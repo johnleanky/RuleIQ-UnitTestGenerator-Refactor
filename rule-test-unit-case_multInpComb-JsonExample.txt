@@ -1,0 +1,1950 @@
+﻿{
+  "UnitTestRules": [
+    {
+      "Name": "TC_IsServiceRequestAutoApproved_MultiInput",
+      "Scenarios": [
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "TrueStandard",
+          "Description": "Describes MultInpComb row 1 in the shared Decision assertion block.",
+          "Type": "Baseline",
+          "Narrative": "Combination row 1 evaluates .RequestCategory=Standard, .RiskScore=10, AccountContext.CustomerTier=Gold and expects Result true.",
+          "InputsNarrative": "Scenario maps 1:1 to RuleCode.pyExpectedResults[0].pyExpectedResults[0]; empty input values keep their cells.",
+          "AssertionsNarrative": "Every third-level input cell and the Result cell for this row are captured in AssertionDecisionTrace.",
+          "EvidenceSummary": {
+            "SupportLevel": "PredictedFromRules",
+            "DependencyState": "NotApplicable",
+            "BranchState": "AllEvaluated",
+            "SimulationState": "NotRequired",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 6,
+            "ExactValueAssertionCount": 6,
+            "StructuralAssertionCount": 0,
+            "OmittedClaimCount": 0,
+            "ResolvedDependencyCount": 0,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 1,
+            "ParameterResolutionCount": 2,
+            "PropertyTraceCount": 5,
+            "SimulatedDependencyCount": 0,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 0,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "No RuleCrawler wave required; multi-input rows use direct Rule-Obj-When inputs only.",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "Scenario 1 maps to MultInpComb row 1. AssertionDecisionTrace lists every input cell and the Result cell. For cells without pyExpectedValue, <EMPTY> means an empty property value on an initialized page/list element, not a missing parent page.",
+            "BlockingGaps": [],
+            "AssertionDecisionTrace": "ASSERT|id=R001C001|kind=DecisionInput|row=1|target=.RequestCategory|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=Standard|support=PredictedFromRules\nASSERT|id=R001C002|kind=DecisionInput|row=1|target=.RiskScore|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=10|support=PredictedFromRules\nASSERT|id=R001C003|kind=DecisionInput|row=1|target=AccountContext.CustomerTier|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=Gold|support=PredictedFromRules\nASSERT|id=R001C004|kind=DecisionInput|row=1|target=Param.Channel|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=Portal|support=PredictedFromRules\nASSERT|id=R001C005|kind=DecisionInput|row=1|target=Param.IsEmployee|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=false|support=PredictedFromRules\nASSERT|id=R001C006|kind=DecisionResult|row=1|target=Result|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Is Equals To|value=true|support=PredictedFromRules"
+          }
+        },
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "FalseHighRisk",
+          "Description": "Describes MultInpComb row 2 in the shared Decision assertion block.",
+          "Type": "Baseline",
+          "Narrative": "Combination row 2 evaluates .RequestCategory=Standard, .RiskScore=95, AccountContext.CustomerTier=Gold and expects Result false.",
+          "InputsNarrative": "Scenario maps 1:1 to RuleCode.pyExpectedResults[0].pyExpectedResults[1]; empty input values keep their cells.",
+          "AssertionsNarrative": "Every third-level input cell and the Result cell for this row are captured in AssertionDecisionTrace.",
+          "EvidenceSummary": {
+            "SupportLevel": "PredictedFromRules",
+            "DependencyState": "NotApplicable",
+            "BranchState": "AllEvaluated",
+            "SimulationState": "NotRequired",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 6,
+            "ExactValueAssertionCount": 6,
+            "StructuralAssertionCount": 0,
+            "OmittedClaimCount": 0,
+            "ResolvedDependencyCount": 0,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 1,
+            "ParameterResolutionCount": 2,
+            "PropertyTraceCount": 5,
+            "SimulatedDependencyCount": 0,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 0,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "No RuleCrawler wave required; multi-input rows use direct Rule-Obj-When inputs only.",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "Scenario 2 maps to MultInpComb row 2. AssertionDecisionTrace lists every input cell and the Result cell. For cells without pyExpectedValue, <EMPTY> means an empty property value on an initialized page/list element, not a missing parent page.",
+            "BlockingGaps": [],
+            "AssertionDecisionTrace": "ASSERT|id=R002C001|kind=DecisionInput|row=2|target=.RequestCategory|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=Standard|support=PredictedFromRules\nASSERT|id=R002C002|kind=DecisionInput|row=2|target=.RiskScore|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=95|support=PredictedFromRules\nASSERT|id=R002C003|kind=DecisionInput|row=2|target=AccountContext.CustomerTier|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=Gold|support=PredictedFromRules\nASSERT|id=R002C004|kind=DecisionInput|row=2|target=Param.Channel|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=Portal|support=PredictedFromRules\nASSERT|id=R002C005|kind=DecisionInput|row=2|target=Param.IsEmployee|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=false|support=PredictedFromRules\nASSERT|id=R002C006|kind=DecisionResult|row=2|target=Result|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Is Equals To|value=false|support=PredictedFromRules"
+          }
+        },
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "FalseManual",
+          "Description": "Describes MultInpComb row 3 in the shared Decision assertion block.",
+          "Type": "Baseline",
+          "Narrative": "Combination row 3 evaluates .RequestCategory=Manual, .RiskScore=15, AccountContext.CustomerTier=Bronze and expects Result false.",
+          "InputsNarrative": "Scenario maps 1:1 to RuleCode.pyExpectedResults[0].pyExpectedResults[2]; empty input values keep their cells.",
+          "AssertionsNarrative": "Every third-level input cell and the Result cell for this row are captured in AssertionDecisionTrace.",
+          "EvidenceSummary": {
+            "SupportLevel": "PredictedFromRules",
+            "DependencyState": "NotApplicable",
+            "BranchState": "AllEvaluated",
+            "SimulationState": "NotRequired",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 6,
+            "ExactValueAssertionCount": 6,
+            "StructuralAssertionCount": 0,
+            "OmittedClaimCount": 0,
+            "ResolvedDependencyCount": 0,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 1,
+            "ParameterResolutionCount": 2,
+            "PropertyTraceCount": 5,
+            "SimulatedDependencyCount": 0,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 0,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "No RuleCrawler wave required; multi-input rows use direct Rule-Obj-When inputs only.",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "Scenario 3 maps to MultInpComb row 3. AssertionDecisionTrace lists every input cell and the Result cell. For cells without pyExpectedValue, <EMPTY> means an empty property value on an initialized page/list element, not a missing parent page.",
+            "BlockingGaps": [],
+            "AssertionDecisionTrace": "ASSERT|id=R003C001|kind=DecisionInput|row=3|target=.RequestCategory|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=Manual|support=PredictedFromRules\nASSERT|id=R003C002|kind=DecisionInput|row=3|target=.RiskScore|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=15|support=PredictedFromRules\nASSERT|id=R003C003|kind=DecisionInput|row=3|target=AccountContext.CustomerTier|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=Bronze|support=PredictedFromRules\nASSERT|id=R003C004|kind=DecisionInput|row=3|target=Param.Channel|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=Batch|support=PredictedFromRules\nASSERT|id=R003C005|kind=DecisionInput|row=3|target=Param.IsEmployee|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=false|support=PredictedFromRules\nASSERT|id=R003C006|kind=DecisionResult|row=3|target=Result|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Is Equals To|value=false|support=PredictedFromRules"
+          }
+        },
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "FalseEmptyCategory",
+          "Description": "Describes MultInpComb row 4 in the shared Decision assertion block.",
+          "Type": "Baseline",
+          "Narrative": "Combination row 4 evaluates .RequestCategory=<empty>, .RiskScore=10, AccountContext.CustomerTier=Gold and expects Result false.",
+          "InputsNarrative": "Scenario maps 1:1 to RuleCode.pyExpectedResults[0].pyExpectedResults[3]; empty input values keep their cells.",
+          "AssertionsNarrative": "Every third-level input cell and the Result cell for this row are captured in AssertionDecisionTrace.",
+          "EvidenceSummary": {
+            "SupportLevel": "PredictedFromRules",
+            "DependencyState": "NotApplicable",
+            "BranchState": "AllEvaluated",
+            "SimulationState": "NotRequired",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 6,
+            "ExactValueAssertionCount": 6,
+            "StructuralAssertionCount": 0,
+            "OmittedClaimCount": 0,
+            "ResolvedDependencyCount": 0,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 1,
+            "ParameterResolutionCount": 2,
+            "PropertyTraceCount": 5,
+            "SimulatedDependencyCount": 0,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 0,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "No RuleCrawler wave required; multi-input rows use direct Rule-Obj-When inputs only.",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "Scenario 4 maps to MultInpComb row 4. AssertionDecisionTrace lists every input cell and the Result cell. For cells without pyExpectedValue, <EMPTY> means an empty property value on an initialized page/list element, not a missing parent page.",
+            "BlockingGaps": [],
+            "AssertionDecisionTrace": "ASSERT|id=R004C001|kind=DecisionInput|row=4|target=.RequestCategory|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=<EMPTY>|support=PredictedFromRules\nASSERT|id=R004C002|kind=DecisionInput|row=4|target=.RiskScore|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=10|support=PredictedFromRules\nASSERT|id=R004C003|kind=DecisionInput|row=4|target=AccountContext.CustomerTier|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=Gold|support=PredictedFromRules\nASSERT|id=R004C004|kind=DecisionInput|row=4|target=Param.Channel|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=Portal|support=PredictedFromRules\nASSERT|id=R004C005|kind=DecisionInput|row=4|target=Param.IsEmployee|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Input Value|value=false|support=PredictedFromRules\nASSERT|id=R004C006|kind=DecisionResult|row=4|target=Result|page=rowLevelPage|class=Sample-Data-Case|mode=text|comparator=Is Equals To|value=false|support=PredictedFromRules"
+          }
+        }
+      ],
+      "RuleCode": {
+        "pyLabel": "TC_IsServiceRequestAutoApproved_MultiInput",
+        "pyPurpose": "TC_IsServiceRequestAutoApproved_MultiInput",
+        "pyDescription": "Run and verify service request auto approval combinations.",
+        "pyPrimaryPageForRUT": "RunRecordPrimaryPage",
+        "pyIsInactive": false,
+        "pyCleanUpTestData": true,
+        "pyRuleSet": "SampleTestRules",
+        "pyRuleSetVersion": "01-01-01",
+        "pyClassName": "Sample-Data-Case",
+        "pyTypeOfSetupPageSelection": "CUSTOMPAGES",
+        "pyRuleUnderTest": {
+          "pyDetails": {
+            "pyRuleUnderTestInsName": "SAMPLE-DATA-CASE!ISSERVICEREQUESTAUTOAPPROVED",
+            "pyIsSinglePageImplementation": "false",
+            "pyRuleUnderTestLabel": "Service request auto approval",
+            "pyRuleUnderTestName": "IsServiceRequestAutoApproved",
+            "pyRuleUnderTestObjClass": "Sample-Data-Case",
+            "pyRuleUnderTestType": "Rule-Obj-When"
+          },
+          "pyParameters": [
+            {
+              "pyParametersParamName": "Channel",
+              "pyParametersParamType": "Text"
+            },
+            {
+              "pyParametersParamName": "IsEmployee",
+              "pyParametersParamType": "TrueFalse"
+            }
+          ]
+        },
+        "pyPagesAndClasses": [
+          {
+            "pyPagesAndClassesPage": "RunRecordPrimaryPage",
+            "pyPagesAndClassesClass": "Sample-Data-Case"
+          },
+          {
+            "pyPagesAndClassesPage": "AccountContext",
+            "pyPagesAndClassesClass": "Sample-Data-Account"
+          }
+        ],
+        "pySetupPages": [],
+        "pySetup": [],
+        "pyCleanup": [],
+        "pySimulation": [],
+        "pyExpectedResults": [
+          {
+            "pyAllowMultipleInputCombinations": "true",
+            "pyAssertionType": "Decision",
+            "pyClassContext": "Sample-Data-Case",
+            "pyPropertyType": "Decision Result",
+            "pyExpectedResults": [
+              {
+                "pyPageName": "rowLevelPage",
+                "pyExpectedResults": [
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".RequestCategory",
+                    "pyPropertyAbsolutePath": ".RequestCategory",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Standard",
+                    "pyDisplayLabel": ".RequestCategory"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".RiskScore",
+                    "pyPropertyAbsolutePath": ".RiskScore",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "10",
+                    "pyDisplayLabel": ".RiskScore"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "AccountContext.CustomerTier",
+                    "pyPropertyAbsolutePath": "AccountContext.CustomerTier",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Gold",
+                    "pyDisplayLabel": "AccountContext.CustomerTier"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.Channel",
+                    "pyPropertyAbsolutePath": "Param.Channel",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Portal",
+                    "pyDisplayLabel": "Param.Channel"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.IsEmployee",
+                    "pyPropertyAbsolutePath": "Param.IsEmployee",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": "Param.IsEmployee"
+                  },
+                  {
+                    "pyPropertyType": "result",
+                    "pyPropertyName": "Result",
+                    "pyPropertyAbsolutePath": "Result",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "true",
+                    "pyDisplayLabel": "Result"
+                  }
+                ]
+              },
+              {
+                "pyPageName": "rowLevelPage",
+                "pyExpectedResults": [
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".RequestCategory",
+                    "pyPropertyAbsolutePath": ".RequestCategory",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Standard",
+                    "pyDisplayLabel": ".RequestCategory"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".RiskScore",
+                    "pyPropertyAbsolutePath": ".RiskScore",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "95",
+                    "pyDisplayLabel": ".RiskScore"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "AccountContext.CustomerTier",
+                    "pyPropertyAbsolutePath": "AccountContext.CustomerTier",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Gold",
+                    "pyDisplayLabel": "AccountContext.CustomerTier"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.Channel",
+                    "pyPropertyAbsolutePath": "Param.Channel",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Portal",
+                    "pyDisplayLabel": "Param.Channel"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.IsEmployee",
+                    "pyPropertyAbsolutePath": "Param.IsEmployee",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": "Param.IsEmployee"
+                  },
+                  {
+                    "pyPropertyType": "result",
+                    "pyPropertyName": "Result",
+                    "pyPropertyAbsolutePath": "Result",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": "Result"
+                  }
+                ]
+              },
+              {
+                "pyPageName": "rowLevelPage",
+                "pyExpectedResults": [
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".RequestCategory",
+                    "pyPropertyAbsolutePath": ".RequestCategory",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Manual",
+                    "pyDisplayLabel": ".RequestCategory"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".RiskScore",
+                    "pyPropertyAbsolutePath": ".RiskScore",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "15",
+                    "pyDisplayLabel": ".RiskScore"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "AccountContext.CustomerTier",
+                    "pyPropertyAbsolutePath": "AccountContext.CustomerTier",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Bronze",
+                    "pyDisplayLabel": "AccountContext.CustomerTier"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.Channel",
+                    "pyPropertyAbsolutePath": "Param.Channel",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Batch",
+                    "pyDisplayLabel": "Param.Channel"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.IsEmployee",
+                    "pyPropertyAbsolutePath": "Param.IsEmployee",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": "Param.IsEmployee"
+                  },
+                  {
+                    "pyPropertyType": "result",
+                    "pyPropertyName": "Result",
+                    "pyPropertyAbsolutePath": "Result",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": "Result"
+                  }
+                ]
+              },
+              {
+                "pyPageName": "rowLevelPage",
+                "pyExpectedResults": [
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".RequestCategory",
+                    "pyPropertyAbsolutePath": ".RequestCategory",
+                    "pyPropertyMode": "text",
+                    "pyDisplayLabel": ".RequestCategory"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".RiskScore",
+                    "pyPropertyAbsolutePath": ".RiskScore",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "10",
+                    "pyDisplayLabel": ".RiskScore"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "AccountContext.CustomerTier",
+                    "pyPropertyAbsolutePath": "AccountContext.CustomerTier",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Gold",
+                    "pyDisplayLabel": "AccountContext.CustomerTier"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.Channel",
+                    "pyPropertyAbsolutePath": "Param.Channel",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Portal",
+                    "pyDisplayLabel": "Param.Channel"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.IsEmployee",
+                    "pyPropertyAbsolutePath": "Param.IsEmployee",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": "Param.IsEmployee"
+                  },
+                  {
+                    "pyPropertyType": "result",
+                    "pyPropertyName": "Result",
+                    "pyPropertyAbsolutePath": "Result",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": "Result"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "TC_IsPaymentReviewRequired_MultiInput",
+      "Scenarios": [
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "TrueStandard",
+          "Description": "Describes MultInpComb row 1 in the shared Decision assertion block.",
+          "Type": "Edge",
+          "Narrative": "Combination row 1 evaluates .TransactionAmount=2500, .MerchantRiskBand=High, CustomerProfile.CustomerSegment=Retail and expects Result true.",
+          "InputsNarrative": "Scenario maps 1:1 to RuleCode.pyExpectedResults[0].pyExpectedResults[0]; empty input values keep their cells.",
+          "AssertionsNarrative": "Every third-level input cell and the Result cell for this row are captured in AssertionDecisionTrace.",
+          "EvidenceSummary": {
+            "SupportLevel": "PredictedFromRules",
+            "DependencyState": "NotApplicable",
+            "BranchState": "AllEvaluated",
+            "SimulationState": "NotRequired",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 6,
+            "ExactValueAssertionCount": 6,
+            "StructuralAssertionCount": 0,
+            "OmittedClaimCount": 0,
+            "ResolvedDependencyCount": 0,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 1,
+            "ParameterResolutionCount": 1,
+            "PropertyTraceCount": 5,
+            "SimulatedDependencyCount": 0,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 0,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "No RuleCrawler wave required; multi-input rows use direct Rule-Obj-When inputs only.",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "Scenario 1 maps to MultInpComb row 1. AssertionDecisionTrace lists every input cell and the Result cell. For cells without pyExpectedValue, <EMPTY> means an empty property value on an initialized page/list element, not a missing parent page.",
+            "BlockingGaps": [],
+            "AssertionDecisionTrace": "ASSERT|id=R001C001|kind=DecisionInput|row=1|target=.TransactionAmount|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=2500|support=PredictedFromRules\nASSERT|id=R001C002|kind=DecisionInput|row=1|target=.MerchantRiskBand|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=High|support=PredictedFromRules\nASSERT|id=R001C003|kind=DecisionInput|row=1|target=CustomerProfile.CustomerSegment|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=Retail|support=PredictedFromRules\nASSERT|id=R001C004|kind=DecisionInput|row=1|target=.AuthenticationPassed|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=true|support=PredictedFromRules\nASSERT|id=R001C005|kind=DecisionInput|row=1|target=Param.SourceChannel|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=Mobile|support=PredictedFromRules\nASSERT|id=R001C006|kind=DecisionResult|row=1|target=Result|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Is Equals To|value=true|support=PredictedFromRules"
+          }
+        },
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "FalseHighRisk",
+          "Description": "Describes MultInpComb row 2 in the shared Decision assertion block.",
+          "Type": "Edge",
+          "Narrative": "Combination row 2 evaluates .TransactionAmount=125, .MerchantRiskBand=Low, CustomerProfile.CustomerSegment=Retail and expects Result false.",
+          "InputsNarrative": "Scenario maps 1:1 to RuleCode.pyExpectedResults[0].pyExpectedResults[1]; empty input values keep their cells.",
+          "AssertionsNarrative": "Every third-level input cell and the Result cell for this row are captured in AssertionDecisionTrace.",
+          "EvidenceSummary": {
+            "SupportLevel": "PredictedFromRules",
+            "DependencyState": "NotApplicable",
+            "BranchState": "AllEvaluated",
+            "SimulationState": "NotRequired",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 6,
+            "ExactValueAssertionCount": 6,
+            "StructuralAssertionCount": 0,
+            "OmittedClaimCount": 0,
+            "ResolvedDependencyCount": 0,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 1,
+            "ParameterResolutionCount": 1,
+            "PropertyTraceCount": 5,
+            "SimulatedDependencyCount": 0,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 0,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "No RuleCrawler wave required; multi-input rows use direct Rule-Obj-When inputs only.",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "Scenario 2 maps to MultInpComb row 2. AssertionDecisionTrace lists every input cell and the Result cell. For cells without pyExpectedValue, <EMPTY> means an empty property value on an initialized page/list element, not a missing parent page.",
+            "BlockingGaps": [],
+            "AssertionDecisionTrace": "ASSERT|id=R002C001|kind=DecisionInput|row=2|target=.TransactionAmount|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=125|support=PredictedFromRules\nASSERT|id=R002C002|kind=DecisionInput|row=2|target=.MerchantRiskBand|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=Low|support=PredictedFromRules\nASSERT|id=R002C003|kind=DecisionInput|row=2|target=CustomerProfile.CustomerSegment|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=Retail|support=PredictedFromRules\nASSERT|id=R002C004|kind=DecisionInput|row=2|target=.AuthenticationPassed|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=true|support=PredictedFromRules\nASSERT|id=R002C005|kind=DecisionInput|row=2|target=Param.SourceChannel|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=Web|support=PredictedFromRules\nASSERT|id=R002C006|kind=DecisionResult|row=2|target=Result|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Is Equals To|value=false|support=PredictedFromRules"
+          }
+        },
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "TrueNewCustomer",
+          "Description": "Describes MultInpComb row 3 in the shared Decision assertion block.",
+          "Type": "Edge",
+          "Narrative": "Combination row 3 evaluates .TransactionAmount=800, .MerchantRiskBand=Low, CustomerProfile.CustomerSegment=NewCustomer and expects Result true.",
+          "InputsNarrative": "Scenario maps 1:1 to RuleCode.pyExpectedResults[0].pyExpectedResults[2]; empty input values keep their cells.",
+          "AssertionsNarrative": "Every third-level input cell and the Result cell for this row are captured in AssertionDecisionTrace.",
+          "EvidenceSummary": {
+            "SupportLevel": "PredictedFromRules",
+            "DependencyState": "NotApplicable",
+            "BranchState": "AllEvaluated",
+            "SimulationState": "NotRequired",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 6,
+            "ExactValueAssertionCount": 6,
+            "StructuralAssertionCount": 0,
+            "OmittedClaimCount": 0,
+            "ResolvedDependencyCount": 0,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 1,
+            "ParameterResolutionCount": 1,
+            "PropertyTraceCount": 5,
+            "SimulatedDependencyCount": 0,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 0,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "No RuleCrawler wave required; multi-input rows use direct Rule-Obj-When inputs only.",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "Scenario 3 maps to MultInpComb row 3. AssertionDecisionTrace lists every input cell and the Result cell. For cells without pyExpectedValue, <EMPTY> means an empty property value on an initialized page/list element, not a missing parent page.",
+            "BlockingGaps": [],
+            "AssertionDecisionTrace": "ASSERT|id=R003C001|kind=DecisionInput|row=3|target=.TransactionAmount|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=800|support=PredictedFromRules\nASSERT|id=R003C002|kind=DecisionInput|row=3|target=.MerchantRiskBand|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=Low|support=PredictedFromRules\nASSERT|id=R003C003|kind=DecisionInput|row=3|target=CustomerProfile.CustomerSegment|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=NewCustomer|support=PredictedFromRules\nASSERT|id=R003C004|kind=DecisionInput|row=3|target=.AuthenticationPassed|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=false|support=PredictedFromRules\nASSERT|id=R003C005|kind=DecisionInput|row=3|target=Param.SourceChannel|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=Mobile|support=PredictedFromRules\nASSERT|id=R003C006|kind=DecisionResult|row=3|target=Result|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Is Equals To|value=true|support=PredictedFromRules"
+          }
+        },
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "FalseEmptyCategory",
+          "Description": "Describes MultInpComb row 4 in the shared Decision assertion block.",
+          "Type": "Edge",
+          "Narrative": "Combination row 4 evaluates .TransactionAmount=50, .MerchantRiskBand=Low, CustomerProfile.CustomerSegment=Retail and expects Result false.",
+          "InputsNarrative": "Scenario maps 1:1 to RuleCode.pyExpectedResults[0].pyExpectedResults[3]; empty input values keep their cells.",
+          "AssertionsNarrative": "Every third-level input cell and the Result cell for this row are captured in AssertionDecisionTrace.",
+          "EvidenceSummary": {
+            "SupportLevel": "PredictedFromRules",
+            "DependencyState": "NotApplicable",
+            "BranchState": "AllEvaluated",
+            "SimulationState": "NotRequired",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 6,
+            "ExactValueAssertionCount": 6,
+            "StructuralAssertionCount": 0,
+            "OmittedClaimCount": 0,
+            "ResolvedDependencyCount": 0,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 1,
+            "ParameterResolutionCount": 1,
+            "PropertyTraceCount": 5,
+            "SimulatedDependencyCount": 0,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 0,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "No RuleCrawler wave required; multi-input rows use direct Rule-Obj-When inputs only.",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "Scenario 4 maps to MultInpComb row 4. AssertionDecisionTrace lists every input cell and the Result cell. For cells without pyExpectedValue, <EMPTY> means an empty property value on an initialized page/list element, not a missing parent page.",
+            "BlockingGaps": [],
+            "AssertionDecisionTrace": "ASSERT|id=R004C001|kind=DecisionInput|row=4|target=.TransactionAmount|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=50|support=PredictedFromRules\nASSERT|id=R004C002|kind=DecisionInput|row=4|target=.MerchantRiskBand|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=Low|support=PredictedFromRules\nASSERT|id=R004C003|kind=DecisionInput|row=4|target=CustomerProfile.CustomerSegment|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=Retail|support=PredictedFromRules\nASSERT|id=R004C004|kind=DecisionInput|row=4|target=.AuthenticationPassed|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=true|support=PredictedFromRules\nASSERT|id=R004C005|kind=DecisionInput|row=4|target=Param.SourceChannel|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Input Value|value=<EMPTY>|support=PredictedFromRules\nASSERT|id=R004C006|kind=DecisionResult|row=4|target=Result|page=rowLevelPage|class=Sample-Data-Payment|mode=text|comparator=Is Equals To|value=false|support=PredictedFromRules"
+          }
+        }
+      ],
+      "RuleCode": {
+        "pyLabel": "TC_IsPaymentReviewRequired_MultiInput",
+        "pyPurpose": "TC_IsPaymentReviewRequired_MultiInput",
+        "pyDescription": "Run and verify payment review decision combinations.",
+        "pyPrimaryPageForRUT": "RunRecordPrimaryPage",
+        "pyIsInactive": false,
+        "pyCleanUpTestData": true,
+        "pyRuleSet": "SampleTestRules",
+        "pyRuleSetVersion": "01-01-01",
+        "pyClassName": "Sample-Data-Payment",
+        "pyTypeOfSetupPageSelection": "CUSTOMPAGES",
+        "pyRuleUnderTest": {
+          "pyDetails": {
+            "pyRuleUnderTestInsName": "SAMPLE-DATA-PAYMENT!ISPAYMENTREVIEWREQUIRED",
+            "pyIsSinglePageImplementation": "false",
+            "pyRuleUnderTestLabel": "Payment review required",
+            "pyRuleUnderTestName": "IsPaymentReviewRequired",
+            "pyRuleUnderTestObjClass": "Sample-Data-Payment",
+            "pyRuleUnderTestType": "Rule-Obj-When"
+          },
+          "pyParameters": [
+            {
+              "pyParametersParamName": "SourceChannel",
+              "pyParametersParamType": "Text"
+            }
+          ]
+        },
+        "pyPagesAndClasses": [
+          {
+            "pyPagesAndClassesPage": "RunRecordPrimaryPage",
+            "pyPagesAndClassesClass": "Sample-Data-Payment"
+          },
+          {
+            "pyPagesAndClassesPage": "CustomerProfile",
+            "pyPagesAndClassesClass": "Sample-Data-Customer"
+          }
+        ],
+        "pySetupPages": [],
+        "pySetup": [],
+        "pyCleanup": [],
+        "pySimulation": [],
+        "pyExpectedResults": [
+          {
+            "pyAllowMultipleInputCombinations": "true",
+            "pyAssertionType": "Decision",
+            "pyClassContext": "Sample-Data-Payment",
+            "pyPropertyType": "Decision Result",
+            "pyExpectedResults": [
+              {
+                "pyPageName": "rowLevelPage",
+                "pyExpectedResults": [
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".TransactionAmount",
+                    "pyPropertyAbsolutePath": ".TransactionAmount",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "2500",
+                    "pyDisplayLabel": ".TransactionAmount"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".MerchantRiskBand",
+                    "pyPropertyAbsolutePath": ".MerchantRiskBand",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "High",
+                    "pyDisplayLabel": ".MerchantRiskBand"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "CustomerProfile.CustomerSegment",
+                    "pyPropertyAbsolutePath": "CustomerProfile.CustomerSegment",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Retail",
+                    "pyDisplayLabel": "CustomerProfile.CustomerSegment"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".AuthenticationPassed",
+                    "pyPropertyAbsolutePath": ".AuthenticationPassed",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "true",
+                    "pyDisplayLabel": ".AuthenticationPassed"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.SourceChannel",
+                    "pyPropertyAbsolutePath": "Param.SourceChannel",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Mobile",
+                    "pyDisplayLabel": "Param.SourceChannel"
+                  },
+                  {
+                    "pyPropertyType": "result",
+                    "pyPropertyName": "Result",
+                    "pyPropertyAbsolutePath": "Result",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "true",
+                    "pyDisplayLabel": "Result"
+                  }
+                ]
+              },
+              {
+                "pyPageName": "rowLevelPage",
+                "pyExpectedResults": [
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".TransactionAmount",
+                    "pyPropertyAbsolutePath": ".TransactionAmount",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "125",
+                    "pyDisplayLabel": ".TransactionAmount"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".MerchantRiskBand",
+                    "pyPropertyAbsolutePath": ".MerchantRiskBand",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Low",
+                    "pyDisplayLabel": ".MerchantRiskBand"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "CustomerProfile.CustomerSegment",
+                    "pyPropertyAbsolutePath": "CustomerProfile.CustomerSegment",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Retail",
+                    "pyDisplayLabel": "CustomerProfile.CustomerSegment"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".AuthenticationPassed",
+                    "pyPropertyAbsolutePath": ".AuthenticationPassed",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "true",
+                    "pyDisplayLabel": ".AuthenticationPassed"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.SourceChannel",
+                    "pyPropertyAbsolutePath": "Param.SourceChannel",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Web",
+                    "pyDisplayLabel": "Param.SourceChannel"
+                  },
+                  {
+                    "pyPropertyType": "result",
+                    "pyPropertyName": "Result",
+                    "pyPropertyAbsolutePath": "Result",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": "Result"
+                  }
+                ]
+              },
+              {
+                "pyPageName": "rowLevelPage",
+                "pyExpectedResults": [
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".TransactionAmount",
+                    "pyPropertyAbsolutePath": ".TransactionAmount",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "800",
+                    "pyDisplayLabel": ".TransactionAmount"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".MerchantRiskBand",
+                    "pyPropertyAbsolutePath": ".MerchantRiskBand",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Low",
+                    "pyDisplayLabel": ".MerchantRiskBand"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "CustomerProfile.CustomerSegment",
+                    "pyPropertyAbsolutePath": "CustomerProfile.CustomerSegment",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "NewCustomer",
+                    "pyDisplayLabel": "CustomerProfile.CustomerSegment"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".AuthenticationPassed",
+                    "pyPropertyAbsolutePath": ".AuthenticationPassed",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": ".AuthenticationPassed"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.SourceChannel",
+                    "pyPropertyAbsolutePath": "Param.SourceChannel",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Mobile",
+                    "pyDisplayLabel": "Param.SourceChannel"
+                  },
+                  {
+                    "pyPropertyType": "result",
+                    "pyPropertyName": "Result",
+                    "pyPropertyAbsolutePath": "Result",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "true",
+                    "pyDisplayLabel": "Result"
+                  }
+                ]
+              },
+              {
+                "pyPageName": "rowLevelPage",
+                "pyExpectedResults": [
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".TransactionAmount",
+                    "pyPropertyAbsolutePath": ".TransactionAmount",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "50",
+                    "pyDisplayLabel": ".TransactionAmount"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".MerchantRiskBand",
+                    "pyPropertyAbsolutePath": ".MerchantRiskBand",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Low",
+                    "pyDisplayLabel": ".MerchantRiskBand"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "CustomerProfile.CustomerSegment",
+                    "pyPropertyAbsolutePath": "CustomerProfile.CustomerSegment",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Retail",
+                    "pyDisplayLabel": "CustomerProfile.CustomerSegment"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".AuthenticationPassed",
+                    "pyPropertyAbsolutePath": ".AuthenticationPassed",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "true",
+                    "pyDisplayLabel": ".AuthenticationPassed"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.SourceChannel",
+                    "pyPropertyAbsolutePath": "Param.SourceChannel",
+                    "pyPropertyMode": "text",
+                    "pyDisplayLabel": "Param.SourceChannel"
+                  },
+                  {
+                    "pyPropertyType": "result",
+                    "pyPropertyName": "Result",
+                    "pyPropertyAbsolutePath": "Result",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": "Result"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "TC_CanOpenWorkspace_PermissionTrue",
+      "Scenarios": [
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "TrueStandard",
+          "Description": "Describes MultInpComb row 1 in the shared Decision assertion block.",
+          "Type": "Baseline",
+          "Narrative": "Combination row 1 evaluates AccessPage.Roles(3).Permission(10).Value=Open, AccessPage.Roles(3).Permission(10).Scope=Workspace, Param.RequestedAccessLevel=Manager and expects Result true.",
+          "InputsNarrative": "Scenario maps 1:1 to RuleCode.pyExpectedResults[0].pyExpectedResults[0]; empty input values keep their cells.",
+          "AssertionsNarrative": "Every third-level input cell and the Result cell for this row are captured in AssertionDecisionTrace.",
+          "EvidenceSummary": {
+            "SupportLevel": "PredictedFromRules",
+            "DependencyState": "NotApplicable",
+            "BranchState": "AllEvaluated",
+            "SimulationState": "NotRequired",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 4,
+            "ExactValueAssertionCount": 4,
+            "StructuralAssertionCount": 0,
+            "OmittedClaimCount": 0,
+            "ResolvedDependencyCount": 0,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 1,
+            "ParameterResolutionCount": 1,
+            "PropertyTraceCount": 3,
+            "SimulatedDependencyCount": 0,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 0,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "No RuleCrawler wave required; rows use direct nested page-list inputs for the When rule.",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "Scenario 1 maps to MultInpComb row 1. AssertionDecisionTrace lists every input cell and the Result cell. For cells without pyExpectedValue, <EMPTY> means an empty property value on an initialized page/list element, not a missing parent page.",
+            "BlockingGaps": [],
+            "AssertionDecisionTrace": "ASSERT|id=R001C001|kind=DecisionInput|row=1|target=AccessPage.Roles(3).Permission(10).Value|page=rowLevelPage|class=Data-Security-Access|mode=text|comparator=Input Value|value=Open|support=PredictedFromRules\nASSERT|id=R001C002|kind=DecisionInput|row=1|target=AccessPage.Roles(3).Permission(10).Scope|page=rowLevelPage|class=Data-Security-Access|mode=text|comparator=Input Value|value=Workspace|support=PredictedFromRules\nASSERT|id=R001C003|kind=DecisionInput|row=1|target=Param.RequestedAccessLevel|page=rowLevelPage|class=Data-Security-Access|mode=text|comparator=Input Value|value=Manager|support=PredictedFromRules\nASSERT|id=R001C004|kind=DecisionResult|row=1|target=Result|page=rowLevelPage|class=Data-Security-Access|mode=text|comparator=Is Equals To|value=true|support=PredictedFromRules"
+          }
+        },
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "FalseHighRisk",
+          "Description": "Describes MultInpComb row 2 in the shared Decision assertion block.",
+          "Type": "Baseline",
+          "Narrative": "Combination row 2 evaluates AccessPage.Roles(3).Permission(10).Value=View, AccessPage.Roles(3).Permission(10).Scope=Workspace, Param.RequestedAccessLevel=Manager and expects Result false.",
+          "InputsNarrative": "Scenario maps 1:1 to RuleCode.pyExpectedResults[0].pyExpectedResults[1]; empty input values keep their cells.",
+          "AssertionsNarrative": "Every third-level input cell and the Result cell for this row are captured in AssertionDecisionTrace.",
+          "EvidenceSummary": {
+            "SupportLevel": "PredictedFromRules",
+            "DependencyState": "NotApplicable",
+            "BranchState": "AllEvaluated",
+            "SimulationState": "NotRequired",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 4,
+            "ExactValueAssertionCount": 4,
+            "StructuralAssertionCount": 0,
+            "OmittedClaimCount": 0,
+            "ResolvedDependencyCount": 0,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 1,
+            "ParameterResolutionCount": 1,
+            "PropertyTraceCount": 3,
+            "SimulatedDependencyCount": 0,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 0,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "No RuleCrawler wave required; rows use direct nested page-list inputs for the When rule.",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "Scenario 2 maps to MultInpComb row 2. AssertionDecisionTrace lists every input cell and the Result cell. For cells without pyExpectedValue, <EMPTY> means an empty property value on an initialized page/list element, not a missing parent page.",
+            "BlockingGaps": [],
+            "AssertionDecisionTrace": "ASSERT|id=R002C001|kind=DecisionInput|row=2|target=AccessPage.Roles(3).Permission(10).Value|page=rowLevelPage|class=Data-Security-Access|mode=text|comparator=Input Value|value=View|support=PredictedFromRules\nASSERT|id=R002C002|kind=DecisionInput|row=2|target=AccessPage.Roles(3).Permission(10).Scope|page=rowLevelPage|class=Data-Security-Access|mode=text|comparator=Input Value|value=Workspace|support=PredictedFromRules\nASSERT|id=R002C003|kind=DecisionInput|row=2|target=Param.RequestedAccessLevel|page=rowLevelPage|class=Data-Security-Access|mode=text|comparator=Input Value|value=Manager|support=PredictedFromRules\nASSERT|id=R002C004|kind=DecisionResult|row=2|target=Result|page=rowLevelPage|class=Data-Security-Access|mode=text|comparator=Is Equals To|value=false|support=PredictedFromRules"
+          }
+        },
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "FalseManual",
+          "Description": "Describes MultInpComb row 3 in the shared Decision assertion block.",
+          "Type": "Baseline",
+          "Narrative": "Combination row 3 evaluates AccessPage.Roles(3).Permission(10).Value=<empty>, AccessPage.Roles(3).Permission(10).Scope=Workspace, Param.RequestedAccessLevel=Manager and expects Result false.",
+          "InputsNarrative": "Scenario maps 1:1 to RuleCode.pyExpectedResults[0].pyExpectedResults[2]; empty input values keep their cells.",
+          "AssertionsNarrative": "Every third-level input cell and the Result cell for this row are captured in AssertionDecisionTrace.",
+          "EvidenceSummary": {
+            "SupportLevel": "PredictedFromRules",
+            "DependencyState": "NotApplicable",
+            "BranchState": "AllEvaluated",
+            "SimulationState": "NotRequired",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 4,
+            "ExactValueAssertionCount": 4,
+            "StructuralAssertionCount": 0,
+            "OmittedClaimCount": 0,
+            "ResolvedDependencyCount": 0,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 1,
+            "ParameterResolutionCount": 1,
+            "PropertyTraceCount": 3,
+            "SimulatedDependencyCount": 0,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 0,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "No RuleCrawler wave required; rows use direct nested page-list inputs for the When rule.",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "Scenario 3 maps to MultInpComb row 3. AssertionDecisionTrace lists every input cell and the Result cell. For cells without pyExpectedValue, <EMPTY> means an empty property value on an initialized page/list element, not a missing parent page.",
+            "BlockingGaps": [],
+            "AssertionDecisionTrace": "ASSERT|id=R003C001|kind=DecisionInput|row=3|target=AccessPage.Roles(3).Permission(10).Value|page=rowLevelPage|class=Data-Security-Access|mode=text|comparator=Input Value|value=<EMPTY>|support=PredictedFromRules\nASSERT|id=R003C002|kind=DecisionInput|row=3|target=AccessPage.Roles(3).Permission(10).Scope|page=rowLevelPage|class=Data-Security-Access|mode=text|comparator=Input Value|value=Workspace|support=PredictedFromRules\nASSERT|id=R003C003|kind=DecisionInput|row=3|target=Param.RequestedAccessLevel|page=rowLevelPage|class=Data-Security-Access|mode=text|comparator=Input Value|value=Manager|support=PredictedFromRules\nASSERT|id=R003C004|kind=DecisionResult|row=3|target=Result|page=rowLevelPage|class=Data-Security-Access|mode=text|comparator=Is Equals To|value=false|support=PredictedFromRules"
+          }
+        },
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "FalseEmptyCategory",
+          "Description": "Describes MultInpComb row 4 in the shared Decision assertion block.",
+          "Type": "Baseline",
+          "Narrative": "Combination row 4 evaluates AccessPage.Roles(3).Permission(10).Value=Open, AccessPage.Roles(3).Permission(10).Scope=Workspace, Param.RequestedAccessLevel=Viewer and expects Result false.",
+          "InputsNarrative": "Scenario maps 1:1 to RuleCode.pyExpectedResults[0].pyExpectedResults[3]; empty input values keep their cells.",
+          "AssertionsNarrative": "Every third-level input cell and the Result cell for this row are captured in AssertionDecisionTrace.",
+          "EvidenceSummary": {
+            "SupportLevel": "PredictedFromRules",
+            "DependencyState": "NotApplicable",
+            "BranchState": "AllEvaluated",
+            "SimulationState": "NotRequired",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 4,
+            "ExactValueAssertionCount": 4,
+            "StructuralAssertionCount": 0,
+            "OmittedClaimCount": 0,
+            "ResolvedDependencyCount": 0,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 1,
+            "ParameterResolutionCount": 1,
+            "PropertyTraceCount": 3,
+            "SimulatedDependencyCount": 0,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 0,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "No RuleCrawler wave required; rows use direct nested page-list inputs for the When rule.",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "Scenario 4 maps to MultInpComb row 4. AssertionDecisionTrace lists every input cell and the Result cell. For cells without pyExpectedValue, <EMPTY> means an empty property value on an initialized page/list element, not a missing parent page.",
+            "BlockingGaps": [],
+            "AssertionDecisionTrace": "ASSERT|id=R004C001|kind=DecisionInput|row=4|target=AccessPage.Roles(3).Permission(10).Value|page=rowLevelPage|class=Data-Security-Access|mode=text|comparator=Input Value|value=Open|support=PredictedFromRules\nASSERT|id=R004C002|kind=DecisionInput|row=4|target=AccessPage.Roles(3).Permission(10).Scope|page=rowLevelPage|class=Data-Security-Access|mode=text|comparator=Input Value|value=Workspace|support=PredictedFromRules\nASSERT|id=R004C003|kind=DecisionInput|row=4|target=Param.RequestedAccessLevel|page=rowLevelPage|class=Data-Security-Access|mode=text|comparator=Input Value|value=Viewer|support=PredictedFromRules\nASSERT|id=R004C004|kind=DecisionResult|row=4|target=Result|page=rowLevelPage|class=Data-Security-Access|mode=text|comparator=Is Equals To|value=false|support=PredictedFromRules"
+          }
+        }
+      ],
+      "RuleCode": {
+        "pyLabel": "TC_CanOpenWorkspace_PermissionTrue",
+        "pyPurpose": "TC_CanOpenWorkspace_PermissionTrue",
+        "pyDescription": "Multi-input combinations for nested workspace permission checks.",
+        "pyPrimaryPageForRUT": "AccessPage",
+        "pyIsInactive": false,
+        "pyCleanUpTestData": true,
+        "pyRuleSet": "SampleTestRules",
+        "pyRuleSetVersion": "01-01-01",
+        "pyClassName": "Data-Security-Access",
+        "pyTypeOfSetupPageSelection": "CUSTOMPAGES",
+        "pyRuleUnderTest": {
+          "pyDetails": {
+            "pyRuleUnderTestInsName": "DATA-SECURITY-ACCESS!CANOPENWORKSPACE",
+            "pyIsSinglePageImplementation": "false",
+            "pyRuleUnderTestLabel": "Can open workspace",
+            "pyRuleUnderTestName": "CanOpenWorkspace",
+            "pyRuleUnderTestObjClass": "Data-Security-Access",
+            "pyRuleUnderTestType": "Rule-Obj-When"
+          },
+          "pyParameters": [
+            {
+              "pyParametersParamName": "RequestedAccessLevel",
+              "pyParametersParamType": "Text"
+            }
+          ]
+        },
+        "pyPagesAndClasses": [
+          {
+            "pyPagesAndClassesPage": "RunRecordPrimaryPage",
+            "pyPagesAndClassesClass": "Data-Security-Access"
+          }
+        ],
+        "pySetupPages": [],
+        "pySetup": [],
+        "pyCleanup": [],
+        "pySimulation": [],
+        "pyExpectedResults": [
+          {
+            "pyAllowMultipleInputCombinations": "true",
+            "pyAssertionType": "Decision",
+            "pyClassContext": "Data-Security-Access",
+            "pyPropertyType": "Decision Result",
+            "pyExpectedResults": [
+              {
+                "pyPageName": "rowLevelPage",
+                "pyExpectedResults": [
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "AccessPage.Roles(3).Permission(10).Value",
+                    "pyPropertyAbsolutePath": "AccessPage.Roles(3).Permission(10).Value",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Open",
+                    "pyDisplayLabel": "AccessPage.Roles(3).Permission(10).Value"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "AccessPage.Roles(3).Permission(10).Scope",
+                    "pyPropertyAbsolutePath": "AccessPage.Roles(3).Permission(10).Scope",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Workspace",
+                    "pyDisplayLabel": "AccessPage.Roles(3).Permission(10).Scope"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.RequestedAccessLevel",
+                    "pyPropertyAbsolutePath": "Param.RequestedAccessLevel",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Manager",
+                    "pyDisplayLabel": "Param.RequestedAccessLevel"
+                  },
+                  {
+                    "pyPropertyType": "result",
+                    "pyPropertyName": "Result",
+                    "pyPropertyAbsolutePath": "Result",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "true",
+                    "pyDisplayLabel": "Result"
+                  }
+                ]
+              },
+              {
+                "pyPageName": "rowLevelPage",
+                "pyExpectedResults": [
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "AccessPage.Roles(3).Permission(10).Value",
+                    "pyPropertyAbsolutePath": "AccessPage.Roles(3).Permission(10).Value",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "View",
+                    "pyDisplayLabel": "AccessPage.Roles(3).Permission(10).Value"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "AccessPage.Roles(3).Permission(10).Scope",
+                    "pyPropertyAbsolutePath": "AccessPage.Roles(3).Permission(10).Scope",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Workspace",
+                    "pyDisplayLabel": "AccessPage.Roles(3).Permission(10).Scope"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.RequestedAccessLevel",
+                    "pyPropertyAbsolutePath": "Param.RequestedAccessLevel",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Manager",
+                    "pyDisplayLabel": "Param.RequestedAccessLevel"
+                  },
+                  {
+                    "pyPropertyType": "result",
+                    "pyPropertyName": "Result",
+                    "pyPropertyAbsolutePath": "Result",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": "Result"
+                  }
+                ]
+              },
+              {
+                "pyPageName": "rowLevelPage",
+                "pyExpectedResults": [
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "AccessPage.Roles(3).Permission(10).Value",
+                    "pyPropertyAbsolutePath": "AccessPage.Roles(3).Permission(10).Value",
+                    "pyPropertyMode": "text",
+                    "pyDisplayLabel": "AccessPage.Roles(3).Permission(10).Value"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "AccessPage.Roles(3).Permission(10).Scope",
+                    "pyPropertyAbsolutePath": "AccessPage.Roles(3).Permission(10).Scope",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Workspace",
+                    "pyDisplayLabel": "AccessPage.Roles(3).Permission(10).Scope"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.RequestedAccessLevel",
+                    "pyPropertyAbsolutePath": "Param.RequestedAccessLevel",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Manager",
+                    "pyDisplayLabel": "Param.RequestedAccessLevel"
+                  },
+                  {
+                    "pyPropertyType": "result",
+                    "pyPropertyName": "Result",
+                    "pyPropertyAbsolutePath": "Result",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": "Result"
+                  }
+                ]
+              },
+              {
+                "pyPageName": "rowLevelPage",
+                "pyExpectedResults": [
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "AccessPage.Roles(3).Permission(10).Value",
+                    "pyPropertyAbsolutePath": "AccessPage.Roles(3).Permission(10).Value",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Open",
+                    "pyDisplayLabel": "AccessPage.Roles(3).Permission(10).Value"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "AccessPage.Roles(3).Permission(10).Scope",
+                    "pyPropertyAbsolutePath": "AccessPage.Roles(3).Permission(10).Scope",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Workspace",
+                    "pyDisplayLabel": "AccessPage.Roles(3).Permission(10).Scope"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.RequestedAccessLevel",
+                    "pyPropertyAbsolutePath": "Param.RequestedAccessLevel",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "Viewer",
+                    "pyDisplayLabel": "Param.RequestedAccessLevel"
+                  },
+                  {
+                    "pyPropertyType": "result",
+                    "pyPropertyName": "Result",
+                    "pyPropertyAbsolutePath": "Result",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": "Result"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "TC_IsGenericDecisionTrue_SharedTrue",
+      "Scenarios": [
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "TrueConditionA",
+          "Description": "Describes MultInpComb row 1 in the shared Decision assertion block.",
+          "Type": "Baseline",
+          "Narrative": "Combination row 1 evaluates Param.LookupFlag=true, .ConditionA=true, .ConditionB=false and expects Result true.",
+          "InputsNarrative": "Scenario maps 1:1 to RuleCode.pyExpectedResults[0].pyExpectedResults[0] and shares the same Data Page simulation as the other rows in this UnitTestRules entry.",
+          "SimulationsNarrative": "The simulated Data Page returns BooleanResult=true for the shared LookupFlag=true simulation group.",
+          "AssertionsNarrative": "Every third-level input cell and the Result cell for this row are captured in AssertionDecisionTrace.",
+          "EvidenceSummary": {
+            "SupportLevel": "PredictedFromRules",
+            "DependencyState": "AllResolved",
+            "BranchState": "AllEvaluated",
+            "SimulationState": "RequiredAndAligned",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 4,
+            "ExactValueAssertionCount": 4,
+            "StructuralAssertionCount": 0,
+            "OmittedClaimCount": 0,
+            "ResolvedDependencyCount": 2,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 2,
+            "ParameterResolutionCount": 1,
+            "PropertyTraceCount": 3,
+            "SimulatedDependencyCount": 1,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 1,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "W1:RUT->D_GenericBooleanLookup fetched=true scanned=true scan=Rule-Declare-Pages extracted=0 queued=0 nested=[]; W1:RUT->BooleanResult fetched=true scanned=true scan=Rule-Obj-Property extracted=0 queued=0 nested=[]",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "Scenario 1 maps to MultInpComb row 1. Its simulation-group key is D_GenericBooleanLookup(LookupFlag=true) with BooleanResult=true. Scenarios 1, 2, and 3 use this identical simulation requirement and are represented as rows in one UnitTestRules entry.",
+            "BlockingGaps": [],
+            "AssertionDecisionTrace": "ASSERT|id=R001C001|kind=DecisionInput|row=1|target=Param.LookupFlag|page=rowLevelPage|class=Generic-Data-Decision|mode=text|comparator=Input Value|value=true|support=PredictedFromRules\nASSERT|id=R001C002|kind=DecisionInput|row=1|target=.ConditionA|page=rowLevelPage|class=Generic-Data-Decision|mode=text|comparator=Input Value|value=true|support=PredictedFromRules\nASSERT|id=R001C003|kind=DecisionInput|row=1|target=.ConditionB|page=rowLevelPage|class=Generic-Data-Decision|mode=text|comparator=Input Value|value=false|support=PredictedFromRules\nASSERT|id=R001C004|kind=DecisionResult|row=1|target=Result|page=rowLevelPage|class=Generic-Data-Decision|mode=text|comparator=Is Equals To|value=true|support=PredictedFromRules\nSIM|id=S001|rule=D_GenericBooleanLookup|sig=DP@Generic-Data-Lookup@D_GenericBooleanLookup(LookupFlag=true)|shape=page|method=DefineData|class=Generic-Data-Lookup|params=LookupFlag=true|target=.BooleanResult"
+          }
+        },
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "TrueConditionB",
+          "Description": "Describes MultInpComb row 2 in the shared Decision assertion block.",
+          "Type": "Baseline",
+          "Narrative": "Combination row 2 evaluates Param.LookupFlag=true, .ConditionA=false, .ConditionB=true and expects Result true.",
+          "InputsNarrative": "Scenario maps 1:1 to RuleCode.pyExpectedResults[0].pyExpectedResults[1] and shares the same Data Page simulation as rows 1 and 3.",
+          "SimulationsNarrative": "The simulated Data Page returns BooleanResult=true for the shared LookupFlag=true simulation group.",
+          "AssertionsNarrative": "Every third-level input cell and the Result cell for this row are captured in AssertionDecisionTrace.",
+          "EvidenceSummary": {
+            "SupportLevel": "PredictedFromRules",
+            "DependencyState": "AllResolved",
+            "BranchState": "AllEvaluated",
+            "SimulationState": "RequiredAndAligned",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 4,
+            "ExactValueAssertionCount": 4,
+            "StructuralAssertionCount": 0,
+            "OmittedClaimCount": 0,
+            "ResolvedDependencyCount": 2,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 2,
+            "ParameterResolutionCount": 1,
+            "PropertyTraceCount": 3,
+            "SimulatedDependencyCount": 1,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 1,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "W1:RUT->D_GenericBooleanLookup fetched=true scanned=true scan=Rule-Declare-Pages extracted=0 queued=0 nested=[]; W1:RUT->BooleanResult fetched=true scanned=true scan=Rule-Obj-Property extracted=0 queued=0 nested=[]",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "Scenario 2 maps to MultInpComb row 2. Its simulation-group key is identical to rows 1 and 3, while its primary-page decision inputs differ. The input differences remain separate MultInpComb rows and do not create another UnitTestRules entry.",
+            "BlockingGaps": [],
+            "AssertionDecisionTrace": "ASSERT|id=R002C001|kind=DecisionInput|row=2|target=Param.LookupFlag|page=rowLevelPage|class=Generic-Data-Decision|mode=text|comparator=Input Value|value=true|support=PredictedFromRules\nASSERT|id=R002C002|kind=DecisionInput|row=2|target=.ConditionA|page=rowLevelPage|class=Generic-Data-Decision|mode=text|comparator=Input Value|value=false|support=PredictedFromRules\nASSERT|id=R002C003|kind=DecisionInput|row=2|target=.ConditionB|page=rowLevelPage|class=Generic-Data-Decision|mode=text|comparator=Input Value|value=true|support=PredictedFromRules\nASSERT|id=R002C004|kind=DecisionResult|row=2|target=Result|page=rowLevelPage|class=Generic-Data-Decision|mode=text|comparator=Is Equals To|value=true|support=PredictedFromRules\nSIM|id=S001|rule=D_GenericBooleanLookup|sig=DP@Generic-Data-Lookup@D_GenericBooleanLookup(LookupFlag=true)|shape=page|method=DefineData|class=Generic-Data-Lookup|params=LookupFlag=true|target=.BooleanResult"
+          }
+        },
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "FalseBothConditions",
+          "Description": "Describes MultInpComb row 3 in the shared Decision assertion block.",
+          "Type": "Edge",
+          "Narrative": "Combination row 3 evaluates Param.LookupFlag=true, .ConditionA=false, .ConditionB=false and expects Result false.",
+          "InputsNarrative": "This is original Scenario 4 and maps to local row 3 after grouping by the shared Data Page simulation.",
+          "SimulationsNarrative": "The simulated Data Page returns BooleanResult=true for the shared LookupFlag=true simulation group.",
+          "AssertionsNarrative": "Every third-level input cell and the Result cell for this row are captured in AssertionDecisionTrace.",
+          "EvidenceSummary": {
+            "SupportLevel": "PredictedFromRules",
+            "DependencyState": "AllResolved",
+            "BranchState": "AllEvaluated",
+            "SimulationState": "RequiredAndAligned",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 4,
+            "ExactValueAssertionCount": 4,
+            "StructuralAssertionCount": 0,
+            "OmittedClaimCount": 0,
+            "ResolvedDependencyCount": 2,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 2,
+            "ParameterResolutionCount": 1,
+            "PropertyTraceCount": 3,
+            "SimulatedDependencyCount": 1,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 1,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "W1:RUT->D_GenericBooleanLookup fetched=true scanned=true scan=Rule-Declare-Pages extracted=0 queued=0 nested=[]; W1:RUT->BooleanResult fetched=true scanned=true scan=Rule-Obj-Property extracted=0 queued=0 nested=[]",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "This Scenario originally appeared fourth in candidate order but maps to local MultInpComb row 3 after simulation grouping. It shares D_GenericBooleanLookup(LookupFlag=true) and BooleanResult=true with the first two rows. Its different local inputs and false Result do not require another UnitTestRules entry.",
+            "BlockingGaps": [],
+            "AssertionDecisionTrace": "ASSERT|id=R003C001|kind=DecisionInput|row=3|target=Param.LookupFlag|page=rowLevelPage|class=Generic-Data-Decision|mode=text|comparator=Input Value|value=true|support=PredictedFromRules\nASSERT|id=R003C002|kind=DecisionInput|row=3|target=.ConditionA|page=rowLevelPage|class=Generic-Data-Decision|mode=text|comparator=Input Value|value=false|support=PredictedFromRules\nASSERT|id=R003C003|kind=DecisionInput|row=3|target=.ConditionB|page=rowLevelPage|class=Generic-Data-Decision|mode=text|comparator=Input Value|value=false|support=PredictedFromRules\nASSERT|id=R003C004|kind=DecisionResult|row=3|target=Result|page=rowLevelPage|class=Generic-Data-Decision|mode=text|comparator=Is Equals To|value=false|support=PredictedFromRules\nSIM|id=S001|rule=D_GenericBooleanLookup|sig=DP@Generic-Data-Lookup@D_GenericBooleanLookup(LookupFlag=true)|shape=page|method=DefineData|class=Generic-Data-Lookup|params=LookupFlag=true|target=.BooleanResult"
+          }
+        }
+      ],
+      "RuleCode": {
+        "pyLabel": "TC_IsGenericDecisionTrue_SharedTrue",
+        "pyPurpose": "TC_IsGenericDecisionTrue_SharedTrue",
+        "pyDescription": "Runs three input combinations that share the same true Data Page simulation.",
+        "pyPrimaryPageForRUT": "RunRecordPrimaryPage",
+        "pyIsInactive": false,
+        "pyCleanUpTestData": true,
+        "pyRuleSet": "GenericTestRules",
+        "pyRuleSetVersion": "01-01-01",
+        "pyClassName": "Generic-Data-Decision",
+        "pyTypeOfSetupPageSelection": "CUSTOMPAGES",
+        "pyRuleUnderTest": {
+          "pyDetails": {
+            "pyRuleUnderTestInsName": "GENERIC-DATA-DECISION!ISGENERICDECISIONTRUE",
+            "pyIsSinglePageImplementation": "false",
+            "pyRuleUnderTestLabel": "Generic decision",
+            "pyRuleUnderTestName": "IsGenericDecisionTrue",
+            "pyRuleUnderTestObjClass": "Generic-Data-Decision",
+            "pyRuleUnderTestType": "Rule-Obj-When"
+          },
+          "pyParameters": [
+            {
+              "pyParametersParamName": "LookupFlag",
+              "pyParametersParamType": "TrueFalse"
+            }
+          ]
+        },
+        "pyPagesAndClasses": [
+          {
+            "pyPagesAndClassesPage": "RunRecordPrimaryPage",
+            "pyPagesAndClassesClass": "Generic-Data-Decision"
+          }
+        ],
+        "pySetupPages": [],
+        "pySetup": [],
+        "pyCleanup": [],
+        "pySimulation": [
+          {
+            "pyClassName": "Generic-Data-Lookup",
+            "pyMockingSupportedRuleTypes": "Rule-Declare-Pages",
+            "pyRuleNameToBeMocked": "D_GenericBooleanLookup",
+            "pySelected": "true",
+            "pySimulationMethod": "DefineData",
+            "pySkipPostLoad": "false",
+            "pySetupPages": [
+              {
+                "pySetupPageName": "PrimaryPage",
+                "pyPageDetails": {
+                  "pxObjClass": "Generic-Data-Lookup",
+                  "BooleanResult": true
+                }
+              }
+            ]
+          }
+        ],
+        "pyExpectedResults": [
+          {
+            "pyAllowMultipleInputCombinations": "true",
+            "pyAssertionType": "Decision",
+            "pyClassContext": "Generic-Data-Decision",
+            "pyPropertyType": "Decision Result",
+            "pyExpectedResults": [
+              {
+                "pyPageName": "rowLevelPage",
+                "pyExpectedResults": [
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.LookupFlag",
+                    "pyPropertyAbsolutePath": "Param.LookupFlag",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "true",
+                    "pyDisplayLabel": "Param.LookupFlag"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".ConditionA",
+                    "pyPropertyAbsolutePath": ".ConditionA",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "true",
+                    "pyDisplayLabel": ".ConditionA"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".ConditionB",
+                    "pyPropertyAbsolutePath": ".ConditionB",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": ".ConditionB"
+                  },
+                  {
+                    "pyPropertyType": "result",
+                    "pyPropertyName": "Result",
+                    "pyPropertyAbsolutePath": "Result",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "true",
+                    "pyDisplayLabel": "Result"
+                  }
+                ]
+              },
+              {
+                "pyPageName": "rowLevelPage",
+                "pyExpectedResults": [
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.LookupFlag",
+                    "pyPropertyAbsolutePath": "Param.LookupFlag",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "true",
+                    "pyDisplayLabel": "Param.LookupFlag"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".ConditionA",
+                    "pyPropertyAbsolutePath": ".ConditionA",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": ".ConditionA"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".ConditionB",
+                    "pyPropertyAbsolutePath": ".ConditionB",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "true",
+                    "pyDisplayLabel": ".ConditionB"
+                  },
+                  {
+                    "pyPropertyType": "result",
+                    "pyPropertyName": "Result",
+                    "pyPropertyAbsolutePath": "Result",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "true",
+                    "pyDisplayLabel": "Result"
+                  }
+                ]
+              },
+              {
+                "pyPageName": "rowLevelPage",
+                "pyExpectedResults": [
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.LookupFlag",
+                    "pyPropertyAbsolutePath": "Param.LookupFlag",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "true",
+                    "pyDisplayLabel": "Param.LookupFlag"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".ConditionA",
+                    "pyPropertyAbsolutePath": ".ConditionA",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": ".ConditionA"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".ConditionB",
+                    "pyPropertyAbsolutePath": ".ConditionB",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": ".ConditionB"
+                  },
+                  {
+                    "pyPropertyType": "result",
+                    "pyPropertyName": "Result",
+                    "pyPropertyAbsolutePath": "Result",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": "Result"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "TC_IsGenericDecisionTrue_IsolatedFalse",
+      "Scenarios": [
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "FalseDataPage",
+          "Description": "Describes the only MultInpComb row in the isolated false-simulation Decision assertion block.",
+          "Type": "Edge",
+          "Narrative": "Combination row 1 evaluates Param.LookupFlag=false, .ConditionA=true, .ConditionB=true and expects Result false.",
+          "InputsNarrative": "This Scenario maps to the only decision row in this UnitTestRules entry because its Data Page simulation differs from the shared true-simulation group.",
+          "SimulationsNarrative": "The simulated Data Page returns BooleanResult=false for LookupFlag=false.",
+          "AssertionsNarrative": "Every third-level input cell and the Result cell for this row are captured in AssertionDecisionTrace.",
+          "EvidenceSummary": {
+            "SupportLevel": "PredictedFromRules",
+            "DependencyState": "AllResolved",
+            "BranchState": "AllEvaluated",
+            "SimulationState": "RequiredAndAligned",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 4,
+            "ExactValueAssertionCount": 4,
+            "StructuralAssertionCount": 0,
+            "OmittedClaimCount": 0,
+            "ResolvedDependencyCount": 2,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 2,
+            "ParameterResolutionCount": 1,
+            "PropertyTraceCount": 3,
+            "SimulatedDependencyCount": 1,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 1,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "W1:RUT->D_GenericBooleanLookup fetched=true scanned=true scan=Rule-Declare-Pages extracted=0 queued=0 nested=[]; W1:RUT->BooleanResult fetched=true scanned=true scan=Rule-Obj-Property extracted=0 queued=0 nested=[]",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "This Scenario maps to local MultInpComb row 1. Its simulation-group key is D_GenericBooleanLookup(LookupFlag=false) with BooleanResult=false, which differs from the true-simulation group. It therefore requires a separate UnitTestRules entry.",
+            "BlockingGaps": [],
+            "AssertionDecisionTrace": "ASSERT|id=R001C001|kind=DecisionInput|row=1|target=Param.LookupFlag|page=rowLevelPage|class=Generic-Data-Decision|mode=text|comparator=Input Value|value=false|support=PredictedFromRules\nASSERT|id=R001C002|kind=DecisionInput|row=1|target=.ConditionA|page=rowLevelPage|class=Generic-Data-Decision|mode=text|comparator=Input Value|value=true|support=PredictedFromRules\nASSERT|id=R001C003|kind=DecisionInput|row=1|target=.ConditionB|page=rowLevelPage|class=Generic-Data-Decision|mode=text|comparator=Input Value|value=true|support=PredictedFromRules\nASSERT|id=R001C004|kind=DecisionResult|row=1|target=Result|page=rowLevelPage|class=Generic-Data-Decision|mode=text|comparator=Is Equals To|value=false|support=PredictedFromRules\nSIM|id=S001|rule=D_GenericBooleanLookup|sig=DP@Generic-Data-Lookup@D_GenericBooleanLookup(LookupFlag=false)|shape=page|method=DefineData|class=Generic-Data-Lookup|params=LookupFlag=false|target=.BooleanResult"
+          }
+        }
+      ],
+      "RuleCode": {
+        "pyLabel": "TC_IsGenericDecisionTrue_IsolatedFalse",
+        "pyPurpose": "TC_IsGenericDecisionTrue_IsolatedFalse",
+        "pyDescription": "Verifies the input combination that requires the false Data Page simulation.",
+        "pyPrimaryPageForRUT": "RunRecordPrimaryPage",
+        "pyIsInactive": false,
+        "pyCleanUpTestData": true,
+        "pyRuleSet": "GenericTestRules",
+        "pyRuleSetVersion": "01-01-01",
+        "pyClassName": "Generic-Data-Decision",
+        "pyTypeOfSetupPageSelection": "CUSTOMPAGES",
+        "pyRuleUnderTest": {
+          "pyDetails": {
+            "pyRuleUnderTestInsName": "GENERIC-DATA-DECISION!ISGENERICDECISIONTRUE",
+            "pyIsSinglePageImplementation": "false",
+            "pyRuleUnderTestLabel": "Generic decision",
+            "pyRuleUnderTestName": "IsGenericDecisionTrue",
+            "pyRuleUnderTestObjClass": "Generic-Data-Decision",
+            "pyRuleUnderTestType": "Rule-Obj-When"
+          },
+          "pyParameters": [
+            {
+              "pyParametersParamName": "LookupFlag",
+              "pyParametersParamType": "TrueFalse"
+            }
+          ]
+        },
+        "pyPagesAndClasses": [
+          {
+            "pyPagesAndClassesPage": "RunRecordPrimaryPage",
+            "pyPagesAndClassesClass": "Generic-Data-Decision"
+          }
+        ],
+        "pySetupPages": [],
+        "pySetup": [],
+        "pyCleanup": [],
+        "pySimulation": [
+          {
+            "pyClassName": "Generic-Data-Lookup",
+            "pyMockingSupportedRuleTypes": "Rule-Declare-Pages",
+            "pyRuleNameToBeMocked": "D_GenericBooleanLookup",
+            "pySelected": "true",
+            "pySimulationMethod": "DefineData",
+            "pySkipPostLoad": "false",
+            "pySetupPages": [
+              {
+                "pySetupPageName": "PrimaryPage",
+                "pyPageDetails": {
+                  "pxObjClass": "Generic-Data-Lookup",
+                  "BooleanResult": false
+                }
+              }
+            ]
+          }
+        ],
+        "pyExpectedResults": [
+          {
+            "pyAllowMultipleInputCombinations": "true",
+            "pyAssertionType": "Decision",
+            "pyClassContext": "Generic-Data-Decision",
+            "pyPropertyType": "Decision Result",
+            "pyExpectedResults": [
+              {
+                "pyPageName": "rowLevelPage",
+                "pyExpectedResults": [
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": "Param.LookupFlag",
+                    "pyPropertyAbsolutePath": "Param.LookupFlag",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": "Param.LookupFlag"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".ConditionA",
+                    "pyPropertyAbsolutePath": ".ConditionA",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "true",
+                    "pyDisplayLabel": ".ConditionA"
+                  },
+                  {
+                    "pyPropertyType": "input",
+                    "pyPropertyName": ".ConditionB",
+                    "pyPropertyAbsolutePath": ".ConditionB",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "true",
+                    "pyDisplayLabel": ".ConditionB"
+                  },
+                  {
+                    "pyPropertyType": "result",
+                    "pyPropertyName": "Result",
+                    "pyPropertyAbsolutePath": "Result",
+                    "pyPropertyMode": "text",
+                    "pyExpectedValue": "false",
+                    "pyDisplayLabel": "Result"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

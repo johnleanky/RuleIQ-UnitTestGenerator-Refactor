@@ -1,0 +1,68 @@
+﻿Kinds: I=Invariant,A=Algorithm,M=Mapping,P=Protocol,S=Semantic. Canonical source=P/M/I/A/S.
+Coverage: interface KRUF.0; identity KRUF.1; detection/source KRUF.2-3; fetch KRUF.4; fetched fields/parameters KRUF.5; transitive/context KRUF.6-9; nested/seed/block KRUF.10-13.
+
+KRUF.0|P|AgentInterface
+A: `DISCOVER` parses a critical invocation. `REQUEST` builds exact RUF dependency identity/payload. `READ` maps fetched RuleJSON to a concrete contract. `DERIVE` creates transitive dependencies. `EVALUATE` determines result semantics or returns unknown.
+I: Prompt supplies only invocation+holder+impact. All RUF field names, identity rules, request mapping, response matching, contract extraction, and field semantics come from this KnowledgeArea.
+
+
+KRUF.1|I|RUFIdentity
+M: call=`@FunctionName(...)`; source=matching row in the already selected holder's `RuleJSON.pxRuleReferences[]` whose exact `pxRuleObjClass="Rule-Utility-Function"`; requestRef=verbatim present-field projection `[pxObjClass,pxRuleFamilyName,pxRuleObjClass,pyRuleName]` only.
+I: RUF has no Apply-To. Ignore every other source field and never emit `pxRuleClassName`. FORBID synthesis, normalization, class substitution, family guessing, or extra fields. Only RUF may omit `pxRuleClassName`; every non-RUF reference requires a non-empty value.
+M: DWL key=`RUF@@<exact pxRuleFamilyName>`.
+
+KRUF.2|A|InvocationDetection
+A: Balanced-parse every `@([A-Za-z][A-Za-z0-9_]*)\(` in RUT/fetched RuleJSON; create `SI` when result affects branch/value/context/error/simulation/assertion/producer/omission.
+
+KRUF.3|P|ContractSource
+A: Use exact prompt helper only if it defines parameter positions/types/roles, executable-rule/context args, required return semantics, and relevant null/error behavior.
+A: Otherwise fetch the concrete RUF before undocumented argument classification or result inference.
+I: Generic RUF KnowledgeArea/common platform knowledge is not a concrete function contract.
+
+KRUF.4|A|RUFFetch
+A: Prefer the exact selected-holder `pxRuleReferences[]` RUF item; project only KRUF.1 fields verbatim. If unavailable, never synthesize values; follow the prompt's existing alternate-holder retry/gap policy.
+A: Create `D|id|RUF@@<family>|src=<holder expression>|ctx=none|state=READY|proof=exactHolderRef|next=REQUEST` only for an exact holder source row; otherwise use the existing retry/gap state. Holder remains the rule containing the invocation, as resolved by the existing holder logic.
+I: Pre-call validation rejects any changed/added allowed-field value, duplicate, extra field, or emitted RUF `pxRuleClassName`; it must not alter holder selection, grouping, or retry behavior. This restriction applies only to the requested RUF item; KRUF.6-8 canonical synthetic non-RUF dependencies remain allowed.
+
+KRUF.5|M|FetchedContractSemantics
+M: `pyParametersDefinition[]` is the ordered formal-parameter contract; row `i` describes invocation argument `i`.
+M: In each row: `pyParameterType`=technical parameter type; `pyPegaType`=optional Pega type and may be empty; `pyParameterUsage`=parameter purpose/role; `pyParameterMode`=direction and may be `In`, `Out`, `In/Out`, empty, or another returned value.
+M: `pyDescription`=function purpose/behavior description. `pyUsage`=function usage, constraints, side effects, and result guidance when documented.
+A: Preserve field values exactly. Do not restrict values or valid combinations to examples.
+A: Map invocation arguments positionally to `pyParametersDefinition[]`; use `pyParameterUsage` first for parameter role, then `pyUsage` and `pyDescription` for function-level behavior.
+A: Empty `pyPegaType`, `pyParameterMode`, `pyParameterUsage`, `pyDescription`, or `pyUsage` means that field supplies no evidence; it is not an error and must not be inferred.
+A: Classify an argument as executable-rule name, context/page input, output target, side-effect carrier, or ordinary value only when these fields state or unambiguously imply that role.
+A: Derive scenarios, seeds, and assertions only from documented parameter roles, function behavior, side effects, and result semantics.
+I: Type alone does not prove semantic role. Parameter definitions alone do not prove return semantics. Missing documentation must remain unknown.
+
+KRUF.6|A|RuleArgumentExtraction
+A: Create executable dependency only when prompt/fetched contract explicitly marks the parameter as `Rule-Obj-When|Rule-Declare-Pages|Rule-Declare-DecisionTable|Rule-Declare-DecisionTree|Rule-Declare-Expression` or equivalent named-rule role.
+I: FORBID treating all strings/Identifiers as rules, assuming fixed argument order, or classifying unknown positions.
+
+KRUF.7|A|ContextResolution
+A: Resolve context path left-to-right via `Rule-Obj-Property`; Page/PageList/PageGroup target class=`pyPageClass`; top-level Data Page=`pyClassName`; Parameter=context class from parameter metadata.
+I: Apply resolved class only to the transitive referenced rule, never to the RUF. FORBID wrapper/caller class substitution.
+
+KRUF.8|P|TransitiveRequest
+A: Build referenced-rule triplet `{pxRuleClassName:<KRUF.7>,pxRuleFamilyName:<rule name>,pxRuleObjClass:<contract type>}`.
+A: Caller-supplied rule arg uses invocation holder. Dependency found inside fetched RUF uses RUF `pzInsKey`/resolvedKey holder and exact `pxRuleReferences[]` item.
+A: Queue/request/scan through DWL until CLOSED or terminal gap.
+
+KRUF.9|A|ImpactAndSeeds
+A: Trace RUF result consumers and assign impact=`branch_selection|property_value|context|error|simulation|other`.
+A: Fetch conditional referenced RuleJSON; derive criteria; design deterministic seeds; compute expected RUF result only from closed evidence.
+
+KRUF.10|A|KnownHelpers
+M: `IsInPageListWhen(arg1,arg2)`, `countInPageListWhen(arg1,arg2)`: arg1=`Rule-Obj-When`; arg2=Page/PageList/PageGroup context. Normalize bare/single/double-quoted arg1; create When+provider rows immediately.
+M: `Lookup(arg1,...)`: arg1=`Rule-Declare-Pages` only when exact helper contract is available.
+
+KRUF.11|A|NestedFunctions
+A: Parse inside-out. Each outer input MUST equal prior inner output. Block exact result when any nested contract/result is unknown.
+
+KRUF.12|P|UnknownReturn
+A: If prompt helper, `pyParametersDefinition[].pyParameterUsage`, `pyDescription`, `pyUsage`, and implementation do not establish return behavior: set result/affected execution=`unknown`; add `RUF_RETURN_UNKNOWN:<FunctionName>` to BlockingGaps+ReasoningTrace; omit/structurally downgrade dependent exact assertions.
+I: FORBID inference from name, parameter signature/type, generic KnowledgeArea, common knowledge, or memory.
+
+KRUF.13|P|ClosureGate
+A: Terminal status per critical invocation: `prompt_helper_sufficient|fetched_contract_sufficient|fetched_contract_insufficient|terminal_unavailable`.
+I: `STATECHECK.preAuthor` fails for missing status or active RUF-derived `READY|CTX|REQUESTED|FETCHED|SCANNED` work. Insufficient/unavailable status requires all affected exact claims blocked.

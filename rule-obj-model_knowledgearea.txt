@@ -1,0 +1,284 @@
+﻿Marker kinds: F=Field,V=Value,L=List,M=Mapping,A=Algorithm,S=Semantic,P=Protocol.
+Line labels: P=Purpose; M=Mapping; I=Invariant; A=Algorithm/Protocol; S=Semantic; X=Example/semantic witness; R=Related markers.
+Resolve only needed markers. X examples clarify semantics but are not canonical source. Canonical meaning = marker heading + P/M/I/A/S lines.
+Param resolution order is fixed: explicit invocation params -> inheritance flag -> empty/null.
+
+CoverageMap
+Invocation scan: KT.3,KT.4,KT.5,KT.7,KT.8.
+Dependency param resolution: KT.6-KT.15,KT.19.
+Property tracing: KT.16,KT.20-KT.24,KT.27-KT.28.
+Branch tracing: KT.17,KT.25.
+Context tracing: KT.18,KT.23-KT.24,KT.28,KT.34.
+Complexity: KT.33 LoopOperations, KT.30 NestingDepthCalculation, KT.31 TotalOperationCounter.
+Termination/list existence: KT.35,KT.36.
+
+KT.1|F|OperationCollectionField
+P: Where RuleJSON operation list lives.
+M: Rule-Obj-Model -> pyProperties.
+X: pyProperties:[{pyPropertyStepId:"1",pyActionName:"SET"},{pyPropertyStepId:"2",pyActionName:"APPLY_MODEL"}]
+I: If resolution=N/A, rule is single-expression; do not iterate operation list; use single expression field such as pyCondition or pyExpression.
+
+KT.2|F|StepSequenceField
+P: Field determining execution order.
+M: Rule-Obj-Model -> pyPropertyStepId.
+A: Sort sequence IDs lexicographically as strings, never numerically.
+X: "1"<"10"<"2"<"20"<"3"; "2"<"2.1"<"2.10"<"2.2"<"2.3"; "38"<"44"<"44.1"<"44.10"<"44.2"<"54".
+S: nesting by dot depth: 1 top; 1.1 child; 1.1.1 grandchild; 1.2 second child.
+I: Execute in StepSequenceField order only. Never reorder by grouping, semantics, narrative flow, or perceived correctness.
+
+KT.3|L|InvocationPattern
+P: Operation/condition patterns invoking other rules.
+M: APPLY_MODEL: pyActionName=="APPLY_MODEL" -> invokes Rule-Obj-Model.
+M: evaluateWhen: pyActionName=="WHEN" AND pyCondition contains "evaluateWhen(" -> invokes Rule-Obj-When.
+A: Some Model operations expose multiple invocation patterns; check all patterns before concluding no dependency.
+X: APPLY_MODEL with pyPropertiesName:"EmbeUnitTestReferenceModelRule". WHEN with pyCondition:"evaluateWhen(\"IsDescriptionMatches\")".
+
+KT.4|F|RuleIdentifierField
+P: Where invoked rule name is read.
+M: APPLY_MODEL -> pyPropertiesName.
+M: evaluateWhen(...) inside pyCondition -> first string argument of evaluateWhen.
+X: {pyActionName:"APPLY_MODEL",pyPropertiesName:"EnrichCustomerData"} -> EnrichCustomerData.
+X: pyCondition:"evaluateWhen(\"IsDescriptionMatches\")" -> IsDescriptionMatches.
+
+KT.5|F|OperationTypeField
+P: Field specifying what operation does.
+M: Rule-Obj-Model -> pyActionName.
+Known values in this KnowledgeArea: SET,APPLY_MODEL,WHEN,OTHERWISE,UPDATE_PAGE,FOR_EACH_PAGE_IN,APPEND,APPEND_AND_MAP_TO,REMOVE,PREPEND,INSERT,SORT,COMMENT,EXIT_MODEL.
+X: {pyPropertyStepId:"1",pyActionName:"SET",pyPropertiesName:"Comments",pyPropertiesValue:"\"Sample text\""}.
+
+KT.6|A|ParameterMechanism
+P: How params pass from caller to invoked Model.
+M: APPLY_MODEL -> Hybrid explicit+inheritance via pyParameters + pyPassCurrentParameterPage.
+A: For each param used/defined in invoked model: 1) if name exists in caller operation pyParameters, use that explicit pyParametersParamValue/type; 2) else if pyPassCurrentParameterPage==true, inherit from caller Param page; 3) else value is empty/null in invoked model.
+I: Explicit params override inherited params.
+R: KT.7,KT.8,KT.9,KT.10,KT.19.
+
+KT.7|F|ParameterArrayField
+P: Explicit invocation parameters array.
+M: APPLY_MODEL -> pyParameters.
+Element fields: pyParametersParamName required string; pyParametersParamValue required string for scalar/expression values and may be empty; pyParametersParamType optional string, e.g. "PAGE".
+X: pyParameters:[{pyParametersParamName:"InputInteger1",pyParametersParamValue:"4"},{pyParametersParamName:"Comments",pyParametersParamValue:""},{pyParametersParamName:"InputTempPage5",pyParametersParamType:"PAGE"}].
+
+KT.8|F|ParameterInheritanceField
+P: Field controlling inheritance of non-explicit params.
+M: APPLY_MODEL -> pyPassCurrentParameterPage.
+I: If param exists in pyParameters, use explicit value. Else true -> inherit caller Param value. Else false/missing -> empty/null.
+R: KT.6,KT.9,KT.10.
+
+KT.9|V|InheritanceEnabledValue
+P: Value enabling inheritance.
+M: APPLY_MODEL -> true.
+S: Caller Param page is accessible in invoked model for params not explicitly present in pyParameters.
+X: If caller Param.Comments="Test" and invoked model uses Comments not in explicit pyParameters, invoked Param.Comments="Test".
+
+KT.10|V|InheritanceDisabledValue
+P: Value disabling inheritance.
+M: APPLY_MODEL -> false.
+S: Non-explicit params are empty/null in invoked model even if caller Param page contains values.
+Critical distinction: explicit empty string and not-passed both evaluate empty in model, but provenance differs.
+X1 explicit empty: pyPassCurrentParameterPage:false; pyParameters:[{pyParametersParamName:"Comments",pyParametersParamValue:""}] -> Param.Comments="" and was explicitly passed.
+X2 not passed: pyPassCurrentParameterPage:false; pyParameters:[] -> Param.Comments empty/null and was not passed.
+
+KT.11|F|ParameterValueField
+P: Field containing parameter value.
+M: Invocation explicit params -> pyParametersParamValue string, literal or expression.
+M: Test setup/RUT params -> pyParametersParamValue string.
+M: Parameter definition -> N/A; definitions have no default value.
+X: literal {pyParametersParamName:"InputInteger1",pyParametersParamValue:"4"}; expression {pyParametersParamName:"Comments",pyParametersParamValue:".Comments + ', extended'"}; test setup pyRuleUnderTest.pyParameters[].pyParametersParamValue.
+
+KT.12|F|ParameterNameField
+P: Field containing parameter name.
+M: Invocation -> pyParametersParamName.
+M: Test setup -> pyParametersParamName.
+M: Model parameter definition -> pyParametersParamName.
+X: invocation {pyParametersParamName:"Comments",pyParametersParamValue:"'Test'"}; definition {pyParametersParamName:"InputInteger1",pyParametersType:"Integer"}.
+
+KT.13|F|ParameterTypeField
+P: Field specifying parameter data type.
+M: Invocation -> pyParametersParamType values: "PAGE", "VALUE", or omitted for scalar.
+M: Model definition -> pyParametersType values: "PAGE","String","Integer","Decimal","Boolean".
+X: PAGE invocation {pyParametersParamName:"InputTempPage5",pyParametersParamType:"PAGE"}; scalar invocation omits type; model definition uses pyParametersType.
+
+KT.14|V|PageTypeValue
+P: Exact value identifying PAGE parameter.
+M: Rule-Obj-Model -> "PAGE".
+A: exact match only: value=="PAGE".
+I: Case-sensitive. "PAGE" != "Page" != "page".
+
+KT.15|M|ParameterNamespace
+P: How params/properties/pages are referenced.
+M: Param.PropertyName -> Param page property; namespace "Param.".
+M: PropertyName without prefix -> named page or current page property; namespace none.
+M: .PropertyName -> current page context property; namespace ".".
+M: Primary.PropertyName -> Primary page property; namespace "Primary.".
+M: Top.PropertyName -> top page property; namespace "Top.".
+Critical distinction: SET Param.InputTempPage5=TempPage5 changes parameter reference; SET InputTempPage5=TempPage5 creates/updates named page and leaves Param unchanged.
+X: target startsWith("Param.") -> parameter reference modification. target without Param. -> named page creation/update.
+X: SET Param.Comments = .Comments + ', extended' reads .Comments from current context and writes Param.Comments.
+
+KT.16|L|PropertyModificationOperations
+P: Operations that directly change property values.
+M: Rule-Obj-Model direct property modifications -> ["SET","APPEND"]. Target field KT.20; value field KT.21.
+Non-direct modification/control ops: WHEN,OTHERWISE branch only; FOR_EACH_PAGE_IN iteration container; UPDATE_PAGE context switch; REMOVE removes pages/list elements, not direct value modification.
+A: For each operation: get type via KT.5; if in this list, extract target via KT.20 and value/expression via KT.21; document in trace. If not, treat as control/context/structure unless covered by KT.27 list semantics.
+R: KT.20,KT.21,KT.22,KT.27.
+
+KT.17|L/A|ConditionalOperationTypes
+P: Operations with conditional branches affecting execution.
+M: Rule-Obj-Model -> ["WHEN","OTHERWISE"]. Condition field for WHEN -> KT.25/pyCondition. OTHERWISE condition is implicit: previous WHEN false.
+S: Child operations execute only when branch condition is satisfied.
+A: Conditional protocol: 1) extract condition via KT.25; 2) identify params/properties referenced; 3) resolve each via parameter/property trace; 4) evaluate true/false; 5) document "Step X condition: expr -> TRUE/FALSE" and child operations EXECUTED/NOT EXECUTED; 6) update property trace only for executed children.
+X: Param.InputTempPage5="" passed explicitly; condition Param.InputTempPage5!='' -> false; WHEN children skipped.
+
+KT.18|L|ContextSwitchOperations
+P: Operations changing current, target, or source page context.
+M: Rule-Obj-Model -> ["UPDATE_PAGE","FOR_EACH_PAGE_IN"]. Target page/list field -> pyPropertiesName.
+S: FOR_EACH_PAGE_IN resolves each indexed item as current for its child scope; source behavior is defined by KT.34.
+S: UPDATE_PAGE resolves pyPropertiesName as target/current for its child scope; source behavior is defined by KT.28.
+Rules: .PropertyName -> context resolved by KT.23; Primary.PropertyName -> rule execution page and never changes; Top.PropertyName -> top-level page of current embedded branch.
+X: UPDATE_PAGE TempPage4.pxResults(4); child SET .Comments writes TempPage4.pxResults(4).Comments; child SET Primary.Comments writes execution page Comments.
+X: FOR_EACH_PAGE_IN TempPage4.pxResults; child .Comments resolves per element: TempPage4.pxResults(1).Comments, (2).Comments, etc.
+R: KT.23,KT.28,KT.34.
+
+KT.19|F|ParameterDefinitionField
+P: Where invoked rule parameter definitions live, distinct from invocation params.
+M: Rule-Obj-Model definition -> pyParameters array of {pyParametersParamName,pyParametersType}.
+I: Definition field = params model expects. Invocation field KT.7 = params caller passes.
+X: model expects InputInteger1(Integer), Comments(String), InputTempPage5(PAGE). Caller passes InputInteger1=4 and pyPassCurrentParameterPage=false -> Param.InputInteger1=4; Param.Comments=""; Param.InputTempPage5 empty.
+
+KT.20|F|PropertyModificationTargetField
+P: Field containing target property/page/list name in modification operations.
+M: Rule-Obj-Model -> pyPropertiesName.
+I: KT.20 + KT.21 define complete property modification.
+
+KT.21|F|PropertyModificationValueField
+P: Field containing value/expression in modification operations.
+M: Rule-Obj-Model -> pyPropertiesValue.
+I: Evaluate/compute this field before applying modification semantics. It may contain literals, property refs, parameter refs, or complex expressions.
+
+KT.22|S/A|ModificationSemantics
+P: How each modification operation affects values.
+M: SET -> OVERWRITE: evaluate expression, replace target with result.
+M: APPEND -> LIST_APPEND: add element to end of page list.
+M: APPEND_AND_MAP_TO -> LIST_APPEND: adds element; in WHEN/OTHERWISE/OTHERWISE-WHEN branches, both may execute across iterations, so size equals executed branches, not matched conditions.
+SET rules: expression evaluated first, then target overwritten. If expression does not read current target, previous target value is lost. If expression reads current target, result can preserve/append via expression, then overwrite.
+X1: SET .Comments = Param.Comments + ", suffix"; Param.Comments="text" -> .Comments="text, suffix"; current .Comments ignored.
+X2: SET .Comments = .Comments + ", suffix"; current .Comments="existing" -> .Comments="existing, suffix".
+X3: SET Primary.Comments = .Comments + ", copied to Primary" overwrites Primary.Comments with current-context .Comments plus suffix; previous Primary.Comments ignored.
+Forbidden assumptions: empty param does not skip SET; SET does not append unless expression reads current value; empty param does not mean target unchanged.
+Mandatory tracing for every SET: extract expression via KT.21; identify refs; resolve refs; evaluate complete expression; document result; apply OVERWRITE.
+
+KT.23|M|ContextResolutionRules
+P: Resolve property refs in page contexts.
+M: Relative write target .PropertyName -> current/target page.
+M: Relative value reference .PropertyName -> active source when present; otherwise current/target.
+M: Primary.PropertyName -> rule execution page; never changes with context switches.
+M: Top.PropertyName -> top-level/root page of current branch; context-sensitive.
+M: PageName.PropertyName -> explicit page reference.
+M: UPDATE_PAGE BLANK sets target/current from pyPropertiesName and preserves inherited source.
+M: UPDATE_PAGE WITH_VALUES_FROM sets target/current from pyPropertiesName and source from pyPropertiesValue.
+I: Resolve UPDATE_PAGE source through KT.28 and inherited loop source through KT.34 before evaluating child expressions.
+R: KT.18,KT.28,KT.34.
+
+KT.24|S|PageCreationOperations
+P: Page auto-creation and page assignment semantics.
+M: UPDATE_PAGE -> auto-creates target page before child operations execute.
+M: SET page assignment -> auto-creates target page only when target is not a PAGE parameter.
+I: UPDATE_PAGE creates target as empty shell only. It does not copy/init child properties, lists, or groups. Target property exists only if a child write operation explicitly writes it.
+Page assignment: If target is PAGE parameter (detect via KT.19+KT.13+KT.14), semantic=REFERENCE; target param and source page point to same object. If target is not PAGE parameter, semantic=COPY; target page is created/overwritten with copied properties from source page.
+Core tracing: UPDATE_PAGE changes context and may auto-create target page. SET PageA=PageB is reference-only for PAGE params, copy otherwise. Never infer PAGE status from assignment text; verify formal parameter definition.
+
+KT.25|F|ConditionalConditionField
+P: Field containing conditional expression.
+M: Rule-Obj-Model WHEN -> pyCondition.
+X: pyCondition:"evaluateWhen(\"IsDescriptionMatches\")"; pyCondition:"Param.InputTempPage5 != ''".
+R: Evaluation protocol lives in KT.17.
+
+KT.26|L/S|ErrorHandlingOperations
+P: Operations/functions that add or check error messages.
+M: Rule-Obj-Model -> SET expression containing @pxAddMessageToProperty(MessageText,PropertyRef). Message extraction -> first parameter only.
+Syntax: @pxAddMessageToProperty("message text","property reference").
+I: For assertions, extract only MessageText. Do not include property name/prefix in pyExpectedValue because property context is already in pyPropertyName/pyPropertyAbsolutePath.
+X: pyPropertiesValue:"@pxAddMessageToProperty(\"Sample error\",\".DocumentType\")" -> message text "Sample error", target .DocumentType. Correct expected value: "Sample error". Wrong: ".DocumentType: Sample error".
+Comparators: has errors -> no pyExpectedValue; has no errors -> no pyExpectedValue; has error with message -> exact message text; has error message that contains -> substring only.
+
+KT.27|L/S|ListOperations
+P: List operation semantics.
+M: APPEND -> ADD_TO_END; new index=current_size+1.
+M: PREPEND -> ADD_TO_BEGINNING; new index=1; existing elements shift up.
+M: INSERT -> ADD_AT_POSITION; specified index; subsequent elements shift up.
+M: REMOVE -> DELETE_PAGE; removes entire page or list element.
+M: SORT -> REORDER_LIST using sort criteria.
+X: initial TempPage4.pxResults has 3 elements. APPEND -> creates (4). PREPEND -> new (1), old (1)(2)(3) become (2)(3)(4). INSERT at 2 -> new (2), old (2)(3) become (3)(4). SORT by .Comments ASC -> order changes by Comments.
+Testing requirements: document before-state size/positions; apply semantic; verify list size, positions, new element index, shifted/preserved elements, and ordering when relevant. Assertions: ResultCount for list count; List assertion for individual element properties; ordering assertions when relevant.
+I: Pega list indices are 1-based. APPEND=end. PREPEND=beginning. INSERT=specific position.
+R: KT.36 for ResultCount existence gate.
+
+KT.28|F/S|UpdatePageRelationship
+P: Field specifying UPDATE_PAGE relationship type.
+M: Rule-Obj-Model UPDATE_PAGE -> pyRelationNameUpdatepage values: "BLANK","WITH_VALUES_FROM".
+BLANK: sets target/current from pyPropertiesName and preserves inherited source.
+WITH_VALUES_FROM: sets target/current from pyPropertiesName and replaces source with pyPropertiesValue for the child scope.
+S: Child write targets resolve against target/current; relative child value refs resolve against active source when present, otherwise target/current.
+X BLANK: UPDATE_PAGE pyPropertiesName:"TempPage4.pxResults(4)", pyRelationNameUpdatepage:"BLANK"; child SET .Comments="text" -> TempPage4.pxResults(4).Comments="text".
+X WITH_VALUES_FROM: UPDATE_PAGE pyPropertiesName:"TempPage2", pyRelationNameUpdatepage:"WITH_VALUES_FROM", pyPropertiesValue:"TempPage"; child SET .pyText=.pyText -> left TempPage2.pyText, right TempPage.pyText; copies source to target.
+X inherited source: FOR_EACH_PAGE_IN .Items with pyUpdateSourceContext:true; nested UPDATE_PAGE .Target with BLANK; child SET .A=.B writes Primary.Target.A from Primary.Items(i).B.
+I: Resolve inherited source through KT.34 before applying BLANK; WITH_VALUES_FROM replaces source within its child scope.
+R: KT.18,KT.23,KT.34.
+  
+KT.28.S2|S|UpdatePageSeedPlacementRule
+P: Seed placement for UPDATE_PAGE BLANK child value refs.
+M: Write-target = pyPropertiesName. Source = inherited (ROOT unless overridden by WITH_VALUES_FROM or pyUpdateSourceContext=true).
+I: BLANK does not change source. Child value refs (.X) resolve from source; child write targets (.X) resolve from write-target. These are different pages when BLANK is used.
+A: Seed input properties on SOURCE page. Do not seed them on write-target page. Write-target needs no pre-seeding; UPDATE_PAGE auto-creates it (KT.24).
+X: UPDATE_PAGE .Target BLANK; child SET .Out=.In. Source=Primary. Seed .In on Primary, not on .Target.
+R: KT.23,KT.24,KT.28.  
+
+KT.29|P|PageParameterSetupProtocol
+P: Detect PAGE params and generate setup.
+A: 1) Read formal params via KT.19. 2) Extract name via KT.12 and type via KT.13. 3) Compare type to KT.14 exact "PAGE". 4) For each PAGE param, generate pySetupPages entry for concrete page instance; pyParameters entry with pyParametersParamValue equal to page name; pyParametersParamType="PAGE" in emitted test JSON; pyPagesAndClasses entry for page/class pair.
+I: Output normalization remains "PAGE".
+
+KT.30|A|NestingDepthCalculation
+P: Calculate max context nesting depth for complexity scoring.
+A: depth=0,maxDepth=0. Traverse operations in execution order. Increment depth on Rule-Obj-Model context-opening UPDATE_PAGE scope. Decrement on matching close/end when present. Track maxDepth. Return MAX_NESTING.
+Use: Execute against RUT RuleJSON. Higher nesting increases complexity score.
+R: KT.18,KT.28.
+
+KT.31|A|TotalOperationCounter
+P: Count all operations for complexity scoring.
+M: Rule-Obj-Model -> count(RuleJSON.pyProperties).
+Use: Evaluate mapped expression against RUT RuleJSON; result is OPERATION_COUNT.
+
+KT.32|V|CommentOperationType
+P: Operation type value for non-executable documentation/comment operations.
+M: Rule-Obj-Model -> "COMMENT".
+A: If operation type from KT.5 equals KT.32 value, treat as comment operation, not executable behavior.
+X: {pyActionName:"COMMENT",pyPropertiesName:"=== Set method"}.
+
+KT.33|L|LoopOperations
+P: Operations representing loops/iterations.
+M: Rule-Obj-Model -> ["FOR_EACH_PAGE_IN"].
+Use: complexity scoring M3; each loop counts toward LOOP_COUNT; loop creates nested execution context; child operations execute once per iteration.
+X: {pyPropertyStepId:"30",pyActionName:"FOR_EACH_PAGE_IN",pyPropertiesName:".Results",pyPageName:"CurrentItem"}.
+R: KT.18,KT.27,KT.30,KT.34.
+
+KT.34|F/S|LoopSourceContext
+P: Field controlling source context in FOR_EACH_PAGE_IN.
+M: Rule-Obj-Model FOR_EACH_PAGE_IN -> pyUpdateSourceContext.
+S: true -> the resolved indexed item becomes both current and source for the child scope.
+S: false or missing -> the resolved indexed item becomes current and does not replace inherited source.
+I: The nearest active source-setting scope supplies source; leaving the loop restores the parent source.
+R: KT.18,KT.23,KT.28,KT.33.
+
+KT.35|V/S|ActionTerminateRuleExecution
+P: Terminates execution of current rule.
+M: Rule-Obj-Model -> pyActionName value "EXIT_MODEL". If raw value contains surrounding spaces, trim before comparison.
+S: Immediately interrupts current rule; no later steps or branches execute.
+R: KT.36 unreachable writes.
+
+KT.36|A|ListPropertyExistenceGate
+P: Choose correct assertion type for list property before emitting ResultCount.
+A: Before every ResultCount assertion ask: did any write operation targeting this list execute on this scenario path? Write ops: APPEND,APPEND_AND_MAP_TO,INSERT,PREPEND,SET. If yes -> ResultCount allowed. If no -> assert Not exists; stop.
+I: A list never written does not exist; it is not an empty list. ResultCount=0 is forbidden when no write reached the list on this path. Unreachable writes include operations skipped by EXIT_MODEL, false WHEN branch, or any early-termination mechanism.
+R: KT.17,KT.27,KT.35.

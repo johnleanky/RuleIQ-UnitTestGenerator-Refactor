@@ -1,0 +1,124 @@
+﻿Kinds: F=Field,V=Value,L=List,M=Mapping,A=Algorithm,S=Semantic,P=Protocol. Labels: P=Purpose; M=Mapping; I=Invariant; A=Algorithm/Protocol; S=Semantic; X=Example/semantic witness; R=Related markers.
+Canonical source = heading + P/M/I/A/S. X clarifies only.
+General: one Boolean predicate, not procedural; no direct clipboard mutation. Rows resolve true/false; result from pyLogic or default conjunction. Param.X=parameter; .X/Top.X/Primary.X/Page.X=property/page refs. Functions are dependencies, not steps.
+Coverage: predicate KW.1,KW.2,KW.11,KW.14; dependencies KW.3,KW.4,KW.12,KW.12a,KW.12b,KW.12c,KW.12d,KW.12e,KW.12f,KW.12g,KW.15,KW.16.2; params KW.6,KW.7,KW.12d,KW.12e,KW.12f,KW.12g; context KW.9,KW.15,KW.16; evaluation KW.13,KW.14,KW.16,KW.16.1,KW.16.2.
+KW.1|F|OperationCollectionField
+P: Atomic predicates storage. M: Rule-Obj-When -> pyCondition[].
+A: Iterate pyCondition; rule is one predicate from rows; each row contributes Boolean operand to pyLogic.
+X: pyCondition labels A/B with expressions; pyLogic="(A AND B) OR (C AND D)". R: KW.2,KW.11,KW.14.
+KW.2|F|StepSequenceField
+P: Row key referenced by pyLogic. M: Rule-Obj-When -> pyConditionLabel.
+I: Operand token, not step number; preserve labels exactly; do not infer positions.
+X: {pyConditionLabel:"1",pyConditionValue1:"@toLowerCase(Param.ValidationFailsValue)=="true""}. R: KW.1,KW.14.
+KW.3|L|InvocationPattern
+P: Dependency patterns in rows/expressions.
+M: pyConditionValue1 contains @FunctionName( -> first-wave RUF/function-contract dependency; contains callwhen("RuleName")/equivalent -> nested When; row has pyFunctionData -> structured function-backed condition.
+M: @IsInPageListWhen("<WhenName>", <PageListPath>) in pyConditionValue1 -> invokes nested Rule-Obj-When <WhenName> for elements of <PageListPath>.
+I: For any function call in a Rule-Obj-When condition, queue/fetch the function/RUF contract before final dependency closure unless the contract is already available from pyFunctionData, KnowledgeArea, or cache.
+I: RUF/function-contract fetch is required even when a documented pattern also produces nested synthetic dependencies.
+I: For @IsInPageListWhen, absence from pxRuleReferences[] is not a blocker; create a synthetic rule reference after extracting <WhenName>.
+S: Dependencies compute row truth; no rule-type change; no procedural steps. R: KW.4,KW.11,KW.12,KW.13.
+KW.4|F|RuleIdentifierField
+P: Dependency identity extraction.
+M: Parse function name from pyConditionValue1; parse nested When name from callwhen("RuleName"); prefer pxRuleReferences[*].pyRuleName/pxRuleObjClass; structured row uses pyCondition[*].pyFunctionData.pyName.
+M: @IsInPageListWhen first string argument -> nested Rule-Obj-When name; second argument -> page/list context path.
+I: Prefer explicit metadata over text parsing, except @IsInPageListWhen where the first string argument is a documented When reference. R: KW.3,KW.12,KW.15.
+KW.5|F|OperationTypeField
+P: Row style detection.
+M: Free-form Boolean -> pyConditionValue1Purpose="1FreeFormExpressionBoolean". Guided comparison/function alias -> pyConditionOperation plus value fields and/or pyFunctionData. Display label -> pyConditionValue1StringLabel, often "[expression evaluates to true]".
+S: Free-form evaluates expression and compares result to true. pyConditionFieldName="true" and pyConditionOperation="=" are structural, not business fields. R: KW.11,KW.12,KW.13.
+KW.6|S|ParameterMechanism
+P: Parameter consumption. S: Params read from Param page at runtime; definitions may exist; values come from caller/test context; no per-row inheritance flag.
+A: For each Param.X in pyConditionValue1: provided by caller/test -> use; else empty/null per runtime rules.
+I: Definition belongs to rule; value binding belongs to caller/run context. R: KW.7,KW.11,KW.13.
+KW.7|F|ParameterDefinitionField
+P: Formal param declarations. M: Rule-Obj-When -> pyParameters.
+S: Defines expected Param.* names; if incomplete, derive actual usage from expressions.
+X: pyParameters:[{pyParametersParamName:"ValidationFailsValue",pyParametersParamType:"Text"},{pyParametersParamName:"pyHTTPResponseCode",pyParametersParamType:"Integer"}]. R: KW.6,KW.11,KW.13.
+KW.9|F|PageContextField
+P: Page/class context for non-Param property refs.
+M: Rule-Obj-When -> pyPagesAndClasses; fields pyPagesAndClassesPage, pyPagesAndClassesClass, pyLocatePageActivity.
+S: Applies only to non-Param references; Top is valid top-level page keyword.
+X: pyPagesAndClasses:[{pyPagesAndClassesPage:"Top",pyPagesAndClassesClass:"Work-"}]. R: KW.11,KW.13.
+KW.11|F|ConditionExpressionField
+P: Canonical Boolean expression text. M: pyCondition[*].pyConditionValue1; display text pyConditionValue1String may simplify but is not preferred.
+I: Prefer pyConditionValue1 for semantics.
+X: condition 4 uses @(Pega-RULES:String).pxIsInListOfValues(.pyValue,"11,222",.pxActionList); display text says .pxActionList contains page where .pyValue is in "11,222".
+R: KW.1,KW.3,KW.5,KW.6,KW.9,KW.12,KW.13.
+KW.12|F|FunctionMetadataField
+P: Structured metadata for function-backed rows. M: pyCondition[*].pyFunctionData.
+S: Use for standard condition/RUF-like alias rows; prefer metadata for semantic explanation. R: KW.12a,KW.12b,KW.12c,KW.12d,KW.12e,KW.12f,KW.12g,KW.13.
+KW.12a|F|FunctionSignatureField
+P: Formal callable shape. M: pyFunctionData.pySignature. X: @(Pega-RULES:String).pxIsInListOfValues({lookAt},{listOfValues},{lookIn}). R: KW.12.
+KW.12b|F|FunctionDescriptionField
+P: Runtime-behavior description. M: pyFunctionData.pyDescription. I: Prefer for natural-language explanation. R: KW.12.
+KW.12c|F|FunctionLabelField
+P: Short semantic label. M: pyFunctionData.pyLabel. S: Use when description too verbose. R: KW.12.
+KW.12d|F|FunctionParameterArrayField
+P: Bound args. M: pyFunctionData.pyParameters[]. A: Iterate for concrete runtime inputs. R: KW.12e,KW.12f,KW.12g.
+KW.12e|F|FunctionParameterNameField
+P: Arg semantic name. M: pyParameters[*].pyParametersParamName. X: lookAt,listOfValues,lookIn. R: KW.12d.
+KW.12f|F|FunctionParameterValueField
+P: Arg bound value. M: pyParameters[*].pyParametersParamValue. X: .pyValue; "11,222"; .pxActionList. S: Drives row result. R: KW.12d.
+KW.12g|F|FunctionParameterDescriptionField
+P: Arg meaning. M: pyParameters[*].pyParametersParamDesc. X: property name to get value; comma-delimited values; property list to look in. A: Combine name+value+description to explain without raw syntax only. R: KW.12d.
+KW.13|A|EvaluationAlgorithm
+P: Canonical Rule-Obj-When evaluation.
+A: 0 if evaluating a Rule-Test-Unit-Case MultInpComb row, first materialize explicit test seed data by KW.16. 0a before resolving any condition expression containing a function call, apply KW.3 and KW.16.2: queue/fetch RUF/function contract first, then classify function parameters and queue confirmed synthetic rule dependencies. 1 read pyCondition. 2 for each row: operand=pyConditionLabel; expression=pyConditionValue1 or comparison fields; if pyFunctionData, read signature/description/label/bound params; resolve Param.*, property, page, function refs; evaluate row true/false. 3 compose: pyLogic -> evaluate by labels; normalize operators only for analysis; one row no pyLogic -> row; multiple rows no pyLogic -> conjunction. 4 return one Boolean and summarize as predicate, not mutation sequence.
+I: Output is always single Boolean. R: KW.1,KW.2,KW.3,KW.4,KW.5,KW.6,KW.7,KW.9,KW.11,KW.12,KW.12a,KW.12b,KW.12c,KW.12d,KW.12e,KW.12f,KW.12g,KW.14.
+KW.14|F|LogicCompositionField
+P: Final Boolean composition. M: Rule-Obj-When -> pyLogic; operators AND,OR,NOT,&&,||,!; parentheses precedence.
+A: Normalize for analysis ANDâ‰¡&&, ORâ‰¡||, NOTâ‰¡!; preserve stored text when quoting.
+X: rows 1/2/3/4 with pyLogic="(1 AND 2) OR (3 AND 4)"; result true when row outcomes satisfy logic; structured rows may be explained from pyFunctionData. R: KW.1,KW.2,KW.13.
+
+KW.15|A/S|PageListWhenFunctionDependency
+P: Built-in function pattern that evaluates a nested When rule against page/list elements.
+M: pyConditionValue1 contains @IsInPageListWhen("<WhenName>", <PageListPath>) -> invokes Rule-Obj-When <WhenName>.
+A: Extract first string argument as nested Rule-Obj-When name. Extract second argument as page/list context path.
+A: Resolve <PageListPath> through Rule-Obj-Property when it is a PageList/PageGroup/property path. Use embedded item class / pyPageClass as the apply-to class for the nested When.
+A: Create synthetic pxRuleReferences-compatible sourceReference under the current holder rule even when the nested When is absent from holder pxRuleReferences[].
+I: This dependency affects the parent When Boolean result and must be fetched/scanned before the parent result is treated as resolved.
+I: If <PageListPath> item class is known, absence from pxRuleReferences[] is never a valid blocker. If class is unknown, block only as page-list item class unresolved for <PageListPath>.
+I: For @IsInPageListWhen, <WhenName> is a real Rule-Obj-When dependency even when absent from holder pxRuleReferences[].
+I: Absence from pxRuleReferences[] is never a valid blocker for this pattern.
+I: Valid blockers only: unresolved page-list item class; RuleCrawler returns no resolvedKey/RuleJSON; RuleCrawler tool failure; RuleCrawler limit.
+I: Blocking with "not in pxRuleReferences" is invalid.
+A: If item class is known, queue synthetic sourceReference: {"pxRuleObjClass":"Rule-Obj-When","pyRuleName":"<WhenName>","pxRuleClassName":"<ResolvedItemClass>"}.
+X: @IsInPageListWhen("IsValidRule",.Rules) -> nested Rule-Obj-When IsValidRule on item class of .Rules.
+R: KW.3,KW.4,KW.9,KW.11,KW.13.
+
+KW.16|A/S|TestSeedMaterialization
+P: Interpret Rule-Test-Unit-Case MultInpComb input/data seed before Rule-Obj-When evaluation.
+S: Applies only to explicit test data seed: third-level MultInpComb input cells, pySetupPages, or pySimulation seed payloads. Assertions never seed or initialize data.
+A: For each seed path, materialize all parent pages and indexed page-list/page-group elements in the seed path.
+A: Materialize the leaf property named by the seed path.
+A: If seed value is present, set leaf property to that value.
+A: If seed value is omitted, set leaf property to empty value, not absent property.
+I: Omitted seed value does not remove the cell, leaf property, parent page, page-list item, or page-group item.
+I: Assertion paths are checks only; never use assertion paths as evidence that pages/list items/properties are initialized.
+I: Page-list length counts seeded initialized items, including items whose seeded leaf property is empty.
+X: Seed cell AccessList.pyConditionList(2).pyPurpose with omitted value => AccessList.pyConditionList(2) exists and pyPurpose="".
+X: With seeded cells pyConditionList(1).pyPurpose="A" and pyConditionList(2).pyPurpose empty, pxPageListLengthCompare(pyConditionList,>,1) sees length 2.
+R: KW.9,KW.11,KW.13.
+KW.16.1|I|ColumnSignatureLockAndListSizeFeasibility
+I: DecisionColumnSignature is fixed from the UNION of all candidate scenario input paths and identical across all rows. Enumerate all scenarios first, collect every discriminating input path, then lock the signature from that union. If a scenario requires an input path not present in Row 0, add it to the signature and backfill all other rows with a present cell and omitted pyExpectedValue for that column. Never derive the signature from Row 0 alone.
+I: For a PageList accessed via pxPageListLengthCompare or equivalent, the list size seen at runtime equals the COUNT OF SEEDED INDEX CELLS in the column signature, regardless of whether their pyExpectedValue is present or empty (KW.16: empty cell = initialized item, not absent).
+I: BEFORE selecting column paths, enumerate all candidate scenarios. For each scenario whose distinguishing condition is a list-size boundary (e.g. length <= N), verify that the required list size CAN be represented by a single fixed column signature shared with all other rows.
+I: If it cannot â€” because other rows require more indexed cells than this scenario's target size â€” the scenario is UNTESTABLE within this MultInpComb. Mark it OMIT reason=schema_incompatible_assertion_target. Do NOT add it as a row. Do NOT describe it in Scenarios[].
+I: Only after all untestable scenarios are excluded, lock the column signature from the remaining rows.
+X: Rows need pyConditionList(1) and pyConditionList(2) columns. A "list length=1" scenario requires only pyConditionList(1) to be initialized. But the fixed column signature always initializes pyConditionList(2) (even empty). Runtime length=2, not 1. Scenario is untestable in this MultInpComb -> OMIT.
+KW.16.2|A/S|FunctionDerivedRuleDependencies
+P: Resolve rule dependencies hidden inside function calls used by Rule-Obj-When conditions.
+S: Applies only to function calls in Rule-Obj-When condition expressions.
+A: For every function call, if the function/RUF contract is not already available from pyFunctionData, KnowledgeArea, or cache, emit a required first-wave RuleCrawler dependency for the function/RUF contract.
+A: Fetch/scan the function/RUF contract before final dependency closure.
+A: KnowledgeArea-documented patterns may queue nested synthetic dependencies immediately, but they do not remove the RUF/function-contract fetch obligation when the contract is absent.
+A: Use the function contract to classify parameters as rule references, page/list context, scalar values, or ordinary strings.
+A: If a parameter is confirmed as a rule reference, emit a required synthetic RuleCrawler dependency with referenced rule type, literal rule name, and inferred context/apply-to class when available.
+I: Do not treat arbitrary string literals as rule names unless KnowledgeArea/cache or fetched RUF/function contract says that parameter is a rule reference.
+I: A confirmed function-derived rule dependency must be queued and sent to RuleCrawler; it must not remain only in reasoning text.
+I: Do not mark function-derived dependency closure complete unless the function/RUF contract was available or a RuleCrawler request for it was actually sent.
+I: Absence from holder pxRuleReferences[] is never a valid blocker for a function-derived dependency confirmed by KnowledgeArea/cache or RUF/function contract.
+I: "not resolved by RuleCrawler" is valid only after the synthetic referenced rule was actually sent to RuleCrawler and RuleCrawler failed to return RuleJSON/resolvedKey.
+X: @IsInPageListWhen("IsValidPostalAddress", .Addresses) is one example of this generic pattern, not a special-case-only rule.
+R: KW.3,KW.4,KW.12,KW.13,KW.15.

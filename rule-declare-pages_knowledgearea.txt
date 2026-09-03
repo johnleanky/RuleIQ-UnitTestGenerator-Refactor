@@ -1,0 +1,80 @@
+﻿KnowledgeTool(Rule-Declare-Pages)
+Scope: Rule-Declare-Pages. All Rule-Declare-Pages domain knowledge is maintained here.
+No Rule-Declare-Pages semantics intentionally removed.
+Kinds: F=Field, V=Value, L=List, M=Mapping, A=Algorithm, S=Semantic, P=Protocol, E=Examples.
+Labels: P=Purpose; M=Mapping; I=Invariant; A=Algorithm/Protocol; S=Semantic;
+        X=Example/semantic witness; R=Related markers.
+Canonical source = marker heading + P/M/I/A/S. X clarifies only.
+Ownership: core identity=KDP.1; scope eligibility gate=KDP.2; examples=KDP.3.
+Coverage: core KDP.1; scope and eligibility KDP.2; examples KDP.3.
+
+KDP.1|F|CoreFields
+P: Rule type, key, and identity fields for Rule-Declare-Pages.
+M: pxRuleObjClass="Rule-Declare-Pages"; pyRuleName=Data Page name (e.g. D_CustomerList);
+   pyClassName=apply-to class of the Data Page payload;
+   pyScope=scope level controlling isolation and simulation eligibility;
+   pyStructure=structural shape of the Data Page payload (Page or List).
+S: A Rule-Declare-Pages rule defines a named, reusable clipboard page populated on demand.
+   It is referenced by name in RUT expressions and dependency rule expressions.
+   The Data Page is populated by a connector, activity, or data transform defined in the rule.
+S: Data Pages are the primary mechanism for supplying external or reference data to rules
+   under test. They are read-only from the perspective of the RUT unless explicitly
+   written back by the rule.
+I: pyScope is a blocking field. It must be resolved from the Data Page RuleJSON before
+   any simulation eligibility decision is made.
+I: Simulation eligibility is determined solely by pyScope from the Data Page RuleJSON.
+   It is never inferred from rule name, apply-to class, structural shape, or usage context.
+R: KDP.2, KDP.3.
+
+KDP.2|A|ScopeEligibilityGate
+P: Unified scope enumeration, isolation semantics, and simulation eligibility algorithm.
+A: 1. Read pyScope from the Data Page RuleJSON.
+   2. Map pyScope to isolation level, eligibility, and resolvedScope:
+
+   pyScope="Thread"
+     -> isolation: scoped to current requestor thread; isolated per test run
+     -> ELIGIBLE; resolvedScope="Thread".
+   pyScope="Requestor"
+     -> isolation: scoped to requestor session; shared across threads
+     -> INELIGIBLE; resolvedScope="Requestor".
+   pyScope="Node"
+     -> isolation: scoped to server node; shared across all requestors
+     -> INELIGIBLE; resolvedScope="Node".
+   pyScope absent, null, empty, or any other value
+     -> isolation: cannot be determined; isolation cannot be guaranteed
+     -> INELIGIBLE; resolvedScope="unresolved".
+
+   3. Produce binary result: ELIGIBLE or INELIGIBLE, plus resolvedScope.
+   4. All agent responses to that result are defined in the Agent Instructions.
+I: Only Thread-scope Data Pages are eligible for simulation in unit tests.
+   This is a hard constraint with no exceptions for any other scope value.
+I: A pyScope field that is absent, null, empty, or set to any value other than "Thread"
+   must be treated as INELIGIBLE. Do not default absent pyScope to Thread.
+I: resolvedScope must be populated from actual RuleJSON evidence, never assumed,
+   defaulted, or omitted.
+I: Eligibility is binary. There is no partial simulation for ineligible Data Pages.
+R: KDP.1, KDP.3.
+
+KDP.3|E|ScopeEligibilityExamples
+P: Illustrative examples for KDP.2; not canonical definitions.
+X A Thread-scope Data Page (eligible):
+     RuleJSON: {pyRuleName:"D_Customer", pxRuleObjClass:"Rule-Declare-Pages",
+                pyScope:"Thread", pyClassName:"Data-Customer"}
+     -> KDP.2: pyScope=Thread -> ELIGIBLE; resolvedScope=Thread.
+
+X B Requestor-scope Data Page (ineligible):
+     RuleJSON: {pyRuleName:"D_UserProfile", pxRuleObjClass:"Rule-Declare-Pages",
+                pyScope:"Requestor", pyClassName:"Data-UserProfile"}
+     -> KDP.2: pyScope=Requestor -> INELIGIBLE; resolvedScope=Requestor.
+
+X C Node-scope Data Page (ineligible):
+     RuleJSON: {pyRuleName:"D_ConfigSettings", pxRuleObjClass:"Rule-Declare-Pages",
+                pyScope:"Node", pyClassName:"Data-Config"}
+     -> KDP.2: pyScope=Node -> INELIGIBLE; resolvedScope=Node.
+
+X D Absent-scope Data Page (ineligible):
+     RuleJSON: {pyRuleName:"D_ExternalFeed", pxRuleObjClass:"Rule-Declare-Pages",
+                pyClassName:"Data-Feed"}   (pyScope field absent)
+     -> KDP.2: pyScope absent -> INELIGIBLE; resolvedScope=unresolved.
+
+R: KDP.2.

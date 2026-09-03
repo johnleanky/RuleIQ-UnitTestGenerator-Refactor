@@ -1,0 +1,566 @@
+﻿{
+  "UnitTestRules": [
+    {
+      "Name": "TC_EntityMap_PageDP",
+      "Scenarios": [
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "PageDP",
+          "Description": "Simulates page-structured Data Page with DefineData.",
+          "Type": "Baseline",
+          "Narrative": "RUT reads D_EntityPageDP. Test seeds deterministic page payload via pySimulation.",
+          "InputsNarrative": "EntityKey=ENT_A001 passed to RUT and Data Page.",
+          "SimulationsNarrative": "D_EntityPageDP resolved via RuleCrawler. Page-structured with class TestData-Record. DefineData seeds PrimaryPage payload.",
+          "AssertionsNarrative": "Verify scalar, decimal, embedded page, page group properties. Includes existence, error, and string operator checks.",
+          "EvidenceSummary": {
+            "SupportLevel": "PredictedFromRules",
+            "DependencyState": "AllResolved",
+            "BranchState": "NotApplicable",
+            "SimulationState": "RequiredAndAligned",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 22,
+            "ExactValueAssertionCount": 13,
+            "StructuralAssertionCount": 9,
+            "OmittedClaimCount": 1,
+            "ResolvedDependencyCount": 1,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 0,
+            "ParameterResolutionCount": 1,
+            "PropertyTraceCount": 13,
+            "SimulatedDependencyCount": 1,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 3,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "W1:RUT->IsEligibleChange fetched=true scanned=true scan=Rule-Obj-When extracted=1 queued=1 nested=[HasSupportedMutationsLeft]; W2:IsEligibleChange->HasSupportedMutationsLeft fetched=true scanned=true scan=Rule-Obj-When extracted=1 queued=1 nested=[IsValidBoardMember]; W3:HasSupportedMutationsLeft->IsValidBoardMember fetched=true scanned=true scan=Rule-Obj-When extracted=0 queued=0 nested=[]",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "Compact projection of the internal evidence ledger. The internal ledger resolved relevant dependencies, enumerated candidate assertions, applied the assertion ladder, checked simulation depth and list assertions, and allowed only the emitted RuleCode assertions. Full DependencyResolution, PropertyTraces, Omissions, and Validation are intentionally not emitted in compact-evidence mode.",
+            "AssertionDecisionTrace": "ASSERT|id=A001|kind=Property|target=.EntityKey|page=RunRecordPrimaryPage|class=RuleIQ-Data|mode=Text|comparator=Is Equals To|value=ENT_A001|support=PredictedFromRules\nASSERT|id=A002|kind=Property|target=Param.SelectedIndex|page=RunRecordPrimaryPage|class=RuleIQ-Data|mode=Text|comparator=Is Equals To|value=2|support=PredictedFromRules\nASSERT|id=A003|kind=Property|target=.Quantity|page=RunRecordPrimaryPage|class=RuleIQ-Data|mode=Text|comparator=Is Equals To|value=73|support=PredictedFromRules\nASSERT|id=A004|kind=Property|target=.ValueSet(1)|page=RunRecordPrimaryPage|class=RuleIQ-Data|mode=Decimal|comparator=Is Equals To|value=456.78|support=PredictedFromRules\nASSERT|id=A005|kind=Property|target=.ConfigGroup(KEY_X).Status|page=RunRecordPrimaryPage.ConfigGroup(KEY_X)|class=Embed-ConfigSet-Group|mode=Text|comparator=Is Equals To|value=ALPHA|support=PredictedFromRules\nASSERT|id=A006|kind=Property|target=.ConfigGroup(KEY_X).pxObjClass|page=RunRecordPrimaryPage.ConfigGroup(KEY_X)|class=Embed-ConfigSet-Group|mode=Identifier|comparator=Is Equals To|value=Embed-ConfigSet-Group|support=PredictedFromRules\nASSERT|id=A007|kind=Property|target=.ConfigGroup(KEY_X).pxSubscript|page=RunRecordPrimaryPage.ConfigGroup(KEY_X)|class=Embed-ConfigSet-Group|mode=Identifier|comparator=Is Equals To|value=KEY_X|support=PredictedFromRules\nASSERT|id=A008|kind=Property|target=.CategoryID|page=RunRecordPrimaryPage|class=RuleIQ-Data|mode=Text|comparator=Not exists|support=Structural\nASSERT|id=A009|kind=Property|target=.Quantity|page=RunRecordPrimaryPage|class=RuleIQ-Data|mode=Text|comparator=Starts With|value=7|support=PredictedFromRules\nASSERT|id=A010|kind=Property|target=.OwnerName|page=RunRecordPrimaryPage|class=RuleIQ-Data|mode=Text|comparator=Is Empty|support=Structural\nASSERT|id=A011|kind=Property|target=.Notation|page=RunRecordPrimaryPage|class=RuleIQ-Data|mode=Text|comparator=has no errors|support=Structural\nASSERT|id=A012|kind=Property|target=.RecordType|page=RunRecordPrimaryPage|class=RuleIQ-Data|mode=Text|comparator=has errors|support=Structural\nASSERT|id=A013|kind=Property|target=.RecordType|page=RunRecordPrimaryPage|class=RuleIQ-Data|mode=Text|comparator=has error with message|value=Field validation failed|support=PredictedFromRules\nASSERT|id=A014|kind=Property|target=.Marker|page=WorkPage|class=RuleIQ-Data|mode=Text|comparator=Is Equals To|value=Computed_WorkValue|support=PredictedFromRules\nASSERT|id=A015|kind=Property|target=.ItemList(1).ItemNote|page=WorkPage.ItemList(1)|class=@baseclass|mode=Text|comparator=Is Equals To|value=ItemAnnotation|support=PredictedFromRules\nASSERT|id=A016|kind=Property|target=.ItemList(2).pxObjClass|page=WorkPage.ItemList(2)|class=RuleIQ-Data|mode=Identifier|comparator=Is Equals To|value=RuleIQ-Data|support=PredictedFromRules\nASSERT|id=A017|kind=List|target=.ItemNote|page=WorkPage.ItemList(1)|class=@baseclass|mode=Text|comparator=Contains|value=Annotation|support=PredictedFromRules\nASSERT|id=A018|kind=ResultCount|target=.ItemList|page=WorkPage|class=RuleIQ-Data|comparator=Is Equals To|value=3|support=PredictedFromRules\nASSERT|id=A019|kind=Page|target=WorkPage.ItemList(1)|page=WorkPage|class=RuleIQ-Data|comparator=Exists|support=Structural\nASSERT|id=A020|kind=Page|target=WorkPage.ItemList(5)|page=WorkPage|class=RuleIQ-Data|comparator=Not exists|support=Structural\nASSERT|id=A021|kind=Page|target=WorkPage.ItemList(1)|page=WorkPage|class=RuleIQ-Data|comparator=has no errors|support=Structural\nASSERT|id=A022|kind=Page|target=WorkPage.ItemList(1)|page=WorkPage|class=RuleIQ-Data|comparator=has errors|support=Structural\nASSERT|id=A023|kind=Property|target=.IsActive|page=RunRecordPrimaryPage|class=RuleIQ-Data|mode=TrueFalse|comparator=Is True|value=true|support=PredictedFromRules\nASSERT|id=A024|kind=Property|target=.IsBlocked|page=RunRecordPrimaryPage|class=RuleIQ-Data|mode=TrueFalse|comparator=Is False|value=false|support=PredictedFromRules\nASSERT|id=A025|kind=Property|target=.StatusText|page=RunRecordPrimaryPage|class=RuleIQ-Data|mode=Text|comparator=Is Equals To|value=true|support=PredictedFromRules\nSIM|id=S001|rule=D_EntityPageDP|shape=page|method=DefineData|class=TestData-Record\nOMIT|id=O999|target=.RejectedCandidateValue|reason=incorrect_candidate_assertion|detail=Candidate expected value was rejected during final RuleCode validation"
+          }
+        }
+      ],
+      "RuleCode": {
+        "pyClassName": "RuleIQ-Data",
+        "pyLabel": "TC_EntityMap_PageDP",
+        "pyPurpose": "TC_EntityMap_PageDP",
+        "pyDescription": "Execute RUT with simulated page-structured D_EntityPageDP",
+        "pyIsInactive": false,
+        "pyCleanUpTestData": true,
+        "pyRuleSet": "3010067594@",
+        "pyRuleSetVersion": "01-01-01",
+        "pyTypeOfSetupPageSelection": "CUSTOMPAGES",
+        "pyRuleUnderTest": {
+          "pyDetails": {
+            "pyRuleUnderTestInsName": "RULEIQ-DATA-TESTLIB!ENTITYMAP",
+            "pyRuleUnderTestLabel": "\"EntityMap\"",
+            "pyRuleUnderTestName": "EntityMap",
+            "pyRuleUnderTestObjClass": "RuleIQ-Data-TestLib",
+            "pyRuleUnderTestType": "Rule-Obj-Model",
+            "pyIsSinglePageImplementation": "false"
+          },
+          "pyParameters": [
+            {
+              "pyParametersParamName": "EntityKey",
+              "pyParametersParamValue": "ENT_A001"
+            }
+          ]
+        },
+        "pyPagesAndClasses": [
+          {
+            "pyPagesAndClassesClass": "RuleIQ-Data",
+            "pyPagesAndClassesPage": "WorkPage"
+          },
+          {
+            "pyPagesAndClassesClass": "RuleIQ-Data",
+            "pyPagesAndClassesPage": "WorkPage.ItemList"
+          }
+        ],
+        "pySetupPages": [],
+        "pySetup": [],
+        "pyCleanup": [],
+        "pyExpectedResults": [
+          {
+            "pyAssertionType": "Property",
+            "pyStepPageClass": "RuleIQ-Data",
+            "pyStepPageName": "RunRecordPrimaryPage",
+            "pyExpectedResults": [
+              {
+                "pyComparator": "Is Equals To",
+                "pyExpectedValue": "ENT_A001",
+                "pyLabel": "EntityKey",
+                "pyPageName": "RunRecordPrimaryPage",
+                "pyPropertyAbsolutePath": ".EntityKey",
+                "pyPropertyApplyToClass": "RuleIQ-Data",
+                "pyPropertyMode": "Text",
+                "pyPropertyName": "EntityKey",
+                "pyPropertyRealName": "EntityKey"
+              },
+              {
+                "pyComparator": "Is Equals To",
+                "pyExpectedValue": "2",
+                "pyLabel": "Selected Index",
+                "pyPropertyAbsolutePath": "Param.SelectedIndex",
+                "pyPropertyMode": "Text",
+                "pyPropertyName": "Param.SelectedIndex",
+                "pyAssertionType": "Property"
+              },
+              {
+                "pyComparator": "Is Equals To",
+                "pyExpectedValue": "73",
+                "pyLabel": "Quantity",
+                "pyPageName": "RunRecordPrimaryPage",
+                "pyPropertyAbsolutePath": ".Quantity",
+                "pyPropertyApplyToClass": "RuleIQ-Data",
+                "pyPropertyMode": "Text",
+                "pyPropertyName": "Quantity",
+                "pyPropertyRealName": "Quantity"
+              },
+              {
+                "pyComparator": "Is Equals To",
+                "pyExpectedValue": 456.78,
+                "pyPageName": "RunRecordPrimaryPage",
+                "pyPropertyAbsolutePath": ".ValueSet(1)",
+                "pyPropertyApplyToClass": "RuleIQ-Data",
+                "pyPropertyMode": "Decimal",
+                "pyPropertyName": "ValueSet(1)",
+                "pyParentPropertyMode": "ValueList",
+                "pyPropertyRealName": "ValueSet"
+              },
+              {
+                "pyComparator": "Is Equals To",
+                "pyExpectedValue": "ALPHA",
+                "pyLabel": "Status",
+                "pyPageName": "RunRecordPrimaryPage.ConfigGroup(KEY_X)",
+                "pyPropertyAbsolutePath": ".ConfigGroup(KEY_X).Status",
+                "pyPropertyApplyToClass": "Embed-ConfigSet-Group",
+                "pyPropertyMode": "Text",
+                "pyPropertyName": "Status",
+                "pyPropertyRealName": "Status"
+              },
+              {
+                "pyComparator": "Is Equals To",
+                "pyExpectedValue": "Embed-ConfigSet-Group",
+                "pyLabel": "pxObjClass",
+                "pyPageName": "RunRecordPrimaryPage.ConfigGroup(KEY_X)",
+                "pyPropertyAbsolutePath": ".ConfigGroup(KEY_X).pxObjClass",
+                "pyPropertyApplyToClass": "Embed-ConfigSet-Group",
+                "pyPropertyMode": "Identifier",
+                "pyPropertyName": "pxObjClass",
+                "pyPropertyRealName": "pxObjClass"
+              },
+              {
+                "pyComparator": "Is Equals To",
+                "pyExpectedValue": "KEY_X",
+                "pyLabel": "pxSubscript",
+                "pyPageName": "RunRecordPrimaryPage.ConfigGroup(KEY_X)",
+                "pyPropertyAbsolutePath": ".ConfigGroup(KEY_X).pxSubscript",
+                "pyPropertyApplyToClass": "Embed-ConfigSet-Group",
+                "pyPropertyMode": "Identifier",
+                "pyPropertyName": "pxSubscript",
+                "pyPropertyRealName": "pxSubscript"
+              },
+              {
+                "pyComparator": "Not exists",
+                "pyPageName": "RunRecordPrimaryPage",
+                "pyPropertyAbsolutePath": ".CategoryID",
+                "pyPropertyApplyToClass": "RuleIQ-Data",
+                "pyPropertyMode": "Text",
+                "pyPropertyName": "CategoryID",
+                "pyPropertyRealName": "CategoryID"
+              },
+              {
+                "pyComparator": "Starts With",
+                "pyExpectedValue": "7",
+                "pyPageName": "RunRecordPrimaryPage",
+                "pyPropertyAbsolutePath": ".Quantity",
+                "pyPropertyApplyToClass": "RuleIQ-Data",
+                "pyPropertyMode": "Text",
+                "pyPropertyName": "Quantity",
+                "pyPropertyRealName": "Quantity"
+              },
+              {
+                "pyComparator": "Is Empty",
+                "pyPageName": "RunRecordPrimaryPage",
+                "pyPropertyAbsolutePath": ".OwnerName",
+                "pyPropertyApplyToClass": "RuleIQ-Data",
+                "pyPropertyMode": "Text",
+                "pyPropertyName": "OwnerName",
+                "pyPropertyRealName": "OwnerName"
+              },
+              {
+                "pyComparator": "has no errors",
+                "pyPageName": "RunRecordPrimaryPage",
+                "pyPropertyAbsolutePath": ".Notation",
+                "pyPropertyApplyToClass": "RuleIQ-Data",
+                "pyPropertyMode": "Text",
+                "pyPropertyName": "Notation",
+                "pyPropertyRealName": "Notation"
+              },
+              {
+                "pyComparator": "has errors",
+                "pyPageName": "RunRecordPrimaryPage",
+                "pyPropertyAbsolutePath": ".RecordType",
+                "pyPropertyApplyToClass": "RuleIQ-Data",
+                "pyPropertyMode": "Text",
+                "pyPropertyName": "RecordType",
+                "pyPropertyRealName": "RecordType"
+              },
+              {
+                "pyComparator": "has error with message",
+                "pyExpectedValue": "Field validation failed",
+                "pyPageName": "RunRecordPrimaryPage",
+                "pyPropertyAbsolutePath": ".RecordType",
+                "pyPropertyApplyToClass": "RuleIQ-Data",
+                "pyPropertyMode": "Text",
+                "pyPropertyName": "RecordType",
+                "pyPropertyRealName": "RecordType"
+              },
+              {
+                "pyComparator": "Is True",
+                "pyExpectedValue": true,
+                "pyPageName": "RunRecordPrimaryPage",
+                "pyPropertyAbsolutePath": ".IsActive",
+                "pyPropertyApplyToClass": "RuleIQ-Data",
+                "pyPropertyMode": "TrueFalse",
+                "pyPropertyName": "IsActive",
+                "pyPropertyRealName": "IsActive"
+              },
+              {
+                "pyComparator": "Is False",
+                "pyExpectedValue": false,
+                "pyPageName": "RunRecordPrimaryPage",
+                "pyPropertyAbsolutePath": ".IsBlocked",
+                "pyPropertyApplyToClass": "RuleIQ-Data",
+                "pyPropertyMode": "TrueFalse",
+                "pyPropertyName": "IsBlocked",
+                "pyPropertyRealName": "IsBlocked"
+               },
+               {
+                "pyComparator": "Is Equals To",
+                "pyExpectedValue": "true",
+                "pyPageName": "RunRecordPrimaryPage",
+                "pyPropertyAbsolutePath": ".StatusText",
+                "pyPropertyApplyToClass": "RuleIQ-Data",
+                "pyPropertyMode": "Text",
+                "pyPropertyName": "StatusText",
+                "pyPropertyRealName": "StatusText"
+               }
+            ]
+          },
+          {
+            "pyAssertionType": "Property",
+            "pyStepPageClass": "RuleIQ-Data",
+            "pyStepPageName": "WorkPage",
+            "pyExpectedResults": [
+              {
+                "pyComparator": "Is Equals To",
+                "pyExpectedValue": "Computed_WorkValue",
+                "pyLabel": "Marker",
+                "pyPageName": "WorkPage",
+                "pyPropertyAbsolutePath": ".Marker",
+                "pyPropertyApplyToClass": "RuleIQ-Data",
+                "pyPropertyMode": "Text",
+                "pyPropertyName": "Marker",
+                "pyPropertyRealName": "Marker"
+              },
+              {
+                "pyComparator": "Is Equals To",
+                "pyExpectedValue": "ItemAnnotation",
+                "pyLabel": "ItemNote",
+                "pyPageName": "WorkPage.ItemList(1)",
+                "pyPropertyAbsolutePath": ".ItemList(1).ItemNote",
+                "pyPropertyApplyToClass": "@baseclass",
+                "pyPropertyMode": "Text",
+                "pyPropertyName": "ItemNote",
+                "pyPropertyRealName": "ItemNote"
+              },
+              {
+                "pyComparator": "Is Equals To",
+                "pyExpectedValue": "RuleIQ-Data",
+                "pyLabel": "pxObjClass",
+                "pyPageName": "WorkPage.ItemList(2)",
+                "pyPropertyAbsolutePath": ".ItemList(2).pxObjClass",
+                "pyPropertyApplyToClass": "RuleIQ-Data",
+                "pyPropertyMode": "Identifier",
+                "pyPropertyName": "pxObjClass",
+                "pyPropertyRealName": "pxObjClass"
+              }
+            ]
+          },
+          {
+            "pyAssertionType": "List",
+            "pyCardApplyToClass": "RuleIQ-Data",
+            "pyListContext": ".ItemList",
+            "pyListFilter": ".ItemNote!=\"\"",
+            "pyNumberOfAppearances": "InAllInstances",
+            "pyPropertyApplyToClass": "RuleIQ-Data",
+            "pyStepPageClass": "RuleIQ-Data",
+            "pyStepPageName": "WorkPage",
+            "pyExpectedResults": [
+              {
+                "pyComparator": "Contains",
+                "pyExpectedValue": "Annotation",
+                "pyLabel": "ItemNote",
+                "pyPageName": "WorkPage.ItemList(1)",
+                "pyPropertyAbsolutePath": ".ItemNote",
+                "pyPropertyApplyToClass": "@baseclass",
+                "pyPropertyMode": "Text",
+                "pyPropertyName": "ItemNote",
+                "pyPropertyRealName": "ItemNote"
+              }
+            ]
+          },
+          {
+            "pyAssertionType": "ResultCount",
+            "pyCardApplyToClass": "RuleIQ-Data",
+            "pyComparator": "Is Equals To",
+            "pyExpectedValue": "3",
+            "pyListContext": ".ItemList",
+            "pyPropertyApplyToClass": "RuleIQ-Data",
+            "pyStepPageClass": "RuleIQ-Data",
+            "pyStepPageName": "WorkPage"
+          },
+          {
+            "pyAssertionType": "Page",
+            "pyCardApplyToClass": "RuleIQ-Data",
+            "pyStepPageName": "WorkPage",
+            "pyStepPageClass": "RuleIQ-Data",
+            "pyExpectedResults": [
+              {
+                "pyComparator": "Exists",
+                "pyPropertyAbsolutePath": "WorkPage.ItemList(1)"
+              },
+              {
+                "pyComparator": "Not exists",
+                "pyPropertyAbsolutePath": "WorkPage.ItemList(5)"
+              },
+              {
+                "pyComparator": "has no errors",
+                "pyPropertyAbsolutePath": "WorkPage.ItemList(1)"
+              },
+              {
+                "pyComparator": "has errors",
+                "pyPropertyAbsolutePath": "WorkPage.ItemList(1)"
+              }
+            ]
+          }
+        ],
+        "pySimulation": [
+          {
+            "pxInsName": "D_ENTITYPAGEDP",
+            "pxObjClass": "Embed-Testcase-RuleDetails",
+            "pyClassName": "TestData-Record",
+            "pyObjClass": "TestData-Record",
+            "pyMockingSupportedRuleTypes": "Rule-Declare-Pages",
+            "pyRuleNameToBeMocked": "D_EntityPageDP",
+            "pySelected": "true",
+            "pySimulationMethod": "DefineData",
+            "pySkipPostLoad": "false",
+            "pySetupPages": [
+              {
+                "pxObjClass": "Embed-Testcase-SetupPages",
+                "pySetupPageName": "PrimaryPage",
+                "pyPageDetails": {
+                  "EntityKey": "ENT_A001",
+                  "pxObjClass": "TestData-Record",
+                  "Identifier": "OrgUnit_Zeta",
+                  "SiteRecords": [
+                    {
+                      "pxObjClass": "TestData-Location",
+                      "Region": "North_Sector",
+                      "Code": "NC1122",
+                      "AddressLine": "Avenue 500",
+                      "LocationType": "Main"
+                    },
+                    {
+                      "pxObjClass": "TestData-Location",
+                      "Region": "South_Sector",
+                      "Code": "SC3344",
+                      "AddressLine": "Boulevard 700",
+                      "LocationType": "Branch"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "TC_EntityLocList_ListDP",
+      "Scenarios": [
+        {
+          "Status": "New",
+          "ReasoningConfidence": "High",
+          "Testability": "FullyTestable",
+          "Name": "ListDP",
+          "Description": "Simulates list-structured Data Page with Code-Pega-List wrapper.",
+          "Type": "Baseline",
+          "Narrative": "RUT reads D_EntityListDP. Test seeds list wrapper via pySimulation.",
+          "InputsNarrative": "EntityKey=ENT_A001 passed to RUT and list DP.",
+          "SimulationsNarrative": "D_EntityListDP resolved via RuleCrawler. List-structured with Code-Pega-List wrapper evidenced by persisted JSON.",
+          "AssertionsNarrative": "Verify list-derived scalars and wrapper metadata.",
+          "EvidenceSummary": {
+            "SupportLevel": "Verified",
+            "DependencyState": "AllResolved",
+            "BranchState": "NotApplicable",
+            "SimulationState": "RequiredAndAligned",
+            "ComplexityTier": "STANDARD",
+            "AssertionCount": 1,
+            "ExactValueAssertionCount": 1,
+            "StructuralAssertionCount": 0,
+            "OmittedClaimCount": 0,
+            "ResolvedDependencyCount": 1,
+            "UnresolvedDependencyCount": 0,
+            "BranchEvaluationCount": 0,
+            "ParameterResolutionCount": 1,
+            "PropertyTraceCount": 1,
+            "SimulatedDependencyCount": 1,
+            "DependencyClosureStatus": "Closed",
+            "MaxDependencyWaveReached": 3,
+            "QueuedDependencyCount": 0,
+            "UnscannedFetchedRuleJsonCount": 0,
+            "DependencyClosureTrace": "W1:RUT->IsEligibleChange fetched=true scanned=true nested=[HasSupportedMutationsLeft]; W2:IsEligibleChange->HasSupportedMutationsLeft fetched=true scanned=true nested=[IsValidBoardMember]; W3:HasSupportedMutationsLeft->IsValidBoardMember fetched=true scanned=true nested=[]",
+            "InternalChecklist": {
+              "CandidateAssertionsEnumerated": true,
+              "DependencyResolutionCompleted": true,
+              "RuleCrawlerLimitsApplied": true,
+              "RUFTransitiveDiscoveryCompleted": true,
+              "ParametersResolved": true,
+              "BranchesEvaluated": true,
+              "PropertyTracesCompleted": true,
+              "OmissionsResolved": true,
+              "ComplexityComputed": true,
+              "SimulationNeedsResolved": true,
+              "SimulationDepthChecked": true,
+              "ListAssertionsChecked": true,
+              "SymbolicIndexesResolved": true,
+              "ContextSwitchesResolved": true,
+              "UnsupportedAssertionsExcluded": true,
+              "RuleCodeConsistentWithLedger": true,
+              "SchemaSelfCheckPassed": true,
+              "NoSpeculation": true,
+              "NoInternalLedgerLeak": true
+            },
+            "ReasoningTrace": "Compact projection of the internal evidence ledger. The internal ledger resolved relevant dependencies, enumerated candidate assertions, applied the assertion ladder, checked simulation depth and list assertions, and allowed only the emitted RuleCode assertions. Full DependencyResolution, PropertyTraces, Omissions, and Validation are intentionally not emitted in compact-evidence mode.",
+            "AssertionDecisionTrace": "ASSERT|id=A001|kind=Property|target=.Notation|page=RunRecordPrimaryPage|class=RuleIQ-Data|mode=Text|comparator=Is Equals To|value=Beta_Description|support=PredictedFromRules\nSIM|id=S001|rule=D_EntityListDP|shape=list|method=DefineData|class=Code-Pega-List"
+          }
+        }
+      ],
+      "RuleCode": {
+        "pyClassName": "RuleIQ-Data",
+        "pyLabel": "TC_EntityLocList_ListDP",
+        "pyPurpose": "TC_EntityLocList_ListDP",
+        "pyDescription": "Execute RUT with simulated list-structured D_EntityListDP",
+        "pyIsInactive": false,
+        "pyCleanUpTestData": true,
+        "pyRuleSet": "3010067594@",
+        "pyRuleSetVersion": "01-01-01",
+        "pyTypeOfSetupPageSelection": "CUSTOMPAGES",
+        "pyRuleUnderTest": {
+          "pyDetails": {
+            "pyRuleUnderTestInsName": "RULEIQ-DATA-TESTLIB!ENTITYLOCLIST",
+            "pyRuleUnderTestLabel": "\"EntityLocList\"",
+            "pyRuleUnderTestName": "EntityLocList",
+            "pyRuleUnderTestObjClass": "RuleIQ-Data-TestLib",
+            "pyRuleUnderTestType": "Rule-Obj-Model",
+            "pyIsSinglePageImplementation": "false"
+          },
+          "pyParameters": [
+            {
+              "pyParametersParamName": "EntityKey",
+              "pyParametersParamValue": "ENT_A001"
+            }
+          ]
+        },
+        "pyPagesAndClasses": [
+          {
+            "pyPagesAndClassesClass": "RuleIQ-Data",
+            "pyPagesAndClassesPage": "WorkPage"
+          }
+        ],
+        "pySetupPages": [],
+        "pySetup": [],
+        "pyCleanup": [],
+        "pyExpectedResults": [
+          {
+            "pyAssertionType": "Property",
+            "pyStepPageClass": "RuleIQ-Data",
+            "pyStepPageName": "RunRecordPrimaryPage",
+            "pyExpectedResults": [
+              {
+                "pyComparator": "Is Equals To",
+                "pyExpectedValue": "Beta_Description",
+                "pyLabel": "Notation",
+                "pyPageName": "RunRecordPrimaryPage",
+                "pyPropertyAbsolutePath": ".Notation",
+                "pyPropertyApplyToClass": "RuleIQ-Data",
+                "pyPropertyMode": "Text",
+                "pyPropertyName": "Notation",
+                "pyPropertyRealName": "Notation"
+              }
+            ]
+          }
+        ],
+        "pySimulation": [
+          {
+            "pxInsName": "D_ENTITYLISTDP",
+            "pxObjClass": "Embed-Testcase-RuleDetails",
+            "pxReferredFromClass": "Code-Pega-List",
+            "pyClassName": "Code-Pega-List",
+            "pyMockingSupportedRuleTypes": "Rule-Declare-Pages",
+            "pyRuleNameToBeMocked": "D_EntityListDP",
+            "pySimulationMethod": "DefineData",
+            "pySkipPostLoad": "false",
+            "pySetupPages": [
+              {
+                "pxObjClass": "Embed-Testcase-SetupPages",
+                "pySetupPageName": "PrimaryPage",
+                "pyPageDetails": {
+                  "EntityKey": "ENT_A001",
+                  "pxObjClass": "Code-Pega-List",
+                  "pyObjClass": "TestData-Item",
+                  "Items": [
+                    {
+                      "pxObjClass": "TestData-Item",
+                      "pyClassName": "TestData-Item",
+                      "Classification": "TypeGamma"
+                    },
+                    {
+                      "pxObjClass": "TestData-Item",
+                      "pyClassName": "TestData-Item",
+                      "Classification": "TypeDelta"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

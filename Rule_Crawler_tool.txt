@@ -1,0 +1,336 @@
+<pagedata>
+<pxUpdateSystemID>rabo-cmp-dt1</pxUpdateSystemID>
+<pyRuleName>RuleIQ ResolveCrawlerBatch--(String,String)</pyRuleName>
+<pyValueChanged>false</pyValueChanged>
+<pyFunctionName>ResolveCrawlerBatch--(String,String)</pyFunctionName>
+<pxUpdateDateTime>20260726T184127.490 GMT</pxUpdateDateTime>
+<pyReturnUsage/>
+<pzRuleSetVersionMinor>01</pzRuleSetVersionMinor>
+<pxOriginalCreateSystemID/>
+<pyMemo>add decision table support</pyMemo>
+<pyUsage/>
+<pzRuleSetVersionMajor>01</pzRuleSetVersionMajor>
+<pyJavaStream/>
+<pyHelperFlowActionClass/>
+<pxCreateDateTime>20260726T183422.883 GMT</pxCreateDateTime>
+<pxOriginalCreateDateTime/>
+<pxOriginalCreateOpName/>
+<pyInterface/>
+<pyIntrinsic/>
+<pxInstanceLockedCreateDateTime/>
+<pxInstanceLockedBy/>
+<pyBaseRule>false</pyBaseRule>
+<pxInsName>RULEIQ!RESOLVECRAWLERBATCH--(STRING,STRING)</pxInsName>
+<pxSaveDateTime>20260726T184127.524 GMT</pxSaveDateTime>
+<pyFormPost/>
+<pyReturnType>boolean</pyReturnType>
+<pyCircumstanceProp/>
+<pyDocumentTitle/>
+<pyToolbarSaveLabel>Save</pyToolbarSaveLabel>
+<pyUsageType>InputFormatting</pyUsageType>
+<pzInsKey>RULE-UTILITY-FUNCTION RULEIQ RESOLVECRAWLERBATCH--(STRING,STRING) #20260726T183422.883 GMT</pzInsKey>
+<pyInline/>
+<pyTemplate/>
+<pyDecoratedFunctionName>ResolveCrawlerBatch--(String,String)</pyDecoratedFunctionName>
+<pyJavaSource>/** * Resolves handles for the input pxRuleReferences() rows and writes the result * to InterestedRules() on the output batch page. * * Input * - inBatchPageName: clipboard page containing InterestedRules() * - outBatchPageName: output page name; defaults to CrawlerBatchResponse * * Output * - OUT.InterestedRules() * - OUT.InterestedRules().pxRuleReferences() rows copied from input with * resolvedKey populated when a direct lookup succeeds * * Supported reference types * - Rule-Obj-Property * - Rule-Obj-Model * - Rule-Obj-Activity * - Rule-Obj-When - Rule-Declare-DecisionTable * - Rule-Declare-Pages * - Rule-Utility-Function * * Input naming * - pxRuleFamilyName is used as the generic input name * - for Rule-Utility-Function it has the format pyLibraryName!pyFunctionName * * Resolution * - Data Pages: PegaDatabase.open(T_DP.toUpperCase(Locale.ROOT), * name.toUpperCase(Locale.ROOT), true) * - Other supported types: findHandle(keys) -> openDefault(keys, true) */ final PublicAPI tools = ThreadContainer.get().getPublicAPI(); if (tools == null) { throw new com.pega.pegarules.pub.PRRuntimeError("Can't get a PublicAPI reference."); } final com.pega.pegarules.priv.database.PegaDatabase pegaDb = (tools.getDatabase() instanceof com.pega.pegarules.priv.database.PegaDatabase) ? (com.pega.pegarules.priv.database.PegaDatabase) tools.getDatabase() : null; final String T_PROP = "Rule-Obj-Property"; final String T_DT = "Rule-Obj-Model"; final String T_ACT = "Rule-Obj-Activity"; final String T_WHEN = "Rule-Obj-When"; final String T_DECISION_TABLE = "Rule-Declare-DecisionTable"; final String T_DP = "Rule-Declare-Pages"; final String T_RUF = "Rule-Utility-Function"; final String K_INTERESTED = "InterestedRules"; final String K_PXREFS = "pxRuleReferences"; final String K_OBJCLASS = "pxObjClass"; final String K_HANDLE = "pzInsKey"; final String K_ITEM_RULE_ID = "pyItemRuleId"; final String K_ROW_TYPE = "pxRuleObjClass"; final String K_ROW_CLASS = "pxRuleClassName"; final String K_ROW_NAME = "pxRuleFamilyName"; final String K_RESOLVED = "resolvedKey"; final String K_KEY_CLASS = "pyClassName"; final String K_KEY_PROPERTY_NAME = "pyPropertyName"; final String K_KEY_MODEL_NAME = "pyModelName"; final String K_KEY_ACTIVITY_NAME = "pyActivityName"; final String K_KEY_WHEN_NAME = "pyBlockName"; final String K_KEY_DECISION_TABLE_NAME = "pyPurpose"; final String K_KEY_LIBRARY_NAME = "pyLibraryName"; final String K_KEY_FUNCTION_NAME = "pyFunctionName"; final String CL_EMBED_RULE_REF = "Embed-Reference-Rule"; final String DEF_OUT = "CrawlerBatchResponse"; final String DEF_PAGE_CLASS = "@baseclass"; final boolean FILTER_OUT_UNSUPPORTED = true; final class Util { boolean isBlank(String s) { return s == null || s.isEmpty(); } boolean isSupported(String type) { if (type == null) { return false; } switch (type) { case T_PROP: case T_DT: case T_ACT: case T_WHEN: case T_DECISION_TABLE: case T_DP: case T_RUF: return true; default: return false; } } /** * Resolve one reference row to pzInsKey when enough key data is present. * Data Pages use the dedicated raw-open path; all other supported types use * generic key lookup with openDefault fallback. */ String findRuleHandle(String type, String cls, String name) { if (isBlank(type) || isBlank(name)) { return ""; } try { // Data Pages bypass generic rule-key resolution to avoid D_* names being // interpreted as defined-on classes in some environments. if (T_DP.equals(type)) { if (pegaDb == null) { return ""; } com.pega.pegarules.pub.clipboard.ClipboardPage rr = pegaDb.open( T_DP.toUpperCase(java.util.Locale.ROOT), name.toUpperCase(java.util.Locale.ROOT), true ); return (rr == null) ? "" : rr.getString(K_HANDLE); } com.pega.pegarules.pub.util.HashStringMap keys = new com.pega.pegarules.pub.util.HashStringMap(); keys.putString(K_OBJCLASS, type); switch (type) { case T_PROP: if (isBlank(cls)) { return ""; } keys.putString(K_KEY_CLASS, cls); keys.putString(K_KEY_PROPERTY_NAME, name); break; case T_DT: if (isBlank(cls)) { return ""; } keys.putString(K_KEY_CLASS, cls); keys.putString(K_KEY_MODEL_NAME, name); break; case T_ACT: if (isBlank(cls)) { return ""; } keys.putString(K_KEY_CLASS, cls); keys.putString(K_KEY_ACTIVITY_NAME, name); break; case T_WHEN: if (isBlank(cls)) { return ""; } keys.putString(K_KEY_CLASS, cls); keys.putString(K_KEY_WHEN_NAME, name); break; case T_DECISION_TABLE: if (isBlank(cls)) { return ""; } keys.putString(K_KEY_CLASS, cls); keys.putString(K_KEY_DECISION_TABLE_NAME, name); break; case T_RUF: int sep = name.indexOf('!'); if (sep <= 0 || sep == name.length() - 1) { return ""; } keys.putString(K_KEY_LIBRARY_NAME, name.substring(0, sep)); keys.putString(K_KEY_FUNCTION_NAME, name.substring(sep + 1)); break; default: return ""; } String handle = tools.getDatabase().findHandle(keys); if (isBlank(handle)) { com.pega.pegarules.pub.clipboard.ClipboardPage rr = tools.getDatabase().openDefault(keys, true); if (rr != null) { handle = rr.getString(K_HANDLE); } } return isBlank(handle) ? "" : handle; } catch (com.pega.pegarules.pub.database.DatabaseException ex) { return ""; } } void ensureList(com.pega.pegarules.pub.clipboard.ClipboardPage page, String listProp, String rowClass) { com.pega.pegarules.pub.clipboard.ClipboardProperty p = page.getProperty(listProp); if (p == null || !p.isList()) { page.putPage("." + listProp + "(1)", tools.createPage(rowClass, "")); page.getProperty(listProp).remove(1); } } void clearList(com.pega.pegarules.pub.clipboard.ClipboardPage page, String listProp) { com.pega.pegarules.pub.clipboard.ClipboardProperty p = page.getProperty(listProp); if (p != null && p.isList()) { while (p.size() > 0) { p.remove(p.size()); } } } void appendPageToList(com.pega.pegarules.pub.clipboard.ClipboardPage target, String listProp, com.pega.pegarules.pub.clipboard.ClipboardPage row) { com.pega.pegarules.pub.clipboard.ClipboardProperty p = target.getProperty(listProp); int nextIndex = (p == null) ? 1 : p.size() + 1; target.putPage("." + listProp + "(" + nextIndex + ")", row); } } String inBatchName = inBatchPageName; String outBatchName = outBatchPageName; if (inBatchName == null || inBatchName.isEmpty()) { throw new com.pega.pegarules.pub.PRRuntimeException( "Param.CrawlerBatchRequest is required and must be the name of a clipboard page containing InterestedRules()" ); } if (outBatchName == null || outBatchName.isEmpty()) { outBatchName = DEF_OUT; } com.pega.pegarules.pub.clipboard.ClipboardPage inBatchOriginal = tools.findPage(inBatchName); if (inBatchOriginal == null) { throw new com.pega.pegarules.pub.PRRuntimeException( "Input page '" + inBatchName + "' not found on clipboard (must contain InterestedRules())" ); } // Snapshot input when output == input to avoid destructive overwrite. boolean inPlace = outBatchName.equals(inBatchName); com.pega.pegarules.pub.clipboard.ClipboardPage inBatch = inPlace ? inBatchOriginal.copy() : inBatchOriginal; com.pega.pegarules.pub.clipboard.ClipboardPage outBatch = tools.findPage(outBatchName); if (outBatch == null) { String reqClass = inBatchOriginal.getString(K_OBJCLASS); if (reqClass == null || reqClass.isEmpty()) { reqClass = DEF_PAGE_CLASS; } outBatch = tools.createPage(reqClass, outBatchName); } final Util util = new Util(); util.clearList(outBatch, K_INTERESTED); com.pega.pegarules.pub.clipboard.ClipboardProperty inItems = inBatch.getProperty(K_INTERESTED); if (inItems != null && inItems.isList()) { for (int iItem = 1; iItem <= inItems.size(); iItem++) { com.pega.pegarules.pub.clipboard.ClipboardPage inItem = inItems.getPageValue(iItem); if (inItem == null) { continue; } String itemClass = inItem.getString(K_OBJCLASS); if (itemClass == null || itemClass.isEmpty()) { itemClass = DEF_PAGE_CLASS; } com.pega.pegarules.pub.clipboard.ClipboardPage outItem = tools.createPage(itemClass, ""); outItem.putString(K_ITEM_RULE_ID, inItem.getString(K_ITEM_RULE_ID)); util.ensureList(outItem, K_PXREFS, CL_EMBED_RULE_REF); com.pega.pegarules.pub.clipboard.ClipboardProperty inRefs = inItem.getProperty(K_PXREFS); if (inRefs != null && inRefs.isList()) { for (int iRef = 1; iRef <= inRefs.size(); iRef++) { com.pega.pegarules.pub.clipboard.ClipboardPage inRow = inRefs.getPageValue(iRef); if (inRow == null) { continue; } String type = inRow.getString(K_ROW_TYPE); if (!util.isSupported(type)) { if (!FILTER_OUT_UNSUPPORTED) { util.appendPageToList(outItem, K_PXREFS, inRow.copy()); } continue; } String handle = inRow.getString(K_RESOLVED); if (util.isBlank(handle)) { String cls = inRow.getString(K_ROW_CLASS); String name = inRow.getString(K_ROW_NAME); handle = util.findRuleHandle(type, cls, name); } com.pega.pegarules.pub.clipboard.ClipboardPage outRow = inRow.copy(); if (!util.isBlank(handle)) { outRow.putString(K_RESOLVED, handle); } util.appendPageToList(outItem, K_PXREFS, outRow); } } util.appendPageToList(outBatch, K_INTERESTED, outItem); } } util.ensureList(outBatch, K_INTERESTED, DEF_PAGE_CLASS); return true;</pyJavaSource>
+<pyLabelOld>ResolveCrawlerBatch</pyLabelOld>
+<pyRelativePath/>
+<pzIsPrivateCheckOut/>
+<pxInsId>RULEIQ!RESOLVECRAWLERBATCH--(STRING,STRING)</pxInsId>
+<pyIsStaleRuleCheckEnabled>false</pyIsStaleRuleCheckEnabled>
+<pyRuleParamsStreamName/>
+<pyWorkKey/>
+<pySpecialtyComponentData/>
+<pyRuleSetVersion>01-01-01</pyRuleSetVersion>
+<pzDocumentKey>RULE-UTILITY-FUNCTION RULEIQ RESOLVECRAWLERBATCH--(STRING,STRING) #20260726T183422.883 GMT</pzDocumentKey>
+<pyLibraryName>RuleIQ</pyLibraryName>
+<pxUpdateOpName>Viktor Koloskov</pxUpdateOpName>
+<pyWindowTitle/>
+<pxUpdateOperator>3010629068</pxUpdateOperator>
+<pxOriginalCreateOperator/>
+<pyObjClassLabel>Function</pyObjClassLabel>
+<pxSiblingCount/>
+<pxMoveFromSystem/>
+<pzChecksum>990066282</pzChecksum>
+<pxMoveImportOperId>3010121150</pxMoveImportOperId>
+<pyDisplayMode>basic</pyDisplayMode>
+<pxInstanceLockedKey/>
+<pxTabLabel>RuleIQ ResolveCrawlerBatch--(String,String)</pxTabLabel>
+<pxObjClass>Rule-Utility-Function</pxObjClass>
+<pyTemplateInputBox/>
+<pyCircumstanceDate/>
+<pxCreateSystemID>pega-fec-innov</pxCreateSystemID>
+<pzOriginalInstanceKey>RULE-UTILITY-FUNCTION RULEIQ RESOLVECRAWLERBATCH--(STRING,STRING) #20260726T183427.517 GMT</pzOriginalInstanceKey>
+<pxCommitDateTime>20260811T220352.615 GMT</pxCommitDateTime>
+<pyDisplayName>ResolveCrawlerBatch--(String,String)</pyDisplayName>
+<pyStreamName/>
+<pyMethodName>ResolveCrawlerBatch</pyMethodName>
+<pyRuleAvailable>Yes</pyRuleAvailable>
+<pzIndexCount>1</pzIndexCount>
+<pyClassName/>
+<pxMoveImportOperName>Md Mazaharul Haque</pxMoveImportOperName>
+<pySortDateCircumWithinRSMajor>true</pySortDateCircumWithinRSMajor>
+<pyRuleFormStatusTime>20260902T094947.831 GMT</pyRuleFormStatusTime>
+<pzRuleSetVersionPatch>01</pzRuleSetVersionPatch>
+<pxHostId>pega-web-6877688969-brb4f</pxHostId>
+<pyRuleFormType>Harness</pyRuleFormType>
+<pyCircumstanceDefinition/>
+<pyRuleSet>RuleIQApp_Branch_VK-16554948</pyRuleSet>
+<pyRuleHarness>RuleForm</pyRuleHarness>
+<pyCircumstanceDateProp/>
+<pyCircumstanceVal/>
+<pyDeleteMemo>Added support of RUF and pyRuleFamilyName</pyDeleteMemo>
+<pyShowJavaWindowName>GeneratedJava20260902T094947.864 GMT</pyShowJavaWindowName>
+<pyMethodStatus/>
+<pxInstanceLockedRuleSetVersion/>
+<pyIsFromManageChangeLP/>
+<pxCreatedInPRPCVersion>08-03</pxCreatedInPRPCVersion>
+<pxInstanceLockedDateTime/>
+<pyReloadForm>true</pyReloadForm>
+<pySPRuleSetName>3010629068@</pySPRuleSetName>
+<pyRuleFormStatus>Good</pyRuleFormStatus>
+<pxInstanceLockedRuleSet/>
+<pyTemplateDisplayText>No ruleset versions available</pyTemplateDisplayText>
+<pyStepPageReference>RH_1</pyStepPageReference>
+<pyActionName>RULE-UTILITY-FUNCTION RULEIQ RESOLVECRAWLERBATCH--(STRING,STRING) #20260430T104345.248 GMT</pyActionName>
+<pyCircumstanceType/>
+<pxMergeSynchronized>20260430T104345.248 GMT</pxMergeSynchronized>
+<pyStatus/>
+<pyCompile>true</pyCompile>
+<pyReturnPegaClass/>
+<pyDescription>Resolves pxRuleReferences() and emits SuggestedReferences() for the items in CrawlerBatchRequest.</pyDescription>
+<pyHistoryObject>false</pyHistoryObject>
+<pxMoveImportDateTime>20260522T074628.773 GMT</pxMoveImportDateTime>
+<pxCreateOperator>3010629068</pxCreateOperator>
+<pyRuleStarts/>
+<pyRuleEnds/>
+<pxLimitedAccess>Dev</pxLimitedAccess>
+<pyReturnPegaType>TrueFalse</pyReturnPegaType>
+<pyLabel>ResolveCrawlerBatch</pyLabel>
+<pyCircumstanceTemplate/>
+<pxCreateOpName>Viktor Koloskov</pxCreateOpName>
+<pzStatus>valid</pzStatus>
+<pyRuleVersionsList REPEATINGTYPE="PageList">
+<rowdata REPEATINGINDEX="1">
+<pxObjClass>Rule-</pxObjClass>
+<pyValue>3</pyValue>
+<pxListSubscript>1</pxListSubscript>
+<pyMenuTooltip/>
+<pzInsKey>RULE-UTILITY-FUNCTION RULEIQ RESOLVECRAWLERBATCH--(STRING,STRING) #20260821T082142.317 GMT</pzInsKey>
+<pyLabel>01-05-05 (Available)</pyLabel>
+</rowdata>
+<rowdata REPEATINGINDEX="2">
+<pxObjClass>Rule-</pxObjClass>
+<pyValue>4</pyValue>
+<pxListSubscript>2</pxListSubscript>
+<pyMenuTooltip/>
+<pzInsKey>RULE-UTILITY-FUNCTION RULEIQ RESOLVECRAWLERBATCH--(STRING,STRING) #20260813T104200.828 GMT</pzInsKey>
+<pyLabel>VK-16554948-T (Available)</pyLabel>
+</rowdata>
+<rowdata REPEATINGINDEX="3">
+<pxObjClass>Rule-</pxObjClass>
+<pyValue>4</pyValue>
+<pxListSubscript>3</pxListSubscript>
+<pyMenuTooltip/>
+<pzInsKey>RULE-UTILITY-FUNCTION RULEIQ RESOLVECRAWLERBATCH--(STRING,STRING) #20260726T183422.883 GMT</pzInsKey>
+<pyLabel>VK-16554948 (Available)</pyLabel>
+</rowdata>
+<rowdata REPEATINGINDEX="4">
+<pxObjClass>Rule-</pxObjClass>
+<pyValue>4</pyValue>
+<pxListSubscript>4</pxListSubscript>
+<pyMenuTooltip/>
+<pzInsKey>RULE-UTILITY-FUNCTION RULEIQ RESOLVECRAWLERBATCH--(STRING,STRING) #20260819T073246.322 GMT</pzInsKey>
+<pyLabel>RulebookTest (Available)</pyLabel>
+</rowdata>
+</pyRuleVersionsList>
+<pyJavaPackageName REPEATINGTYPE="PageList">
+<rowdata REPEATINGINDEX="1">
+<pxObjClass>Embed-Rule-Utility-Package</pxObjClass>
+<pyJavaPackageName/>
+</rowdata>
+</pyJavaPackageName>
+<pyRuleCompareList REPEATINGTYPE="PageList">
+<rowdata REPEATINGINDEX="1">
+<pxObjClass>Rule-</pxObjClass>
+<pyValue>3</pyValue>
+<pxListSubscript>1</pxListSubscript>
+<pyMenuTooltip/>
+<pzInsKey>RULE-UTILITY-FUNCTION RULEIQ RESOLVECRAWLERBATCH--(STRING,STRING) #20260821T082142.317 GMT</pzInsKey>
+<pyLabel>01-05-05 (Available)</pyLabel>
+</rowdata>
+<rowdata REPEATINGINDEX="2">
+<pxObjClass>Rule-</pxObjClass>
+<pyValue>4</pyValue>
+<pxListSubscript>2</pxListSubscript>
+<pyMenuTooltip/>
+<pzInsKey>RULE-UTILITY-FUNCTION RULEIQ RESOLVECRAWLERBATCH--(STRING,STRING) #20260813T104200.828 GMT</pzInsKey>
+<pyLabel>VK-16554948-T (Available)</pyLabel>
+</rowdata>
+<rowdata REPEATINGINDEX="3">
+<pxObjClass>Rule-</pxObjClass>
+<pyValue>4</pyValue>
+<pyMenuTooltip/>
+<pxListSubscript>3</pxListSubscript>
+<pzInsKey>RULE-UTILITY-FUNCTION RULEIQ RESOLVECRAWLERBATCH--(STRING,STRING) #20260726T183422.883 GMT</pzInsKey>
+<pyLabel>VK-16554948 (Available)</pyLabel>
+</rowdata>
+<rowdata REPEATINGINDEX="4">
+<pxObjClass>Rule-</pxObjClass>
+<pyValue>4</pyValue>
+<pyMenuTooltip/>
+<pxListSubscript>4</pxListSubscript>
+<pzInsKey>RULE-UTILITY-FUNCTION RULEIQ RESOLVECRAWLERBATCH--(STRING,STRING) #20260819T073246.322 GMT</pzInsKey>
+<pyLabel>RulebookTest (Available)</pyLabel>
+</rowdata>
+</pyRuleCompareList>
+<pyRMAction>
+<pxObjClass>Embed-RuleManagement</pxObjClass>
+<pyAction>load</pyAction>
+</pyRMAction>
+<pyCustomFields REPEATINGTYPE="PageGroup">
+<rowdata REPEATINGINDEX="empty">
+<pyCFieldValue/>
+<pxObjClass>Embed-CustomFieldsList</pxObjClass>
+<pyCFileKey/>
+<pyCFieldName/>
+<pyCFileRelativePath/>
+<pxSubscript>empty</pxSubscript>
+<pyCFieldType/>
+</rowdata>
+</pyCustomFields>
+<pyPagesAndClasses REPEATINGTYPE="PageList">
+<rowdata REPEATINGINDEX="1">
+<pxObjClass>Embed-PagesAndClasses</pxObjClass>
+<pyPagesAndClassesClass/>
+<pyPagesAndClassesPage/>
+</rowdata>
+</pyPagesAndClasses>
+<pxNamedPageReferences REPEATINGTYPE="PageList"/>
+<pxMessageSummary>
+<pxObjClass>Embed-Message-Summary</pxObjClass>
+<pxUnjustifiedWarningCount>2</pxUnjustifiedWarningCount>
+<pxPrimaryPageName>RH_1</pxPrimaryPageName>
+<pxWarningCount>2</pxWarningCount>
+<pxErrors REPEATINGTYPE="PageList"/>
+</pxMessageSummary>
+<pyToolBarSettings>
+<pyFavorites>true</pyFavorites>
+<pxCanJustifyWarnings>true</pxCanJustifyWarnings>
+<pyRecover>false</pyRecover>
+<pyForward>true</pyForward>
+<pyRestore>false</pyRestore>
+<pyBranchOut>false</pyBranchOut>
+<pySave>false</pySave>
+<pyLaunch>true</pyLaunch>
+<pyHasQualifiers>false</pyHasQualifiers>
+<pyCheckIn>false</pyCheckIn>
+<pyRequiresCheckOut>true</pyRequiresCheckOut>
+<pySiblings>true</pySiblings>
+<pyAvailability>false</pyAvailability>
+<pyHelpRef>/rule-/rule-utility-/rule-utility-function/main</pyHelpRef>
+<pyDelegates>false</pyDelegates>
+<pyRefresh>true</pyRefresh>
+<pyPreview>false</pyPreview>
+<pyCheckOut>true</pyCheckOut>
+<pyRun>false</pyRun>
+<pyRuleData>true</pyRuleData>
+<pyVersionSecure>false</pyVersionSecure>
+<pyRuleResolution>true</pyRuleResolution>
+<pyCurrentlyOpen>true</pyCurrentlyOpen>
+<pxObjClass>Embed-WBSettings-ToolBar</pxObjClass>
+<pyShowJava>false</pyShowJava>
+<pyDelete>true</pyDelete>
+<pyNew>true</pyNew>
+<pyBack>true</pyBack>
+<pyCompareVersion/>
+<pyHelpURI>https://community.pega.com/help_v251/rule-/rule-utility-/rule-utility-function/main</pyHelpURI>
+<pySaveAs>true</pySaveAs>
+<pyPropertyPane>false</pyPropertyPane>
+<pyUsesInheritance>false</pyUsesInheritance>
+</pyToolBarSettings>
+<pxAPIMethodReferences REPEATINGTYPE="PageList"/>
+<pxWarnings REPEATINGTYPE="PageList">
+<rowdata REPEATINGINDEX="1">
+<pxObjClass>Embed-Warning</pxObjClass>
+<pxWarningSeverity>3</pxWarningSeverity>
+<pxWarningMessage>There may be a merge conflict with this rule. It is being modified in another branch: RulebookTest by Madhan Ananthaneni (3010614932)</pxWarningMessage>
+<pxWarningType>Merge Warning</pxWarningType>
+<pxWarningName>Merge Warning</pxWarningName>
+<pxWarningDetails/>
+</rowdata>
+<rowdata REPEATINGINDEX="2">
+<pxObjClass>Embed-Warning</pxObjClass>
+<pxWarningSeverity>3</pxWarningSeverity>
+<pxWarningMessage>There may be a merge conflict with this rule. It is being modified in another branch: VK-16554948-T by Sergei Kart (3010067594)</pxWarningMessage>
+<pxWarningType>Merge Warning</pxWarningType>
+<pxWarningName>Merge Warning</pxWarningName>
+<pxWarningDetails/>
+</rowdata>
+</pxWarnings>
+<pyRuleReferenceTypes REPEATINGTYPE="PageList">
+<rowdata REPEATINGINDEX="1">
+<pxObjClass>Rule-Obj-Class</pxObjClass>
+<pyClassName/>
+<pyKeyDefList REPEATINGTYPE="PageList"/>
+</rowdata>
+</pyRuleReferenceTypes>
+<pyParametersDefinition REPEATINGTYPE="PageList">
+<rowdata REPEATINGINDEX="1">
+<pxObjClass>Embed-Rule-Utility-FunctionParameters</pxObjClass>
+<pyParameterMode/>
+<pyPageClass/>
+<pyParameterName>inBatchPageName</pyParameterName>
+<pyPegaType/>
+<pyParameterUsage/>
+<pyParameterType>String</pyParameterType>
+</rowdata>
+<rowdata REPEATINGINDEX="2">
+<pxObjClass>Embed-Rule-Utility-FunctionParameters</pxObjClass>
+<pyParameterMode/>
+<pyPageClass/>
+<pyParameterName>outBatchPageName</pyParameterName>
+<pyParameterUsage/>
+<pyPegaType/>
+<pyParameterType>String</pyParameterType>
+</rowdata>
+</pyParametersDefinition>
+<pxRuleReferences REPEATINGTYPE="PageList">
+<rowdata REPEATINGINDEX="1">
+<pxObjClass>Embed-Reference-Rule</pxObjClass>
+<pxRuleClassName/>
+<pyRuleName>RuleIQ RuleIQApp</pyRuleName>
+<pyMethodStatus/>
+<pzIndexOwnerKey>RULE-UTILITY-FUNCTION RULEIQ RESOLVECRAWLERBATCH--(STRING,STRING) #20260726T183422.883 GMT</pzIndexOwnerKey>
+<pxRuleObjClass>Rule-Utility-Library</pxRuleObjClass>
+<pxRuleFamilyName>RULEIQ!RULEIQAPP</pxRuleFamilyName>
+<pzIndexes REPEATINGTYPE="PropertyGroup">
+<rowdata REPEATINGINDEX="RuleReference">0</rowdata>
+</pzIndexes>
+</rowdata>
+</pxRuleReferences>
+<pyThrowsException REPEATINGTYPE="PageList">
+<rowdata REPEATINGINDEX="1">
+<pyException/>
+<pxObjClass>Embed-Rule-Utility-FunctionExceptions</pxObjClass>
+</rowdata>
+</pyThrowsException>
+<pxWarningsToDisplay REPEATINGTYPE="PageList">
+<rowdata REPEATINGINDEX="1">
+<pxObjClass>Embed-Warning</pxObjClass>
+<pxWarningSeverity>3</pxWarningSeverity>
+<pxWarningMessage>There may be a merge conflict with this rule. It is being modified in another branch: RulebookTest by Madhan Ananthaneni (3010614932)</pxWarningMessage>
+<pxWarningType>Merge Warning</pxWarningType>
+<pxWarningName>Merge Warning</pxWarningName>
+<pxWarningDetails/>
+</rowdata>
+<rowdata REPEATINGINDEX="2">
+<pxObjClass>Embed-Warning</pxObjClass>
+<pxWarningSeverity>3</pxWarningSeverity>
+<pxWarningMessage>There may be a merge conflict with this rule. It is being modified in another branch: VK-16554948-T by Sergei Kart (3010067594)</pxWarningMessage>
+<pxWarningType>Merge Warning</pxWarningType>
+<pxWarningName>Merge Warning</pxWarningName>
+<pxWarningDetails/>
+</rowdata>
+</pxWarningsToDisplay>
+</pagedata>

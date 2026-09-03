@@ -1,0 +1,1575 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pega Rule-Test-Unit-Case MultInpComb Candidate for Rule-Obj-When",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "UnitTestRules"
+  ],
+  "properties": {
+    "UnitTestRules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "Name",
+          "Scenarios",
+          "RuleCode"
+        ],
+        "properties": {
+          "Name": {
+  "type": "string",
+  "pattern": "^TC_[A-Za-z0-9_]+$",
+  "minLength": 5,
+  "maxLength": 53,
+  "description": "MUST equal RuleCode.pyPurpose exactly."
+},
+          "Scenarios": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/ScenarioWithEvidenceSummary"
+            },
+            "description": "Scenario descriptions for this UnitTestRules entry. For Rule-Obj-When MultInpComb, Scenarios[] should map 1:1 by index to RuleCode.pyExpectedResults[0].pyExpectedResults[] rows: Scenario[n] describes row[n]. JSON Schema does not enforce cross-array equality; Validator documentation checks do."
+          },
+          "RuleCode": {
+            "$ref": "#/$defs/RuleCode"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "AssertionBlock": {
+      "$ref": "#/$defs/MultiInputDecisionAssertionBlock",
+      "description": "For Rule-Obj-When multi-input-combination tests, RuleCode.pyExpectedResults contains exactly one Decision block."
+    },
+    "ClassName": {
+      "type": "string",
+      "pattern": "^(@baseclass|[A-Za-z][A-Za-z0-9-]*(?:-[A-Za-z0-9]+)*)$",
+      "description": "Pega class name (e.g., 'Ins-Policy-Auto', 'Data-Party', or '@baseclass'). Use the concrete class that matches the page instance you seed; use abstract classes only if the rule truly executes at that level."
+    },
+    "ClipboardPageSeed": {
+      "type": "object",
+      "description": "Dynamic Pega clipboard page structure. Must contain pxObjClass and may contain arbitrary nested data (subpages, lists, scalars). Seed only fields needed for deterministic assertions.",
+      "required": [
+        "pxObjClass"
+      ],
+      "properties": {
+        "pxObjClass": {
+          "type": "string",
+          "description": "The concrete class of the seeded page instance. Must match the class for the corresponding page (e.g., pyClassName for Primary)."
+        }
+      },
+      "additionalProperties": true
+    },
+    "EvidenceSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "SupportLevel",
+        "DependencyState",
+        "BranchState",
+        "SimulationState",
+        "ComplexityTier",
+        "AssertionCount",
+        "ExactValueAssertionCount",
+        "StructuralAssertionCount",
+        "OmittedClaimCount",
+        "ResolvedDependencyCount",
+        "UnresolvedDependencyCount",
+        "BranchEvaluationCount",
+        "ParameterResolutionCount",
+        "PropertyTraceCount",
+        "SimulatedDependencyCount",
+        "InternalChecklist",
+        "ReasoningTrace",
+        "DependencyClosureStatus",
+        "MaxDependencyWaveReached",
+        "QueuedDependencyCount",
+        "UnscannedFetchedRuleJsonCount",
+        "DependencyClosureTrace",
+        "AssertionDecisionTrace"
+      ],
+      "properties": {
+        "DependencyClosureStatus": {
+          "type": "string",
+          "enum": [
+            "Closed",
+            "Blocked",
+            "Incomplete"
+          ],
+          "description": "Compact status of dependency traversal closure. Closed means no queued or unscanned dependency remains."
+        },
+        "MaxDependencyWaveReached": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Highest RuleCrawler wave actually executed."
+        },
+        "QueuedDependencyCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of dependency stack rows still queued at final output. Must be 0 when DependencyState is AllResolved."
+        },
+        "UnscannedFetchedRuleJsonCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Fetched RuleJSON items not scanned for nested dependencies. Must be 0 when DependencyState is AllResolved."
+        },
+        "DependencyClosureTrace": {
+          "type": "string",
+          "maxLength": 2500,
+          "description": "Compact wave-by-wave dependency traversal proof. Each fetched rule row must show rule-specific scan proof: W<wave>:<sourceRule>-><ruleName> fetched=<true|false> scanned=<true|false> scan=<ruleType|scanType> extracted=<number> queued=<number> nested=[<nestedRuleNames>]. `nested=[]` is valid only when extracted=0 and queued=0 after scanning dependency-bearing fields. Example: W1:RUT->When1 fetched=true scanned=true scan=Rule-Obj-When extracted=1 queued=1 nested=[When2]; W2:When1->When2 fetched=true scanned=true scan=Rule-Obj-When extracted=1 queued=1 nested=[When3]; W3:When2->When3 fetched=true scanned=true scan=Rule-Obj-When extracted=0 queued=0 nested=[]"
+        },
+        "SupportLevel": {
+          "type": "string",
+          "enum": [
+            "Verified",
+            "PredictedFromRules",
+            "StructuralOnly",
+            "OmittedClaimsPresent",
+            "NotTestable"
+          ],
+          "description": "Highest practical support level for emitted assertions. Exact-value assertions require Verified or PredictedFromRules support in the internal ledger. Use StructuralOnly when only structural checks are safe; OmittedClaimsPresent when any candidate claim was intentionally omitted; NotTestable when RuleCode is harness-only or minimal due to missing evidence."
+        },
+        "DependencyState": {
+          "type": "string",
+          "enum": [
+            "AllResolved",
+            "SomeUnresolved",
+            "NotApplicable"
+          ],
+          "description": "Final dependency state for emitted assertions. Dependencies affecting emitted exact values must be resolved. Queued is an internal-only state and must never appear here."
+        },
+        "BranchState": {
+          "type": "string",
+          "enum": [
+            "AllEvaluated",
+            "SomeUnknown",
+            "NotApplicable"
+          ],
+          "description": "State of branch evaluation for emitted assertions. Branch-dependent exact values require AllEvaluated."
+        },
+        "SimulationState": {
+          "type": "string",
+          "enum": [
+            "NotRequired",
+            "RequiredAndAligned",
+            "RequiredButLimited",
+            "NotApplicable"
+          ],
+          "description": "Whether simulation is needed and whether pySimulation seed depth/content is aligned with RUT access depth. RequiredButLimited must not support unsupported exact-value assertions."
+        },
+        "ComplexityTier": {
+          "type": "string",
+          "enum": [
+            "STANDARD",
+            "ELEVATED",
+            "HIGH"
+          ],
+          "description": "Complexity tier computed internally from invocation count, branch count, nesting, loops, modified properties, page parameters, unresolved dependencies, and invocation-chain depth."
+        },
+        "AssertionCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total emitted assertions in RuleCode.pyExpectedResults across all assertion blocks, including ResultCount blocks."
+        },
+        "ExactValueAssertionCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of emitted exact-value assertions."
+        },
+        "StructuralAssertionCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of emitted structural/existence/count/error-state assertions."
+        },
+        "OmittedClaimCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of candidate claims intentionally omitted from RuleCode after the internal assertion ladder."
+        },
+        "ResolvedDependencyCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of relevant dependencies internally marked resolved."
+        },
+        "UnresolvedDependencyCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of relevant dependencies internally marked unresolved after limits/retries. Must be 0 for dependency-affecting exact-value assertions."
+        },
+        "BranchEvaluationCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of relevant branch evaluations completed internally."
+        },
+        "ParameterResolutionCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of relevant parameter resolutions completed internally."
+        },
+        "PropertyTraceCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of internal property traces used to support emitted assertions and/or omissions."
+        },
+        "SimulatedDependencyCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of dependencies represented through RuleCode.pySimulation."
+        },
+        "InternalChecklist": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "CandidateAssertionsEnumerated",
+            "DependencyResolutionCompleted",
+            "RuleCrawlerLimitsApplied",
+            "RUFTransitiveDiscoveryCompleted",
+            "ParametersResolved",
+            "BranchesEvaluated",
+            "PropertyTracesCompleted",
+            "OmissionsResolved",
+            "ComplexityComputed",
+            "SimulationNeedsResolved",
+            "SimulationDepthChecked",
+            "ListAssertionsChecked",
+            "SymbolicIndexesResolved",
+            "ContextSwitchesResolved",
+            "UnsupportedAssertionsExcluded",
+            "RuleCodeConsistentWithLedger",
+            "SchemaSelfCheckPassed",
+            "NoSpeculation",
+            "NoInternalLedgerLeak"
+          ],
+          "properties": {
+            "CandidateAssertionsEnumerated": {
+              "type": "boolean"
+            },
+            "DependencyResolutionCompleted": {
+              "type": "boolean"
+            },
+            "RuleCrawlerLimitsApplied": {
+              "type": "boolean"
+            },
+            "RUFTransitiveDiscoveryCompleted": {
+              "type": "boolean"
+            },
+            "ParametersResolved": {
+              "type": "boolean"
+            },
+            "BranchesEvaluated": {
+              "type": "boolean"
+            },
+            "PropertyTracesCompleted": {
+              "type": "boolean"
+            },
+            "OmissionsResolved": {
+              "type": "boolean"
+            },
+            "ComplexityComputed": {
+              "type": "boolean"
+            },
+            "SimulationNeedsResolved": {
+              "type": "boolean"
+            },
+            "SimulationDepthChecked": {
+              "type": "boolean"
+            },
+            "ListAssertionsChecked": {
+              "type": "boolean"
+            },
+            "SymbolicIndexesResolved": {
+              "type": "boolean"
+            },
+            "ContextSwitchesResolved": {
+              "type": "boolean"
+            },
+            "UnsupportedAssertionsExcluded": {
+              "type": "boolean"
+            },
+            "RuleCodeConsistentWithLedger": {
+              "type": "boolean"
+            },
+            "SchemaSelfCheckPassed": {
+              "type": "boolean"
+            },
+            "NoSpeculation": {
+              "type": "boolean"
+            },
+            "NoInternalLedgerLeak": {
+              "type": "boolean"
+            }
+          },
+          "description": "Compact projection of mandatory internal validation gates. False values are allowed only when reflected by lower confidence/testability, structural-only assertions, omissions, or BlockingGaps."
+        },
+        "ReasoningTrace": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Compact human-readable chain of decisions based on the internal ledger. Must mention why emitted assertions are allowed, dependency/branch/simulation status, and why any candidate claims were omitted. This is not a full Evidence dump."
+        },
+        "BlockingGaps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "pyValue"
+            ],
+            "properties": {
+              "pxObjClass": {
+                "type": "string",
+                "const": "RuleIQ-Data-BlockingGap"
+              },
+              "pyValue": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "AssertionDecisionTrace": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Final machine-readable assertion decision ledger used by Validator to compare Author decisions with RuleCode. Contains ASSERT, SIM, and OMIT lines only. ASSERT lines are final emitted assertion decisions. SIM lines are final emitted simulation decisions. OMIT lines are final intentionally excluded candidate claims. If a previously considered ASSERT is removed from RuleCode, represent it as OMIT, preferably reason=incorrect_candidate_assertion when the candidate expected value was rejected during final validation. This is not an evidence ledger, proof trace, dependency trace, or reasoning trace. Values must be encoded safely for a JSON string: do not wrap values in unescaped double quotes; encode double quote as &quot;, pipe as &#124;, and newline as &#10;. For Rule-Obj-When MultInpComb, use cell-level ASSERT lines only: one DecisionInput line for each third-level input cell and one DecisionResult line for the third-level Result cell of the mapped row. DecisionInput value=<EMPTY> means the input cell exists and pyExpectedValue is omitted; it does not mean the parent page or page-list element is absent. Do not use legacy kind=Decision with Combination(n).Result for MultInpComb."
+        }
+      },
+      "title": "EvidenceSummary with restored stable fields and AssertionDecisionTrace",
+      "description": "Compact scenario-level evidence projection. Restores stable EvidenceSummary fields from the prior schema and adds AssertionDecisionTrace for Validator alignment. Full internal evidence ledger is not emitted."
+    },
+    "ExpectedValue": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      ],
+      "description": "Expected assertion value. Formatting and comparator-specific presence rules are enforced by prompt self-check."
+    },
+    "ListAssertionBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pyAssertionType",
+        "pyStepPageClass",
+        "pyStepPageName",
+        "pyListContext",
+        "pyExpectedResults"
+      ],
+      "properties": {
+        "pyAssertionType": {
+          "type": "string",
+          "const": "List"
+        },
+        "pyStepPageName": {
+          "type": "string",
+          "description": "Page name providing context for the assertion block (usually the Primary page name). If the assertion is not on Primary page name, then it should be the name of the page where the assertion takes place."
+        },
+        "pyStepPageNameActual": {
+          "type": "string",
+          "description": "Optional: actual page name when aliasing/nicknames are used."
+        },
+        "pyStepPageClass": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Class of the step page. Match the class from Pages & Classes for the given page."
+        },
+        "pyStepPageMethodName": {
+          "type": "string",
+          "description": "Optional: the method invoked whose results are being asserted (e.g., an Activity step)."
+        },
+        "pyExpectedResults": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/PropertyAssertion"
+          }
+        },
+        "pyCardApplyToClass": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Optional: card context class, used by some UI/reporting tools for rendering."
+        },
+        "pyPropertyApplyToClass": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Optional: Apply-To class for properties when needed for resolution."
+        },
+        "pyListContext": {
+          "type": "string",
+          "description": "For 'List'/'ResultCount': the list property context (e.g., '.Results'). Use the absolute path to the list to count or filter."
+        },
+        "pyListFilter": {
+          "type": "string",
+          "description": "Optional filter expression to narrow list items under test (implementation-specific). Include only if the runner supports and you need it."
+        },
+        "pyNumberOfAppearances": {
+          "type": "string",
+          "enum": [
+            "InAllInstances",
+            "InAnyInstance"
+          ]
+        }
+      },
+      "description": "List assertion block. Use only when list assertion semantics are required and seeded items are compatible with pyNumberOfAppearances."
+    },
+    "MethodParam": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pyParametersParamName"
+      ],
+      "properties": {
+        "pyParametersParamName": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Formal parameter name as defined by the Rule-Obj-When RUT."
+        },
+        "pyParametersParamValue": {
+          "type": "string",
+          "description": "Optional fixed parameter value. For multi-input rows, prefer row-level Param.<Name> input cells instead of fixed values here."
+        },
+        "pyParametersParamType": {
+          "type": "string",
+          "enum": [
+            "Text",
+            "Integer",
+            "Decimal",
+            "Double",
+            "TrueFalse",
+            "Date",
+            "DateTime",
+            "PAGE"
+          ],
+          "description": "Formal parameter type. Scalar values for each combination are represented as input cells in the Decision block."
+        }
+      },
+      "description": "Formal RUT parameter declaration. Multi-input combination values are provided by Decision input rows."
+    },
+    "PageAssertionBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pyAssertionType"
+      ],
+      "properties": {
+        "pyAssertionType": {
+          "type": "string",
+          "const": "Page"
+        },
+        "pyStepPageName": {
+          "type": "string",
+          "description": "Page name providing context for the assertion block (usually the Primary page name). If the assertion is not on Primary page name, then it should be the name of the page where the assertion takes place."
+        },
+        "pyStepPageNameActual": {
+          "type": "string",
+          "description": "Optional: actual page name when aliasing/nicknames are used."
+        },
+        "pyStepPageClass": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Class of the step page. Match the class from Pages & Classes for the given page."
+        },
+        "pyStepPageMethodName": {
+          "type": "string",
+          "description": "Optional: the method invoked whose results are being asserted (e.g., an Activity step)."
+        },
+        "pyExpectedResults": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/PropertyAssertion"
+              },
+              {
+                "$ref": "#/$defs/PagePathAssertion"
+              }
+            ]
+          }
+        },
+        "pyCardApplyToClass": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Optional: card context class, used by some UI/reporting tools for rendering."
+        },
+        "pyPropertyApplyToClass": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Optional: Apply-To class for properties when needed for resolution."
+        },
+        "pyComparator": {
+          "$ref": "#/$defs/PropertyComparator",
+          "description": "Optional block-level comparator preserved from Pega examples for Page assertion blocks."
+        }
+      },
+      "description": "Page-level structural assertion block. Page assertion children may be full property assertions or compact structural page-path assertions."
+    },
+    "PagePropertyAssertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pyComparator",
+        "pyPropertyName",
+        "pyPropertyAbsolutePath"
+      ],
+      "properties": {
+        "pyComparator": {
+          "$ref": "#/$defs/PropertyComparator"
+        },
+        "pyPropertyRealName": {
+          "$ref": "#/$defs/PropertyRealName",
+          "description": "Base property name without any indexing. Required for all Property-type assertions. For ValueList where pyPropertyName='pyDecimalValue(1)', this is 'pyDecimalValue'. For page list indexed properties where pyPropertyName='Comments' and path='.pxResults(1).Comments', this is 'Comments'."
+        },
+        "pyParentPropertyMode": {
+          "type": "string",
+          "enum": [
+            "ValueList",
+            "PageList",
+            "ValueGroup",
+            "PageGroup"
+          ],
+          "description": "Include only for list/group structures; omit for scalar Value/Page properties."
+        },
+        "pyExpectedValue": {
+          "$ref": "#/$defs/ExpectedValue"
+        },
+        "pyPropertyName": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/PropertyLeafName"
+            },
+            {
+              "not": {
+                "pattern": "^Param\\."
+              }
+            }
+          ],
+          "description": "Regular property name; Param.* paths must use ParamPropertyAssertion.Final scalar property segment only. Do not use Property assertions to check existence of Page/PageList items such as Addresses(1). Use Page assertion instead."
+        },
+        "pyPropertyAbsolutePath": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/PropertyPath"
+            },
+            {
+              "not": {
+                "pattern": "^Param\\."
+              }
+            }
+          ],
+          "description": "Regular property path; starts with '.' for page properties. Param.* paths must use ParamPropertyAssertion. Path is relative"
+        },
+        "pyPropertyApplyToClass": {
+          "$ref": "#/$defs/ClassName"
+        },
+        "pyPropertyMode": {
+          "type": "string",
+          "enum": [
+            "Text",
+            "Decimal",
+            "Identifier",
+            "Integer",
+            "Double",
+            "DateTime",
+            "Date",
+            "TimeOfDay",
+            "TrueFalse",
+            "Password",
+            "TextEncrypted",
+            "String"
+          ],
+          "description": "Value data type used for assertion formatting; derive from property metadata where available."
+        },
+        "pyPageName": {
+          "type": "string",
+          "description": "Page context that contains the asserted property. For child assertion block contains full page path of asserted property. For property asserted CustomerCommunication.Addresses(1).pyTown CORRECT: CustomerCommunication.Addresses(1) , INCORRECT CustomerCommunication"
+        },
+        "pyLabel": {
+          "type": "string",
+          "description": "Optional assertion label."
+        }
+      },
+      "description": "Regular page/property assertion. Do not use for Param.* paths."
+    },
+    "PagesAndClasses": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pyPagesAndClassesPage": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]*(?:\\.[A-Za-z0-9_]+)*(?:\\([A-Za-z0-9_]+\\))?$",
+          "description": "Page name (optionally page list indexing). Include an entry for the Primary page name (pyPrimaryPageForRUT or RunRecordPrimaryPage) and any referenced pages in setup/assertions. Must not be one of the reserved top-level system pages: pxProcess, AccessGroup, Application, OperatorID, Org, OrgDivision, pxRequestor, pxThread.",
+          "not": {
+            "enum": [
+              "pxProcess",
+              "AccessGroup",
+              "Application",
+              "OperatorID",
+              "Org",
+              "OrgDivision",
+              "pxRequestor",
+              "pxThread"
+            ]
+          }
+        },
+        "pyPagesAndClassesClass": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Class associated with the page name. For Primary, this MUST equal RuleUnderTest.pyDetails.pyClassName."
+        }
+      },
+      "required": [
+        "pyPagesAndClassesPage",
+        "pyPagesAndClassesClass"
+      ],
+      "description": "Static declaration to help resolve properties at design/compile time."
+    },
+    "ParamPropertyAssertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pyComparator",
+        "pyPropertyName",
+        "pyPropertyAbsolutePath",
+        "pyPropertyMode",
+        "pyAssertionType"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "pyPageName"
+            ]
+          },
+          {
+            "required": [
+              "pyPropertyRealName"
+            ]
+          },
+          {
+            "required": [
+              "pyParentPropertyMode"
+            ]
+          }
+        ]
+      },
+      "properties": {
+        "pyComparator": {
+          "$ref": "#/$defs/PropertyComparator"
+        },
+        "pyPropertyName": {
+          "type": "string",
+          "pattern": "^Param\\.[A-Za-z][A-Za-z0-9_]*$",
+          "description": "Parameter path, eg. Valid Param.CustomerId, Invalid CustomerID"
+        },
+        "pyPropertyAbsolutePath": {
+          "type": "string",
+          "pattern": "^Param\\.[A-Za-z][A-Za-z0-9_]*$",
+          "description": "Same full Param.* path; no leading dot."
+        },
+        "pyPropertyMode": {
+          "type": "string",
+          "const": "Text",
+          "description": "Always Text for Param.* assertions."
+        },
+        "pyAssertionType": {
+          "type": "string",
+          "const": "Property",
+          "description": "Required child-level type marker for Param.* assertions."
+        },
+        "pyExpectedValue": {
+          "$ref": "#/$defs/ExpectedValue"
+        },
+        "pyLabel": {
+          "type": "string",
+          "description": "Optional assertion label."
+        }
+      },
+      "description": "Parameter-page assertion. Must omit pyPageName, pyPropertyRealName, and pyParentPropertyMode by construction."
+    },
+    "PropertyAssertion": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/PagePropertyAssertion"
+        },
+        {
+          "$ref": "#/$defs/ParamPropertyAssertion"
+        }
+      ],
+      "description": "Assertion item. Use ParamPropertyAssertion for Param.* paths; use PagePropertyAssertion for normal page properties."
+    },
+    "PropertyLeafName": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*(?:\\([A-Za-z0-9_]+\\))?$",
+      "description": "Final property segment only. No leading dot and no page path. Valid: 'pyStreet', 'Comments', 'pyDecimalValue(1)'. Invalid: '.Addresses(1).pyStreet', 'Addresses(1).pyStreet', 'pxResults(1).Comments'."
+    },
+    "PropertyAssertionBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pyAssertionType",
+        "pyStepPageClass",
+        "pyStepPageName",
+        "pyExpectedResults"
+      ],
+      "properties": {
+        "pyAssertionType": {
+          "type": "string",
+          "const": "Property"
+        },
+        "pyStepPageName": {
+          "type": "string",
+          "description": "Page name providing context for the assertion block (usually the Primary page name). If the assertion is not on Primary page name, then it should be the name of the page where the assertion takes place.Every child assertion in this block's pyExpectedResults must calculate pyPropertyAbsolutePath relative to this pyStepPageName."
+        },
+        "pyStepPageNameActual": {
+          "type": "string",
+          "description": "Optional: actual page name when aliasing/nicknames are used."
+        },
+        "pyStepPageClass": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Class of the step page. Match the class from Pages & Classes for the given page."
+        },
+        "pyStepPageMethodName": {
+          "type": "string",
+          "description": "Optional: the method invoked whose results are being asserted (e.g., an Activity step)."
+        },
+        "pyExpectedResults": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/PropertyAssertion"
+          }
+        },
+        "pyCardApplyToClass": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Optional: card context class, used by some UI/reporting tools for rendering."
+        },
+        "pyPropertyApplyToClass": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Optional: Apply-To class for properties when needed for resolution."
+        }
+      },
+      "description": "Property assertion block for field-level checks."
+    },
+    "PropertyComparator": {
+      "type": "string",
+      "enum": [
+        "Is Equals To",
+        "IS Not Equals TO",
+        "Exists",
+        "Not exists",
+        "Starts With",
+        "Ends With",
+        "Contains",
+        "Is In",
+        "Is Not In",
+        "Is Empty",
+        "Is Not Empty",
+        "has errors",
+        "has no errors",
+        "has error with message",
+        "has error message that contains"
+      ],
+      "description": "Pega property comparator. Use exact labels. Prompt rules define when pyExpectedValue is required or omitted."
+    },
+    "PropertyName": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*(?:\\([A-Za-z0-9_]+\\))?(?:\\.[A-Za-z][A-Za-z0-9_]*(?:\\([A-Za-z0-9_]+\\))?)*$",
+      "description": "Relative property name (no leading dot). Examples: 'Comments', 'pxResults(1).Comments', 'pyQuestionGroup(QUESTION1).Mode, pyDecimalValue(1)'. Use with a known step page (AssertionBlock.pyStepPageName/pyStepPageClass)."
+    },
+    "PropertyPath": {
+      "type": "string",
+      "pattern": "^(?:[A-Za-z0-9_.@-]+(?:\\([A-Za-z0-9_]+\\))?(?:\\.[A-Za-z0-9_.@-]+(?:\\([A-Za-z0-9_]+\\))?)*)$",
+      "description": "Absolute property path relative to a context page (e.g., '.BillingAddress.PostalCode', '.Results(1).pxObjClass'). Supports index or key syntax '(n)' or '(key)'. Start paths with a dot and ensure referenced subpages/props are seeded."
+    },
+    "PropertyRealName": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+      "description": "Base property name without any indexing. Required for all Property-type assertions EXCEPT parameter properties (Param.*). For ValueList where pyPropertyName='pyDecimalValue(1)', this is 'pyDecimalValue'. For page list indexed properties where pyPropertyName='Comments' and path='.pxResults(1).Comments', this is 'Comments'. OMIT for parameter page properties."
+    },
+    "ResultCountAssertionBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pyAssertionType",
+        "pyListContext",
+        "pyComparator",
+        "pyExpectedValue"
+      ],
+      "properties": {
+        "pyAssertionType": {
+          "type": "string",
+          "const": "ResultCount"
+        },
+        "pyListContext": {
+          "type": "string",
+          "pattern": "^\\.[A-Za-z][A-Za-z0-9_]*$",
+          "description": "Top-level list property name with leading dot only. Correct: '.Addresses'. Invalid: 'Addresses', '.Addresses(1)', '.Customer.Addresses', '.Addresses.pyCity'."
+        },
+        "pyComparator": {
+          "$ref": "#/$defs/ResultCountComparator"
+        },
+        "pyExpectedValue": {
+          "type": "string",
+          "description": "Expected count as an integer string, e.g. \"3\"."
+        },
+        "pyExpectedResults": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "pyStepPageName": {
+          "type": "string",
+          "description": "Page name providing context for the assertion block (usually the Primary page name). If the assertion is not on Primary page name, then it should be the name of the page where the assertion takes place."
+        },
+        "pyStepPageNameActual": {
+          "type": "string",
+          "description": "Optional: actual page name when aliasing/nicknames are used."
+        },
+        "pyStepPageClass": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Class of the step page. Match the class from Pages & Classes for the given page."
+        },
+        "pyStepPageMethodName": {
+          "type": "string",
+          "description": "Optional: the method invoked whose results are being asserted (e.g., an Activity step)."
+        },
+        "pyCardApplyToClass": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Optional: card context class, used by some UI/reporting tools for rendering."
+        },
+        "pyPropertyApplyToClass": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Optional: Apply-To class for properties when needed for resolution."
+        },
+        "pyListFilter": {
+          "type": "string",
+          "description": "Optional filter expression to narrow list items under test (implementation-specific). Include only if the runner supports and you need it."
+        }
+      },
+      "description": "ResultCount assertion block for list cardinality checks. Optional context fields such as pyStepPageName, pyStepPageClass, pyCardApplyToClass, and pyPropertyApplyToClass are allowed and should be preserved when evidenced or present in examples."
+    },
+    "ResultCountComparator": {
+      "type": "string",
+      "enum": [
+        "Is Equals To",
+        "IS Not Equals TO",
+        "Is Less Than",
+        "Is Greater Than",
+        "Is Less Than Or Equal To",
+        "Is Greater Than Or Equal To"
+      ],
+      "description": "Comparator for ResultCount assertion blocks."
+    },
+    "RuleUnderTest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pyDetails": {
+          "$ref": "#/$defs/RuleUnderTestDetails",
+          "description": "Core identity + execution class for the RUT."
+        },
+        "pyParameters": {
+          "type": "array",
+          "description": "Parameters passed to the rule at execution time. Include only if the target rule defines parameters; ensure PAGE parameters reference seeded pages.",
+          "items": {
+            "$ref": "#/$defs/MethodParam"
+          }
+        }
+      },
+      "required": [
+        "pyDetails"
+      ],
+      "description": "RUT configuration. Set pyDetails including pyClassName; add pyParameters only as needed."
+    },
+    "RuleUnderTestDetails": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pyRuleUnderTestInsName": {
+          "type": "string",
+          "pattern": "^[A-Z0-9_-]+![A-Z0-9_-]+$",
+          "description": "Format is '<ApplyToClass>!<RuleName>' and should match values taken from the TestedRuleKey property of the case. The generated value must always be in uppercase. For example, if TestedRuleKey has value 'RULE-OBJ-MODEL RULEIQ-WORK-GENUT INITIALTESTDATATRANSFORMATION #20260216T095134.961 GMT', then take the second part 'RULEIQ-WORK-GENUT' as <ApplyToClass> and 'INITIALTESTDATATRANSFORMATION' as <RuleName>, and construct the value as 'RULEIQ-WORK-GENUT!INITIALTESTDATATRANSFORMATION'."
+        },
+        "pyIsSinglePageImplementation": {
+          "type": "string",
+          "const": "false",
+          "description": "Observed successful multi-input Rule-Obj-When unit tests use false."
+        },
+        "pyRuleUnderTestLabel": {
+          "type": "string",
+          "description": "Label of the rule under test (optional, informational). May mirror the rule’s label from Designer Studio."
+        },
+        "pyRuleUnderTestName": {
+          "type": "string",
+          "description": "Technical name of the rule (e.g., Activity/Data Transform name). Copy exact rule name."
+        },
+        "pyRuleUnderTestObjClass": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Apply-To class of the rule under test (definition class). Copy exactly from the rule’s Apply-To."
+        },
+        "pyRuleUnderTestType": {
+          "type": "string",
+          "const": "Rule-Obj-When",
+          "description": "For this multi-input-combination schema the RUT type is Rule-Obj-When."
+        }
+      },
+      "required": [
+        "pyRuleUnderTestName",
+        "pyRuleUnderTestObjClass",
+        "pyRuleUnderTestType",
+        "pyRuleUnderTestInsName",
+        "pyIsSinglePageImplementation"
+      ],
+      "description": "Identity and execution context of the Rule Under Test. Ensure pyClassName matches the Primary page's class."
+    },
+    "SetupAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pyActionType": {
+          "type": "string",
+          "enum": [
+            "ApplyDataTransform",
+            "RunActivity",
+            "LoadDataPage",
+            "LoadObject",
+            "CreateDataObject",
+            "CreateWorkObject"
+          ],
+          "description": "Kind of setup/teardown action. Heuristics: prefer 'ApplyDataTransform' for shaping page state; 'RunActivity' for procedural steps; 'LoadDataPage' only when the test must load a real Data Page as part of setup, not when mocking it; 'CreateDataObject'/'CreateWorkObject' for persistence-backed instances when inevitable. LLMs: represent Data Page simulation under RuleCode.pySimulation instead of as a LoadDataPage action."
+        },
+        "pyActionName": {
+          "type": "string",
+          "description": "Name of the Data Transform / Activity / Data Page / other target to run. Copy designer-visible name."
+        },
+        "pyTargetPage": {
+          "type": "string",
+          "description": "Target page for the action (if applicable). Set to the Primary page name for actions that manipulate context; omit or leave empty for global loads."
+        },
+        "pyParameters": {
+          "type": "array",
+          "description": "Parameters to pass to the action. Include only parameters that the action defines; for PAGE parameters, ensure the page exists in setup and pages & classes.",
+          "items": {
+            "$ref": "#/$defs/MethodParam"
+          }
+        }
+      },
+      "required": [
+        "pyActionType",
+        "pyActionName"
+      ],
+      "description": "Executable step run during setup or cleanup."
+    },
+    "SetupPage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pySetupPageName": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+          "description": "Name of the page to create/seed. For Primary use pyPrimaryPageForRUT or default RunRecordPrimaryPage. Avoid the literal 'Primary'. Must not be one of the reserved top-level system pages: pxProcess, AccessGroup, Application, OperatorID, Org, OrgDivision, pxRequestor, pxThread.",
+          "not": {
+            "enum": [
+              "pxProcess",
+              "AccessGroup",
+              "Application",
+              "OperatorID",
+              "Org",
+              "OrgDivision",
+              "pxRequestor",
+              "pxThread"
+            ]
+          }
+        },
+        "pyPageDesc": {
+          "type": "string",
+          "description": "Optional explanation of the page's role in the test (e.g., 'Policy under test', 'Stubbed service response')."
+        },
+        "pyPageDetails": {
+          "$ref": "#/$defs/ClipboardPageSeed",
+          "description": "Data that will populate the page. Include pxObjClass and minimal properties required by the RUT and assertions.Seeded payload returned by simulated dependency. Seed ONLY properties at paths that are: (1) asserted, (2) accessed by RUT, or (3) structural (pxObjClass). Do not seed parameters or child properties unless assertions exist at those paths."
+        }
+      },
+      "required": [
+        "pySetupPageName"
+      ],
+      "description": "Declares and seeds a clipboard page for test setup."
+    },
+    "SimulationRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pxInsName": {
+          "type": "string",
+          "description": "Optional persisted instance name of the mocked dependency. Preserve exact value from source JSON when available; otherwise omit."
+        },
+        "pxObjClass": {
+          "type": "string",
+          "description": "Optional Pega metadata class for the simulation record, commonly 'Embed-Testcase-RuleDetails'. LLMs: preserve when available from evidence; do not invent platform metadata."
+        },
+        "pxReferredFromClass": {
+          "type": "string",
+          "description": "Wrapper class for list-structured Data Pages. REQUIRED when pyStructure='list': set 'Code-Pega-List'. OMIT when pyStructure='page' or empty."
+        },
+        "pyClassName": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Runtime class for simulation. BLOCKING RULE: (1) Fetch Rule-Declare-Pages via RuleCrawler. (2) Extract pyStructure. (3) IF pyStructure='list' SET 'Code-Pega-List'; ELSE use RuleCrawler class. Item class for lists goes in pyPageDetails.pyObjClass only. FORBIDDEN: item class name when pyStructure='list'."
+        },
+        "pyObjClass": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Optional object class preserved from persisted simulation JSON when present. For page-structured Data Pages it may equal pyClassName. For list-structured Data Pages the item class is typically carried inside pySetupPages[*].pyPageDetails (for example pyObjClass on the wrapper page) rather than here, unless persisted evidence shows a root-level value."
+        },
+        "pyMockingSupportedRuleTypes": {
+          "type": "string",
+          "enum": [
+            "Rule-Declare-Pages"
+          ],
+          "description": "Rule type being mocked. For supported Data Page simulation this must always be 'Rule-Declare-Pages'."
+        },
+        "pyRuleNameToBeMocked": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Technical rule name of the dependency being simulated, copied exactly from the resolved rule dependency, for example 'D_CustomerTestRef'."
+        },
+        "pySelected": {
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "description": "Optional persisted selection flag. When emitting this property for an active simulation entry, set it to 'true'. Omit only if the surrounding serialization pipeline omits persisted UI-state metadata."
+        },
+        "pySimulationMethod": {
+          "type": "string",
+          "enum": [
+            "DefineData"
+          ],
+          "description": "Only supported simulation method. Always set to 'DefineData'. Do not generate any other simulation method."
+        },
+        "pySkipPostLoad": {
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "description": "Optional persisted flag controlling post-load behavior. For the supported DefineData simulation pattern evidenced in the samples, preserve or emit 'false' when this property is included."
+        },
+        "pySetupPages": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Seed payload returned by the mocked dependency. Usually one setup page is sufficient. These nested pages are seeded pages authored to satisfy the assertions; their content must be minimal, deterministic, and aligned with the dependency shape evidenced by resolved dependencies plus the RUT access path.",
+          "items": {
+            "$ref": "#/$defs/SimulationSetupPage"
+          }
+        }
+      },
+      "required": [
+        "pyClassName",
+        "pyMockingSupportedRuleTypes",
+        "pyRuleNameToBeMocked",
+        "pySimulationMethod",
+        "pySetupPages"
+      ],
+      "description": "Simulation entry for a mocked Rule-Declare-Pages dependency inside Rule-Test-Unit-Case. Use this when the unit test must isolate the RUT from a Data Page and provide deterministic seeded data. This schema documents the simulation fields and serialization rules. The only supported simulation method is DefineData."
+    },
+    "SimulationSeededPage": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Arbitrary seeded clipboard page or wrapper page nested under RuleCode.pySimulation[*].pySetupPages[*].pyPageDetails. This payload is authored by the LLM to satisfy the assertions and the actual access path of the RUT. It must not be constrained to a fixed field set by the schema. Use resolved rule dependecy evidence plus the RUT access path to choose shape. For page-structured Data Pages this is usually a seeded page. For list-structured Data Pages this may be a wrapper page such as…"
+    },
+    "SimulationSetupPage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pxObjClass": {
+          "type": "string",
+          "description": "Optional persisted metadata class for the simulation setup page record, commonly 'Embed-Testcase-SetupPages'. Preserve when evidenced; otherwise omit."
+        },
+        "pySetupPageName": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+          "description": "Name of the simulation setup page container. Preserve persisted evidence when known; archived examples use 'PrimaryPage'. Must not be one of the reserved top-level system pages: pxProcess, AccessGroup, Application, OperatorID, Org, OrgDivision, pxRequestor, pxThread.",
+          "not": {
+            "enum": [
+              "pxProcess",
+              "AccessGroup",
+              "Application",
+              "OperatorID",
+              "Org",
+              "OrgDivision",
+              "pxRequestor",
+              "pxThread"
+            ]
+          }
+        },
+        "pyPageDetails": {
+          "$ref": "#/$defs/SimulationSeededPage",
+          "description": "Seeded payload returned by the simulated dependency. This is assertion-driven seeded clipboard data. Do not constrain its inner fields in the schema; the LLM determines its content from the assertion requirements, RuleCrawler evidence, and the RUT access path."
+        },
+        "pxWarningsToDisplay": {
+          "type": "array",
+          "description": "Optional warnings container copied from persisted rule JSON. LLMs: preserve when present in source JSON; otherwise omit.",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "pySetupPageName",
+        "pyPageDetails"
+      ],
+      "description": "Seeded payload block nested under a simulation entry. This is test-case representation, not Rule-Declare-Pages metadata. pyPageDetails is an unconstrained seeded page payload chosen by the LLM to satisfy assertions and match the dependency shape evidenced by RuleCrawler and actual RUT usage."
+    },
+    "PagePathAssertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pyComparator",
+        "pyPropertyAbsolutePath"
+      ],
+      "properties": {
+        "pyComparator": {
+          "$ref": "#/$defs/PropertyComparator"
+        },
+        "pyPropertyAbsolutePath": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Full path including parent page name for Page assertion blocks. Format: '<pyStepPageName>.<path>'. Example: 'CustomerCommunication.Addresses(1)', NOT '.Addresses(1)'. For child asserting block, child path relative to the nearest enclosing parent assertion block's pyStepPageName. Formula: parent.pyStepPageName + child.pyPropertyAbsolutePath = full asserted property path. If parent.pyStepPageName='Customer', use '.Account(1).pyNumber'. If parent.pyStepPageName='Customer.Account(1)', use '.pyNumber'. Do not repeat segments already included in parent.pyStepPageName"
+        },
+        "pyExpectedValue": {
+          "$ref": "#/$defs/ExpectedValue"
+        },
+        "pyPropertyName": {
+          "type": "string",
+          "description": "Optional property/page name when available; not required for page-existence paths preserved from Pega examples."
+        },
+        "pyPropertyMode": {
+          "type": "string",
+          "description": "Optional property mode/type when available."
+        },
+        "pyPageName": {
+          "type": "string",
+          "description": "Optional page context."
+        },
+        "pyPropertyApplyToClass": {
+          "$ref": "#/$defs/ClassName"
+        },
+        "pyPropertyRealName": {
+          "$ref": "#/$defs/PropertyRealName"
+        },
+        "pyParentPropertyMode": {
+          "type": "string",
+          "enum": [
+            "ValueList",
+            "PageList",
+            "ValueGroup",
+            "PageGroup"
+          ]
+        },
+        "pyLabel": {
+          "type": "string"
+        }
+      },
+      "description": "Structural Page assertion item. Allows original compact Pega examples with only pyComparator and pyPropertyAbsolutePath, while also permitting richer optional metadata."
+    },
+    "ScenarioWithEvidenceSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Status",
+        "Name",
+        "Type",
+        "ReasoningConfidence",
+        "Testability",
+        "EvidenceSummary",
+        "InputsNarrative",
+        "AssertionsNarrative",
+        "Description"
+      ],
+      "properties": {
+        "Status": {
+          "type": "string",
+          "enum": [
+            "New",
+            "Existing",
+            "Deleted",
+            "Modified"
+          ]
+        },
+        "ReasoningConfidence": {
+          "type": "string",
+          "enum": [
+            "High",
+            "Medium",
+            "Low"
+          ]
+        },
+        "Testability": {
+          "type": "string",
+          "enum": [
+            "FullyTestable",
+            "PartiallyTestable",
+            "NotTestable"
+          ]
+        },
+        "Name": {
+  "type": "string",
+  "pattern": "^(?!TC_)[A-Za-z0-9 _]+$",
+  "minLength": 1,
+  "maxLength": 50,
+  "description": "Short PascalCase semantic purpose label for this scenario. MUST NOT start with 'TC_'. MUST NOT contain any fragment of the RUT base name. MUST NOT equal pyPurpose. Derived from scenario semantic purpose only — never from branch names, step IDs, condition expressions, pyUsage, pyDescription, or any RuleJSON field. Examples: HappyPath, EmptyInput, BoundaryMax, ErrorPath."
+},
+        "Description": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "string",
+          "enum": [
+            "Baseline",
+            "Edge"
+          ]
+        },
+        "Narrative": {
+          "type": "string"
+        },
+        "InputsNarrative": {
+          "type": "string"
+        },
+        "SimulationsNarrative": {
+          "type": "string"
+        },
+        "AssertionsNarrative": {
+          "type": "string"
+        },
+        "EvidenceSummary": {
+          "$ref": "#/$defs/EvidenceSummary"
+        }
+      }
+    },
+    "RuleCode": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pyLabel": {
+  "type": "string",
+  "pattern": "^TC_[A-Za-z0-9_]+$",
+  "minLength": 5,
+  "maxLength": 53,
+  "description": "Label of the unit test rule. MUST equal pyPurpose exactly. Do not use dash-separated or space-separated labels."
+},
+        "pyDescription": {
+          "type": "string",
+          "description": "Purpose and scope of the unit test, including acceptance criteria in plain language."
+        },
+        "pyPrimaryPageForRUT": {
+          "type": "string",
+          "description": "Optional name of the Primary page used to execute the RUT. If empty, 'RunRecordPrimaryPage' is used. Do NOT name the page literally 'Primary'. The class of this page MUST match RuleUnderTest.pyDetails.pyClassName. Must not be a reserved top-level system page.",
+          "not": {
+            "enum": [
+              "pxProcess",
+              "AccessGroup",
+              "Application",
+              "OperatorID",
+              "Org",
+              "OrgDivision",
+              "pxRequestor",
+              "pxThread"
+            ]
+          }
+        },
+        "pyIsInactive": {
+          "type": "boolean",
+          "description": "Disable test execution without deleting the rule. Heuristic: false unless temporarily quarantining a flaky/blocked test."
+        },
+        "pyCleanUpTestData": {
+          "type": "boolean",
+          "description": "Whether to clean up seeded/created data after the test. Heuristic: true by default for isolation; false only when test artifacts are intentionally inspected post-run."
+        },
+        "pyRuleSet": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Target Ruleset to save the unit test. Heuristic: use the project's UT/QA ruleset (e.g., 'App-UT')."
+        },
+        "pyClassName": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Class of the Primary page context to execute the RUT. Typically equals pyRuleUnderTestObjClass. If Apply-To is abstract but execution needs concrete properties, set to a concrete subclass used during test."
+        },
+        "pyPurpose": {
+  "type": "string",
+  "pattern": "^TC_[A-Za-z0-9_]+$",
+  "minLength": 5,
+  "maxLength": 53,
+  "description": "Unique identifier of the unit test rule. MUST follow the convention: TC_<RUTBase>_<ScenarioLabel>. Construction: (1) RUT_BASE = RuleJSON.pyRuleName with ALL whitespace removed. (2) SCENARIO_LABEL = short PascalCase semantic purpose word, chars outside [A-Za-z0-9_] replaced with _, leading/trailing _ stripped. (3) BASE_ALLOC = 49 - len(SCENARIO_LABEL). (4) RUT_BASE_FINAL = RUT_BASE truncated to BASE_ALLOC characters. (5) pyPurpose = 'TC_' + RUT_BASE_FINAL + '_' + SCENARIO_LABEL. MUST equal pyLabel exactly. MUST equal UnitTestRules[i].Name exactly. Example: TC_ReviewScenariosPost_HappyPath. Pega appends up to 11 chars at runtime; max 53 ensures total stays within 64."
+},
+        "pyRuleSetVersion": {
+          "type": "string",
+          "pattern": "^[0-9]{2}-[0-9]{2}-[0-9]{2}$",
+          "description": "Ruleset version in 'MM-NN-PP' format (e.g., '01-01-01'). Heuristic: choose the active open version for the UT ruleset."
+        },
+        "pyRuleUnderTest": {
+          "$ref": "#/$defs/RuleUnderTest",
+          "description": "The rule to execute and (optionally) its parameters. LLMs: set pyDetails including pyClassName (mandatory). Typically set pyClassName = pyRuleUnderTestObjClass unless a concrete subclass is required."
+        },
+        "pyPagesAndClasses": {
+          "type": "array",
+          "description": "Static declaration of Pages & Classes used in the test (including Primary). Include at least the Primary page (custom or RunRecordPrimaryPage) with class = pyClassName, plus any additional context pages used by setup or assertions.",
+          "items": {
+            "$ref": "#/$defs/PagesAndClasses"
+          }
+        },
+        "pySetupPages": {
+          "type": "array",
+          "description": "Seed clipboard pages and their data (including pxObjClass). Seed the Primary page and any dependency pages with minimal, deterministic data needed to assert outcomes.",
+          "items": {
+            "$ref": "#/$defs/SetupPage"
+          }
+        },
+        "pySetup": {
+          "type": "array",
+          "description": "Pre-execution setup actions (e.g., ApplyDataTransform, RunActivity). Prepare the Primary page state here; keep actions idempotent and deterministic.",
+          "items": {
+            "$ref": "#/$defs/SetupAction"
+          }
+        },
+        "pyCleanup": {
+          "type": "array",
+          "description": "Post-execution cleanup actions. Mirror any create/load operations that must be undone if pyCleanUpTestData = true.",
+          "items": {
+            "$ref": "#/$defs/SetupAction"
+          }
+        },
+        "pyTypeOfSetupPageSelection": {
+          "type": "string",
+          "enum": [
+            "CUSTOMPAGES"
+          ],
+          "description": "Strategy for setup pages; only custom pages are supported here. Always 'CUSTOMPAGES'."
+        },
+        "pyExpectedResults": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "description": "Rule-Obj-When multi-input mode allows exactly one Decision block when pyAllowMultipleInputCombinations=\"true\".",
+          "items": {
+            "$ref": "#/$defs/MultiInputDecisionAssertionBlock"
+          }
+        },
+        "pySimulation": {
+          "type": "array",
+          "description": "Optional simulated dependencies used by the unit test. Use this for Rule-Declare-Pages or other mockable runtime dependencies when the RUT reads externalized data and deterministic test execution requires seeded responses. LLMs: create one item per mocked dependency, derive the payload shape from the dependency rule metadata and the exact usage pattern in the RUT, and keep the seed minimal but sufficient for assertions. Do NOT use pySetup + LoadDataPage to represent mocking.",
+          "items": {
+            "$ref": "#/$defs/SimulationRule"
+          }
+        }
+      },
+      "required": [
+        "pyLabel",
+        "pyRuleSet",
+        "pyRuleSetVersion",
+        "pyRuleUnderTest",
+        "pyExpectedResults",
+        "pyClassName",
+        "pyPurpose"
+      ],
+      "description": "Configuration schema for a Rule-Obj-When Pega unit test using multiple input combinations. Excludes pz* properties and unrelated Pega export/system metadata. RuleCode.pyExpectedResults must contain exactly one Decision block with pyAllowMultipleInputCombinations=\"true\"."
+    },
+    "MultiInputInputCell": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pyPropertyType",
+        "pyPropertyName",
+        "pyPropertyAbsolutePath",
+        "pyPropertyMode",
+        "pyDisplayLabel"
+      ],
+      "properties": {
+        "pyPropertyType": {
+          "type": "string",
+          "const": "input"
+        },
+        "pyPropertyName": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Input property, parameter, page, or nested page-list path used by this combination row. Examples: .Status, CustomerPage.Tier, Param.Channel, AccessPage.Roles(3).Permission(10).Value. Must not start with a reserved top-level system page root.",
+          "not": {
+            "pattern": "^(?:pxProcess|AccessGroup|Application|OperatorID|Org|OrgDivision|pxRequestor|pxThread)(?:\\.|\\(|$)"
+          }
+        },
+        "pyPropertyAbsolutePath": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Same logical path as pyPropertyName for the row-level input cell. Nested PageList/PageGroup indexes are allowed when they are the actual When-rule input path, for example AccessPage.Roles(3).Permission(10).Value. Must not start with a reserved top-level system page root.",
+          "not": {
+            "pattern": "^(?:pxProcess|AccessGroup|Application|OperatorID|Org|OrgDivision|pxRequestor|pxThread)(?:\\.|\\(|$)"
+          }
+        },
+        "pyPropertyMode": {
+          "type": "string",
+          "const": "text",
+          "description": "Observed successful multi-input Decision cells serialize pyPropertyMode as lower-case text."
+        },
+        "pyExpectedValue": {
+          "type": "string",
+          "description": "Stringified input value for this third-level row cell. Omit this property to represent an empty/missing input value. Do not use null for empty input in this MultInpComb shape."
+        },
+        "pyDisplayLabel": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Display label used as the multi-input table column header. Set to the full input/assertion path, normally equal to pyPropertyAbsolutePath, for example AccessPage.Roles(3).Permission(10).Value. Do not omit; blank headers make the row unusable in Pega UI."
+        }
+      },
+      "description": "Third-level input comparison cell at RuleCode.pyExpectedResults[0].pyExpectedResults[n].pyExpectedResults[m]. It has pyPropertyType=\"input\". Required identifiers are pyPropertyName and pyPropertyAbsolutePath. Generated artifacts must not include exported metadata such as pxObjClass, pz*, pxWarningsToDisplay, or pyManageProps. Include nested PageList/PageGroup paths in examples and generated rows when the RUT reads that specific path. pyDisplayLabel is required only here at the third-level cell because Pega uses it as the table column header."
+    },
+    "MultiInputResultCell": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pyPropertyType",
+        "pyPropertyName",
+        "pyPropertyAbsolutePath",
+        "pyPropertyMode",
+        "pyExpectedValue",
+        "pyDisplayLabel"
+      ],
+      "properties": {
+        "pyPropertyType": {
+          "type": "string",
+          "const": "result"
+        },
+        "pyPropertyName": {
+          "type": "string",
+          "const": "Result"
+        },
+        "pyPropertyAbsolutePath": {
+          "type": "string",
+          "const": "Result"
+        },
+        "pyPropertyMode": {
+          "type": "string",
+          "const": "text",
+          "description": "Observed successful multi-input Result cells serialize pyPropertyMode as lower-case text."
+        },
+        "pyExpectedValue": {
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "description": "Expected Rule-Obj-When result for this combination row. Use the string values \"true\" or \"false\" only."
+        },
+        "pyDisplayLabel": {
+          "type": "string",
+          "const": "Result",
+          "description": "Display label for the Result column header. Must be Result."
+        }
+      },
+      "description": "Third-level Result comparison cell at RuleCode.pyExpectedResults[0].pyExpectedResults[n].pyExpectedResults[m]. It has pyPropertyType=\"result\" and stores the expected Rule-Obj-When boolean outcome as string true/false. There must be exactly one Result cell per row; documentation/examples require it to be the last cell."
+    },
+    "MultiInputCell": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/MultiInputInputCell"
+        },
+        {
+          "$ref": "#/$defs/MultiInputResultCell"
+        }
+      ],
+      "description": "A third-level decision cell: either an input cell or the single Result cell for one combination row. The third level is the only level where input values and expected Result values are stored."
+    },
+    "MultiInputCombinationRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pyPageName",
+        "pyExpectedResults"
+      ],
+      "properties": {
+        "pyPageName": {
+          "type": "string",
+          "const": "rowLevelPage",
+          "description": "Observed successful multi-input combination rows use rowLevelPage."
+        },
+        "pyExpectedResults": {
+          "type": "array",
+          "minItems": 2,
+          "contains": {
+            "$ref": "#/$defs/MultiInputResultCell"
+          },
+          "minContains": 1,
+          "maxContains": 1,
+          "items": {
+            "$ref": "#/$defs/MultiInputCell"
+          },
+          "description": "Third-level cells at RuleCode.pyExpectedResults[0].pyExpectedResults[n].pyExpectedResults[]. Schema enforces exactly one Result cell per row. Documentation/examples require all input cells first and the Result cell last. Keep the same input-cell set and order across rows when possible."
+        }
+      },
+      "description": "Second-level combination row at RuleCode.pyExpectedResults[0].pyExpectedResults[n]. Do not put pyExpectedValue or expected boolean result on this object. Actual comparisons live only inside this row's third-level pyExpectedResults[] cells."
+    },
+    "MultiInputDecisionAssertionBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pyAllowMultipleInputCombinations",
+        "pyAssertionType",
+        "pyClassContext",
+        "pyPropertyType",
+        "pyExpectedResults"
+      ],
+      "properties": {
+        "pyAllowMultipleInputCombinations": {
+          "type": "string",
+          "const": "true",
+          "description": "Enables multiple input combination mode. The observed passing rule serializes this value as string \"true\"."
+        },
+        "pyAssertionType": {
+          "type": "string",
+          "const": "Decision"
+        },
+        "pyClassContext": {
+          "$ref": "#/$defs/ClassName",
+          "description": "Apply-To class/context of the Rule-Obj-When RUT."
+        },
+        "pyPropertyType": {
+          "type": "string",
+          "const": "Decision Result"
+        },
+        "pyExpectedResults": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/MultiInputCombinationRow"
+          },
+          "description": "Second-level combination rows at RuleCode.pyExpectedResults[0].pyExpectedResults[]. Each row represents one decision-table line / input combination. Each row's own pyExpectedResults[] contains the third-level input cells and exactly one Result cell. One or more second-level combination rows. One row is valid when the UnitTestRules entry isolates one scenario-specific simulation. Multiple rows are valid only when all mapped scenarios can use the same RuleCode.pySimulation payload; coverage sufficiency is documented/validated semantically."
+        }
+      },
+      "description": "Top-level Decision block at RuleCode.pyExpectedResults[0]. This is the only item allowed in RuleCode.pyExpectedResults when pyAllowMultipleInputCombinations=\"true\". It enables multi-input mode and contains second-level combination rows. It must not contain direct input or Result comparison values."
+    }
+  },
+  "description": "Schema for Rule-Test-Unit-Case candidates for Rule-Obj-When RUTs using multi-input combinations. It reuses the existing UnitTestRules/Scenario/EvidenceSummary/RuleCode structure where applicable, but RuleCode.pyExpectedResults is a single Decision assertion block with pyAllowMultipleInputCombinations=\"true\".",
+  "$comment": "Rule-Obj-When multi-input hierarchy: RuleCode.pyExpectedResults[0] = the only Decision block; RuleCode.pyExpectedResults[0].pyExpectedResults[] = combination rows; RuleCode.pyExpectedResults[0].pyExpectedResults[].pyExpectedResults[] = actual input/result comparison cells. Schema enforces exactly one Result cell per row. Documentation/examples require Result cell last and stable input order. Input cells may target nested page/list paths such as AccessPage.Roles(3).Permission(10).Value; the schema intentionally keeps path grammar string-based to avoid over-constraining valid Pega paths. v5: third-level MultInpComb cells require pyDisplayLabel so the table header is not blank. For input cells pyDisplayLabel should equal the full assertion/input path; for Result it is Result. Reserved top-level system pages must not be used as setup/input roots. v6: MultInpComb supports multiple Scenario descriptions in the same UnitTestRules entry. Scenario[n] maps to Decision row[n]. Validator checks scenario count equals row count. v8: MultInpComb AssertionDecisionTrace must be cell-level with DecisionInput/DecisionResult lines. Omitted pyExpectedValue on input cells means empty property value on an initialized page/page-list element, not parent page absence. Scenarios.length and row symmetry remain dynamic documentation checks enforced by Author/Validator.Cardinality modes: SHARED_SIMULATION permits one UnitTestRules entry with multiple Scenarios and rows only when every Scenario uses the same RuleCode.pySimulation payload. SCENARIO_SIMULATION_ISOLATION requires separate UnitTestRules entries when simulation payloads differ; every split entry contains one Scenario and one row."
+}

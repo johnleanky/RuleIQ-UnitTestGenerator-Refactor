@@ -1,0 +1,87 @@
+﻿KnowledgeTool(Rule-Obj-Property)
+Scope: Rule-Obj-Property. No Rule-Obj-Property semantics intentionally removed; duplicate field examples centralized in KP.8.
+Kinds: F=Field,V=Value,L=List,M=Mapping,A=Algorithm,S=Semantic,P=Protocol,E=Examples.
+Labels: P=Purpose; M=Mapping; I=Invariant; A=Algorithm/Protocol; S=Semantic; X=Example/semantic witness; R=Related markers.
+Canonical source = marker heading + P/M/I/A/S. X clarifies only. Ownership: structure=KP.2; scalar type=KP.3; examples=KP.8.
+Coverage: core KP.1; assertion KP.2-KP.4,KP.9,KP.10; runtime KP.4-KP.7,KP.10; examples KP.8.
+
+KP.1|F|CoreFields
+P: Rule type/key/index fields.
+M: type=Rule-Obj-Property; category=Data Model; pyClassName=Applies To; pyPropertyName=name; pyPropertyMode=structure; pyStringType=scalar type; pyIsGateway=linked indicator.
+S: Property rule defines name+characteristics of data in an object; participates in inheritance/versioning/access control.
+I: Definition is metadata, not runtime value. R: KP.2,KP.3,KP.6.
+
+KP.2|F|PropertyStructureField
+P: Structure field controlling assertion name/path and pyParentPropertyMode.
+M: Rule-Obj-Property -> pyPropertyMode in {Value,ValueList,ValueGroup,Page,PageList,PageGroup}.
+A: Value/Page -> scalar; omit pyParentPropertyMode; pyPropertyName=pyPropertyRealName="PropertyName".
+A: ValueList/PageList -> ordered collection; pyParentPropertyMode=value; pyPropertyName="PropertyName(1)"; pyPropertyRealName="PropertyName".
+A: ValueGroup/PageGroup -> keyed collection; pyParentPropertyMode=value; pyPropertyName="PropertyName(key)"; pyPropertyRealName="PropertyName".
+I: Resolve structure before exact-value assertions; schema compliance depends on correct pyParentPropertyMode. X: KP.8.A/B/E/F. R: KP.3,KP.4,KP.9,KP.10.
+
+KP.3|F|PropertyDataTypeField
+P: Scalar type field controlling assertion pyPropertyMode + pyExpectedValue serialization.
+M: Rule-Obj-Property -> pyStringType.
+M: pyStringType->assertion pyPropertyMode: Text=Text; Decimal=Decimal; Integer=Decimal; Boolean=Text; DateTime=Text; Identifier=Identifier; TrueFalse=Text.
+M: pyExpectedValue format: Text/Identifier/Password=escaped string; Integer/Double/Decimal=bare numeric; DateTime/Date/TimeOfDay=escaped temporal string; TrueFalse=escaped "true"/"false"; TextEncrypted=escaped string with security context.
+I: Data type determines assertion type and value serialization; property definition is blocking when type affects assertion construction. X: KP.8.A-D. R: KP.2,KP.5,KP.9.
+
+KP.4|S|PageModeSemantics
+P: Embedded-page mode meaning + page-class contract.
+M: Page=one embedded page; PageList/Page List=ordered indexed embedded pages; PageGroup/Page Group=unordered keyed embedded pages.
+S: Page modes carry page-class definition constraining/guiding embedded class; class may be concrete, abstract, $CLASS, or $ANY.
+A: Embedded-page assertion: extract page class; set pyPropertyApplyToClass=page class; validate class compatibility with modification target.
+S: Page validity recursive by default. I: Page modes model nested objects, not scalar text; pyPropertyApplyToClass required. X: KP.8.E/F. R: KP.2,KP.7,KP.9,KP.10.
+
+KP.5|S|ValueModeRuntimeBehavior
+P: Value-mode runtime/storage semantics.
+M: Single Value=one scalar; ValueList/Value List=ordered indexed scalar collection; ValueGroup/Value Group=unordered keyed scalar collection.
+S: Single Value internally String-like even when numeric/date/boolean; ValueList is 1-based; ValueGroup uses text keys; aggregates may have zero/one/many elements.
+S: DateTime stored UTC/GMT-oriented text; Date=YYYYMMDD; TimeOfDay=HHMMSS; Password and TextEncrypted are security-sensitive with different visibility semantics.
+I: Value modes store scalar data with typed interpretation over text-like storage. R: KP.2,KP.3,KP.9,KP.10.
+
+KP.6|S|LinkedPropertyBehavior
+P: Linked-property dereference semantics.
+M: indicator pyIsGateway=true; pattern .LinkedPropertyName.TargetPropertyReference; example .pxCreateOperator.pyUserName.
+S: Linked property = Single Value Text whose value corresponds to all/part of key of a unique instance in another concrete class.
+S: Runtime locates/opens target object read-only without lock; linked pages are temporary clipboard pages, commonly cleared at commit; chains may nest.
+S: Reduces duplication/explicit load-open activity; behaves like app-level foreign key + read-only join.
+I: Read-only dereference, not editable embedding. R: KP.1,KP.7,KP.9.
+
+KP.7|S|DataAccessPatterns
+P: Runtime sourcing and reference/copy semantics encoded by property definitions.
+M: Non-page: Manual=value supplied by user/processing; Automatic reference to class instance=key-based object reference (KP.6).
+M: Page/PageList: Manual; Refer to data page; Copy data from data page.
+S: Refer=data-page reference view, reads/writes against referenced view. Copy=materialized case-data copy.
+S: Reference property links to source property instead of independent copy; reduces duplication/long paths; page reference semantics differ from copied page content.
+I: Definitions encode sourcing, not just structure; reference/copy affects property trace prediction. R: KP.4,KP.6,KP.9,KP.10.
+
+KP.8|E|PropertyDefinitionExamples
+P: Central examples for KP.2/KP.3/KP.4; not canonical definitions.
+X A Scalar text: {pxRuleName:"Comments",pxRuleObjClass:"Rule-Obj-Property",pyPropertyMode:"Value",pyStringType:"Text"} -> scalar Text; no collection; omit pyParentPropertyMode; assertion pyPropertyMode="Text"; expected escaped string.
+X B ValueList decimal: {pxRuleName:"pyDecimalValue",pxRuleObjClass:"Rule-Obj-Property",pyPropertyMode:"ValueList",pyStringType:"Decimal"} -> ordered scalar collection; use PropertyName(1); pyParentPropertyMode="ValueList"; assertion pyPropertyMode="Decimal"; expected bare number.
+X C Scalar decimal: {pxRuleName:"TotalAmount",pxRuleObjClass:"Rule-Obj-Property",pyPropertyMode:"Value",pyStringType:"Decimal"} -> scalar decimal; omit pyParentPropertyMode; assertion Decimal; expected bare number.
+X D Scalar text name: {pxRuleName:"CustomerName",pxRuleObjClass:"Rule-Obj-Property",pyPropertyMode:"Value",pyStringType:"Text"} -> scalar Text; omit pyParentPropertyMode; expected escaped string.
+X E Embedded page: {pxRuleName:"Customer",pxRuleObjClass:"Rule-Obj-Property",pyPropertyMode:"Page",pyPageClassification:"RuleIQ-Data-Customer"} -> page class RuleIQ-Data-Customer; omit pyParentPropertyMode; set pyPropertyApplyToClass.
+X F PageList: {pxRuleName:"Orders",pxRuleObjClass:"Rule-Obj-Property",pyPropertyMode:"PageList",pyPageClassification:"RuleIQ-Data-Order"} -> ordered page collection; class RuleIQ-Data-Order; pyParentPropertyMode="PageList"; pyPropertyName="Orders(1)"; pyPropertyRealName="Orders"; set pyPropertyApplyToClass.
+R: KP.2,KP.3,KP.4.
+
+KP.9|P|AnalysisProtocol
+P: Assertion-critical property-rule reasoning.
+A: 1 read KP.2 pyPropertyMode: Value/Page omit pyParentPropertyMode; List/Group set pyParentPropertyMode + index/key pyPropertyName.
+A: 2 read KP.3 pyStringType: map assertion pyPropertyMode + pyExpectedValue format.
+A: 3 if pyTableOption="LocalList", use pyListValues().pyLabel for exact-value assertions; if pyTableOption="PromptList", use pyPromptTableList().pyStandardValue; serialize via KP.3.
+A: 4 for Page/PageList/PageGroup apply KP.4: extract page class, set pyPropertyApplyToClass.
+A: 5 when runtime trace needed apply KP.5 value storage, KP.6 linked if pyIsGateway=true, KP.7 reference/copy sourcing.
+A: 6 use KP.8 for example-based validation.
+I: Source markers own meaning; protocol only orders use. Property definitions block assertion construction when structure/type matters. R: KP.1,KP.2,KP.3,KP.4,KP.5,KP.6,KP.7,KP.8,KP.10.
+
+KP.10|S|ClipboardInitializationSemantics
+P: Uninitialized-property clipboard semantics + assertions.
+S: Uninitialized list/group/page properties do not exist until first modification.
+M: Init triggers: List APPEND/PREPEND/INSERT/assignment; Group subscript assignment; Page CREATE_PAGE/assignment; Value varies by declaration.
+A: If list/group/page never modified in trace -> Property comparator "Not exists". Else if modified but empty -> ResultCount "Is Equals To" "0".
+I: ResultCount=0 forbidden for never-modified list/group/page.
+X: .Addresses PageList never touched -> correct {pyComparator:"Not exists",pyPropertyAbsolutePath:".Addresses",pyPropertyMode:"Text"}; wrong ResultCount expected 0.
+S: Applies to all properties on all pages, including child properties of pre-declared pyPagesAndClasses pages; page declaration status irrelevant. Evaluate each property independently against traced operations/seeds.
+R: KP.2,KP.4,KP.5,KP.7,KP.9.
