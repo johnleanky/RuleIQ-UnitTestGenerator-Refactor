@@ -124,13 +124,13 @@ This is an append-oriented log. Add accepted durable decisions; do not record un
 
 ## DEC-013 — Design Missing Pega Artifacts in the Assigned Stages
 
-- **Status:** `ACCEPTED`
+- **Status:** `ACCEPTED`; the S1 tool-implementation assignment is superseded by DEC-019
 - **Context:** No usable exports currently exist for `WriteMemory`, `GetMemory`, the UUID-aware `JsonValidationTool`, or the new Generator agent.
-- **Decision:** Treat these artifacts as from-scratch design and implementation work. S0 stabilizes their contracts and design constraints; S1 creates the Memory and UUID-aware validation tool artifacts; S3 creates the Generator artifact; S4 completes Validator integration.
-- **Reasoning:** Missing exports are planned product scope and should not remain ambiguous external dependencies.
-- **Consequences:** Later ExecPlans must include Pega rule design, export creation, prompt/export parity where applicable, interface tests, and high-risk independent review.
+- **Decision:** Treat the missing Generator agent as from-scratch design and implementation work in S3, with S4 completing Validator integration. DEC-019 supersedes only the former assignment to create Memory and UUID-aware validation tool implementations in S1.
+- **Reasoning:** The missing Generator remains planned product scope, while the user owns the three external tool implementations and the repository owns their caller-facing contracts.
+- **Consequences:** Later Generator and agent-integration ExecPlans must include Pega agent design, export creation, prompt/export parity where applicable, interface tests, and high-risk independent review. S1 must not plan or create the external tool implementations.
 - **Affected stages or files:** `S0`, `S1`, `S3`, `S4`; active S0 ExecPlan and future Pega tool and agent artifacts.
-- **Evidence or references:** User confirmation on 2026-09-02 that the exports do not exist and must be designed.
+- **Evidence or references:** User confirmation on 2026-09-02 that the exports do not exist; DEC-019 and explicit user scope correction on 2026-09-03.
 
 ## DEC-014 — Name the New Agent UnitTestGenerator
 
@@ -146,7 +146,7 @@ This is an append-oriented log. Add accepted durable decisions; do not record un
 
 - **Status:** `ACCEPTED`
 - **Context:** The repository is on an unborn branch and cannot provide Git-diff evidence until an initial baseline exists.
-- **Decision:** The root agent is authorized to create the initial baseline commit after all mandatory S0 acceptance and validation criteria pass, and before S1 implementation begins.
+- **Decision:** The root agent is authorized to create the initial baseline commit after all mandatory S0 acceptance and validation criteria pass, and before S1 work begins.
 - **Reasoning:** A verified baseline gives later high-risk refactoring reliable diff evidence without prematurely committing incomplete S0 work.
 - **Consequences:** No commit may be created while S0 remains open; S0 closure must be recorded before the commit, and the resulting HEAD must be reconciled into continuity immediately afterward.
 - **Affected stages or files:** `S0`, `S1`; all baseline repository files and continuity state.
@@ -178,6 +178,16 @@ This is an append-oriented log. Add accepted durable decisions; do not record un
 - **Context:** Memory transports materialized ScenarioGroup ledgers and generated UnitTestCandidate JSON between independently executing agents. Transport-layer interpretation or identifier reconstruction would couple Memory to either payload format and could corrupt exact version addressing.
 - **Decision:** `WriteMemory` stores `Payload` exactly as supplied without parsing, normalization, schema validation, or restructuring, creates a new immutable record, and returns its generated `UUID`. `GetMemory` returns the stored Payload only for an exact `CaseID`, `Type`, and `UUID` match. Callers treat the returned UUID as an opaque value and pass it unchanged; they never construct, normalize, or infer it.
 - **Reasoning:** An opaque transport preserves the Scenario Author's materialized semantic ledger and the Generator's schema-governed candidate verbatim while keeping format validation with the owning agents and Validator.
-- **Consequences:** S1 round-trip tests must cover whitespace and special-character preservation as well as cross-case/type/UUID isolation. Memory tools do not validate ScenarioGroup grammar or UnitTestCandidate JSON. UUID representation and Pega storage metadata are implementation details, but observable equality and exact addressing are mandatory.
+- **Consequences:** S1 contract fixtures must cover whitespace and special-character preservation as well as cross-case/type/UUID isolation. Memory tools do not validate ScenarioGroup grammar or UnitTestCandidate JSON. UUID representation and Pega storage metadata are implementation details, but observable equality and exact addressing are mandatory. Under DEC-019, Pega runtime proof belongs to the external implementation and is not a repository S1 closure criterion.
 - **Affected stages or files:** `S0` through `S5`; Memory tool contracts, Scenario Author, UnitTestGenerator, Validator, Roadmap, and active S0 ExecPlan.
 - **Evidence or references:** Explicit user requirement in the architecture discussion that Payload is unstructured and passed as-is and that UUID generation belongs to the Memory tool; DEC-002 through DEC-005.
+
+## DEC-019 — Keep Pega Tool Implementation External and Repository Work Caller-Side
+
+- **Status:** `ACCEPTED`
+- **Context:** The user will implement and configure `WriteMemory`, `GetMemory`, and UUID-aware `JsonValidationTool` separately in Pega. Repository work must define how GenAI agents call those tools without attempting to create their backing rules or prove their runtime internals.
+- **Decision:** Limit S1 to repository-only design of agent-facing Pega GenAI tool-call contracts: signatures, parameter sources, invocation order, observable response and failure handling, retry prohibitions, UUID propagation, caller ownership, and static contract fixtures. Exclude Rule-AI-Tool and backing-rule implementation, category selection, storage design, exports, ChangeRequests, Pega environment mutation, and runtime behavior verification.
+- **Reasoning:** This preserves a precise integration boundary while keeping ownership of Pega implementation with the user and preventing speculative or unusable exports.
+- **Consequences:** S1 can close on independently reviewed repository contract evidence without live Pega access. Later runtime integration remains dependent on user-supplied tools conforming to the designed interface; repository work may not claim their persistence, isolation, concurrency, or schema-validation behavior as runtime-verified.
+- **Affected stages or files:** `S1` through `S5`; Roadmap, active S1 ExecPlan, continuity state, agent prompts, tool allowlists, and static call-contract fixtures.
+- **Evidence or references:** Explicit user direction on 2026-09-03 to keep tool implementation separate in Pega, make repository work responsible only for agent calls to Pega GenAI tools, and use a repository-only path.

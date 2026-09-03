@@ -15,13 +15,13 @@ Establish a trustworthy, restart-safe baseline, complete preservation traceabili
 - Correct the verified syntax defect in the standard JSON example without changing its schema.
 - Parse both schemas and examples with BOM-aware tooling and validate each example against its matching schema using already available tools.
 - Record canonical integrity for `Main_Agent_Prompt.txt` and establish repeatable `<pySystemPrompt>` boundary and decoded-equivalence checks for the in-scope Validator pair only.
-- Define sufficient interfaces, ownership boundaries, and from-scratch Pega artifact design constraints for S1 through S4.
+- Define sufficient interfaces and ownership boundaries for S1 through S4. DEC-019 later supersedes the repository-owned Pega tool implementation assumption while preserving the caller-facing contracts.
 - Apply the high-risk change gate after every qualifying change or indivisible batch.
 - Obtain an independent read-only validation report before stage closure.
 
 ## Excluded Scope
 
-- Product implementation of Memory tools or UUID-aware JsonValidationTool.
+- Product implementation of Memory tools or UUID-aware JsonValidationTool; DEC-019 later confirms this remains external to the repository.
 - Scenario Author, Unit Test Generator, or Validator prompt refactoring.
 - Modification or parity enforcement of the legacy `Main_Agent.txt` Pega rule export; it is reference-only.
 - Creation or synthetic modification of Pega agent system metadata.
@@ -34,7 +34,7 @@ Establish a trustworthy, restart-safe baseline, complete preservation traceabili
 - Existing root artifacts are current-state evidence, even where they describe the legacy architecture.
 - The root agent is authorized to create the initial baseline commit after, but not before, verified S0 closure.
 - Local schema-keyword conformance of both examples is `VERIFIED` by independent Python and Node implementations; reproduction with a complete installed Draft 2020-12 or Pega validator remains unavailable and is not claimed.
-- No usable exports exist for the new Memory tools, UUID-aware validation tool, or Generator; S0 defines their contracts and later stages design and create them.
+- No usable exports exist for the new Memory tools, UUID-aware validation tool, or Generator. S0 defines their contracts; under later DEC-019 the user creates the external tool implementations, while S3 retains repository-owned Generator design and creation.
 - The new Generator rule name is `UnitTestGenerator`; use `UnitTestGenerator_Prompt.txt` as its canonical prompt and `UnitTestGenerator.txt` as its export.
 
 ## Dependencies
@@ -54,7 +54,7 @@ Establish a trustworthy, restart-safe baseline, complete preservation traceabili
 6. Record the canonical Main prompt baseline and verify Validator prompt/export synchronization and baseline artifact integrity.
 7. Confirm accepted architecture contracts and from-scratch artifact design constraints are sufficient to begin S1.
 8. Obtain independent read-only validation before closing S0.
-9. After S0 is closed, create the user-authorized initial baseline commit before starting S1 implementation.
+9. After S0 is closed, create the user-authorized initial baseline commit before starting S1 work.
 
 ## Progress
 
@@ -265,20 +265,20 @@ Regression evidence codes:
 ## S1 Entry Contract Audit
 
 - **Status:** `VERIFIED` by the mandatory independent S0 review and focused follow-up.
-- **Outcome:** The accepted contracts are sufficient to begin S1. No remaining product decision or external artifact is required before S1 planning. Implementation-selected Pega metadata and response-envelope details must be recorded in the S1 ExecPlan and validated before S1 closure.
+- **Outcome:** The accepted caller-facing contracts are sufficient to begin S1. DEC-019, accepted after S0 closure, assigns Pega tool implementation to the user and limits repository S1 work to call-contract design and static fixtures.
 
-| Contract area | Fixed entry contract | Evidence | Deferred S1 design work that does not require user confirmation |
+| Contract area | Fixed entry contract | Evidence | Repository S1 design and external implementation boundary |
 |---|---|---|---|
-| Write identity and immutability | `WriteMemory(CaseID, Type, Payload)` preserves CaseID, Type, and Payload; creates a new immutable record; generates and returns one opaque UUID; never updates an existing record. Automatic write retry is forbidden without an idempotency contract. | DEC-002, DEC-003, DEC-018; IPM-AUTH-011, 015, 023, 105 | Pega ruleset/class/storage metadata, UUID generation mechanism, success envelope, and atomic implementation. |
-| Exact read | `GetMemory(CaseID, Type, UUID)` requires all three address values, returns only the exact match and its unchanged Payload, and never falls back to a latest record. Callers pass CaseID and UUID unchanged. | DEC-002, DEC-003, DEC-018; IPM-VAL-004, 006, 018 | Pega lookup implementation, not-found/error envelope, authorization checks available in the target ruleset, and diagnostic wording. |
-| Payload boundary | Memory treats Payload as opaque. ScenarioGroup line-ledger grammar is owned by Scenario Author/Generator, while UnitTestCandidate JSON validity is owned by Generator/Validator; Memory parses neither. | DEC-005, DEC-018; IPM-AUTH-015, 105; IPM-VAL-022 | Transport size limits and safe Pega string/blob representation, provided exact round-trip behavior is preserved and tested. |
-| Supported types | v1 accepts exact Type values `ScenarioGroup` and `UnitTestCandidate`; readers validate Type as part of the address. | DEC-003 | Closed-enum enforcement implementation and error wording. |
-| UUID-aware schema validation | `JsonValidationTool(CaseID, UUID, JsonSchema)` validates the exact `UnitTestCandidate` version addressed through Memory and returns boolean `IsValid` plus `ValidationMessage`; tool failure remains distinct from schema-invalid JSON. | DEC-007, DEC-013, DEC-018; IPM-VAL-014 through 018 | Internal GetMemory invocation, Pega rule/export metadata, malformed-tool response envelope, and schema-engine integration available in the repository constraints. |
-| Downstream orchestration boundary | Scenario Author writes ordered ScenarioGroup records; UnitTestGenerator reads their opaque UUIDs, writes new UnitTestCandidate versions after projection repair, and passes the current UUID to Validator. Validator is read-only and never selects a latest record. | DEC-001, DEC-004, DEC-006 through 008; IPM-AUTH-015, 023, 105; IPM-VAL-002, 006, 013, 018, 041, 042 | Agent prompt/export implementation occurs in S2–S4; S1 supplies only the transport and exact-candidate validation capabilities. |
-| Failure and retry boundary | Missing/mismatched CaseID, Type, or UUID is a tool failure, never a substitute read. Failed writes return no usable UUID. Automatic write retry is forbidden; Validator has no retry loop. Repair attempts create new immutable candidate UUIDs. | DEC-002, DEC-006, DEC-007; IPM-VAL-015 through 018, 041 | Exact error codes/messages and retry-safe operational diagnostics, which S1 must make explicit and test before closure. |
-| From-scratch artifact scope | S1 designs and creates `WriteMemory`, `GetMemory`, and UUID-aware `JsonValidationTool` Pega rules/exports; S3 creates `UnitTestGenerator`; S4 completes Validator integration. `Main_Agent.txt` remains reference-only. | DEC-013, DEC-014, DEC-017 | Non-contractual filenames and Pega metadata for S1 tools, documented in the S1 ExecPlan before artifact creation. |
+| Write identity and immutability | `WriteMemory(CaseID, Type, Payload)` preserves CaseID, Type, and Payload; creates a new immutable record; generates and returns one opaque UUID; never updates an existing record. Automatic write retry is forbidden without an idempotency contract. | DEC-002, DEC-003, DEC-018; IPM-AUTH-011, 015, 023, 105 | S1 defines the caller-visible success/failure response and caller action. Ruleset, storage, UUID generation, and atomic implementation are external under DEC-019. |
+| Exact read | `GetMemory(CaseID, Type, UUID)` requires all three address values, returns only the exact match and its unchanged Payload, and never falls back to a latest record. Callers pass CaseID and UUID unchanged. | DEC-002, DEC-003, DEC-018; IPM-VAL-004, 006, 018 | S1 defines exact response handling and not-found/address-mismatch behavior. Lookup and authorization implementation are external under DEC-019. |
+| Payload boundary | Memory treats Payload as opaque. ScenarioGroup line-ledger grammar is owned by Scenario Author/Generator, while UnitTestCandidate JSON validity is owned by Generator/Validator; Memory parses neither. | DEC-005, DEC-018; IPM-AUTH-015, 105; IPM-VAL-022 | S1 supplies opaque-data call fixtures. Transport limits and Pega string/blob representation are external implementation details. |
+| Supported types | v1 accepts exact Type values `ScenarioGroup` and `UnitTestCandidate`; readers validate Type as part of the address. | DEC-003 | S1 fixes caller literals and invalid-Type handling; enforcement implementation is external. |
+| UUID-aware schema validation | `JsonValidationTool(CaseID, UUID, JsonSchema)` validates the exact `UnitTestCandidate` version addressed through Memory and returns boolean `IsValid` plus `ValidationMessage`; tool failure remains distinct from schema-invalid JSON. | DEC-007, DEC-018, DEC-019; IPM-VAL-014 through 018 | S1 defines caller branching and malformed-response handling. Internal lookup, Pega metadata, and schema-engine implementation are external. |
+| Downstream orchestration boundary | Scenario Author writes ordered ScenarioGroup records; UnitTestGenerator reads their opaque UUIDs, writes new UnitTestCandidate versions after projection repair, and passes the current UUID to Validator. Validator is read-only and never selects a latest record. | DEC-001, DEC-004, DEC-006 through 008; IPM-AUTH-015, 023, 105; IPM-VAL-002, 006, 013, 018, 041, 042 | S1 specifies calls and traces; agent prompt/export implementation occurs in S2–S4; external tools are supplied by the user. |
+| Failure and retry boundary | Missing/mismatched CaseID, Type, or UUID is a tool failure, never a substitute read. Failed writes return no usable UUID. Automatic write retry is forbidden; Validator has no retry loop. Repair attempts create new immutable candidate UUIDs. | DEC-002, DEC-006, DEC-007; IPM-VAL-015 through 018, 041 | S1 makes observable failure classes and deterministic caller actions explicit in static fixtures; Pega diagnostics and execution are external. |
+| Artifact scope | S1 creates no Pega tool or backing artifact and instead designs caller contracts; S3 creates `UnitTestGenerator`; S4 completes Validator integration. `Main_Agent.txt` remains reference-only. | DEC-013, DEC-014, DEC-017, DEC-019 | Tool categories, backing rules, storage, exports, ChangeRequests, and runtime verification are user-owned and external. |
 
-The deferred items are bounded implementation choices: none may weaken exact addressing, immutability, opaque round-trip behavior, failure distinction, or no-retry rules. Discovery of a platform constraint that would weaken one of those invariants reopens S0 or requires a superseding accepted decision.
+The external implementation details may not weaken exact addressing, immutability, opaque round-trip behavior, failure distinction, or no-retry rules. A later platform constraint that would weaken one of those invariants reopens S0 or requires a superseding accepted decision.
 
 Allowed values:
 
@@ -346,9 +346,10 @@ Allowed values:
 - `VERIFIED` — `Main_Agent_Prompt.txt` canonical baseline on 2026-09-03: SHA-256 `D6CDED6A4D786AC555452C05296B1A409042B5E6853B0FB9B9EC635AF065C290`; 177,990 bytes; 2,219 logical lines; 1,710 non-empty lines; 66 Markdown headings; six fence markers; CRLF line endings; no UTF-8 BOM.
 - `VERIFIED` — raw Validator artifacts on 2026-09-03: `Validator_Prompt.txt` SHA-256 `F68E9362F7C85984552D806825BAA93F73B56762F158E91FC9E018F447474864`, 32,899 bytes, 657 logical lines, 519 non-empty lines; `JsonValidator_tool.txt` SHA-256 `779D7E65B8D3C473C111622070043D0327752A9EE12B3E14167587C632DEEE06`, 58,980 bytes, 309 logical lines, and exactly one opening and closing `<pySystemPrompt>` tag.
 - `VERIFIED` — decoded Validator parity on 2026-09-03: both representations contain 519 ordered non-empty logical lines and share normalized SHA-256 `1B78FF5E6422BDE561A24704939D6185FCC7E70CF9806D76BBFBD55DB45B10AE`; their exact 3,137-token sequences share SHA-256 `EA7F8BEB5141599F07A32519B0F4905AB3318524F1DE6AE4A0EF89999387DBC0`. The first strict difference is logical line 7 and all 396 strict differences are HTML serializer-added leading spaces; no difference remains after trimming boundary whitespace. The check was read-only and did not inspect or modify `Main_Agent.txt`.
-- `VERIFIED` — the 2026-09-03 S1 entry-contract audit maps every S1-facing invariant to accepted decisions and Instruction Preservation Matrix rows, records DEC-018 for the user-confirmed opaque Payload/UUID boundary, and classifies remaining Pega metadata and response-envelope choices as bounded S1 design work; the independent final audit confirmed the content is sufficient to begin S1.
+- `VERIFIED` — the 2026-09-03 S1 entry-contract audit maps every S1-facing invariant to accepted decisions and Instruction Preservation Matrix rows and records DEC-018 for the opaque Payload/UUID boundary; the independent final audit confirmed the caller-facing content is sufficient to begin S1. DEC-019 later moves Pega metadata and tool implementation outside repository scope while retaining response-envelope design as S1 caller-contract work.
 - `FAILED` — the first final independent S0 audit on 2026-09-03 confirmed the S1/DEC-018 contract content and all reproduced technical evidence but found contradictory validator-fallback wording, a stale Roadmap conformance statement, and premature reverse-matrix scope; it required root correction and focused follow-up.
 - `VERIFIED` — focused independent follow-up on 2026-09-03 found all three prior findings corrected, no new contradiction, disciplined classifications, valid links and stage mappings, unchanged product hashes, and no remaining blocking defect.
+- `VERIFIED` — after S0 closure, the user-authorized initial baseline commit `99e038330076288bcc86bcc556681dc3efc82c74` (`chore: establish verified S0 baseline`) captured all 20 repository files before S1 was activated.
 
 ## Risks
 
@@ -357,8 +358,8 @@ Allowed values:
 - Validator prompt/export equivalence may require normalization beyond entity decoding; record the method and avoid whole-export rewrites. Never introduce a `Main_Agent.txt` parity requirement without a new user decision.
 - An incomplete instruction inventory can silently drop stable behavior during the split; product prompt changes are blocked until matrix coverage passes independent review.
 - A validator subagent may miss a cross-file invariant if given incomplete scope; every high-risk review package must include source rows, destination rows, acceptance criteria, and relevant files.
-- Missing Pega exports can block later stages even when S0 contracts are complete.
+- Missing externally implemented Pega tools can block later runtime integration even when repository caller contracts are complete; under DEC-019 they do not block S1 design closure.
 
 ## Exact Next Action
 
-Create the user-authorized initial baseline commit for the verified closed S0 repository before selecting or implementing S1.
+Follow `docs/execution/plans/S1-pega-memory-transport.md`; reopen S0 only if S1 discovery proves that a fixed S0 invariant cannot be implemented without a superseding decision.
