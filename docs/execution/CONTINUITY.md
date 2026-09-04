@@ -7,13 +7,13 @@ This file is the single authoritative operational state for resuming repository 
 - **Project objective:** Refactor the current monolithic Pega unit-test Author into a Scenario Author and a Unit Test Generator, with caller-side contracts for user-implemented UUID-addressed Pega GenAI Memory and Validator tools, while preserving every stable instruction through explicit source-to-destination traceability and preserving schema-governed `UnitTestRules` output.
 - **Repository root:** `C:/Dev/RuleIQ-UnitTestGenerator-Refactor/RuleIQ-UnitTestGenerator-Refactor`
 - **Current branch:** `main`
-- **Recorded HEAD:** `SELF` — the S1 closure commit containing this checkpoint, titled `docs: define verified Pega tool call contracts`; resolve its immutable hash with `git rev-parse HEAD`. Its parent is verified S0 baseline `99e038330076288bcc86bcc556681dc3efc82c74`.
-- **Remote tracking state:** `origin/main` is reported as gone.
-- **Working-tree state:** `VERIFIED` — clean immediately after the user-authorized S1 closure commit; it captures six documentation, planning, contract, and decision paths, with no product artifact modified.
-- **Active stage:** None during the post-S1 closure checkpoint; `S1 — Pega GenAI Tool Invocation Contracts` is closed and S2 has not yet been selected as active.
-- **Active ExecPlan:** [S1-pega-memory-transport.md](plans/S1-pega-memory-transport.md), closed and retained as the transition authority until S2 is selected and its ExecPlan is created.
-- **Stage status:** `CLOSED` for S1; `NOT_STARTED` for S2.
-- **Current project status:** `PARTIAL` — repository-only Pega GenAI tool-call contracts are verified, external Pega implementation remains user-owned, and product prompt refactoring has not started.
+- **Recorded HEAD:** the S2 closure checkpoint commit containing this file; resolve the exact hash with `git rev-parse HEAD` because a commit cannot embed its own hash. Its verified parent is `b9dd5653f4c449653ac14e06c595e5e2108f516a`.
+- **Remote tracking state:** `main` tracks `origin/main`, and the S2 closure checkpoint is pushed.
+- **Working-tree state:** `VERIFIED` — clean immediately after the authorized S2 checkpoint commit and push; `Main_Agent_Prompt.txt` is the only changed product `.txt` in that checkpoint.
+- **Active stage:** none at the verified S2/S3 planning boundary.
+- **Active ExecPlan:** none; the closed S2 plan is [S2-scenario-author-extraction.md](plans/S2-scenario-author-extraction.md).
+- **Stage status:** `S2` is `CLOSED`; `S3` is `NOT_STARTED`.
+- **Current project status:** `VERIFIED` — Scenario Author extraction is complete, independently reviewed, root-reconciled, committed, and pushed. UnitTestGenerator implementation has not begun.
 
 ### Verified Completed Work
 
@@ -34,13 +34,17 @@ This file is the single authoritative operational state for resuming repository 
 - `VERIFIED` — the first final S0 audit found three planning-document inconsistencies; the root corrected them, and focused independent follow-up returned `PASS` with no findings.
 - `VERIFIED` — all mandatory S0 acceptance criteria are satisfied and S0 is closed as of 2026-09-03.
 - `VERIFIED` — initial baseline commit `99e038330076288bcc86bcc556681dc3efc82c74` was created after S0 closure and before S1 activation; its tree contains all 20 baseline files.
-- `NOT_STARTED` — product prompt, schema, and Pega agent-export changes; implementation of the three external tools is no longer a repository deliverable.
+- `PARTIAL` — the first bounded `Main_Agent_Prompt.txt` refactor batch is implemented; schema and Pega agent-export changes remain not started, and implementation of the three external tools is not a repository deliverable.
 - `PARTIAL` — S1 discovery identified the local export boundary and authoritative Rule-AI-Tool schema, but live application and rule listings timed out.
 - `VERIFIED` — the user assigned Pega tool implementation and backing configuration to themselves, selected repository-only work, and limited this project to designing agent calls to those external GenAI tools; DEC-019 records the boundary.
 - `VERIFIED` — an independent read-only review of the DEC-019 scope revision returned `PASS` after the root corrected one residual S0 creation statement and one S1/S5 runtime-boundary statement; no product file changed.
 - `VERIFIED` — the repository caller contract and F01–F13 static fixtures at [PEGA_GENAI_TOOL_CALL_CONTRACTS.md](../contracts/PEGA_GENAI_TOOL_CALL_CONTRACTS.md) passed focused independent follow-up after all first-review defects were corrected and root static checks passed.
 - `VERIFIED` — every mandatory S1 acceptance criterion is satisfied and S1 is closed as of 2026-09-03.
 - `VERIFIED` — the user-authorized commit `docs: define verified Pega tool call contracts` captures the complete S1 checkpoint in six documentation paths; its self-referential hash is resolved from Git rather than embedded in its own contents.
+- `VERIFIED` — S2 activation revalidated the clean HEAD `b9dd5653f4c449653ac14e06c595e5e2108f516a`, unchanged canonical Main prompt hash/size/line count, and the 106-row Author partition of 48 Scenario Author, 39 shared, 18 Generator, and one Validator owner.
+- `VERIFIED` — the corrected S2 activation plan passed focused independent follow-up with no remaining findings; the reviewer confirmed exact DEC-016 requirements, DEC-017-compliant S5 scope, the closed Scenario Author tool allowlist, synchronized next action, matrix counts, and unchanged product artifacts.
+- `VERIFIED` — all 106 Scenario Author matrix rows, the ScenarioGroup v1 contract, final storage/handoff boundary, fixtures, and deterministic checker passed independent final follow-up and root reconciliation on 2026-09-04; S2 is closed.
+- `VERIFIED` — the authorized S2 closure checkpoint is committed on `main` and pushed to `origin`; obtain its exact self-referential commit hash from Git.
 
 ### Blockers and Unknowns
 
@@ -48,6 +52,10 @@ This file is the single authoritative operational state for resuming repository 
 - `VERIFIED` — the detailed caller-side specification and static fixtures for `WriteMemory`, `GetMemory`, and UUID-aware `JsonValidationTool` passed root validation and focused independent review.
 - `VERIFIED` — the independently reviewed S1 entry-contract audit found no decision gap in immutable exact addressing or opaque round trips; DEC-019 now excludes backing categories, rules, storage, exports, ChangeRequests, and runtime proof from repository scope.
 - `UNKNOWN` — exact Pega backing implementation and runtime behavior remain user-owned and external; they cannot be claimed as repository-verified and do not block S1 caller-contract design or closure.
+- `VERIFIED` — the complete corrected S2 design-freeze package received focused independent `PASS`; the reviewer mutation-tested the DEC-020/IPM-AUTH-041/S2-R041 link, reproduced 106 executable row checks and all static fixtures, and confirmed unchanged product files and repository-only scope.
+- `VERIFIED` — the first bounded prompt batch replaces monolithic role, candidate/Validator loop, interfaces, source order, and execution outline with Scenario Author ownership, exact ScenarioGroup writes, one UnitTestGenerator handoff, a five-interface closed allowlist, downstream-only legacy locks, and bounded result mapping. Its 26 IPM rows passed independent review and are verified.
+- `VERIFIED` — prompt batch 2 refactors semantic Knowledge acquisition, evidence/dependency/runtime records, assertion/simulation/omission decisions, Scenario Compiler state, grouping semantics, summary facts, and confidence/testability. All 66 rows passed focused independent follow-up; materialization/handoff is implemented separately in the final batch.
+- `VERIFIED` — no external blocker prevents S2 repository planning or design; Pega runtime remains external under DEC-019.
 
 ### Validation State
 
@@ -70,11 +78,38 @@ This file is the single authoritative operational state for resuming repository 
 - S1 caller-contract design: `VERIFIED`; the specification and F01–F13 fixtures passed root static validation and focused independent follow-up.
 - S1 caller-contract first review: `FAILED`; it found overlapping validation error semantics, an incomplete candidate-read ValidatorReport mapping, lost mass-error compaction, missing partial-result mapping, and one stale continuity classification.
 - S1 caller-contract follow-up: `VERIFIED`; all prior findings were corrected, 13 JSON examples parse, F01–F13 and every IPM reference resolve, product hashes match HEAD, links and exact-next-action checks pass, and the independent reviewer returned `PASS`.
+- S2 activation plan: `VERIFIED`; after the first review found missing test locks for DEC-016, conflicting S5 legacy-search scope, and an open Scenario Author allowlist, the root corrected all three and focused independent follow-up returned `PASS` with no findings.
+- S2 design-freeze package: `IMPLEMENTED_NOT_VERIFIED`; the first independent review returned `FAIL` despite the initial root-check `PASS`. Blocking gaps cover exact S1 WriteMemory envelopes, runtime-complete/no-simulation When grouping keys, When cell/trace bijection, atomic Decision Table consumer/action/setup reconciliation, and structured parameter/root/complexity/EvidenceSummary facts. Medium findings cover non-null enforcement, deterministic ID freeze rules, and row-specific regression/destination proof.
+- S2 design-freeze first corrections: `FAILED`; the second focused review confirmed the first review's envelope, grouping-key, cell/trace, Decision Table, structured-fact, and non-null corrections, but found four high and two medium residual defects: the 106 check labels are not executable definitions and the slice contains `NaN`; the checker wrongly requires equal signatures across unequal simulation groups; SIM trace projection is not an exact whitelist; COMPLEXITY derivation is incomplete; the contract omits the `C` ID prefix; and `dtCount` prose omits DTC.
+- S2 design-freeze second corrections: `IMPLEMENTED_NOT_VERIFIED`; the slice now contains 106 exact executable check definitions and no placeholder; cross-group signature equality is removed while within-group checks remain; AssertionDecisionTrace uses exact tag-specific whitelists with positive and contaminated SIM cases; DEC-020 closes loop/invocation and cap derivation with six boundary cases; and contract prose now includes `C` COLUMN and DTC. The expanded checker, JSON parsing, exact-next synchronization, product hash/scope, whitespace, and link checks pass locally; focused independent follow-up is pending.
+- S2 design-freeze third review: `FAILED`; it passed every prior functional correction, product integrity, scope, exact-next, and local checker result, but found that the new DEC-020 behavior lacks reverse traceability from IPM-AUTH-041 and S2-R041. No product file changed.
+- S2 design-freeze third correction: `IMPLEMENTED_NOT_VERIFIED`; IPM-AUTH-041 and S2-R041 now cite DEC-020, all 106 executable audits include and validate their exact decision sets, and a specific checker assertion prevents removal of the DEC-020 linkage. Expanded checker, diff check, exact-next synchronization, and product-scope checks pass locally.
+- S2 design-freeze final follow-up: `VERIFIED`; independent review returned `PASS` with no remaining findings, reproduced the checker, and confirmed both temporary DEC-020-removal mutations fail as required. External Pega runtime and post-prompt row execution remain intentionally unverified.
+- S2 prompt batch 1 local validation: `IMPLEMENTED_NOT_VERIFIED`; expanded checker passes role, authority, exact WriteMemory envelope/call order, Generator mapping, closed allowlist, 20-step execution order, 26 prompt trace markers, and the Sections 5–14 semantic-scope lock. `Main_Agent_Prompt.txt` is SHA-256 `51126AB5836E4D7DB9D0C54E5C729E9F59D25AC25B871E5982022F692868B133`, 166,207 bytes, and 2,068 logical lines with CRLF and no BOM; no other `.txt` differs from HEAD.
+- S2 prompt batch 1 first review: `FAILED`; behavioral checks passed, but two medium coherence defects remained: continuity/plan still contained four stale `NOT_STARTED` or unchanged-product statements, and the prompt falsely claimed the full ScenarioGroup grammar was embedded even though insertion belongs to the later materialization batch.
+- S2 prompt batch 1 corrections: `IMPLEMENTED_NOT_VERIFIED`; stale classifications are reconciled, and the prompt now truthfully states that the full repository-defined grammar will be inserted in the later materialization batch, marks the intermediate prompt non-release-ready, and blocks WriteMemory/Generator execution until insertion. The checker enforces these statements. Root checks pass at SHA-256 `4A052FD0F5159728F37A9D18BE610776237E9E7D2792222213FE202C60554326`, 166,730 bytes, and 2,068 CRLF lines.
+- S2 prompt batch 1 follow-up: `VERIFIED`; independent review returned `PASS` with no remaining findings, confirmed all state corrections and truthful deferred-grammar gates, reproduced the checker and product scope, and verified the prompt hash/encoding. IPM-AUTH-001–020 and 027–032 are now verified.
+- S2 prompt batch 2 local validation: `IMPLEMENTED_NOT_VERIFIED`; expanded checker passes semantic-only KnowledgeTool keys/checkpoints, evidence/dependency scope, simulation decisions, internal `SCENARIO_SNAPSHOT`, physical grouping, final SUMMARY/ASSERT/SIM/OMIT semantics, omission catalog, confidence caps, and 66 additional IPM traces. The prompt has SHA-256 `8972DF766EF2837DE7DBEBE859A172D749C5B75EE45D48F7ABCAC1756A69AF06`, 157,467 bytes, and 1,920 CRLF logical lines; it is the only changed product `.txt`.
+- S2 prompt batch 2 first review: `FAILED`; two high defects make semantic AUDITED unreachable without forbidden candidate work and leave DEC-020 under-specified in the runtime prompt. Two medium defects leave ROOT circular through RuleCode and checker coverage too shallow. The other 66-row semantic behaviors, scope, product integrity, and repository boundary passed.
+- S2 prompt batch 2 corrections: `IMPLEMENTED_NOT_VERIFIED`; execution now runs I/W/F before final decisions and B/A after complete semantic materialization but before WriteMemory; B/A audit ScenarioGroup records with no RuleCode/candidate/tool carrier; exact DEC-020 triggers, tiers, caps, and limits are embedded; ROOT derives directly from evidenced primary-page semantics; and 14 critical prompt mutations prove checker coverage. Root checks pass at SHA-256 `D3356E2D8A26E1AF7FB98AAA4641255263FC7D867E6B6AA8C7581ED1217F1BD3`, 159,680 bytes, and 1,929 CRLF lines.
+- S2 prompt batch 2 second review: `FAILED`; all three product-prompt corrections passed, but one medium checker defect remains because mutations do not cover the full hard-trigger thresholds, exact tier derivation, complete ROOT freeze/named-page rule, weighted formula, or the full RuleCode-independence prohibition.
+- S2 prompt batch 2 checker correction: `IMPLEMENTED_NOT_VERIFIED`; the checker now requires and mutation-tests 16 complete atomic clauses, including all six DEC-020 derivation clauses and all seven ROOT-lock clauses in their required sections. The repository-static checker and `git diff --check` pass locally; focused independent review is pending.
+- S2 prompt batch 2 checker first focused audit: `FAILED`; the reviewer reproduced two medium defects: two workflow clauses were not section-bound, and the ELEVATED wording `25–49` did not close the fractional-score interval permitted by the weighted formula.
+- S2 prompt batch 2 checker follow-up correction: `IMPLEMENTED_NOT_VERIFIED`; all three workflow clauses are now bound to their required execution/compiler sections, all 16 critical clauses have relocation mutations, ELEVATED is exact at `25 <= score < 50`, and explicit 49.75/50 fixtures close the score boundary. Root checks pass with `Main_Agent_Prompt.txt` SHA-256 `B88678FE2776D494288CB06BD86D2840107313DCBAB9A1825998E6EA79F62E75`, 159,680 bytes, and 1,929 CRLF logical lines; focused independent follow-up is pending.
+- S2 prompt batch 2 checker follow-up: `VERIFIED`; independent review returned `PASS` with no findings and rejected 96 adversarial removals, relocations, duplicates, and DEC-020/ROOT fragment mutations. All 66 batch-2 IPM rows are verified; validation remains repository-static.
+- S2 completion strategy: `VERIFIED`; the user accepted one consolidated final high-risk batch with integrity-only rechecks of untouched verified sections, one full independent audit, and a mandatory authorized commit/push after S2 closure. DEC-021 records the durable rule.
+- S2 final prompt batch initial snapshot: `IMPLEMENTED_NOT_VERIFIED`; it removed the legacy candidate/Validator tail and added final semantic gates, the executable ScenarioGroup v1 contract, ordered storage/handoff, a closed Author prohibition, and downstream ownership. The later full audit failed and superseded this intermediate hash and classification.
+- S2 full final audit: `FAILED`; three high findings identified a non-executable 106-row regression claim, an unmaterializable NotTestable state, and unchecked dangling RX/PROPERTY references. Two medium findings identified zero-PARAM, RequiredButLimited/NotApplicable, DTA-OMIT checker gaps and stale operational classifications.
+- S2 final-audit correction follow-up: `VERIFIED`; the checker freezes the independently reviewed 106-row prompt by full SHA-256/CRLF regression, resolves RX/BRANCH/PRODUCER/PROPERTY references, allows zero PARAM rows, models NotTestable and schema-aligned SupportLevel values, constrains all four simulation states, and exercises DTA-to-OMIT. Focused independent follow-up returned `PASS` with no high- or medium-severity findings. The final prompt is 174,283 bytes and 1,973 CRLF logical lines with no BOM and SHA-256 `BACADFB07E90D68B9751B9D573437A21B204E0BCCE87BE6ACE8BD5DDF3CEEC95`. Pega runtime remains external and unverified.
+- S2 final root reconciliation and closure: `VERIFIED`; the S2 checker, all five JSON files, prompt hash/encoding, 106-row census, product scope, unchanged `Main_Agent.txt`, cache hygiene, and `git diff --check` passed on 2026-09-04 before the authorized checkpoint commit and push.
 
 ### Relevant Files
 
 - Continuity: `AGENTS.md`, this file, [ROADMAP.md](ROADMAP.md), the active ExecPlan, and [DECISIONS.md](../decisions/DECISIONS.md).
 - S1 caller contract: [PEGA_GENAI_TOOL_CALL_CONTRACTS.md](../contracts/PEGA_GENAI_TOOL_CALL_CONTRACTS.md).
+- S2 closed plan: [S2-scenario-author-extraction.md](plans/S2-scenario-author-extraction.md).
+- S2 implementation slice: [S2-instruction-implementation-slice.md](design/S2-instruction-implementation-slice.md).
+- ScenarioGroup v1 contract: [SCENARIO_GROUP_V1.md](../contracts/SCENARIO_GROUP_V1.md).
 - Current Author authority: `Main_Agent_Prompt.txt`. `Main_Agent.txt` is a read-only legacy Pega rule export and is not a refactor deliverable.
 - Current Validator: `Validator_Prompt.txt` and `JsonValidator_tool.txt`.
 - Schema families: `rule-test-unit-case_JsonSchema.txt`, `rule-test-unit-case_JsonExample.txt`, `rule-test-unit-case_multInpComb-JsonSchema.txt`, and `rule-test-unit-case_multInpComb-JsonExample.txt`.
@@ -82,26 +117,26 @@ This file is the single authoritative operational state for resuming repository 
 
 ### Handoff
 
-- **Repository state:** `main` is at the clean S1 closure commit `docs: define verified Pega tool call contracts`, whose parent is baseline `99e038330076288bcc86bcc556681dc3efc82c74`; the current product architecture remains the monolithic Author plus Validator and legacy response-record transport.
-- **Active objective and stage:** S1 is closed. Select S2 and create its ExecPlan before changing Scenario Author prompts; Pega backing implementation remains user-owned and out of scope.
-- **Verified work:** Repository/document inventory, Git-state inspection, standard-example syntax failure, and accepted architecture decisions.
-- **Unverified or partial work:** S2–S5 product prompt, agent-export, Validator, and integration changes have not started; Pega runtime behavior is external and will not be claimed as repository-verified.
-- **Uncommitted changes:** None immediately after the S1 closure commit; product files remain unchanged.
-- **Blockers and unknowns:** No blocker prevents selection and planning of S2. Exact Pega implementation metadata and runtime behavior remain external dependencies for later integration.
-- **Validation results:** All mandatory S0 and S1 checks are verified. The S1 caller contract passed root static checks and focused independent follow-up after the first review's findings were corrected.
+- **Repository state:** `main` contains the pushed S2 closure checkpoint; the working tree is clean immediately after that checkpoint. `Main_Agent_Prompt.txt` is the only changed product `.txt`, and reference-only `Main_Agent.txt` remains unchanged.
+- **Active objective and stage:** No stage is active at the S2/S3 boundary. The next objective is planning and independent validation for S3 before Generator implementation begins.
+- **Verified work:** S0 and S1 are closed. S2 Scenario Author extraction, ScenarioGroup materialization, ordered Memory handoff, instruction preservation, independent validation, root reconciliation, commit, and push are complete.
+- **Unverified or partial work:** S3 UnitTestGenerator, S4 Validator refactor, S5 integration/cleanup, and external Pega runtime behavior remain not started or external.
+- **Uncommitted changes:** None immediately after the S2 closure checkpoint.
+- **Blockers and unknowns:** No repository blocker. Pega runtime remains external and unverified under DEC-019.
+- **Validation results:** All S2 static checks and independent review gates pass. The first full final audit remains recorded as `FAILED`; its five findings are corrected and the focused follow-up returned `PASS` with no high- or medium-severity findings.
 
 #### Do Not Assume
 
-- Do not assume the repository is still unborn: verify and use baseline HEAD `99e038330076288bcc86bcc556681dc3efc82c74` unless Git evidence shows a later authorized commit.
-- Do not assume the accepted target architecture has been implemented.
+- Do not assume the repository is still at the S1 closure commit: resolve the current S2 checkpoint hash and remote state from Git.
+- Do not assume the full target architecture is implemented: Scenario Author is complete, while UnitTestGenerator and Validator refactors remain future stages.
 - Do not assume `WriteMemory`, `GetMemory`, or UUID-aware `JsonValidationTool` exists in this repository or create their Pega implementation here; the user owns them externally under DEC-019. The new agent export remains assigned to its later stage.
-- Do not create the authorized initial baseline commit before S0 satisfies its closure criteria.
+- Do not create another commit unless the user explicitly authorizes it.
 - Do not treat local schema-keyword validation as validation by an installed full Draft 2020-12 implementation; record the distinction until equivalent tooling is available.
 - Do not assume an in-scope prompt/export pair is semantically synchronized until decoded comparison is recorded. Do not treat `Main_Agent.txt` as an in-scope pair or edit target.
 
 #### Exact next action
 
-Select S2 as the next active Roadmap stage and create its ExecPlan before changing Scenario Author product artifacts.
+Create and independently validate the S3 ExecPlan before activating S3 or changing `UnitTestGenerator` product artifacts.
 
 ## Essential Workflow
 

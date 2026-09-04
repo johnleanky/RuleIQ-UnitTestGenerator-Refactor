@@ -191,3 +191,23 @@ This is an append-oriented log. Add accepted durable decisions; do not record un
 - **Consequences:** S1 can close on independently reviewed repository contract evidence without live Pega access. Later runtime integration remains dependent on user-supplied tools conforming to the designed interface; repository work may not claim their persistence, isolation, concurrency, or schema-validation behavior as runtime-verified.
 - **Affected stages or files:** `S1` through `S5`; Roadmap, active S1 ExecPlan, continuity state, agent prompts, tool allowlists, and static call-contract fixtures.
 - **Evidence or references:** Explicit user direction on 2026-09-03 to keep tool implementation separate in Pega, make repository work responsible only for agent calls to Pega GenAI tools, and use a repository-only path.
+
+## DEC-020 — Close Scenario Complexity Derivation Deterministically
+
+- **Status:** `ACCEPTED`
+- **Context:** The canonical Author defines complexity metrics, score, most HIGH conditions, and the presence of confidence/testability caps, but does not quantify `loop+invocation combination requires it` or map tiers to cap values. Leaving either output discretionary would make identical frozen semantics produce different ScenarioGroup records.
+- **Decision:** Interpret the loop/invocation HIGH condition conservatively as `loopCount >= 1 AND invocationCount >= 1`, recorded as hard trigger `LOOP_INVOCATION_COMBINATION`. Derive caps exactly as STANDARD=`High/Testable`, ELEVATED=`Medium/Testable`, and HIGH=`Medium/PartiallyTestable`; when `unresolvedCriticalDependencyCount >= 1`, lower the HIGH confidence cap to `Low`. EvidenceSummary gaps and closure rules may lower Scenario confidence/testability further but never raise these caps.
+- **Reasoning:** The smallest literal non-zero conjunction preserves the source's independent combination rule without inventing a hidden magnitude. A deterministic monotone cap table removes model discretion while retaining the source rule that complexity changes trace depth rather than assertion coverage.
+- **Consequences:** Scenario Author and the S2 checker recompute the combination trigger, tier, and caps from metrics. S3 projects the stored values without reinterpretation. Any later threshold or cap-policy change requires an explicit superseding decision and synchronized fixture update.
+- **Affected stages or files:** `S2`, `S3`, `S5`; ScenarioGroup contract, Scenario Author prompt, UnitTestGenerator prompt, fixtures, and deterministic checkers.
+- **Evidence or references:** `Main_Agent_Prompt.txt` lines 709–736; second focused S2 design-freeze review on 2026-09-03; DEC-005, DEC-011, and DEC-012.
+
+## DEC-021 — Consolidate Risk-Based Validation and Require the S2 Git Checkpoint
+
+- **Status:** `ACCEPTED`
+- **Context:** Repeating independent review after every small checker or documentation edit made S2 slow without proportionate risk reduction. The remaining work is one cohesive responsibility boundary: IPM-AUTH-093–106, ScenarioGroup materialization, legacy persistence removal, and the final handoff. The user also requires the completed verified changes to be committed and pushed.
+- **Decision:** Treat the remaining S2 prompt work as one indivisible high-risk batch. Revalidate untouched, previously verified sections by Git diff/hash and cross-cutting invariants rather than repeating clause-by-clause review. After the complete batch passes root checks, run one full independent read-only audit; require follow-up only if corrections change high-risk behavior. After independent `PASS` and S2 closure, the root agent must create the S2 checkpoint commit and push `main` to `origin`.
+- **Reasoning:** Cohesive batching preserves deep semantic and cross-section review while removing redundant micro-audits. A verified remote Git checkpoint provides a durable recovery boundary before S3.
+- **Consequences:** The complete final batch remains `IMPLEMENTED_NOT_VERIFIED` until independent `PASS`; S3 cannot begin earlier. Low-risk continuity-only corrections do not trigger separate review. Commit and push are explicitly authorized only after S2 closure; any Git or remote failure is reported accurately and must not promote an unpushed state.
+- **Affected stages or files:** `S2`, `S3`; `Main_Agent_Prompt.txt`, `docs/contracts/SCENARIO_GROUP_V1.md`, S2 fixtures/checker, Roadmap, active ExecPlan, continuity state, and decision log.
+- **Evidence or references:** User approval on 2026-09-04 to optimize validation through larger coherent batches and then create a mandatory commit and push; DEC-012.

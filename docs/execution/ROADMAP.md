@@ -4,6 +4,8 @@ This roadmap records progress stages only. Detailed execution instructions belon
 
 Every stage is governed by the Instruction Preservation Matrix and the high-risk change gate in `CONTINUITY.md`. A high-risk change remains `IMPLEMENTED_NOT_VERIFIED` until an independent read-only subagent reports `PASS` and the root agent reconciles the evidence and corrections.
 
+No stage is active at the verified S2/S3 boundary. The exact next action is to create and independently validate the S3 ExecPlan before activating S3 or changing Generator product artifacts.
+
 ## S0 — Baseline and Contract Stabilization
 
 - **Objective:** Establish a verified repository baseline, complete instruction-preservation traceability, valid schema fixtures, canonical-prompt integrity and in-scope Validator prompt/export checks, and durable target-architecture contracts before product refactoring.
@@ -40,7 +42,7 @@ Every stage is governed by the Instruction Preservation Matrix and the high-risk
 
 - **Objective:** Restrict the existing main agent to semantic analysis, final scenario formation, grouping, materialization, and one Generator handoff.
 - **Dependencies:** `S1`
-- **Status:** `NOT_STARTED`
+- **Status:** `CLOSED`
 - **Mandatory acceptance criteria:**
   - Scenario Author owns RUT/dependency analysis, coverage, inputs, simulations, assertions, omissions, and final semantic audit.
   - Each physical unit-test group is stored as one immutable `ScenarioGroup` record.
@@ -49,7 +51,8 @@ Every stage is governed by the Instruction Preservation Matrix and the high-risk
   - Legacy `MemoryTemp` and response-record persistence are absent from the Scenario Author workflow.
   - Every Scenario Author-owned Instruction Preservation Matrix row is implemented at its designated destination and retains its stable behavior.
   - Each split, replacement, or removal is traceable to its source instruction, accepted decision, and regression evidence.
-- **Required validation:** Matrix-row traceability, responsibility-boundary review, ScenarioGroup ledger audit, grouping cases, canonical prompt integrity, regression checks for preserved semantic behavior, and high-risk-gate independent review after each prompt split or legacy removal batch. `Main_Agent.txt` is not an S2 parity or edit target.
+  - After final independent `PASS` and S2 closure, all authorized S2 changes are committed and pushed from `main` to `origin` as the stage checkpoint.
+- **Required validation:** Matrix-row traceability, responsibility-boundary review, ScenarioGroup ledger audit, grouping cases, canonical prompt integrity, regression checks for preserved semantic behavior, and one independent review after each indivisible high-risk batch. Previously verified sections are rechecked by hash/diff and cross-cutting invariants unless a new change touches them. `Main_Agent.txt` is not an S2 parity or edit target.
 - **Unresolved questions:** None for repository work. Runtime execution depends on the user-owned external Pega tools under DEC-019.
 
 ## S3 — Unit Test Generator
@@ -92,12 +95,12 @@ Every stage is governed by the Instruction Preservation Matrix and the high-risk
 - **Status:** `NOT_STARTED`
 - **Mandatory acceptance criteria:**
   - Each agent exposes only its intended tools and responsibilities.
-  - Legacy `MemoryTemp`, `CreateAIAgentResponseRecord`, and `GetAIAgentResponseRecord` references are absent.
+  - Legacy `MemoryTemp`, `CreateAIAgentResponseRecord`, and `GetAIAgentResponseRecord` references are absent from every effective S2–S4 prompt/export deliverable. Reference-only `Main_Agent.txt` is excluded, may retain baseline references, and must remain byte-identical to HEAD.
   - Every prompt/export pair explicitly selected as an implementation deliverable is synchronized after decoding. `Main_Agent.txt` remains excluded and reference-only under DEC-017.
   - A reverse matrix audit proves that every stable source instruction has exactly one effective owner, no required invariant is orphaned, and no conflicting duplicate survives across agents.
   - Only instructions classified as obsolete legacy behavior and linked to accepted decisions are removed.
   - Repository-only static fixtures for standard, When, partial-success, shared-group failure, all-failed, wrong-UUID, and repair-version flows pass.
   - Scenario Author maps Generator `Completed` and `PartiallyCompleted` to the existing external `Completed` status and maps Generator `Failed` to external `Failed`.
   - An independent end-to-end validator reports no blocking defects.
-- **Required validation:** Reverse Instruction Preservation Matrix audit, repository-wide legacy search, preserved-behavior regression suite, schema validation of fixture candidates, static full-flow fixtures, parity and targeted diffs only for selected deliverable exports, explicit confirmation that `Main_Agent.txt` stayed untouched, and an independent repository integration review.
+- **Required validation:** Reverse Instruction Preservation Matrix audit, scoped legacy search across effective S2–S4 deliverables, separate HEAD-hash verification for excluded `Main_Agent.txt`, preserved-behavior regression suite, schema validation of fixture candidates, static full-flow fixtures, parity and targeted diffs only for selected deliverable exports, and an independent repository integration review.
 - **Unresolved questions:** None for repository-only completion. Runtime conformance depends on the user-owned external Pega tools under DEC-019 and must not be claimed without separate evidence.

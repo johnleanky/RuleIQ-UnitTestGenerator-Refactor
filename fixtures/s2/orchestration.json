@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "successfulHandoffs": [
+    {
+      "name": "standard",
+      "groupFiles": ["standard-escaping.sgl"],
+      "expectedWrites": [
+        {"CaseID": "CASE-STANDARD-001", "Type": "ScenarioGroup", "PayloadFile": "standard-escaping.sgl"}
+      ],
+      "writeResults": [
+        {"Success": true, "UUID": "uuid-standard-001", "ErrorCode": "", "ErrorMessage": ""}
+      ],
+      "expectedGeneratorCall": {
+        "CaseID": "CASE-STANDARD-001",
+        "RUTType": "Rule-Obj-Model",
+        "ScenarioGroupUUIDs": ["uuid-standard-001"],
+        "callCount": 1
+      }
+    },
+    {
+      "name": "when-distinct-complete-keys",
+      "groupFiles": ["when-key-a.sgl", "when-key-b.sgl"],
+      "expectedWrites": [
+        {"CaseID": "CASE-WHEN-001", "Type": "ScenarioGroup", "PayloadFile": "when-key-a.sgl"},
+        {"CaseID": "CASE-WHEN-001", "Type": "ScenarioGroup", "PayloadFile": "when-key-b.sgl"}
+      ],
+      "writeResults": [
+        {"Success": true, "UUID": "uuid-when-a", "ErrorCode": "", "ErrorMessage": ""},
+        {"Success": true, "UUID": "uuid-when-b", "ErrorCode": "", "ErrorMessage": ""}
+      ],
+      "expectedGeneratorCall": {
+        "CaseID": "CASE-WHEN-001",
+        "RUTType": "Rule-Obj-When",
+        "ScenarioGroupUUIDs": ["uuid-when-a", "uuid-when-b"],
+        "callCount": 1
+      }
+    },
+    {
+      "name": "when-no-simulation",
+      "groupFiles": ["when-no-simulation.sgl"],
+      "expectedWrites": [
+        {"CaseID": "CASE-WHEN-NO-SIM", "Type": "ScenarioGroup", "PayloadFile": "when-no-simulation.sgl"}
+      ],
+      "writeResults": [
+        {"Success": true, "UUID": "uuid-when-no-sim", "ErrorCode": "", "ErrorMessage": ""}
+      ],
+      "expectedGeneratorCall": {
+        "CaseID": "CASE-WHEN-NO-SIM",
+        "RUTType": "Rule-Obj-When",
+        "ScenarioGroupUUIDs": ["uuid-when-no-sim"],
+        "callCount": 1
+      }
+    }
+  ],
+  "writeFailure": {
+    "groupFiles": ["when-key-a.sgl", "when-key-b.sgl"],
+    "writeResults": [
+      {"Success": true, "UUID": "uuid-when-a", "ErrorCode": "", "ErrorMessage": ""},
+      {"Success": false, "UUID": "", "ErrorCode": "WRITE_FAILED", "ErrorMessage": "The memory record was not created."}
+    ],
+    "expectedWriteAttempts": 2,
+    "retryCount": 0,
+    "expectedGeneratorCall": null,
+    "expectedOuterResponse": {
+      "AIAgentResponseStatus": "Failed",
+      "AIAgentErrorResponseMessage": "Scenario group storage failed."
+    }
+  },
+  "simulationKeyFieldVariants": {
+    "base": {
+      "itemClass": "App-Data-Customer-Item",
+      "params": {"Customer": "A"},
+      "payload": {"CustomerType": "Preferred"},
+      "pyClassName": "App-Data-Customer",
+      "pyMockingSupportedRuleTypes": "Rule-Declare-Pages",
+      "pyRuleNameToBeMocked": "D_Customer",
+      "pySimulationMethod": "DefineData",
+      "pxReferredFromClass": "App-Work-Order",
+      "setupPages": [],
+      "shape": "list",
+      "sig": "D_Customer[Customer=A]",
+      "target": ".CustomerData"
+    },
+    "variants": [
+      {"field": "itemClass", "value": "App-Data-Alternate-Item"},
+      {"field": "params", "value": {"Customer": "B"}},
+      {"field": "payload", "value": {"CustomerType": "Standard"}},
+      {"field": "pyClassName", "value": "App-Data-Alternate"},
+      {"field": "pyMockingSupportedRuleTypes", "value": "Rule-Obj-Activity"},
+      {"field": "pyRuleNameToBeMocked", "value": "D_AlternateCustomer"},
+      {"field": "pySimulationMethod", "value": "AlternateMethod"},
+      {"field": "pxReferredFromClass", "value": "App-Work-Alternate"},
+      {
+        "field": "setupPages",
+        "value": [
+          {
+            "pyPageDetails": [{"path": ".Code", "value": "A", "valueType": "string"}],
+            "pySetupPageName": "CustomerSetup"
+          }
+        ]
+      },
+      {"field": "shape", "value": "page"},
+      {"field": "sig", "value": "D_Customer[Customer=B]"},
+      {"field": "target", "value": ".AlternateCustomerData"}
+    ],
+    "noSimulation": "NO_SIMULATION"
+  },
+  "invalidWriteResponses": [
+    {"name": "missing-fields", "response": {"Success": true, "UUID": "uuid-only"}},
+    {"name": "success-empty-uuid", "response": {"Success": true, "UUID": "", "ErrorCode": "", "ErrorMessage": ""}},
+    {"name": "success-with-error", "response": {"Success": true, "UUID": "uuid-x", "ErrorCode": "WRITE_FAILED", "ErrorMessage": "contradiction"}},
+    {"name": "failure-with-uuid", "response": {"Success": false, "UUID": "uuid-x", "ErrorCode": "WRITE_FAILED", "ErrorMessage": "failed"}},
+    {"name": "failure-empty-code", "response": {"Success": false, "UUID": "", "ErrorCode": "", "ErrorMessage": "failed"}},
+    {"name": "unsupported-error-code", "response": {"Success": false, "UUID": "", "ErrorCode": "OTHER", "ErrorMessage": "failed"}}
+  ],
+  "negativeLedgerMutations": [
+    {"name": "decision-input-row-drift", "source": "when-key-a.sgl", "operation": "replace", "old": "ASSERT|id=A001|kind=DecisionInput|row=1|target=.CustomerType", "new": "ASSERT|id=A001|kind=DecisionInput|row=2|target=.CustomerType"},
+    {"name": "decision-input-value-drift", "source": "when-key-a.sgl", "operation": "replace", "old": "|value=Preferred|support=Verified|scenario=S1", "new": "|value=Other|support=Verified|scenario=S1"},
+    {"name": "column-signature-drift", "source": "when-key-a.sgl", "operation": "replace", "old": "COLUMN|id=C001|order=1|path=.CustomerType|class=App-Work-Order|mode=Text", "new": "COLUMN|id=C001|order=1|path=.CustomerType|class=App-Work-Order|mode=Identifier"},
+    {"name": "simulated-root-input", "source": "when-key-a.sgl", "operation": "replace", "old": "COLUMN|id=C001|order=1|path=.CustomerType", "new": "COLUMN|id=C001|order=1|path=.CustomerData"},
+    {"name": "missing-decision-result", "source": "when-key-a.sgl", "operation": "deleteLinePrefix", "prefix": "ASSERT|id=A002|kind=DecisionResult|row=1"},
+    {"name": "duplicate-decision-input", "source": "when-key-a.sgl", "operation": "duplicateLinePrefix", "prefix": "INPUT|scenario=S1|id=I001|"},
+    {"name": "wrong-dt-consumer-target", "source": "when-key-a.sgl", "operation": "replace", "old": "DTC|scenario=S1|id=Z001|order=1|dte=Q002|target=.NestedEligibility", "new": "DTC|scenario=S1|id=Z001|order=1|dte=Q002|target=.WrongConsumer"},
+    {"name": "missing-dta-before-setup", "source": "when-key-a.sgl", "operation": "deleteLinePrefix", "prefix": "SETUP|scenario=S1|id=U001|"},
+    {"name": "dtra-action-census-drift", "source": "when-key-a.sgl", "operation": "replace", "old": "|checkedActions=Q003|omitted=O001|", "new": "|checkedActions=-|omitted=O001|"},
+    {"name": "dangling-rx-input", "source": "standard-escaping.sgl", "operation": "replace", "old": "|guard=-|inputs=I001,U001|result=", "new": "|guard=-|inputs=I999|result="},
+    {"name": "dangling-rx-guard", "source": "when-key-a.sgl", "operation": "replace", "old": "RX|scenario=S1|id=R002|order=2|source=App-DT-NestedEligibility|operation=DecisionTableAction|context=RunRecordPrimaryPage|guard=B001|inputs=U001", "new": "RX|scenario=S1|id=R002|order=2|source=App-DT-NestedEligibility|operation=DecisionTableAction|context=RunRecordPrimaryPage|guard=B999|inputs=U001"},
+    {"name": "dangling-property-producer", "source": "standard-escaping.sgl", "operation": "replace", "old": "PROPERTY|scenario=S1|id=Y001|order=1|target=.CustomerName|support=PredictedFromRules|deterministic=true|valueType=string|value=Ada Lovelace|producers=P001", "new": "PROPERTY|scenario=S1|id=Y001|order=1|target=.CustomerName|support=PredictedFromRules|deterministic=true|valueType=string|value=Ada Lovelace|producers=P999"}
+  ],
+  "complexityCases": [
+    {
+      "name": "standard",
+      "metrics": {"invocationCount": 0, "whenRuleReferenceCount": 0, "maxNesting": 0, "operationCount": 0, "loopCount": 0, "modifiedPropertyCount": 0, "conditionalBlockCount": 0, "pageParameterCount": 0, "unresolvedCriticalDependencyCount": 0, "invocationChainDepth": 0, "ruleCrawlerCalls": 0, "dependencyReferencesRequested": 0},
+      "expected": {"score": 0, "triggers": [], "tier": "STANDARD", "confidenceCap": "High", "testabilityCap": "Testable"}
+    },
+    {
+      "name": "elevated-score-boundary",
+      "metrics": {"invocationCount": 0, "whenRuleReferenceCount": 0, "maxNesting": 0, "operationCount": 100, "loopCount": 0, "modifiedPropertyCount": 0, "conditionalBlockCount": 0, "pageParameterCount": 0, "unresolvedCriticalDependencyCount": 0, "invocationChainDepth": 0, "ruleCrawlerCalls": 0, "dependencyReferencesRequested": 0},
+      "expected": {"score": 25, "triggers": [], "tier": "ELEVATED", "confidenceCap": "Medium", "testabilityCap": "Testable"}
+    },
+    {
+      "name": "elevated-fractional-upper-boundary",
+      "metrics": {"invocationCount": 0, "whenRuleReferenceCount": 0, "maxNesting": 0, "operationCount": 199, "loopCount": 0, "modifiedPropertyCount": 0, "conditionalBlockCount": 0, "pageParameterCount": 0, "unresolvedCriticalDependencyCount": 0, "invocationChainDepth": 0, "ruleCrawlerCalls": 0, "dependencyReferencesRequested": 0},
+      "expected": {"score": 49.75, "triggers": [], "tier": "ELEVATED", "confidenceCap": "Medium", "testabilityCap": "Testable"}
+    },
+    {
+      "name": "high-score-boundary",
+      "metrics": {"invocationCount": 0, "whenRuleReferenceCount": 0, "maxNesting": 0, "operationCount": 200, "loopCount": 0, "modifiedPropertyCount": 0, "conditionalBlockCount": 0, "pageParameterCount": 0, "unresolvedCriticalDependencyCount": 0, "invocationChainDepth": 0, "ruleCrawlerCalls": 0, "dependencyReferencesRequested": 0},
+      "expected": {"score": 50, "triggers": [], "tier": "HIGH", "confidenceCap": "Medium", "testabilityCap": "PartiallyTestable"}
+    },
+    {
+      "name": "high-loop-invocation-combination",
+      "metrics": {"invocationCount": 1, "whenRuleReferenceCount": 0, "maxNesting": 0, "operationCount": 0, "loopCount": 1, "modifiedPropertyCount": 0, "conditionalBlockCount": 0, "pageParameterCount": 0, "unresolvedCriticalDependencyCount": 0, "invocationChainDepth": 0, "ruleCrawlerCalls": 0, "dependencyReferencesRequested": 0},
+      "expected": {"score": 18, "triggers": ["LOOP_INVOCATION_COMBINATION"], "tier": "HIGH", "confidenceCap": "Medium", "testabilityCap": "PartiallyTestable"}
+    },
+    {
+      "name": "high-hard-trigger-below-score-fifty",
+      "metrics": {"invocationCount": 0, "whenRuleReferenceCount": 0, "maxNesting": 6, "operationCount": 0, "loopCount": 0, "modifiedPropertyCount": 0, "conditionalBlockCount": 0, "pageParameterCount": 0, "unresolvedCriticalDependencyCount": 0, "invocationChainDepth": 0, "ruleCrawlerCalls": 0, "dependencyReferencesRequested": 0},
+      "expected": {"score": 30, "triggers": ["MAX_NESTING"], "tier": "HIGH", "confidenceCap": "Medium", "testabilityCap": "PartiallyTestable"}
+    },
+    {
+      "name": "high-unresolved-critical-cap",
+      "metrics": {"invocationCount": 0, "whenRuleReferenceCount": 0, "maxNesting": 0, "operationCount": 0, "loopCount": 0, "modifiedPropertyCount": 0, "conditionalBlockCount": 0, "pageParameterCount": 0, "unresolvedCriticalDependencyCount": 1, "invocationChainDepth": 0, "ruleCrawlerCalls": 0, "dependencyReferencesRequested": 0},
+      "expected": {"score": 12, "triggers": ["UNRESOLVED_CRITICAL_DEPENDENCY_COUNT"], "tier": "HIGH", "confidenceCap": "Low", "testabilityCap": "PartiallyTestable"}
+    },
+    {
+      "name": "high-when-modified-combination",
+      "metrics": {"invocationCount": 0, "whenRuleReferenceCount": 3, "maxNesting": 0, "operationCount": 0, "loopCount": 0, "modifiedPropertyCount": 8, "conditionalBlockCount": 0, "pageParameterCount": 0, "unresolvedCriticalDependencyCount": 0, "invocationChainDepth": 0, "ruleCrawlerCalls": 0, "dependencyReferencesRequested": 0},
+      "expected": {"score": 42, "triggers": [], "tier": "HIGH", "confidenceCap": "Medium", "testabilityCap": "PartiallyTestable"}
+    }
+  ],
+  "traceProjection": {
+    "sourceFile": "standard-escaping.sgl",
+    "tag": "SIM",
+    "id": "M001",
+    "expected": "SIM|id=M001|rule=D_Customer|sig=D_Customer[Customer=Ada]|shape=page|method=DefineData|class=App-Data-Customer|itemClass=-|params={&quot;Customer&quot;:&quot;Ada&quot;}|target=.CustomerData",
+    "forbiddenFields": ["mockingRuleType", "referredFromClass", "setupPages", "scenario", "order", "payload", "parameterResolutions", "producer", "evidence"]
+  },
+  "generatorStatusMappings": [
+    {
+      "generatorResponse": {"status": "Completed", "details": ""},
+      "outerResponse": {"AIAgentResponseStatus": "Completed", "AIAgentErrorResponseMessage": ""}
+    },
+    {
+      "generatorResponse": {"status": "PartiallyCompleted", "details": "One Scenario was untestable."},
+      "outerResponse": {"AIAgentResponseStatus": "Completed", "AIAgentErrorResponseMessage": ""}
+    },
+    {
+      "generatorResponse": {"status": "Failed", "details": "Candidate projection failed."},
+      "outerResponse": {"AIAgentResponseStatus": "Failed", "AIAgentErrorResponseMessage": "Unit test generation failed."}
+    },
+    {
+      "generatorResponse": {"unexpected": true},
+      "outerResponse": {"AIAgentResponseStatus": "Failed", "AIAgentErrorResponseMessage": "Unit test generator returned an invalid response."}
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+SG|version=1|caseId=CASE-WHEN-001|rutType=Rule-Obj-When|rutClass=App-Work-Order|rutName=IsPreferred|ruleset=App|groupId=G001|groupOrder=1|kind=WHEN|scenarioCount=2|simulationGroupKey={"simulations":[{"itemClass":null,"params":{"Customer":"A"},"payload":{"CustomerType":"Preferred"},"pxReferredFromClass":"App-Work-Order","pyClassName":"App-Data-Customer","pyMockingSupportedRuleTypes":"Rule-Declare-Pages","pyRuleNameToBeMocked":"D_Customer","pySimulationMethod":"DefineData","setupPages":[],"shape":"page","sig":"D_Customer[Customer=A]","target":".CustomerData"}]}
+ROOT|page=RunRecordPrimaryPage|class=App-Work-Order|primarySetup=true|pagesAndClasses={"RunRecordPrimaryPage":"App-Work-Order"}|namedPageEvidence=[]
+TARGET|id=T_ATOM_1|order=1|source=WhenClause1|behavior=MC/DC preferred side|constraint=CustomerType=Preferred|state=REQUIRED|proof=-
+TARGET|id=T_TRUE|order=2|source=WhenClause1|behavior=Final true outcome|constraint=CustomerType=Preferred|state=REQUIRED|proof=-
+TARGET|id=T_ATOM_2|order=3|source=WhenClause1|behavior=MC/DC standard side|constraint=CustomerType=Standard|state=REQUIRED|proof=-
+TARGET|id=T_FALSE|order=4|source=WhenClause1|behavior=Final false outcome|constraint=CustomerType=Standard|state=REQUIRED|proof=-
+COLUMN|id=C001|order=1|path=.CustomerType|class=App-Work-Order|mode=Text|source=PRIMARY|simulatedRoot=false
+COMPLEXITY|invocationCount=1|whenRuleReferenceCount=0|maxNesting=1|operationCount=1|loopCount=0|modifiedPropertyCount=0|conditionalBlockCount=1|pageParameterCount=0|unresolvedCriticalDependencyCount=0|invocationChainDepth=1|weightedScore=17.25|tier=STANDARD|ruleCrawlerCalls=0|dependencyReferencesRequested=1|hardTriggers=-|triggeredLimits=-|confidenceCap=High|testabilityCap=Testable
+SCENARIO|id=S1|order=1|name=Preferred customer qualifies|owner=TRUE|covers=T_ATOM_1,T_TRUE|testability=Testable|confidence=High
+SCENARIO|id=S2|order=2|name=Preferred customer does not qualify|owner=FALSE|covers=T_ATOM_2,T_FALSE|testability=PartiallyTestable|confidence=Low
+PARAM|scenario=S1|id=K001|order=1|invocation=RUT-1|dependency=RUT|name=CustomerType|mode=explicit|inheritance=n_a|expression=.CustomerType|valueType=string|value=Preferred|evidence=E001
+PARAM|scenario=S1|id=K002|order=2|invocation=DP-1|dependency=D_Customer|name=Customer|mode=explicit|inheritance=n_a|expression="A"|valueType=string|value=A|evidence=E001
+INPUT|scenario=S1|id=I001|order=1|role=DECISION_INPUT|path=.CustomerType|page=rowLevelPage|class=App-Work-Order|mode=Text|valueType=string|value=Preferred|resolution=K001|evidence=E001
+SETUP|scenario=S1|id=U001|order=1|role=DTA_BEFORE|path=.Discount|page=RunRecordPrimaryPage|class=App-Work-Order|mode=Decimal|valueType=number|value=0|evidence=E001
+RX|scenario=S1|id=R001|order=1|source=WhenClause1|operation=Compare|context=RunRecordPrimaryPage|guard=-|inputs=I001|result=true|writes=-|evidence=E001
+RX|scenario=S1|id=R002|order=2|source=App-DT-NestedEligibility|operation=DecisionTableAction|context=RunRecordPrimaryPage|guard=B001|inputs=U001|result=.Discount=10|writes=.Discount|evidence=E001
+DEP|scenario=S1|id=D001|order=1|kind=DT|identity=App-DT-NestedEligibility|state=CLOSED|parameters={"Customer":"A"}|proof=Decision Table execution records are closed|evidence=E001
+BRANCH|scenario=S1|id=B001|order=1|source=WhenClause1|logic=.CustomerType == Preferred|inputs=I001|result=TRUE|writes=-|evidence=E001
+PRODUCER|scenario=S1|id=P001|order=1|target=.Discount|operation=ADD|context=RunRecordPrimaryPage|guard=B001|payload={"value":10}|execution=R002|evidence=E001
+PRODUCER|scenario=S1|id=P002|order=2|target=Result|operation=WhenResult|context=RunRecordPrimaryPage|guard=B001|payload={"value":true}|execution=R001|evidence=E001
+PROPERTY|scenario=S1|id=Y001|order=1|target=.Discount|support=Verified|deterministic=true|valueType=number|value=10|producers=P001|evidence=E001
+PROPERTY|scenario=S1|id=Y002|order=2|target=Result|support=Verified|deterministic=true|valueType=boolean|value=true|producers=P002|evidence=E001
+DTM|scenario=S1|id=Q001|order=1|source=App-DT-NestedEligibility|mode=EVALUATE_ALL|scalarEnabled=false|evidence=E001
+DTE|scenario=S1|id=Q002|order=1|dtm=Q001|status=EXECUTED|scalarState=NONE|scalarType=absent|scalarValue=-|actions=Q003|consumers=Z001|evidence=E001
+DTA|scenario=S1|id=Q003|order=1|dte=Q002|target=.Discount|page=RunRecordPrimaryPage|class=App-Work-Order|operation=ADD|beforeType=number|before=0|afterType=number|after=10|status=EXECUTED|evidence=E001
+DTC|scenario=S1|id=Z001|order=1|dte=Q002|target=.NestedEligibility|decision=O001|evidence=E001
+DTRA|scenario=S1|id=Q004|order=1|dte=Q002|source=App-DT-NestedEligibility|removedScalar=.NestedEligibility|checkedActions=Q003|omitted=O001|pass=true|evidence=E001
+SIM|id=M001|rule=D_Customer|sig=D_Customer[Customer=A]|shape=page|method=DefineData|class=App-Data-Customer|itemClass=-|params={"Customer":"A"}|target=.CustomerData|mockingRuleType=Rule-Declare-Pages|referredFromClass=App-Work-Order|setupPages=[]|scenario=S1|order=1|payload={"CustomerType":"Preferred"}|parameterResolutions=K002|evidence=E001
+ASSERT|id=A001|kind=DecisionInput|row=1|target=.CustomerType|page=rowLevelPage|class=App-Work-Order|mode=Text|comparator=Input Value|value=Preferred|support=Verified|scenario=S1|order=1|producer=-|evidence=E001
+ASSERT|id=A002|kind=DecisionResult|row=1|target=Result|page=rowLevelPage|class=App-Work-Order|mode=text|comparator=Is Equals To|value=true|support=Verified|scenario=S1|order=2|producer=P002|evidence=E001
+ASSERT|id=A003|kind=Property|target=.Discount|page=RunRecordPrimaryPage|class=App-Work-Order|mode=Decimal|comparator=Is Equals To|value=10|support=Verified|scenario=S1|order=3|producer=P001|evidence=E001
+OMIT|id=O001|target=.NestedEligibility|reason=inactive_evaluate_all_scalar|scenario=S1|order=1|evidence=E001
+EVIDENCE|scenario=S1|id=E001|order=1|kind=EXECUTION|source=WhenClause1|fact=The preferred path is true; the scalar is inactive and the independent Discount action executes.|support=Verified|confidence=High
+SUMMARY|scenario=S1|id=H001|order=1|supportLevel=OmittedClaimsPresent|dependencyState=AllResolved|branchState=AllEvaluated|simulationState=RequiredAndAligned|complexityTier=STANDARD|assertionCount=3|omissionCount=1|simulationCount=1|gapCount=0|internalChecklist=CELLS,COVERAGE,DECISION_TABLE,DEPENDENCY,ROOT,SEED,SIMULATION|reasoningEvidence=E001|dependencyEvidence=E001|blockingGaps=-|dependencyClosureStatus=Closed|maxDependencyWaveReached=0|queuedDependencyCount=0|unscannedFetchedRuleJsonCount=0|seedCoverageEvidence=E001
+NARRATIVE|scenario=S1|id=N001|order=1|text=Uses the preferred input, preserves the Discount action, and expects a true result.|evidence=E001
+PARAM|scenario=S2|id=K001|order=1|invocation=RUT-1|dependency=RUT|name=CustomerType|mode=explicit|inheritance=n_a|expression=.CustomerType|valueType=string|value=Standard|evidence=E001
+PARAM|scenario=S2|id=K002|order=2|invocation=DP-1|dependency=D_Customer|name=Customer|mode=explicit|inheritance=n_a|expression="A"|valueType=string|value=A|evidence=E001
+INPUT|scenario=S2|id=I001|order=1|role=DECISION_INPUT|path=.CustomerType|page=rowLevelPage|class=App-Work-Order|mode=Text|valueType=string|value=Standard|resolution=K001|evidence=E001
+RX|scenario=S2|id=R001|order=1|source=WhenClause1|operation=Compare|context=RunRecordPrimaryPage|guard=-|inputs=I001|result=false|writes=-|evidence=E001
+DEP|scenario=S2|id=D001|order=1|kind=DT|identity=App-DT-NestedEligibility|state=OMIT_NONCRITICAL|parameters={"Customer":"A"}|proof=Scalar-disabled result is localized and independent final effects remain supported|evidence=E001
+BRANCH|scenario=S2|id=B001|order=1|source=WhenClause1|logic=.CustomerType == Preferred|inputs=I001|result=FALSE|writes=-|evidence=E001
+PRODUCER|scenario=S2|id=P001|order=1|target=Result|operation=WhenResult|context=RunRecordPrimaryPage|guard=B001|payload={"value":false}|execution=R001|evidence=E001
+PROPERTY|scenario=S2|id=Y001|order=1|target=Result|support=Verified|deterministic=true|valueType=boolean|value=false|producers=P001|evidence=E001
+DTM|scenario=S2|id=Q001|order=1|source=App-DT-NestedEligibility|mode=FIRST_MATCH|scalarEnabled=false|evidence=E001
+DTE|scenario=S2|id=Q002|order=1|dtm=Q001|status=EXECUTED|scalarState=NONE|scalarType=absent|scalarValue=-|actions=-|consumers=Z001|evidence=E001
+DTC|scenario=S2|id=Z001|order=1|dte=Q002|target=.NestedEligibility|decision=O001|evidence=E001
+DTRA|scenario=S2|id=Q003|order=1|dte=Q002|source=App-DT-NestedEligibility|removedScalar=.NestedEligibility|checkedActions=-|omitted=O001|pass=true|evidence=E001
+SIM|id=M001|rule=D_Customer|sig=D_Customer[Customer=A]|shape=page|method=DefineData|class=App-Data-Customer|itemClass=-|params={"Customer":"A"}|target=.CustomerData|mockingRuleType=Rule-Declare-Pages|referredFromClass=App-Work-Order|setupPages=[]|scenario=S2|order=1|payload={"CustomerType":"Preferred"}|parameterResolutions=K002|evidence=E001
+ASSERT|id=A001|kind=DecisionInput|row=2|target=.CustomerType|page=rowLevelPage|class=App-Work-Order|mode=Text|comparator=Input Value|value=Standard|support=Verified|scenario=S2|order=1|producer=-|evidence=E001
+ASSERT|id=A002|kind=DecisionResult|row=2|target=Result|page=rowLevelPage|class=App-Work-Order|mode=text|comparator=Is Equals To|value=false|support=Verified|scenario=S2|order=2|producer=P001|evidence=E001
+OMIT|id=O001|target=.NestedEligibility|reason=inactive_return_values_scalar|scenario=S2|order=1|evidence=E001
+EVIDENCE|scenario=S2|id=E001|order=1|kind=EXECUTION|source=WhenClause1|fact=The standard path is false and the inactive nested scalar consumer is omitted.|support=Verified|confidence=Low
+GAP|scenario=S2|id=X001|order=1|dependency=D001|code=NONCRITICAL_SCALAR_DISABLED|scope=.NestedEligibility|effect=OMITTED|evidence=E001
+SUMMARY|scenario=S2|id=H001|order=1|supportLevel=OmittedClaimsPresent|dependencyState=SomeUnresolved|branchState=AllEvaluated|simulationState=RequiredButLimited|complexityTier=STANDARD|assertionCount=2|omissionCount=1|simulationCount=1|gapCount=1|internalChecklist=CELLS,COVERAGE,DECISION_TABLE,DEPENDENCY,ROOT,SEED,SIMULATION|reasoningEvidence=E001|dependencyEvidence=E001|blockingGaps=X001|dependencyClosureStatus=Blocked|maxDependencyWaveReached=0|queuedDependencyCount=0|unscannedFetchedRuleJsonCount=0|seedCoverageEvidence=E001
+NARRATIVE|scenario=S2|id=N001|order=1|text=Uses the standard input, omits the inactive scalar, and expects a false result.|evidence=E001
+END|targetCount=4|columnCount=1|paramCount=4|scenarioCount=2|inputCount=2|setupCount=1|rxCount=3|depCount=2|branchCount=2|producerCount=3|propertyCount=3|dtCount=9|simCount=2|assertCount=5|omitCount=2|evidenceCount=2|gapCount=1|summaryCount=2|narrativeCount=2|complete=PASS

@@ -1,0 +1,19 @@
+SG|version=1|caseId=CASE-NOT-TESTABLE-001|rutType=Rule-Obj-Model|rutClass=App-Work-Order|rutName=ResolveExternalStatus|ruleset=AppRules|groupId=G001|groupOrder=1|kind=STANDARD|scenarioCount=1|simulationGroupKey=-
+ROOT|page=RunRecordPrimaryPage|class=App-Work-Order|primarySetup=false|pagesAndClasses={"RunRecordPrimaryPage":"App-Work-Order"}|namedPageEvidence=[]
+TARGET|id=T_EXTERNAL|order=1|source=ModelStep1|behavior=External status branch executes|constraint=-|state=REQUIRED|proof=-
+COMPLEXITY|invocationCount=1|whenRuleReferenceCount=0|maxNesting=0|operationCount=1|loopCount=0|modifiedPropertyCount=1|conditionalBlockCount=0|pageParameterCount=0|unresolvedCriticalDependencyCount=1|invocationChainDepth=1|weightedScore=23.25|tier=HIGH|ruleCrawlerCalls=1|dependencyReferencesRequested=1|hardTriggers=UNRESOLVED_CRITICAL_DEPENDENCY_COUNT|triggeredLimits=-|confidenceCap=Low|testabilityCap=PartiallyTestable
+SCENARIO|id=S1|order=1|name=External status remains unsupported|owner=ModelStep1|covers=T_EXTERNAL|testability=NotTestable|confidence=Low
+RX|scenario=S1|id=R001|order=1|source=ModelStep1|operation=InvokeExternal|context=RunRecordPrimaryPage|guard=-|inputs=-|result=unknown|writes=.ExternalStatus|evidence=E001
+DEP|scenario=S1|id=D001|order=1|kind=HELPER|identity=Helper@App-Work-Order@ExternalStatus|state=MISSING|parameters=-|proof=RuleCrawler returned missing after the allowed request|evidence=E001
+BRANCH|scenario=S1|id=B001|order=1|source=ModelStep1|logic=NOT_APPLICABLE|inputs=-|result=NOT_APPLICABLE|writes=.ExternalStatus|evidence=E001
+PROPERTY|scenario=S1|id=Y001|order=1|target=.ExternalStatus|support=Omitted|deterministic=false|valueType=absent|value=-|producers=-|evidence=E001
+DTM|scenario=S1|id=Q001|order=1|source=DTable@App-Work-Order@ExternalStatus|mode=FIRST_MATCH|scalarEnabled=false|evidence=E001
+DTE|scenario=S1|id=Q002|order=1|dtm=Q001|status=EXECUTED|scalarState=NONE|scalarType=absent|scalarValue=-|actions=Q003|consumers=-|evidence=E001
+DTA|scenario=S1|id=Q003|order=1|dte=Q002|target=.ExternalStatus|page=RunRecordPrimaryPage|class=App-Work-Order|operation=CLEAR|beforeType=absent|before=-|afterType=absent|after=-|status=EXECUTED|evidence=E001
+DTRA|scenario=S1|id=Q004|order=1|dte=Q002|source=DTable@App-Work-Order@ExternalStatus|removedScalar=-|checkedActions=Q003|omitted=-|pass=true|evidence=E001
+OMIT|id=O001|target=.ExternalStatus|reason=unresolved_external_source|scenario=S1|order=1|evidence=E001
+EVIDENCE|scenario=S1|id=E001|order=1|kind=DEPENDENCY|source=Helper@App-Work-Order@ExternalStatus|fact=The required external status source is unavailable after terminal dependency handling.|support=Structural|confidence=Low
+GAP|scenario=S1|id=X001|order=1|dependency=D001|code=EXTERNAL_STATUS_UNAVAILABLE|scope=.ExternalStatus|effect=OMITTED|evidence=E001
+SUMMARY|scenario=S1|id=H001|order=1|supportLevel=NotTestable|dependencyState=SomeUnresolved|branchState=NotApplicable|simulationState=NotApplicable|complexityTier=HIGH|assertionCount=0|omissionCount=1|simulationCount=0|gapCount=1|internalChecklist=COVERAGE,DECISION_TABLE,DEPENDENCY,ROOT|reasoningEvidence=E001|dependencyEvidence=E001|blockingGaps=X001|dependencyClosureStatus=Blocked|maxDependencyWaveReached=1|queuedDependencyCount=0|unscannedFetchedRuleJsonCount=0|seedCoverageEvidence=-
+NARRATIVE|scenario=S1|id=N001|order=1|text=Exercises the external status branch but omits unsupported output verification.|evidence=E001
+END|targetCount=1|columnCount=0|paramCount=0|scenarioCount=1|inputCount=0|setupCount=0|rxCount=1|depCount=1|branchCount=1|producerCount=0|propertyCount=1|dtCount=4|simCount=0|assertCount=0|omitCount=1|evidenceCount=1|gapCount=1|summaryCount=1|narrativeCount=1|complete=PASS
