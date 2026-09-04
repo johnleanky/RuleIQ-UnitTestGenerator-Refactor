@@ -8,5 +8,5 @@ Repository files, not model memory, are the source of truth after a chat restart
 4. After every material project-state change, update continuity and any affected roadmap, plan, or decision entry with evidence from the repository.
 5. Use the defined evidence classifications and never describe unverified work or tests as verified.
 6. Re-read the continuity artifacts after context compaction before continuing work.
-7. The root agent is the sole writer of global continuity artifacts. After each high-risk change, it must stop dependent work, launch an independent read-only validation subagent, receive its report, and apply any corrections itself before proceeding.
+7. The root agent is the sole writer of global continuity artifacts. After each high-risk change, it must stop dependent work, launch an independent read-only validation subagent using the reviewer model profile defined in `CONTINUITY.md`, receive its report, and apply any corrections itself before proceeding.
 8. Do not update continuity artifacts for discussion-only turns that make no material project-state change.

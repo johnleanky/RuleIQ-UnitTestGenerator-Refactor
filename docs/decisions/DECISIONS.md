@@ -211,3 +211,13 @@ This is an append-oriented log. Add accepted durable decisions; do not record un
 - **Consequences:** The complete final batch remains `IMPLEMENTED_NOT_VERIFIED` until independent `PASS`; S3 cannot begin earlier. Low-risk continuity-only corrections do not trigger separate review. Commit and push are explicitly authorized only after S2 closure; any Git or remote failure is reported accurately and must not promote an unpushed state.
 - **Affected stages or files:** `S2`, `S3`; `Main_Agent_Prompt.txt`, `docs/contracts/SCENARIO_GROUP_V1.md`, S2 fixtures/checker, Roadmap, active ExecPlan, continuity state, and decision log.
 - **Evidence or references:** User approval on 2026-09-04 to optimize validation through larger coherent batches and then create a mandatory commit and push; DEC-012.
+
+## DEC-022 — Pin Independent Repository Reviewer Model Profiles
+
+- **Status:** `ACCEPTED`
+- **Context:** Independent validation quality depends on the reviewer model and reasoning effort, but the existing gate did not prescribe either and allowed different sessions to use materially different review strength.
+- **Decision:** Spawn routine documentation-only reviewers with `gpt-5.6-terra` and `high` reasoning, high-risk change or batch reviewers with `gpt-5.6-sol` and `xhigh` reasoning, and final whole-stage closure reviewers with `gpt-5.6-sol` and `max` reasoning. Pass both overrides explicitly. These profiles govern repository validation subagents and do not configure the Pega Validator agent. Do not silently substitute an unavailable profile; record the gate as `BLOCKED` and request user direction.
+- **Reasoning:** `gpt-5.6-sol` is the available flagship profile for complex professional review, while `xhigh` provides deep default scrutiny and `max` reserves the highest effort for closure-wide audits. `gpt-5.6-terra` provides a proportionate profile for bounded documentation checks.
+- **Consequences:** Future ExecPlans and review dispatches must select the profile by review scope. Review reports must state the actual model and effort used. A required review cannot pass when its prescribed profile was not used unless the user explicitly supersedes this decision.
+- **Affected stages or files:** `S3`, `S4`, `S5`; `AGENTS.md`, `docs/execution/CONTINUITY.md`, future ExecPlans, and independent review reports.
+- **Evidence or references:** User confirmation on 2026-09-04; DEC-012; official OpenAI model documentation for `gpt-5.6-sol` and `gpt-5.6-terra` consulted on 2026-09-04.

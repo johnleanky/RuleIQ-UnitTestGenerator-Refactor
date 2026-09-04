@@ -7,13 +7,13 @@ This file is the single authoritative operational state for resuming repository 
 - **Project objective:** Refactor the current monolithic Pega unit-test Author into a Scenario Author and a Unit Test Generator, with caller-side contracts for user-implemented UUID-addressed Pega GenAI Memory and Validator tools, while preserving every stable instruction through explicit source-to-destination traceability and preserving schema-governed `UnitTestRules` output.
 - **Repository root:** `C:/Dev/RuleIQ-UnitTestGenerator-Refactor/RuleIQ-UnitTestGenerator-Refactor`
 - **Current branch:** `main`
-- **Recorded HEAD:** the S2 closure checkpoint commit containing this file; resolve the exact hash with `git rev-parse HEAD` because a commit cannot embed its own hash. Its verified parent is `b9dd5653f4c449653ac14e06c595e5e2108f516a`.
-- **Remote tracking state:** `main` tracks `origin/main`, and the S2 closure checkpoint is pushed.
-- **Working-tree state:** `VERIFIED` — clean immediately after the authorized S2 checkpoint commit and push; `Main_Agent_Prompt.txt` is the only changed product `.txt` in that checkpoint.
+- **Recorded HEAD:** the reviewer-model governance checkpoint commit containing this file; resolve the exact hash with `git rev-parse HEAD` because a commit cannot embed its own hash. Its verified parent is `36f097a842296b0e9b4de30cbb1ce27046c5ff0c`.
+- **Remote tracking state:** `main` tracks `origin/main`, and the reviewer-model governance checkpoint is pushed.
+- **Working-tree state:** `VERIFIED` — clean immediately after the reviewer-model governance checkpoint commit and push; no product file changed in that checkpoint.
 - **Active stage:** none at the verified S2/S3 planning boundary.
 - **Active ExecPlan:** none; the closed S2 plan is [S2-scenario-author-extraction.md](plans/S2-scenario-author-extraction.md).
 - **Stage status:** `S2` is `CLOSED`; `S3` is `NOT_STARTED`.
-- **Current project status:** `VERIFIED` — Scenario Author extraction is complete, independently reviewed, root-reconciled, committed, and pushed. UnitTestGenerator implementation has not begun.
+- **Current project status:** `VERIFIED` — Scenario Author extraction remains verified and pushed, and the reviewer-model policy passed focused independent follow-up after correction of one Roadmap/continuity conflict. UnitTestGenerator implementation has not begun.
 
 ### Verified Completed Work
 
@@ -45,6 +45,9 @@ This file is the single authoritative operational state for resuming repository 
 - `VERIFIED` — the corrected S2 activation plan passed focused independent follow-up with no remaining findings; the reviewer confirmed exact DEC-016 requirements, DEC-017-compliant S5 scope, the closed Scenario Author tool allowlist, synchronized next action, matrix counts, and unchanged product artifacts.
 - `VERIFIED` — all 106 Scenario Author matrix rows, the ScenarioGroup v1 contract, final storage/handoff boundary, fixtures, and deterministic checker passed independent final follow-up and root reconciliation on 2026-09-04; S2 is closed.
 - `VERIFIED` — the authorized S2 closure checkpoint is committed on `main` and pushed to `origin`; obtain its exact self-referential commit hash from Git.
+- `VERIFIED` — the user selected explicit model profiles for future independent repository reviewers on 2026-09-04; DEC-022 records the accepted policy.
+- `VERIFIED` — the reviewer-model policy and its Roadmap synchronization correction passed read-only `gpt-5.6-sol`/`xhigh` focused follow-up with no remaining findings.
+- `VERIFIED` — the independently verified reviewer-model governance update is committed on `main` and pushed to `origin`; obtain its exact self-referential commit hash from Git.
 
 ### Blockers and Unknowns
 
@@ -117,17 +120,17 @@ This file is the single authoritative operational state for resuming repository 
 
 ### Handoff
 
-- **Repository state:** `main` contains the pushed S2 closure checkpoint; the working tree is clean immediately after that checkpoint. `Main_Agent_Prompt.txt` is the only changed product `.txt`, and reference-only `Main_Agent.txt` remains unchanged.
-- **Active objective and stage:** No stage is active at the S2/S3 boundary. The next objective is planning and independent validation for S3 before Generator implementation begins.
+- **Repository state:** `main` contains the pushed reviewer-model governance checkpoint, and the working tree is clean immediately after that checkpoint; no product file changed.
+- **Active objective and stage:** No Roadmap stage is active at the S2/S3 boundary. The next objective is to create and independently validate the S3 ExecPlan before Generator implementation.
 - **Verified work:** S0 and S1 are closed. S2 Scenario Author extraction, ScenarioGroup materialization, ordered Memory handoff, instruction preservation, independent validation, root reconciliation, commit, and push are complete.
 - **Unverified or partial work:** S3 UnitTestGenerator, S4 Validator refactor, S5 integration/cleanup, and external Pega runtime behavior remain not started or external.
-- **Uncommitted changes:** None immediately after the S2 closure checkpoint.
+- **Uncommitted changes:** None immediately after the reviewer-model governance checkpoint.
 - **Blockers and unknowns:** No repository blocker. Pega runtime remains external and unverified under DEC-019.
-- **Validation results:** All S2 static checks and independent review gates pass. The first full final audit remains recorded as `FAILED`; its five findings are corrected and the focused follow-up returned `PASS` with no high- or medium-severity findings.
+- **Validation results:** All S2 static checks and independent review gates pass. The first reviewer-model policy audit returned `FAIL` on one medium Roadmap/continuity synchronization defect; focused `gpt-5.6-sol`/`xhigh` follow-up returned `PASS` with no findings after correction.
 
 #### Do Not Assume
 
-- Do not assume the repository is still at the S1 closure commit: resolve the current S2 checkpoint hash and remote state from Git.
+- Do not assume the repository is still at the S2 closure commit: resolve the current reviewer-model governance checkpoint hash and remote state from Git.
 - Do not assume the full target architecture is implemented: Scenario Author is complete, while UnitTestGenerator and Validator refactors remain future stages.
 - Do not assume `WriteMemory`, `GetMemory`, or UUID-aware `JsonValidationTool` exists in this repository or create their Pega implementation here; the user owns them externally under DEC-019. The new agent export remains assigned to its later stage.
 - Do not create another commit unless the user explicitly authorizes it.
@@ -176,6 +179,16 @@ After each high-risk change or indivisible high-risk batch:
 4. Keep the subagent read-only. It reports to the root agent and does not modify product or global continuity artifacts.
 5. The root agent verifies the report, applies corrections, reruns affected checks, and launches follow-up independent review when a blocking finding changed the high-risk behavior.
 6. Promote the change to `VERIFIED` only after a `PASS` report and root-agent reconciliation. `FAIL` or `BLOCKED` prevents dependent work and stage closure.
+
+#### Independent Reviewer Model Profiles
+
+Pass both the model and reasoning effort explicitly when spawning an independent repository reviewer:
+
+- routine documentation-only review: `gpt-5.6-terra` with `high` reasoning;
+- high-risk change or indivisible high-risk batch: `gpt-5.6-sol` with `xhigh` reasoning;
+- final whole-stage closure audit: `gpt-5.6-sol` with `max` reasoning.
+
+These profiles apply to repository validation subagents, not the Pega Validator agent. Do not silently substitute a model or reasoning effort. If the required profile is unavailable, record the gate as `BLOCKED` and request user direction.
 
 ### Stage Closure
 
