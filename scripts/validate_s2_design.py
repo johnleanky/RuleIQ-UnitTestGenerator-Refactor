@@ -24,7 +24,10 @@ REGRESSION_RE = re.compile(r"^S2-R(\d{3})$")
 BATCH1_IDS = {f"IPM-AUTH-{number:03d}" for number in (*range(1, 21), *range(27, 33))}
 BATCH2_IDS = {f"IPM-AUTH-{number:03d}" for number in (*range(21, 27), *range(33, 93))}
 BATCH3_IDS = {f"IPM-AUTH-{number:03d}" for number in range(93, 107)}
-FINAL_PROMPT_SHA256 = "BACADFB07E90D68B9751B9D573437A21B204E0BCCE87BE6ACE8BD5DDF3CEEC95"
+# Fixed reviewed content, canonicalized to LF only for repository regression.
+# ScenarioGroup payload encoding and opaque Memory transport are unaffected.
+FINAL_PROMPT_SHA256 = "6F059B641B9CF8B627E6879ED5B7A8FAEE78A616E71E2DD305AF8C051ACD215F"
+HISTORICAL_CRLF_PROMPT_SHA256 = "BACADFB07E90D68B9751B9D573437A21B204E0BCCE87BE6ACE8BD5DDF3CEEC95"
 
 FIELDS = {
     "SG": ("version", "caseId", "rutType", "rutClass", "rutName", "ruleset", "groupId", "groupOrder", "kind", "scenarioCount", "simulationGroupKey"),
@@ -1175,11 +1178,47 @@ def semantic_contract_lines(value: str) -> list[str]:
     return [line.rstrip() for line in value.splitlines() if line.strip() and not line.startswith("#")]
 
 
+def validate_prompt_integrity(raw: bytes) -> str:
+    """Accept uniform LF or CRLF without relaxing any reviewed content byte."""
+    require(not raw.startswith(b"\xef\xbb\xbf"), "Main prompt UTF-8 BOM forbidden")
+    canonical = raw.replace(b"\r\n", b"\n")
+    require(b"\r" not in canonical, "Main prompt lone CR forbidden")
+    require(raw.count(b"\r\n") in (0, raw.count(b"\n")), "Main prompt mixed line endings forbidden")
+    try:
+        text = canonical.decode("utf-8")
+    except UnicodeDecodeError as error:
+        raise ContractError("Main prompt invalid UTF-8") from error
+    require(canonical.count(b"\n") == 1973, "Main prompt final logical line count")
+    require(hashlib.sha256(canonical).hexdigest().upper() == FINAL_PROMPT_SHA256, "Main prompt full-regression canonical-LF SHA-256")
+    return text
+
+
+def validate_prompt_portability() -> None:
+    canonical = validate_prompt_integrity(PROMPT.read_bytes()).encode("utf-8")
+    crlf = canonical.replace(b"\n", b"\r\n")
+    require(validate_prompt_integrity(crlf) == validate_prompt_integrity(canonical), "Main prompt LF/CRLF equivalence")
+    require(hashlib.sha256(crlf).hexdigest().upper() == HISTORICAL_CRLF_PROMPT_SHA256, "Main prompt historical CRLF equivalence")
+    mutations = {
+        "semantic_content": canonical.replace(b"Scenario Author", b"Scenario Editor", 1),
+        "boundary_whitespace": b" " + canonical,
+        "missing_final_newline": canonical[:-1],
+        "extra_newline": canonical + b"\n",
+        "utf8_bom": b"\xef\xbb\xbf" + canonical,
+        "lone_cr": canonical.replace(b"\n", b"\r", 1),
+        "invalid_utf8": b"\xff" + canonical[1:],
+        "mixed_line_endings": canonical.replace(b"\n", b"\r\n", 1),
+    }
+    for name, mutated in mutations.items():
+        require(mutated != canonical, f"prompt integrity mutation source missing: {name}")
+        try:
+            validate_prompt_integrity(mutated)
+        except ContractError:
+            continue
+        raise ContractError(f"prompt integrity mutation accepted: {name}")
+
+
 def validate_prompt_batch3() -> None:
-    raw = PROMPT.read_bytes()
-    require(hashlib.sha256(raw).hexdigest().upper() == FINAL_PROMPT_SHA256, "Main prompt full-regression SHA-256")
-    require(raw.count(b"\n") == raw.count(b"\r\n") == 1973, "Main prompt final CRLF/line count")
-    text = raw.decode("utf-8")
+    text = validate_prompt_integrity(PROMPT.read_bytes())
     for row_id in BATCH3_IDS:
         require(row_id in text, f"Main prompt missing batch-3 trace {row_id}")
 
@@ -1233,6 +1272,7 @@ def validate_prompt_batch3() -> None:
 
 def main() -> int:
     try:
+        validate_prompt_portability()
         ledger_files = ("standard-escaping.sgl", "standard-not-testable.sgl", "when-key-a.sgl", "when-key-b.sgl", "when-no-simulation.sgl")
         ledgers = {name: validate_ledger(FIXTURES / name) for name in ledger_files}
         standard = ledgers["standard-escaping.sgl"]
@@ -1260,7 +1300,8 @@ def main() -> int:
     print(f"prompt_batch2_mutations={len(SEMANTIC_CRITICAL_CLAUSES)}")
     print(f"prompt_batch2_relocations={len(SEMANTIC_CRITICAL_CLAUSES)}")
     print("prompt_batch3=final_gates,exact_scenariogroup_contract,ordered_storage,single_handoff,downstream_boundary")
-    print(f"prompt_full_regression=sha256:{FINAL_PROMPT_SHA256},ipm_rows:106")
+    print(f"prompt_full_regression=canonical_lf_sha256:{FINAL_PROMPT_SHA256},ipm_rows:106")
+    print("prompt_portability=uniform_lf_or_crlf,historical_crlf_equivalence,negative_mutations:8")
     return 0
 
 

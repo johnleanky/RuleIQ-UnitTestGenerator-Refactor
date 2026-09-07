@@ -214,10 +214,40 @@ This is an append-oriented log. Add accepted durable decisions; do not record un
 
 ## DEC-022 — Pin Independent Repository Reviewer Model Profiles
 
-- **Status:** `ACCEPTED`
+- **Status:** `SUPERSEDED` by DEC-023 on 2026-09-07; retained as historical policy and review evidence.
 - **Context:** Independent validation quality depends on the reviewer model and reasoning effort, but the existing gate did not prescribe either and allowed different sessions to use materially different review strength.
 - **Decision:** Spawn routine documentation-only reviewers with `gpt-5.6-terra` and `high` reasoning, high-risk change or batch reviewers with `gpt-5.6-sol` and `xhigh` reasoning, and final whole-stage closure reviewers with `gpt-5.6-sol` and `max` reasoning. Pass both overrides explicitly. These profiles govern repository validation subagents and do not configure the Pega Validator agent. Do not silently substitute an unavailable profile; record the gate as `BLOCKED` and request user direction.
 - **Reasoning:** `gpt-5.6-sol` is the available flagship profile for complex professional review, while `xhigh` provides deep default scrutiny and `max` reserves the highest effort for closure-wide audits. `gpt-5.6-terra` provides a proportionate profile for bounded documentation checks.
 - **Consequences:** Future ExecPlans and review dispatches must select the profile by review scope. Review reports must state the actual model and effort used. A required review cannot pass when its prescribed profile was not used unless the user explicitly supersedes this decision.
 - **Affected stages or files:** `S3`, `S4`, `S5`; `AGENTS.md`, `docs/execution/CONTINUITY.md`, future ExecPlans, and independent review reports.
 - **Evidence or references:** User confirmation on 2026-09-04; DEC-012; official OpenAI model documentation for `gpt-5.6-sol` and `gpt-5.6-terra` consulted on 2026-09-04.
+
+## DEC-023 — Use GPT-6 Astra with Extra High Reasoning for Every Repository Reviewer
+
+- **Status:** `ACCEPTED`
+- **Context:** The user replaced all three reviewer profiles in DEC-022 with Astra 6 and then specified Extra High reasoning for every profile.
+- **Decision:** Use `gpt-6-astra` with `xhigh` reasoning for routine documentation-only reviews, high-risk changes or indivisible batches, and final whole-stage closure audits. Pass both overrides explicitly when spawning every independent repository reviewer. This supersedes all model and reasoning assignments in DEC-022.
+- **Reasoning:** Apply the user's selected model and reasoning level consistently across every repository review scope.
+- **Consequences:** Preserve the independent read-only review gate, root-only corrections, actual-model/effort reporting, and no-silent-substitution rule. If the required profile is unavailable, record the gate as `BLOCKED` and request user direction. Historical reports retain their actual model names. This policy governs repository validation subagents; it does not change the primary agent or Pega agent configuration.
+- **Affected stages or files:** `S3`, `S4`, `S5`; `docs/execution/CONTINUITY.md`, `docs/execution/ROADMAP.md`, future ExecPlans, and independent review dispatches and reports.
+- **Evidence or references:** Explicit user instructions on 2026-09-07 to set Astra 6 everywhere in the reviewer table and then use Extra High; the current collaboration tool advertises `gpt-6-astra` with `xhigh` support; DEC-012 and superseded DEC-022.
+
+## DEC-024 — Keep Repository Paths Independent of the Checkout Location
+
+- **Status:** `ACCEPTED`
+- **Context:** Continuity and the historical S0 evidence recorded absolute checkout paths from individual machines. The user requested removing these references so the project can be used from another location without a path dependency.
+- **Decision:** Describe the repository root as the current Git worktree root and resolve it at runtime with `git rev-parse --show-toplevel` from within the checkout. Use repository-relative artifact paths and document-relative Markdown link targets. Scripts may derive the root from their own location. Do not persist machine-specific checkout prefixes as project configuration or required instructions; summarize historical root-discovery evidence without its absolute path.
+- **Reasoning:** The same tracked instructions and links should work after cloning or moving the repository on another machine.
+- **Consequences:** Preserve artifact identities, historical verification outcomes, and intentional path strings used as test data. The existing Python checker already derives its root from `__file__` and needs no change. This decision does not fix the separately recorded LF/CRLF validation issue or alter stage status and next action.
+- **Affected stages or files:** All future stages and project documentation; `docs/execution/CONTINUITY.md` and `docs/execution/plans/S0-baseline-contracts.md`.
+- **Evidence or references:** Explicit user request on 2026-09-07 to remove the fixed Windows and macOS checkout paths; repository search found these prefixes only in continuity and the historical S0 root observation; `scripts/validate_s2_design.py` derives `ROOT` from `Path(__file__).resolve().parents[1]`.
+
+## DEC-025 — Make the S2 Prompt Regression Independent of Checkout Line Endings
+
+- **Status:** `ACCEPTED`
+- **Context:** The current LF `Main_Agent_Prompt.txt` is byte-identical to HEAD and reproduces the independently reviewed historical CRLF hash after in-memory conversion, but the S2 checker requires the historical raw bytes and therefore fails on the unchanged checkout.
+- **Decision:** For this repository prompt regression only, accept uniform LF or uniform CRLF, replace CRLF with LF in memory, and compare against the fixed reviewed canonical-LF SHA-256 `6F059B641B9CF8B627E6879ED5B7A8FAEE78A616E71E2DD305AF8C051ACD215F`. Retain the 1,973-line guard and verify that re-encoding to CRLF reproduces historical SHA-256 `BACADFB07E90D68B9751B9D573437A21B204E0BCCE87BE6ACE8BD5DDF3CEEC95`. Reject mixed endings, lone CR, BOM, invalid UTF-8, whitespace/content changes, and missing/extra newlines. Do not derive the expected hash from a mutable prompt or rewrite the product file.
+- **Reasoning:** Checkout representation is not an instruction change. Canonicalizing only CRLF retains full-content regression and makes the verified baseline usable across machines without relaxing stable semantic checks.
+- **Consequences:** The checker reports canonical-LF evidence and runs positive equivalence and negative mutation probes. Historical raw-hash evidence remains historical. ScenarioGroup v1 still requires its own exact LF grammar; Memory Payload and UUID opacity are unchanged. The S3 prerequisite requires independent review before dependent design work.
+- **Affected stages or files:** S2 regression and S3 prerequisite; `scripts/validate_s2_design.py`, `docs/execution/CONTINUITY.md`, and `docs/execution/plans/S3-unit-test-generator.md`.
+- **Evidence or references:** Root and independent S3 activation review on 2026-09-07 reproduced the original hash failure and LF/CRLF equivalence; the verified S3 plan milestone 2 requires this bounded correction. Independent `/root/review_s2_portability` (`gpt-6-astra`/`xhigh`) confirmed complete LF/CRLF runs, 26 adversarial rejections, fixed hashes, unchanged product/contracts, and continued ScenarioGroup CRLF rejection; focused follow-up returned `PASS` after documentation reconciliation. DEC-018, DEC-023, and DEC-024.

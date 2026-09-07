@@ -5,17 +5,21 @@ This file is the single authoritative operational state for resuming repository 
 ## Current State
 
 - **Project objective:** Refactor the current monolithic Pega unit-test Author into a Scenario Author and a Unit Test Generator, with caller-side contracts for user-implemented UUID-addressed Pega GenAI Memory and Validator tools, while preserving every stable instruction through explicit source-to-destination traceability and preserving schema-governed `UnitTestRules` output.
-- **Repository root:** `C:/Dev/RuleIQ-UnitTestGenerator-Refactor/RuleIQ-UnitTestGenerator-Refactor`
+- **Repository root:** the current Git worktree root, resolved at runtime with `git rev-parse --show-toplevel` from within the checkout. Repository artifact paths are relative to that root; Markdown link targets are relative to their containing document (DEC-024).
 - **Current branch:** `main`
-- **Recorded HEAD:** the reviewer-model governance checkpoint commit containing this file; resolve the exact hash with `git rev-parse HEAD` because a commit cannot embed its own hash. Its verified parent is `36f097a842296b0e9b4de30cbb1ce27046c5ff0c`.
-- **Remote tracking state:** `main` tracks `origin/main`, and the reviewer-model governance checkpoint is pushed.
-- **Working-tree state:** `VERIFIED` — clean immediately after the reviewer-model governance checkpoint commit and push; no product file changed in that checkpoint.
-- **Active stage:** none at the verified S2/S3 planning boundary.
-- **Active ExecPlan:** none; the closed S2 plan is [S2-scenario-author-extraction.md](plans/S2-scenario-author-extraction.md).
-- **Stage status:** `S2` is `CLOSED`; `S3` is `NOT_STARTED`.
-- **Current project status:** `VERIFIED` — Scenario Author extraction remains verified and pushed, and the reviewer-model policy passed focused independent follow-up after correction of one Roadmap/continuity conflict. UnitTestGenerator implementation has not begun.
+- **Recorded HEAD:** the local `chore: checkpoint verified S3 preparation` checkpoint containing this document; resolve its self-referential hash with `git log -1 --format=%H`. Its parent is `4161fd3f77fc562ecb1e9fded19b5391ea67722f` (`docs: pin reviewer model profiles`).
+- **Remote tracking state:** `main` tracks `origin/main` and is one local commit ahead. Local `origin/main` remains `4161fd3f77fc562ecb1e9fded19b5391ea67722f`; this preparation checkpoint has not been pushed.
+- **Working-tree state:** The preparation checkpoint includes the five changed/new documentation paths and `scripts/validate_s2_design.py`. Tracked changes, including checkpoint reconciliation, are committed; pre-existing untracked `.idea/` is excluded and untouched. All 15 product `.txt` files remain byte-identical to the parent checkpoint.
+- **Active stage:** `S3 — Unit Test Generator`; activation plan independently verified on 2026-09-07.
+- **Active ExecPlan:** [S3-unit-test-generator.md](plans/S3-unit-test-generator.md); the [S2 plan](plans/S2-scenario-author-extraction.md) remains closed.
+- **Stage status:** `S2` is `CLOSED`; `S3` is `ACTIVE`.
+- **Current project status:** S3 activation is `VERIFIED` by independent `gpt-6-astra`/`xhigh` review and root reconciliation. The DEC-025 S2 checker portability correction is `VERIFIED` by full local/independent tests, focused independent `PASS`, and root reconciliation. Generator design and product artifacts remain `NOT_STARTED`; S2 retains its historical verified closure.
 
 ### Verified Completed Work
+
+- `VERIFIED` — on 2026-09-07 the user authorized committing the current verified preparation changes under GitHub `vkoloskov`. The local checkpoint uses `vkoloskov <95134563+vkoloskov@users.noreply.github.com>` as author and committer, includes six project paths, excludes `.idea/`, and has not been pushed. Resolve the final checkpoint hash from Git; checkpoint reconciliation is included in that same local commit.
+
+- `VERIFIED` — S3 activation plan and DEC-025 S2 checker portability prerequisite are complete on 2026-09-07. Both received independent `gpt-6-astra`/`xhigh` `PASS` and root reconciliation; the checker's first-review documentation findings were corrected without functional changes. S3 design freeze remains the next milestone.
 
 - `VERIFIED` — repository root, branch, unborn HEAD, remote tracking state, and initial untracked working tree were inspected on 2026-09-02.
 - `VERIFIED` — no `AGENTS.override.md`, README, architecture, requirements, roadmap, ADR, plan, or task documents existed before continuity initialization.
@@ -45,12 +49,15 @@ This file is the single authoritative operational state for resuming repository 
 - `VERIFIED` — the corrected S2 activation plan passed focused independent follow-up with no remaining findings; the reviewer confirmed exact DEC-016 requirements, DEC-017-compliant S5 scope, the closed Scenario Author tool allowlist, synchronized next action, matrix counts, and unchanged product artifacts.
 - `VERIFIED` — all 106 Scenario Author matrix rows, the ScenarioGroup v1 contract, final storage/handoff boundary, fixtures, and deterministic checker passed independent final follow-up and root reconciliation on 2026-09-04; S2 is closed.
 - `VERIFIED` — the authorized S2 closure checkpoint is committed on `main` and pushed to `origin`; obtain its exact self-referential commit hash from Git.
-- `VERIFIED` — the user selected explicit model profiles for future independent repository reviewers on 2026-09-04; DEC-022 records the accepted policy.
+- `VERIFIED` — the user selected explicit model profiles for independent repository reviewers on 2026-09-04; DEC-022 records that historical policy, superseded by DEC-023 on 2026-09-07.
 - `VERIFIED` — the reviewer-model policy and its Roadmap synchronization correction passed read-only `gpt-5.6-sol`/`xhigh` focused follow-up with no remaining findings.
 - `VERIFIED` — the independently verified reviewer-model governance update is committed on `main` and pushed to `origin`; obtain its exact self-referential commit hash from Git.
+- `VERIFIED` — the 2026-09-07 DEC-023 update selects `gpt-6-astra`/`xhigh` for every repository reviewer. Independent read-only review `/root/review_astra_profiles` used that actual profile and returned `PASS` with no findings; root checks confirmed profile consistency, supersession, unchanged next action, documentation-only scope, local links, and whitespace. This update remains uncommitted.
 
 ### Blockers and Unknowns
 
+- `VERIFIED` — the recorded S2 LF/CRLF failure is resolved under DEC-025. Complete LF/CRLF runs pass, content/encoding mutations fail, independent focused review returned `PASS`, and root reconciliation is complete.
+- `UNKNOWN` — whether the existing ScenarioGroup mode/evidence fields preserve all formal Pega parameter types required by original Main lines 1554–1565. The active S3 plan requires resolving source sufficiency during design freeze; Generator must not infer formal types from values.
 - `UNKNOWN` — whether an installed full Draft 2020-12 validator or runnable Pega JsonValidationTool can reproduce the local schema-keyword validation; none is currently available without installing dependencies.
 - `VERIFIED` — the detailed caller-side specification and static fixtures for `WriteMemory`, `GetMemory`, and UUID-aware `JsonValidationTool` passed root validation and focused independent review.
 - `VERIFIED` — the independently reviewed S1 entry-contract audit found no decision gap in immutable exact addressing or opaque round trips; DEC-019 now excludes backing categories, rules, storage, exports, ChangeRequests, and runtime proof from repository scope.
@@ -62,6 +69,21 @@ This file is the single authoritative operational state for resuming repository 
 
 ### Validation State
 
+- 2026-09-07 local preparation checkpoint: `VERIFIED`; pre-commit S2 validation and `git diff --check` pass, all six intended paths were staged explicitly, and Git created the user-authorized local checkpoint with the requested author/committer identity. Checkpoint reconciliation changes only continuity and the active plan; stage status and exact next action remain unchanged.
+
+- 2026-09-07 S2 checker prerequisite closure: `VERIFIED`; focused `/root/review_s2_portability` follow-up returned `PASS` using `gpt-6-astra`/`xhigh` with no findings. Root reconciled the corrected historical/current wording and retained the independent functional evidence: complete LF/CRLF PASS, changed-content rejection, 26 adversarial rejections, fixed hashes, unchanged 15 product files/contracts, and ScenarioGroup CRLF rejection. Local links, synchronized next action, whitespace, and scope checks pass. S3 milestones 1 and 2 are complete.
+
+- 2026-09-07 S2 checker prerequisite first independent review: `FAILED` for two stale current-state statements in the S3 plan only. `/root/review_s2_portability` used `gpt-6-astra`/`xhigh`; its independent functional audit passed LF/CRLF complete-suite runs, 26 adversarial rejections, fixed hashes, preserved checker functions, unchanged 15 product files/contracts, and continued ScenarioGroup CRLF rejection. Root corrected the documentation; the focused follow-up recorded above returned `PASS`. Dependent design remained stopped until that verdict.
+
+- 2026-09-07 S2 checker portability correction: `IMPLEMENTED_NOT_VERIFIED`; DEC-025 uses a fixed canonical-LF hash and preserves historical CRLF equivalence, encoding rejection, and all semantic guards. The full S2 checker passes with eight new integrity mutations. Isolated temporary-checkout runs pass for LF and CRLF and reject a semantic edit under CRLF. Product bytes match HEAD, no cache artifacts exist, and `git diff --check` passes. Independent review is pending; dependent S3 design work has not started.
+
+- 2026-09-07 S3 activation: `VERIFIED`; `/root/review_s3_activation` used explicit `gpt-6-astra`/`xhigh` and returned `PASS` with no findings. Root reconciled the report, 150-row source census, original 2,219-line monolith, unchanged product/checker bytes, 20 local links, exact next action, and whitespace. S3 is active; its first milestone is the checker portability prerequisite.
+
+- 2026-09-07 S3 activation plan: `IMPLEMENTED_NOT_VERIFIED`; the new plan defines preservation scope, S2 checker portability as a prerequisite, design freeze, prompt/export implementation, static fixtures, explicit S4 boundary, and required `gpt-6-astra`/`xhigh` review gates. S3 remains `NOT_STARTED` pending independent activation review.
+
+- 2026-09-07 portable repository paths: `VERIFIED` by root checks; DEC-024 replaces the fixed checkout root with runtime discovery and removes the machine-specific prefix from the historical S0 root evidence. A tracked-text scan found no fixed machine checkout prefixes; root discovery agrees from the root and a nested directory; all 10 relative links in changed documents resolve; next-action synchronization and `git diff --check` pass. The checker still derives its root from its own location and is unchanged. This low-risk documentation correction does not alter product files, stage status, or next action and does not claim a new full S2 validation PASS.
+- 2026-09-07 reviewer-profile update: `VERIFIED`; DEC-023 and the operational profiles select `gpt-6-astra`/`xhigh` for all three review scopes. Independent read-only review `/root/review_astra_profiles` returned `PASS` with no findings using `gpt-6-astra`/`xhigh`. Root reconciliation confirmed the documentation diff, explicit supersession, profile/next-action consistency, local links, and `git diff --check`; no product artifact, checker, stage status, or next action changed. The reviewer independently confirmed all 29 other tracked files match HEAD and reproduced the existing S2 checker failure.
+- 2026-09-07 checkout reconciliation: `VERIFIED`; HEAD and local `origin/main` are `4161fd3f77fc562ecb1e9fded19b5391ea67722f`. The working and committed Main prompt both have 172,310 bytes, 1,973 LF endings, zero CRLF endings, and SHA-256 `6F059B641B9CF8B627E6879ED5B7A8FAEE78A616E71E2DD305AF8C051ACD215F`. In-memory LF-to-CRLF conversion reproduces historical hash `BACADFB07E90D68B9751B9D573437A21B204E0BCCE87BE6ACE8BD5DDF3CEEC95`; no file was converted. Earlier S2 PASS and encoding entries below are historical evidence.
 - Continuity artifacts: `VERIFIED` by post-write re-read and structural checks on 2026-09-02.
 - Standard schema JSON syntax: `VERIFIED` as parseable when decoded with UTF-8 BOM support.
 - MultInpComb schema JSON syntax: `VERIFIED` as parseable when decoded with UTF-8 BOM support.
@@ -110,6 +132,7 @@ This file is the single authoritative operational state for resuming repository 
 
 - Continuity: `AGENTS.md`, this file, [ROADMAP.md](ROADMAP.md), the active ExecPlan, and [DECISIONS.md](../decisions/DECISIONS.md).
 - S1 caller contract: [PEGA_GENAI_TOOL_CALL_CONTRACTS.md](../contracts/PEGA_GENAI_TOOL_CALL_CONTRACTS.md).
+- S3 active plan: [S3-unit-test-generator.md](plans/S3-unit-test-generator.md).
 - S2 closed plan: [S2-scenario-author-extraction.md](plans/S2-scenario-author-extraction.md).
 - S2 implementation slice: [S2-instruction-implementation-slice.md](design/S2-instruction-implementation-slice.md).
 - ScenarioGroup v1 contract: [SCENARIO_GROUP_V1.md](../contracts/SCENARIO_GROUP_V1.md).
@@ -120,17 +143,17 @@ This file is the single authoritative operational state for resuming repository 
 
 ### Handoff
 
-- **Repository state:** `main` contains the pushed reviewer-model governance checkpoint, and the working tree is clean immediately after that checkpoint; no product file changed.
-- **Active objective and stage:** No Roadmap stage is active at the S2/S3 boundary. The next objective is to create and independently validate the S3 ExecPlan before Generator implementation.
-- **Verified work:** S0 and S1 are closed. S2 Scenario Author extraction, ScenarioGroup materialization, ordered Memory handoff, instruction preservation, independent validation, root reconciliation, commit, and push are complete.
+- **Repository state:** `main` contains the local S3 preparation checkpoint, one commit ahead of local `origin/main` at `4161fd3f77fc562ecb1e9fded19b5391ea67722f`. DEC-023/024/025, S3 activation, and the verified checker correction are committed; product files are unchanged.
+- **Active objective and stage:** S3 is active; activation and checker prerequisite are independently verified. Build the design-freeze package before Generator product implementation.
+- **Verified work:** S0–S2 remain closed. DEC-023 reviewer profiles and DEC-024 portable paths retain their verified evidence. S3 activation and DEC-025 checker portability correction received independent `gpt-6-astra`/`xhigh` `PASS` and root reconciliation; all product files remain unchanged.
 - **Unverified or partial work:** S3 UnitTestGenerator, S4 Validator refactor, S5 integration/cleanup, and external Pega runtime behavior remain not started or external.
-- **Uncommitted changes:** None immediately after the reviewer-model governance checkpoint.
-- **Blockers and unknowns:** No repository blocker. Pega runtime remains external and unverified under DEC-019.
-- **Validation results:** All S2 static checks and independent review gates pass. The first reviewer-model policy audit returned `FAIL` on one medium Roadmap/continuity synchronization defect; focused `gpt-5.6-sol`/`xhigh` follow-up returned `PASS` with no findings after correction.
+- **Uncommitted changes:** Only pre-existing untracked `.idea/` remains; it is excluded from the user-authorized checkpoint. This authorization covers the current local checkpoint only; no push or further commit is authorized.
+- **Blockers and unknowns:** No blocker remains for S3 design. Formal parameter-type provenance is an explicit design question in the active plan. Pega runtime remains external and unverified under DEC-019.
+- **Validation results:** S3 activation and the corrected S2 checker passed independent `gpt-6-astra`/`xhigh` review and root reconciliation. Complete LF/CRLF runs and negative mutations pass; the first checker review's documentation-only findings are closed. Historical S2/DEC-022 and verified DEC-023/024 evidence is retained.
 
 #### Do Not Assume
 
-- Do not assume the repository is still at the S2 closure commit: resolve the current reviewer-model governance checkpoint hash and remote state from Git.
+- Do not assume the repository is still at the S2 closure commit: resolve the current local S3 preparation checkpoint hash and remote state from Git.
 - Do not assume the full target architecture is implemented: Scenario Author is complete, while UnitTestGenerator and Validator refactors remain future stages.
 - Do not assume `WriteMemory`, `GetMemory`, or UUID-aware `JsonValidationTool` exists in this repository or create their Pega implementation here; the user owns them externally under DEC-019. The new agent export remains assigned to its later stage.
 - Do not create another commit unless the user explicitly authorizes it.
@@ -139,7 +162,7 @@ This file is the single authoritative operational state for resuming repository 
 
 #### Exact next action
 
-Create and independently validate the S3 ExecPlan before activating S3 or changing `UnitTestGenerator` product artifacts.
+Build and independently validate the S3 design-freeze package, resolving formal parameter-type provenance before Generator prompt/export implementation.
 
 ## Essential Workflow
 
@@ -182,11 +205,11 @@ After each high-risk change or indivisible high-risk batch:
 
 #### Independent Reviewer Model Profiles
 
-Pass both the model and reasoning effort explicitly when spawning an independent repository reviewer:
+Under DEC-023, pass both the model and reasoning effort explicitly when spawning every independent repository reviewer:
 
-- routine documentation-only review: `gpt-5.6-terra` with `high` reasoning;
-- high-risk change or indivisible high-risk batch: `gpt-5.6-sol` with `xhigh` reasoning;
-- final whole-stage closure audit: `gpt-5.6-sol` with `max` reasoning.
+- routine documentation-only review: `gpt-6-astra` with `xhigh` reasoning;
+- high-risk change or indivisible high-risk batch: `gpt-6-astra` with `xhigh` reasoning;
+- final whole-stage closure audit: `gpt-6-astra` with `xhigh` reasoning.
 
 These profiles apply to repository validation subagents, not the Pega Validator agent. Do not silently substitute a model or reasoning effort. If the required profile is unavailable, record the gate as `BLOCKED` and request user direction.
 

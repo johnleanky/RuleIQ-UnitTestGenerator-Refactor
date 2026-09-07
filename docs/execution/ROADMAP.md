@@ -4,7 +4,9 @@ This roadmap records progress stages only. Detailed execution instructions belon
 
 Every stage is governed by the Instruction Preservation Matrix and the high-risk change gate in `CONTINUITY.md`. A high-risk change remains `IMPLEMENTED_NOT_VERIFIED` until an independent read-only subagent reports `PASS` and the root agent reconciles the evidence and corrections.
 
-No stage is active at the verified S2/S3 boundary. The exact next action is to create and independently validate the S3 ExecPlan before activating S3 or changing Generator product artifacts.
+Under DEC-023, every independent repository reviewer uses `gpt-6-astra` with `xhigh` reasoning, including documentation-only reviews, high-risk batches, and final whole-stage closure audits. The root agent passes both overrides explicitly and follows the availability and evidence rules in `CONTINUITY.md`.
+
+S3 is active after independent `gpt-6-astra`/`xhigh` activation-plan and checker-prerequisite `PASS`. Follow the [S3 ExecPlan](plans/S3-unit-test-generator.md): build and independently validate the Generator design-freeze package before prompt/export implementation.
 
 ## S0 — Baseline and Contract Stabilization
 
@@ -59,7 +61,7 @@ No stage is active at the verified S2/S3 boundary. The exact next action is to c
 
 - **Objective:** Design and add one sequential Pega agent named `UnitTestGenerator` that reads ordered ScenarioGroup UUIDs, creates one combined candidate, performs projection-only repair, and returns a runtime report.
 - **Dependencies:** `S1`, `S2`
-- **Status:** `NOT_STARTED`
+- **Status:** `ACTIVE`
 - **Mandatory acceptance criteria:**
   - The new rule is named `UnitTestGenerator`; its canonical readable prompt is `UnitTestGenerator_Prompt.txt` and its Pega export is `UnitTestGenerator.txt`.
   - Generator consumes `CaseID`, immutable `RUTType`, and ordered `ScenarioGroupUUIDs`.

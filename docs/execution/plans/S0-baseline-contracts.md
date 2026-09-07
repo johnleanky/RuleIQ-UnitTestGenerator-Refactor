@@ -326,7 +326,7 @@ Allowed values:
 
 ## Evidence
 
-- `VERIFIED` — `git rev-parse --show-toplevel` returned `C:/Dev/RuleIQ-UnitTestGenerator-Refactor/RuleIQ-UnitTestGenerator-Refactor`.
+- `VERIFIED` — `git rev-parse --show-toplevel` resolved the checkout root during S0 initialization; the machine-specific path is omitted under DEC-024 while preserving the historical observation.
 - `VERIFIED` — branch inspection returned `main`; `git rev-parse --verify HEAD` failed because no commit exists.
 - `VERIFIED` — `git status --short --branch` reported `No commits yet on main...origin/main [gone]` and 16 initial untracked files.
 - `VERIFIED` — documentation discovery found only the pre-existing `AGENTS.md`.
