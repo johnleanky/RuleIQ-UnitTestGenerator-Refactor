@@ -1,0 +1,231 @@
+{
+  "OK": {
+    "valid": true,
+    "route": "OK",
+    "blocking": 0,
+    "warnings": 0,
+    "jsonSchemaValidation": {
+      "isValid": true,
+      "message": ""
+    },
+    "issues": []
+  },
+  "SCHEMA_INVALID": {
+    "valid": false,
+    "route": "GENERATOR_REPAIR",
+    "blocking": 1,
+    "warnings": 0,
+    "jsonSchemaValidation": {
+      "isValid": false,
+      "message": "/UnitTestRules/0/Name: invalid name"
+    },
+    "issues": [
+      {
+        "code": "JSON_SCHEMA_INVALID",
+        "severity": "B",
+        "path": "/",
+        "unit": null,
+        "scenario": null,
+        "decision": "",
+        "action": "FIX_JSON",
+        "message": "Json schema invalid."
+      }
+    ]
+  },
+  "SCHEMA_MASS": {
+    "valid": false,
+    "route": "GENERATOR_REPAIR",
+    "blocking": 1,
+    "warnings": 0,
+    "jsonSchemaValidation": {
+      "isValid": false,
+      "message": "Candidate has broad schema defects; rebuild projection."
+    },
+    "issues": [
+      {
+        "code": "JSON_SCHEMA_MASS_FAILURE",
+        "severity": "B",
+        "path": "/",
+        "unit": null,
+        "scenario": null,
+        "decision": "",
+        "action": "REBUILD_JSON_FROM_CURRENT_EVIDENCE",
+        "message": "Json schema mass failure."
+      }
+    ]
+  },
+  "SCHEMA_TOOL": {
+    "valid": false,
+    "route": "HUMAN",
+    "blocking": 1,
+    "warnings": 0,
+    "jsonSchemaValidation": {
+      "isValid": false,
+      "message": "Schema validation could not be completed."
+    },
+    "issues": [
+      {
+        "code": "JSON_VALIDATION_TOOL_ERROR",
+        "severity": "B",
+        "path": "/",
+        "unit": null,
+        "scenario": null,
+        "decision": "",
+        "action": "HUMAN_REVIEW",
+        "message": "Json validation tool error."
+      }
+    ]
+  },
+  "MEMORY_TOOL": {
+    "valid": false,
+    "route": "HUMAN",
+    "blocking": 1,
+    "warnings": 0,
+    "jsonSchemaValidation": {
+      "isValid": true,
+      "message": ""
+    },
+    "issues": [
+      {
+        "code": "MEMORY_READ_TOOL_ERROR",
+        "severity": "B",
+        "path": "/",
+        "unit": null,
+        "scenario": null,
+        "decision": "",
+        "action": "HUMAN_REVIEW",
+        "message": "GetMemory could not return the exact candidate."
+      }
+    ]
+  },
+  "PROJECTION": {
+    "valid": false,
+    "route": "GENERATOR_REPAIR",
+    "blocking": 1,
+    "warnings": 0,
+    "jsonSchemaValidation": {
+      "isValid": true,
+      "message": ""
+    },
+    "issues": [
+      {
+        "code": "ASSERT_VALUE_MISMATCH",
+        "severity": "B",
+        "path": "/UnitTestRules/0/Scenarios/0",
+        "unit": 0,
+        "scenario": 0,
+        "decision": "A001",
+        "action": "FIX_ASSERTION",
+        "message": "Assert value mismatch."
+      }
+    ]
+  },
+  "SEMANTIC": {
+    "valid": false,
+    "route": "SEMANTIC_REJECT",
+    "blocking": 1,
+    "warnings": 0,
+    "jsonSchemaValidation": {
+      "isValid": true,
+      "message": ""
+    },
+    "issues": [
+      {
+        "code": "TRACE_MISSING",
+        "severity": "B",
+        "path": "/UnitTestRules/0/Scenarios/0",
+        "unit": 0,
+        "scenario": 0,
+        "decision": "",
+        "action": "REJECT_SEMANTICS",
+        "message": "Trace missing."
+      }
+    ]
+  },
+  "HUMAN": {
+    "valid": false,
+    "route": "HUMAN",
+    "blocking": 1,
+    "warnings": 0,
+    "jsonSchemaValidation": {
+      "isValid": true,
+      "message": ""
+    },
+    "issues": [
+      {
+        "code": "AMBIGUOUS",
+        "severity": "B",
+        "path": "/",
+        "unit": null,
+        "scenario": null,
+        "decision": "",
+        "action": "HUMAN_REVIEW",
+        "message": "Ambiguous."
+      }
+    ]
+  },
+  "MIXED": {
+    "valid": false,
+    "route": "HUMAN",
+    "blocking": 3,
+    "warnings": 0,
+    "jsonSchemaValidation": {
+      "isValid": true,
+      "message": ""
+    },
+    "issues": [
+      {
+        "code": "ASSERT_MISSING",
+        "severity": "B",
+        "path": "/UnitTestRules/0/Scenarios/0",
+        "unit": 0,
+        "scenario": 0,
+        "decision": "A001",
+        "action": "ADD_ASSERTION",
+        "message": "Assert missing."
+      },
+      {
+        "code": "REASONING_CONTRADICTION",
+        "severity": "B",
+        "path": "/UnitTestRules/0/Scenarios/0",
+        "unit": 0,
+        "scenario": 0,
+        "decision": "",
+        "action": "REJECT_SEMANTICS",
+        "message": "Reasoning contradiction."
+      },
+      {
+        "code": "AMBIGUOUS",
+        "severity": "B",
+        "path": "/",
+        "unit": null,
+        "scenario": null,
+        "decision": "",
+        "action": "HUMAN_REVIEW",
+        "message": "Ambiguous."
+      }
+    ]
+  },
+  "WARNING_ONLY": {
+    "valid": true,
+    "route": "OK",
+    "blocking": 0,
+    "warnings": 1,
+    "jsonSchemaValidation": {
+      "isValid": true,
+      "message": ""
+    },
+    "issues": [
+      {
+        "code": "AMBIGUOUS",
+        "severity": "W",
+        "path": "/",
+        "unit": null,
+        "scenario": null,
+        "decision": "",
+        "action": "HUMAN_REVIEW",
+        "message": "Ambiguous."
+      }
+    ]
+  }
+}

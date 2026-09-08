@@ -7,15 +7,19 @@ This file is the single authoritative operational state for resuming repository 
 - **Project objective:** Refactor the current monolithic Pega unit-test Author into a Scenario Author and a Unit Test Generator, with caller-side contracts for user-implemented UUID-addressed Pega GenAI Memory and Validator tools, while preserving every stable instruction through explicit source-to-destination traceability and preserving schema-governed `UnitTestRules` output.
 - **Repository root:** the current Git worktree root, resolved at runtime with `git rev-parse --show-toplevel` from within the checkout. Repository artifact paths are relative to that root; Markdown link targets are relative to their containing document (DEC-024).
 - **Current branch:** `main`
-- **Recorded HEAD:** the local S3 closure checkpoint (`refactor: complete verified S3 unit test generator`) containing this reconciliation; resolve its self-referential hash with `git log -1 --format=%H`. Its parent is preparation checkpoint `8509a508ee586136b4a06caa86ee50a51a391b0e`.
-- **Remote tracking state:** `main` tracks `origin/main` and is two local commits ahead. Local `origin/main` remains `4161fd3f77fc562ecb1e9fded19b5391ea67722f`; neither the preparation nor S3 closure checkpoint has been pushed.
-- **Working-tree state:** Complete verified S3 work is committed in 59 project paths, including ScenarioGroup 1.3 Author/contract/checker corrections, Generator prompt/export, contracts/report schemas, source fixtures, projection/protocol/audit tooling, requirements, manifest and this reconciliation. Pre-existing `.idea/` is untouched and untracked; no tracked project changes remain after checkpoint reconciliation. The 14 protected legacy product files and S1 caller contract match the preparation checkpoint.
-- **Active stage:** None; S3 is CLOSED and S4 is NOT_STARTED.
-- **Current ExecPlan:** [S3-unit-test-generator.md](plans/S3-unit-test-generator.md), CLOSED; retained as the resumption pointer at the S3/S4 boundary.
-- **Stage status:** S0–S3 are CLOSED; S4/S5 are NOT_STARTED.
-- **Current project status:** S3 is VERIFIED and CLOSED after independent whole-stage gpt-6-astra/xhigh PASS on all 15 criteria and root reconciliation. [S3 acceptance report](design/S3-acceptance-report.md) records scope, tests, reviews and artifact hashes. The source contract is revision1.3. Existing legacy Validator compatibility, Pega import/runtime and further stages are not claimed complete.
+- **Recorded HEAD:** the local S4 closure checkpoint (`refactor: complete verified S4 validator`); resolve its final self-referential hash with `git rev-parse HEAD`. Its parent is S3 checkpoint `4393c680633d176129676f7b91179262cc25391f`.
+- **Remote tracking state:** `main` tracks `origin/main` and is three local commits ahead. Local `origin/main` remains `4161fd3f77fc562ecb1e9fded19b5391ea67722f`; the preparation, S3 and S4 closure checkpoints have not been pushed.
+- **Working-tree state:** S4 is committed together with its Git-state reconciliation. All 20 intended project paths are included; Author/Generator and all 57 protected owner artifacts match the fixed S3 baseline. Only pre-existing `.idea/` remains untouched and untracked.
+- **Active stage:** None. S4 Validator Refactor is CLOSED after independent whole-stage PASS and root reconciliation; S5 remains NOT_STARTED.
+- **Current ExecPlan:** [S4-validator-refactor.md](plans/S4-validator-refactor.md), CLOSED; retained as the verified handoff until S5 activation is selected and reviewed.
+- **Stage status:** S0–S4 are CLOSED; S5 is NOT_STARTED.
+- **Current project status:** S3 is VERIFIED and CLOSED after independent whole-stage gpt-6-astra/xhigh PASS on all 15 criteria and root reconciliation. [S3 acceptance report](design/S3-acceptance-report.md) records scope, tests, reviews and artifact hashes. The source contract is revision1.3. S4 Validator is now VERIFIED and CLOSED on all 14 criteria; see the [S4 acceptance report](design/S4-acceptance-report.md). S5 integration and Pega import/runtime are not claimed complete.
 
 ### Verified Completed Work
+
+- `VERIFIED` — on 2026-09-08 root created the user-authorized local S4 closure checkpoint in 20 project paths and verified both author and committer as vkoloskov <95134563+vkoloskov@users.noreply.github.com>. Parent is S3 checkpoint 4393c680633d176129676f7b91179262cc25391f; main is three commits ahead of unchanged local origin/main and only .idea/ remains untracked. The complete staged S4 gate passed, including 35 producer groups and all seven S3 suites/180 corrections. This same local checkpoint includes its Git-state reconciliation; resolve its final self-referential hash from Git. No push was performed. S4 stays CLOSED, S5 NOT_STARTED and the synchronized next action is unchanged.
+
+- `VERIFIED` — final focused /root/review_s4_closure actual gpt-6-astra/xhigh returned whole-stage PASS with no remaining actionable findings. All original and focused corrections are closed. Reviewer independently passed 76 schema-valid scalar producer/consumer probes, five ASCII/Unicode blank-RUT cases, both-family opaque-address controls and the complete 35-group S4 gate with seven S3 suites/180 corrections, 150/73 dispositions, 57 protected artifacts and 10 reports. Root reconciled exact product hashes/parity, bounded export restoration, metadata, links, Git state and evidence limits. All 14 S4 criteria are VERIFIED; S4 is CLOSED on 2026-09-08, S5 stays NOT_STARTED. S4 changes are uncommitted; no commit/push or Pega import/runtime was performed.
 
 - `VERIFIED` — on 2026-09-08 root created the authorized local S3 closure checkpoint in 59 project paths and verified both author and committer as `vkoloskov <95134563+vkoloskov@users.noreply.github.com>`, parent `8509a508ee586136b4a06caa86ee50a51a391b0e`, two commits ahead of unchanged local origin, and only `.idea/` untracked. This same checkpoint includes its Git-state reconciliation; resolve its final self-referential hash from Git. No push was performed. S3 remains CLOSED and the synchronized S4 preparation next action is unchanged.
 
@@ -62,12 +66,38 @@ This file is the single authoritative operational state for resuming repository 
 
 ### Blockers and Unknowns
 
-- `VERIFIED` — no unresolved repository blocker remains for S3 closure. All design, artifact and checker findings received prescribed-profile independent PASS and root reconciliation.
-- `NOT_STARTED` — S4 must adapt the unchanged legacy Validator to the current candidate UUID/report contract; S5 integration follows. S3 closure does not establish current end-to-end compatibility.
+- `VERIFIED` — no unresolved repository blocker remains for S4 closure. All design, artifact and checker findings received prescribed-profile independent PASS and root reconciliation.
+- `VERIFIED` — S4 activation, design and whole-stage closure are verified. The Validator UUID/report product pair is complete; S5 integration remains a separate NOT_STARTED stage. S3 closure does not establish current end-to-end compatibility.
 - `UNKNOWN` — live Pega import, named-reference resolution and external tool runtime remain user-owned under DEC-019. Ruleset/Version selection is already implemented in Pega and was not changed here.
 - `VERIFIED` — on 2026-09-08 the user-authorized S3 local checkpoint was created under the same vkoloskov author/committer identity. Both local checkpoints remain unpushed; `.idea/` is excluded.
 
 ### Validation State
+
+- `VERIFIED` — on 2026-09-08 root created the user-authorized local S4 closure checkpoint in 20 project paths and verified both author and committer as vkoloskov <95134563+vkoloskov@users.noreply.github.com>. Parent is S3 checkpoint 4393c680633d176129676f7b91179262cc25391f; main is three commits ahead of unchanged local origin/main and only .idea/ remains untracked. The complete staged S4 gate passed, including 35 producer groups and all seven S3 suites/180 corrections. This same local checkpoint includes its Git-state reconciliation; resolve its final self-referential hash from Git. No push was performed. S4 stays CLOSED, S5 NOT_STARTED and the synchronized next action is unchanged.
+
+- `VERIFIED` — on 2026-09-08 the user authorized the local S4 closure commit. The inherited checkpoint identity is vkoloskov <95134563+vkoloskov@users.noreply.github.com> for both author and committer. Include the verified S4 project changes and Git-state reconciliation; exclude .idea/. S4 remains CLOSED and S5 NOT_STARTED with the same next action. No push is authorized.
+
+- `VERIFIED` — final focused /root/review_s4_closure actual gpt-6-astra/xhigh returned whole-stage PASS with no remaining actionable findings. All original and focused corrections are closed. Reviewer independently passed 76 schema-valid scalar producer/consumer probes, five ASCII/Unicode blank-RUT cases, both-family opaque-address controls and the complete 35-group S4 gate with seven S3 suites/180 corrections, 150/73 dispositions, 57 protected artifacts and 10 reports. Root reconciled exact product hashes/parity, bounded export restoration, metadata, links, Git state and evidence limits. All 14 S4 criteria are VERIFIED; S4 is CLOSED on 2026-09-08, S5 stays NOT_STARTED. S4 changes are uncommitted; no commit/push or Pega import/runtime was performed.
+
+- `IMPLEMENTED_NOT_VERIFIED` — focused whole-stage review confirmed both original findings corrected and found one residual supported String-mode omission. Root added String to the scalar gate and runtime V6; an independent explicit eight-mode census now drives schema-valid true/false positive, physical mismatch, invalid-decision and missing-target controls. Other source typing and opaque-address boundaries remain unchanged. Focused PASS is still required.
+
+- `IMPLEMENTED_NOT_VERIFIED` — whole-stage /root/review_s4_closure actual gpt-6-astra/xhigh returned FAIL with two P2 groups. Root corrected explicit scalar constraints before physical matching (including missing targets), Text/native-boolean comparison and blank RUTType zero-call handling without modifying opaque addresses. V1/V5/V6, row regressions and product pair are synchronized. New schema-valid positive/adversarial cases preserve arrays/null source limits and current decision scopes; all 35 producer groups pass. Focused whole-stage PASS is required before closure.
+
+- `IMPLEMENTED_NOT_VERIFIED` — the bounded Validator product batch is implemented. Canonical prompt embeds V1–V10 plus the unchanged closed report catalog/schema and 10 examples. Export synchronization changes only the approved prompt/read-tool/reference regions; exact decoding, deterministic reconstruction, complete baseline restoration and four negative artifact probes pass. Full S4 artifact gate passes (33 producer groups, 150/73 dispositions, 57 protected files, 10 reports, all seven S3 suites/180 corrections). Whole-stage independent review is pending; S5 remains NOT_STARTED.
+
+- `VERIFIED` — final focused `/root/review_s4_design` actual gpt-6-astra/xhigh returned design-freeze PASS with no remaining findings. Reviewer independently confirmed all original/focused fixes, 12 extra type/quote/numeric/boolean controls, 33 groups, 150/73 dispositions, 57 protected files, 10 reports and seven S3 suites/180 corrections. Root reconciled unchanged Validator baseline and all gates. Product implementation may proceed; S4 closure and runtime remain unverified.
+
+- `IMPLEMENTED_NOT_VERIFIED` — second focused review confirmed the prior four fixes but exposed mixed Text/Decimal order dependence in final-ledger equality. Root now requires compatible explicit typing on both decisions before numeric equivalence and keeps canonical text/When comparisons exact. Both mixed-type orders reject; Decimal 1/1.0 compatibility passes in both orders. The producer suite has 33 groups; focused PASS remains required.
+
+- `IMPLEMENTED_NOT_VERIFIED` — first focused S4 review confirmed the original seven groups corrected and found four residual P2 cases: asymmetric quote fallback between final trace values, literal OMIT paths, consumed exact-target multiplicity, and quoted diagnostic values mistaken for counts. Root separated canonical decision comparison from legacy candidate fallback, preserved literal OMIT and exact-target interpretation, restricted reported-count recognition, and added both-order/negative controls. All 32 producer groups and the complete S4 design gate (including seven S3 suites/180 corrections) pass; focused PASS remains required before product creation.
+
+- `IMPLEMENTED_NOT_VERIFIED` — `/root/review_s4_design` actual gpt-6-astra/xhigh returned FAIL with seven P2 groups: final-decision contradictions, quote/path normalization, observable property/When context, simulated DP roots, mass diagnostics and traversal-before-Knowledge. Root corrected the cohesive batch, synchronized V3/V5–V8 and added all reported positive/negative probes. The producer suite passes 29 named groups and the complete S4 design gate passes with all seven S3 suites/180 historical corrections, 150 rows, 57 protected paths and 10 report examples; focused independent PASS remains required. Product pair is unchanged.
+
+- `IMPLEMENTED_NOT_VERIFIED` — S4 cohesive design batch now includes the V1–V10 producer contract/DEC-030 evidence boundary, 150-row preservation slice (73 effective: 43 retained Validator plus 30 Author obligations), 57 fixed protected owner artifacts, 24 adversarial protocol/alignment groups, 10 full-schema/consumer report examples, export change boundary and narrow S3 gate adaptation. Complete S4 design gate and all seven S3 suites pass locally, including 180 historical correction regressions. Product Validator pair remains byte-identical to S3 HEAD. Independent design-freeze review is pending; product implementation is stopped.
+
+- `VERIFIED` — S4 activation `/root/review_s4_activation` used actual gpt-6-astra/xhigh and returned PASS with no remaining findings. Root reconciled its corrected historical-plan label, unchanged product/source Git state and complete S3 baseline: all matrix/scope/report/artifact checks plus seven suites including 180 corrections passed; active S4 links/next action were checked separately from the known historical S3 docs() pointer. S4 is ACTIVE; S5 stays NOT_STARTED.
+
+- `IMPLEMENTED_NOT_VERIFIED` — on 2026-09-08 the user requested S4 through completion. Root prepared the S4 activation plan after verifying S3 HEAD and inspecting the S1/S3 contracts, 44 Validator matrix rows and current export references. Independent activation review is pending; no S4 product/design implementation, new commit or push has occurred.
 
 - `VERIFIED` — the 2026-09-08 staging correction explicitly excludes requirements-s3.txt from the legacy census while retaining exactly 14 protected legacy product/HEAD comparisons. Actual and prospective tracking accept both Generator artifacts and this validation dependency and reject UnexpectedLegacy.txt. Both staged and unstaged whitespace are checked. Independent `/root/review_s3_commit_hygiene` used actual `gpt-6-astra`/`xhigh`, returned PASS, and root reconciled the complete seven-suite gate including 180 correction regressions.
 
@@ -183,7 +213,8 @@ Current state is in Current State and Handoff. The chronological checkpoints bel
 - S1 caller contract: [PEGA_GENAI_TOOL_CALL_CONTRACTS.md](../contracts/PEGA_GENAI_TOOL_CALL_CONTRACTS.md).
 - S3 projection source audit: [S3-projection-source-audit.md](design/S3-projection-source-audit.md).
 - S3 handoff correction: [S3-parameter-provenance-correction.md](design/S3-parameter-provenance-correction.md).
-- S3 active plan: [S3-unit-test-generator.md](plans/S3-unit-test-generator.md).
+- S4 current plan: [S4-validator-refactor.md](plans/S4-validator-refactor.md).
+- S3 closed plan: [S3-unit-test-generator.md](plans/S3-unit-test-generator.md).
 - S2 closed plan: [S2-scenario-author-extraction.md](plans/S2-scenario-author-extraction.md).
 - S2 implementation slice: [S2-instruction-implementation-slice.md](design/S2-instruction-implementation-slice.md).
 - ScenarioGroup v1 contract: [SCENARIO_GROUP_V1.md](../contracts/SCENARIO_GROUP_V1.md).
@@ -194,17 +225,17 @@ Current state is in Current State and Handoff. The chronological checkpoints bel
 
 ### Handoff
 
-- **Repository state:** `main`, HEAD is the S3 closure checkpoint containing this reconciliation, with parent `8509a508ee586136b4a06caa86ee50a51a391b0e`; resolve its final hash from Git. Two local commits are ahead of `origin/main` (`4161fd3f77fc562ecb1e9fded19b5391ea67722f`). S3 work is committed; only pre-existing `.idea/` remains untracked.
-- **Active objective and stage:** S3 is CLOSED after whole-stage PASS and root reconciliation. The required source revision is 1.3 under independently verified DEC-026–029.
-- **Verified work:** S0–S2 closed; S3 activation, portability prerequisite, formal/profile/source-provenance corrections and full design freeze received independent gpt-6-astra/xhigh PASS with root reconciliation.
-- **Verified completed artifacts:** UnitTestGenerator_Prompt.txt and UnitTestGenerator.txt, self-contained source/report references, deterministic builder, manifest and complete static suites. Full seven-suite artifact gate, decoded prompt/export parity and all 15 S3 acceptance criteria received independent PASS and root reconciliation.
-- **Boundary:** S4/S5 are NOT_STARTED. Current legacy Validator is incompatible with the new UUID/report consumer contract until S4. Pega tool implementation, target Ruleset/Version selection, live import and runtime are external and unverified under DEC-019.
-- **Commit authorization:** The 2026-09-08 request is fulfilled by the local S3 checkpoint and its continuity reconciliation, using `vkoloskov <95134563+vkoloskov@users.noreply.github.com>` as both author and committer. No push was requested or performed.
+- **Repository state:** `main`, HEAD is the local S4 closure checkpoint; resolve its final hash from Git. Parent is `4393c680633d176129676f7b91179262cc25391f`. Three local commits are ahead of unchanged `origin/main` (`4161fd3f77fc562ecb1e9fded19b5391ea67722f`). S4 project changes and this reconciliation are committed; only `.idea/` remains untouched and untracked.
+- **Active objective and stage:** The requested S4 work is complete on 2026-09-08. S4 is CLOSED after prescribed-profile whole-stage PASS and root reconciliation; S5 remains NOT_STARTED. Source revision is unchanged at 1.3.
+- **Verified work:** S0–S4 closed; activation/design and whole-stage S3/S4 audits received independent gpt-6-astra/xhigh PASS with root reconciliation of every finding.
+- **Verified completed artifacts:** UnitTestGenerator_Prompt.txt and UnitTestGenerator.txt, self-contained source/report references, deterministic builder, manifest and complete static suites. Full seven-suite artifact gate, decoded prompt/export parity and all 15 S3 acceptance criteria received independent PASS and root reconciliation. Validator_Prompt.txt and JsonValidator_tool.txt now also have verified exact parity, bounded metadata restoration and all 14 S4 criteria satisfied.
+- **Boundary:** S4 is CLOSED; S5 is NOT_STARTED. Current Validator implements the UUID/report consumer contract with independently verified repository-static behavior. Pega tool implementation, target Ruleset/Version selection, live import and runtime are external and unverified under DEC-019.
+- **Commit authorization:** The subsequent 2026-09-08 request is fulfilled by the local S4 closure checkpoint and this reconciliation, using `vkoloskov <95134563+vkoloskov@users.noreply.github.com>` as both author and committer. No push was requested or performed.
 
 #### Do Not Assume
 
 - Resolve Git state rather than assuming the S2 or remote checkpoint is current.
-- Do not activate S4 as part of S3 closure or claim compatibility with the unchanged legacy Validator.
+- S4 is verified and CLOSED; do not infer S5 activation or full integration completion from that closure.
 - Do not implement/configure external Pega tools or target selection here; named export references do not prove external resolution/import.
 - Do not create another commit without user authorization.
 - Full jsonschema 4.25.1 Draft 2020-12 validation is installed and tested locally; this is not a Pega JsonValidationTool invocation.
@@ -212,7 +243,7 @@ Current state is in Current State and Handoff. The chronological checkpoints bel
 
 #### Exact next action
 
-Prepare the S4 Validator activation ExecPlan for independent review; keep S4 NOT_STARTED until activation is verified.
+Prepare the S5 integration activation ExecPlan for independent review; keep S5 NOT_STARTED until activation is verified.
 
 ## Essential Workflow
 

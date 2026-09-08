@@ -162,4 +162,4 @@ Add the sequential Pega agent `UnitTestGenerator`. It consumes the ordered, immu
 
 ## Exact Next Action
 
-Prepare the S4 Validator activation ExecPlan for independent review; keep S4 NOT_STARTED until activation is verified.
+Follow the current ExecPlan and exact next action in continuity; S3 remains CLOSED.

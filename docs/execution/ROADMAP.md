@@ -6,7 +6,7 @@ Every stage is governed by the Instruction Preservation Matrix and the high-risk
 
 Under DEC-023, every independent repository reviewer uses `gpt-6-astra` with `xhigh` reasoning, including documentation-only reviews, high-risk batches, and final whole-stage closure audits. The root agent passes both overrides explicitly and follows the availability and evidence rules in `CONTINUITY.md`.
 
-S3 is CLOSED after independent whole-stage gpt-6-astra/xhigh PASS and root reconciliation. All 15 criteria in the [S3 ExecPlan](plans/S3-unit-test-generator.md) are VERIFIED; see the [acceptance report](design/S3-acceptance-report.md). S4 and S5 remain NOT_STARTED.
+S3 is CLOSED after independent whole-stage gpt-6-astra/xhigh PASS and root reconciliation. All 15 criteria in the [S3 ExecPlan](plans/S3-unit-test-generator.md) are VERIFIED; see the [acceptance report](design/S3-acceptance-report.md). S4 is also CLOSED after independent whole-stage gpt-6-astra/xhigh PASS on all 14 [S4 criteria](plans/S4-validator-refactor.md) and root reconciliation; see the [S4 acceptance report](design/S4-acceptance-report.md). S5 remains NOT_STARTED.
 
 ## S0 — Baseline and Contract Stabilization
 
@@ -72,13 +72,13 @@ S3 is CLOSED after independent whole-stage gpt-6-astra/xhigh PASS and root recon
   - `GeneratorRunReport` returns `Completed`, `PartiallyCompleted`, or `Failed` consistently.
   - Every Generator-owned or shared Instruction Preservation Matrix row is implemented without duplicating semantic ownership from Scenario Author.
 - **Required validation:** Matrix-row traceability, repository-only standard and When grouping fixtures, multiple simulation groups, ordering, immutable semantic input, repair-version addressing, failure pruning, static runtime-report contract checks, and high-risk-gate independent review after each prompt or interface batch.
-- **Unresolved questions:** None for S3 repository completion. Target selection, external tool implementation, live import and runtime remain Pega-owned; the unchanged legacy Validator is adapted in S4.
+- **Unresolved questions:** None for S3 repository completion. Target selection, external tool implementation, live import and runtime remain Pega-owned; S4 has now supplied the verified UUID-addressed Validator; S5 integration remains separate.
 
 ## S4 — Validator Refactor
 
 - **Objective:** Validate UUID-addressed candidates and separate projection repair from immutable semantic rejection.
 - **Dependencies:** `S1`, `S3`
-- **Status:** `NOT_STARTED`
+- **Status:** `CLOSED`
 - **Mandatory acceptance criteria:**
   - Validator accepts `CaseID`, immutable `RUTType`, and candidate UUID.
   - Validator calls `JsonValidationTool` and `GetMemory` with the same exact current candidate UUID.

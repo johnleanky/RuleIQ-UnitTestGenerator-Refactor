@@ -58,7 +58,13 @@ def docs():
             if re.match(r'[a-z]+:',link) or link.startswith('#'):continue
             target=link.split('#',1)[0]
             b.require(not target.startswith('/') and (path.parent/target).exists(),'local doc link: '+target)
-    continuity=paths[0].read_text();plan=paths[2].read_text()
+    continuity=paths[0].read_text()
+    # The closed S3 plan is historical once a later stage becomes the current pointer.
+    pointer=re.search(r'^- \*\*Current ExecPlan:\*\* \[[^]]+\]\(([^)]+)\)',continuity,re.M)
+    b.require(pointer is not None,'current ExecPlan pointer')
+    current_plan=paths[0].parent/pointer[1]
+    b.require(current_plan.exists(),'current ExecPlan exists')
+    plan=current_plan.read_text()
     matches=[]
     for text in [continuity,plan]:
         found=re.findall(r'^#{2,4} Exact [Nn]ext [Aa]ction\s*\n\s*([^\n]+)',text,re.M)
@@ -67,23 +73,26 @@ def docs():
     return len(paths)
 
 
-def scope(tracked=None):
+def scope(tracked=None, s4_regression=False):
     if tracked is None:tracked=git('ls-files','*.txt').decode().splitlines()
     active={'Main_Agent_Prompt.txt','UnitTestGenerator_Prompt.txt','UnitTestGenerator.txt','requirements-s3.txt'}
     others=[name for name in tracked if name not in active]
     b.require(len(others)==14,'legacy product census')
-    for name in others:b.require((ROOT/name).read_bytes()==git('show','HEAD:'+name),'unchanged legacy product: '+name)
+    for name in others:
+        if s4_regression and name in {'Validator_Prompt.txt','JsonValidator_tool.txt'}:continue
+        baseline='4393c680633d176129676f7b91179262cc25391f' if s4_regression else 'HEAD'
+        b.require((ROOT/name).read_bytes()==git('show',baseline+':'+name),'unchanged legacy product: '+name)
     caller='docs/contracts/PEGA_GENAI_TOOL_CALL_CONTRACTS.md'
     b.require((ROOT/caller).read_bytes()==git('show','HEAD:'+caller),'S1 contract unchanged')
     b.require(not list((ROOT/'scripts').glob('__pycache__')),'cache hygiene')
 
 
-def future_tracking():
+def future_tracking(s4_regression=False):
     """A future authorized commit must not count new artifacts as legacy files."""
     tracked=set(git('ls-files','*.txt').decode().splitlines())
     future=sorted(tracked | {'UnitTestGenerator_Prompt.txt','UnitTestGenerator.txt','requirements-s3.txt'})
-    scope(future)
-    try:scope(future+['UnexpectedLegacy.txt'])
+    scope(future,s4_regression)
+    try:scope(future+['UnexpectedLegacy.txt'],s4_regression)
     except b.ContractError:pass
     else:raise b.ContractError('unreviewed legacy product census accepted')
 
@@ -138,8 +147,8 @@ def artifacts(design_only):
 
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--design-only',action='store_true');args=parser.parse_args()
-    effective=matrix();count=docs();scope();future_tracking();reports();artifacts(args.design_only)
+    parser=argparse.ArgumentParser();parser.add_argument('--design-only',action='store_true');parser.add_argument('--s4-regression',action='store_true',help='S4 gate owns only the two selected Validator artifacts; all other legacy files stay pinned to S3 closure');args=parser.parse_args()
+    effective=matrix();count=docs();scope(s4_regression=args.s4_regression);future_tracking(args.s4_regression);reports();artifacts(args.design_only)
     for name in SUITES:
         result=subprocess.run([sys.executable,'-B',str(ROOT/'scripts'/name)],cwd=ROOT,text=True,capture_output=True)
         b.require(result.returncode==0,name+': '+result.stdout+result.stderr)

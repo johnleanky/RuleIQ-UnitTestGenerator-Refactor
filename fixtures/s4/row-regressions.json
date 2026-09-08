@@ -1,0 +1,1693 @@
+{
+  "S4-AUTH-001": {
+    "row": "IPM-AUTH-001",
+    "source": "Main 3\u20135, Core contract",
+    "obligation": "Maximize evidence-supported RUT coverage with the minimum valid physical unit-test groups.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-002": {
+    "row": "IPM-AUTH-002",
+    "source": "Main 7,14\u201318",
+    "obligation": "Structured-output limits require strict evidence, dependency closure, materialized semantics, and schema-governed projection; active crawl blocks authoring.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-003": {
+    "row": "IPM-AUTH-003",
+    "source": "Main 9\u201312",
+    "obligation": "Monolithic generation, persistence, validation, repair, and status handling must become ordered ScenarioGroup handoff, candidate generation, validation, and outer status mapping.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-004": {
+    "row": "IPM-AUTH-004",
+    "source": "Main 20\u201324, reserved-page ban",
+    "obligation": "Reserved system pages are never setup, simulation, primary, P&C, or MultInpComb input roots; an invalid carrier cannot silently remove coverage.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-005": {
+    "row": "IPM-AUTH-005",
+    "source": "Main 26\u201327, compiler memory authority",
+    "obligation": "Scenario formation uses one complete replacement snapshot and no competing scenario ledger; replace MemoryTemp with final immutable ScenarioGroup records.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-006": {
+    "row": "IPM-AUTH-006",
+    "source": "Main 29\u201330, MultInpComb firewall",
+    "obligation": "MultInpComb applies only to original Rule-Obj-When; non-When physical groups contain exactly one Scenario.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V8",
+    "checks": [
+      "when_rows_cells_and_scope"
+    ]
+  },
+  "S4-AUTH-007": {
+    "row": "IPM-AUTH-007",
+    "source": "Main 32\u201360, simulation key",
+    "obligation": "Each When Scenario has one typed canonical key containing every runtime-relevant simulation field and concrete DP parameter; no simulation uses NO_SIMULATION.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-008": {
+    "row": "IPM-AUTH-008",
+    "source": "Main 61\u201396, grouping/cardinality",
+    "obligation": "Equal simulation keys form one group, unequal keys never mix, order is stable, local rows are bijective, and unit count equals distinct keys.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V8",
+    "checks": [
+      "when_rows_cells_and_scope"
+    ]
+  },
+  "S4-AUTH-009": {
+    "row": "IPM-AUTH-009",
+    "source": "Main 99\u2013123, visible output",
+    "obligation": "Candidate and internal work stay hidden; Generator has a runtime report and Scenario Author emits only the bounded two-field external status.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-010": {
+    "row": "IPM-AUTH-010",
+    "source": "Main 126\u2013132, forbidden final state",
+    "obligation": "Internal ledgers, transport state, reports, and unsupported fields never enter schema-governed candidate JSON.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-011": {
+    "row": "IPM-AUTH-011",
+    "source": "Main 136\u2013159, stored-response validation loop",
+    "obligation": "Validation starts a closed repair phase: no new crawl or semantic knowledge; repair uses immutable scenarios and current candidate only.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-012": {
+    "row": "IPM-AUTH-012",
+    "source": "Main 161\u2013167, candidate storage",
+    "obligation": "A complete formatted candidate is persisted only after semantic and projection gates, using WriteMemory and a returned UUID.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-013": {
+    "row": "IPM-AUTH-013",
+    "source": "Main 165,171\u2013177",
+    "obligation": "CaseID is GetCaseData.pyID and original RUTType is immutable across generation, validation, and repair.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V1",
+    "checks": [
+      "exact_uuid_order_both_families"
+    ]
+  },
+  "S4-AUTH-014": {
+    "row": "IPM-AUTH-014",
+    "source": "Main 169\u2013180",
+    "obligation": "Validator selects the schema family from immutable original RUTType; caller never passes or recomputes schema mode.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V3",
+    "checks": [
+      "memory_envelopes_payloads_no_fallback"
+    ]
+  },
+  "S4-AUTH-015": {
+    "row": "IPM-AUTH-015",
+    "source": "Main 182\u2013201, validator results",
+    "obligation": "Preserve unaffected projection material; replace Author repair/rerun with Generator projection repair and semantic rejection.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-016": {
+    "row": "IPM-AUTH-016",
+    "source": "Main 203\u2013223",
+    "obligation": "HUMAN or malformed reports terminate; useful issue messages precede bounded fallback failure text.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-017": {
+    "row": "IPM-AUTH-017",
+    "source": "Main 225\u2013239",
+    "obligation": "Mass projection failure rebuilds from unchanged ScenarioGroups; warnings do not block OK; write failure terminates; at most two repairs follow first report.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-018": {
+    "row": "IPM-AUTH-018",
+    "source": "Main 241, data bus",
+    "obligation": "Large candidates and all validators address the same exact immutable UnitTestCandidate version.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V3",
+    "checks": [
+      "memory_envelopes_payloads_no_fallback"
+    ]
+  },
+  "S4-AUTH-019": {
+    "row": "IPM-AUTH-019",
+    "source": "Main 245\u2013253, interfaces",
+    "obligation": "Tool access is role-bounded: Scenario Author analyzes/writes groups; Generator reads groups/writes candidates/calls Validator.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V1",
+    "checks": [
+      "exact_uuid_order_both_families"
+    ]
+  },
+  "S4-AUTH-020": {
+    "row": "IPM-AUTH-020",
+    "source": "Main 257\u2013264, source order",
+    "obligation": "Schema governs structure; RuleJSON governs semantics; immutable ScenarioGroups govern final scenarios; examples never override authorities.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V4",
+    "checks": [
+      "knowledge_failures_and_complete_keys"
+    ]
+  },
+  "S4-AUTH-021": {
+    "row": "IPM-AUTH-021",
+    "source": "Main 268\u2013305, Knowledge keys",
+    "obligation": "Knowledge uses qualified canonical composite keys; MultInpComb UTC keys depend only on original When RUT type.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V4",
+    "checks": [
+      "knowledge_failures_and_complete_keys"
+    ]
+  },
+  "S4-AUTH-022": {
+    "row": "IPM-AUTH-022",
+    "source": "Main 307\u2013324, knowledge cache",
+    "obligation": "Parse pxResults, batch/cache each requested key once, record gaps, and prohibit new Knowledge acquisition after validation.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V4",
+    "checks": [
+      "knowledge_failures_and_complete_keys"
+    ]
+  },
+  "S4-AUTH-023": {
+    "row": "IPM-AUTH-023",
+    "source": "Main 326\u2013339, required keys",
+    "obligation": "Scenario Author owns semantic rule/dependency/property guidance; Generator owns UTC schema/example/RuleCode guidance.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-024": {
+    "row": "IPM-AUTH-024",
+    "source": "Main 341\u2013356, checkpoints",
+    "obligation": "Knowledge calls occur only at deterministic batch checkpoints, never repeat, and missing guidance narrows claims instead of inviting inference.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V4",
+    "checks": [
+      "knowledge_failures_and_complete_keys"
+    ]
+  },
+  "S4-AUTH-025": {
+    "row": "IPM-AUTH-025",
+    "source": "Main 358\u2013374, guided extraction",
+    "obligation": "Knowledge guidance controls semantic extraction, context, parameters, properties, simulations, and RuleCode serialization according to role.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-026": {
+    "row": "IPM-AUTH-026",
+    "source": "Main 375\u2013379",
+    "obligation": "Missing required guidance remains an explicit gap affecting support and testability; it is never treated as resolved.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-027": {
+    "row": "IPM-AUTH-027",
+    "source": "Main 382\u2013395, execution 1\u201310",
+    "obligation": "Acquire/validate RUT identity, lock type, load guidance, scan/crawl, and prove closed or terminal dependencies before authoring.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-028": {
+    "row": "IPM-AUTH-028",
+    "source": "Main 396\u2013400, execution 11\u201315",
+    "obligation": "Semantic analysis, evidence, complexity, and Scenario Compiler freeze occur only after dependency closure.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-029": {
+    "row": "IPM-AUTH-029",
+    "source": "Main 400\u2013413, packaging",
+    "obligation": "Scenario Author fixes physical groups; Generator waits for them and performs exact one-entry-per-group projection.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-030": {
+    "row": "IPM-AUTH-030",
+    "source": "Main 414\u2013418, assertions",
+    "obligation": "Enumerate candidates, apply the assertion ladder, and pass runtime/producer/simulation/closure gates before final semantic decisions.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-031": {
+    "row": "IPM-AUTH-031",
+    "source": "Main 419\u2013421",
+    "obligation": "RuleCode purpose, serialization, and post-RuleCode alignment audit are mandatory projection work.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-032": {
+    "row": "IPM-AUTH-032",
+    "source": "Main 422\u2013424",
+    "obligation": "Replace Author storage/Validator/repair with Generator candidate UUID, Validator invocation, projection-only repair, and report.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-033": {
+    "row": "IPM-AUTH-033",
+    "source": "Main 426\u2013523, Internal Evidence Ledger and DWL",
+    "obligation": "Complete the evidence ledger before RuleCode; one canonical dependency state machine governs identity, DP signatures, grammar, transitions, closure, and authoring gates; no parallel proof ledger.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-034": {
+    "row": "IPM-AUTH-034",
+    "source": "Main 525\u2013539, DependencyResolution",
+    "obligation": "DependencyResolution is a read-only DWL projection; narrative dependencies without rows block authoring.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-035": {
+    "row": "IPM-AUTH-035",
+    "source": "Main 541\u2013553, parameters",
+    "obligation": "Every behavior-affecting parameter records invocation, mode, inheritance, expression, resolved value, and evidence; guessing is forbidden.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-036": {
+    "row": "IPM-AUTH-036",
+    "source": "Main 555\u2013580, branches",
+    "obligation": "Every relevant branch records exact logic, inputs, result, paths, and write reachability without mixing exclusive branches.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-037": {
+    "row": "IPM-AUTH-037",
+    "source": "Main 581\u2013606, pyLogic lock",
+    "obligation": "Copy pyLogic verbatim, tokenize every top-level clause, evaluate all clauses, discover dependencies, and block authoring on failure.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-038": {
+    "row": "IPM-AUTH-038",
+    "source": "Main 608\u2013676, RUT I/O lock",
+    "obligation": "Compute root identity, reads/writes, required/forbidden seeds, conflicts, and pre-seed closure; never patch frozen scenarios.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-039": {
+    "row": "IPM-AUTH-039",
+    "source": "Main 679\u2013693, property traces",
+    "obligation": "Every emitted or omitted exact claim records support, determinism, confidence, final value, and ordered producing modifications.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-040": {
+    "row": "IPM-AUTH-040",
+    "source": "Main 695\u2013707, omissions",
+    "obligation": "Omission follows full candidate enumeration and assertion ladder, uses an allowed reason, and never cites complexity alone.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-041": {
+    "row": "IPM-AUTH-041",
+    "source": "Main 709\u2013736, limits",
+    "obligation": "Complexity metrics, thresholds, caps, and tiers are deterministic; complexity increases trace depth but cannot alone reduce coverage.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-042": {
+    "row": "IPM-AUTH-042",
+    "source": "Main 738\u2013770, runtime rows",
+    "obligation": "Every execution-relevant step/expression/action has a grounded RX row; unknowns stay unknown and drive producer/DP projections.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-043": {
+    "row": "IPM-AUTH-043",
+    "source": "Main 774\u2013787, discovery",
+    "obligation": "Enumerate direct, dependency, branch, error, business, and collection assertion candidates after producer discovery.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-044": {
+    "row": "IPM-AUTH-044",
+    "source": "Main 789\u2013860, skipped-branch gate",
+    "obligation": "Per property/scenario, write reachability and seed conflicts select Not exists, structural/omit, or normal ladder with nested-path proof.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-045": {
+    "row": "IPM-AUTH-045",
+    "source": "Main 861\u2013941, producer lock",
+    "obligation": "Immutable hierarchical producer and execution rows bind assertions to operation, context, guard, payload, and order.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-046": {
+    "row": "IPM-AUTH-046",
+    "source": "Main 943\u2013984, list uncertainty",
+    "obligation": "Indexed/exact-count list assertions require terminal producer execution/order proof; safe fallback never removes a Scenario.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-047": {
+    "row": "IPM-AUTH-047",
+    "source": "Main 986\u2013998, assertion ladder",
+    "obligation": "Use Verified \u2192 PredictedFromRules \u2192 Structural \u2192 Omitted; all outputs have trace support and RUF/concatenation values are mechanical.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-048": {
+    "row": "IPM-AUTH-048",
+    "source": "Main 1002\u20131013, dependency-first",
+    "obligation": "Crawl and author modes are mutually gated; active dependency work precedes authoring, downgrade, omission, or persistence.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-049": {
+    "row": "IPM-AUTH-049",
+    "source": "Main 1015\u20131036, discovery",
+    "obligation": "Known page-list helpers and Decision Table calls become concrete dependency rows before generic RUF handling.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-050": {
+    "row": "IPM-AUTH-050",
+    "source": "Main 1038\u20131086, materialization",
+    "obligation": "Every executable occurrence, property segment, RUF, DP, helper context, and Decision Table dependency is materialized and closed/terminal before use.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-051": {
+    "row": "IPM-AUTH-051",
+    "source": "Main 1088\u20131131, request planning",
+    "obligation": "RuleCrawler payloads derive mechanically from READY rows with exact reference shapes, deduplication, retries, mappings, and pre-call gates.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-052": {
+    "row": "IPM-AUTH-052",
+    "source": "Main 1132\u20131144, response transition",
+    "obligation": "Match every response, scan fetched JSON immediately, advance context occurrence-locally, retain DP obligations, and continue while work is open.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-053": {
+    "row": "IPM-AUTH-053",
+    "source": "Main 1146\u20131156, terminal gaps",
+    "obligation": "LIMIT/KEYONLY/MISSING/OMIT_NONCRITICAL require exhausted factual evidence and cannot replace requestable work or support positive assertions.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-054": {
+    "row": "IPM-AUTH-054",
+    "source": "Main 1158\u20131165, caps",
+    "obligation": "Explicit call/rule caps apply; remaining capacity plus READY work requires continued crawling; wave number is not a stop criterion.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-055": {
+    "row": "IPM-AUTH-055",
+    "source": "Main 1167\u20131219, examples",
+    "obligation": "Preserve canonical continuation, context-separation, and helper-extraction examples as non-authoritative regression fixtures.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-056": {
+    "row": "IPM-AUTH-056",
+    "source": "Main 1221\u20131231, closure gates",
+    "obligation": "Semantic closure precedes handoff; Generator separately owns projection, RuleCode, DP alignment, and candidate-write gates.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-057": {
+    "row": "IPM-AUTH-057",
+    "source": "Main 1233\u20131257, RUF",
+    "obligation": "Critical RUFs require exact contracts, transitive closure, deterministic arguments, and explicit unknown-result gaps.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-058": {
+    "row": "IPM-AUTH-058",
+    "source": "Main 1259\u20131269, Decision Tables",
+    "obligation": "Evaluate through DTM/DTA/DTE evidence; inactive scalar results create localized omissions while independent final effects remain traceable.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-059": {
+    "row": "IPM-AUTH-059",
+    "source": "Main 1271\u20131285, property/context",
+    "obligation": "Trace ordered RUT/dependency modifications, loops, indexes, contexts, and Decision Table effects; assert only final observable values.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-060": {
+    "row": "IPM-AUTH-060",
+    "source": "Main 1287\u20131302, DP obligation",
+    "obligation": "Every reachable/unknown DP signature becomes a concrete Scenario simulation obligation with exact parameters, seed context, output shape, and DPA alignment.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-061": {
+    "row": "IPM-AUTH-061",
+    "source": "Main 1304\u20131333, seed depth",
+    "obligation": "Simulation paths preserve exact RUT tokens and navigation depth; wrapper conventions cannot rename or deepen paths.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-062": {
+    "row": "IPM-AUTH-062",
+    "source": "Main 1335\u20131368, simulation scope",
+    "obligation": "Only Thread-level Data Pages are simulated; excluded pages create gaps/downgrades and invalid scope returns to witness formation.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-063": {
+    "row": "IPM-AUTH-063",
+    "source": "Main 1371\u20131380, simulation serialization",
+    "obligation": "Scenario Author fixes DP mock semantics; Generator maps them to pySimulation with exact page/list and runtime seed shape.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V7",
+    "checks": [
+      "simulation_mapping_shared_identity"
+    ]
+  },
+  "S4-AUTH-064": {
+    "row": "IPM-AUTH-064",
+    "source": "Main 1382\u20131383, seed coverage",
+    "obligation": "Every seed-derived exact assertion has a matching physical seed; post-freeze changes require rematerialization or downgrade.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-065": {
+    "row": "IPM-AUTH-065",
+    "source": "Main 1387\u20131415, property formatting",
+    "obligation": "Property definitions govern structure, class, type, boolean form, and collection addressing.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V6",
+    "checks": [
+      "bidirectional_assertion_value_and_count",
+      "explicit_scalar_constraints_before_matching"
+    ]
+  },
+  "S4-AUTH-066": {
+    "row": "IPM-AUTH-066",
+    "source": "Main 1416\u20131423, Param assertions",
+    "obligation": "Param assertions use exact Param paths and property assertion shape without page/real-name/parent-mode fields.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-067": {
+    "row": "IPM-AUTH-067",
+    "source": "Main 1425\u20131437, regular assertions",
+    "obligation": "Regular assertion page, class, relative target, and real name derive from immutable APB/runtime context.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V6",
+    "checks": [
+      "bidirectional_assertion_value_and_count"
+    ]
+  },
+  "S4-AUTH-068": {
+    "row": "IPM-AUTH-068",
+    "source": "Main 1439\u20131451, Page assertions",
+    "obligation": "Page/list-item targets use Page assertions; Property assertions address scalar descendants only.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-069": {
+    "row": "IPM-AUTH-069",
+    "source": "Main 1453\u20131472, comparators",
+    "obligation": "Semantic assertion and property type determine comparator/value; booleans remain typed and never use existence semantics.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V6",
+    "checks": [
+      "bidirectional_assertion_value_and_count",
+      "explicit_scalar_constraints_before_matching"
+    ]
+  },
+  "S4-AUTH-070": {
+    "row": "IPM-AUTH-070",
+    "source": "Main 1475\u20131493, Pega context",
+    "obligation": "Preserve evidenced optional Pega context fields and valid compact Page forms unless forbidden or proven wrong.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-071": {
+    "row": "IPM-AUTH-071",
+    "source": "Main 1497\u20131515, cardinality",
+    "obligation": "One physical group per non-When Scenario or distinct When simulation key; ordinary input/result differences do not split groups.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V8",
+    "checks": [
+      "when_rows_cells_and_scope"
+    ]
+  },
+  "S4-AUTH-072": {
+    "row": "IPM-AUTH-072",
+    "source": "Main 1517\u20131530, compiler/grammar",
+    "obligation": "One compiler owns census, witnesses, coverage, membership, freeze, IDs, typed data, escaping, and complete snapshot validation; replace only its MemoryTemp carrier.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-073": {
+    "row": "IPM-AUTH-073",
+    "source": "Main 1532\u20131538, INVENTORY",
+    "obligation": "Census original-RUT behaviors only; dependencies never own targets; rule-type adapters govern Model, When, and original Decision Table coverage.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-074": {
+    "row": "IPM-AUTH-074",
+    "source": "Main 1539, WITNESSES",
+    "obligation": "Build deterministic executable coverage witnesses, resolve all physical data/simulation, execute RUT, and merge only identical physical executions.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-075": {
+    "row": "IPM-AUTH-075",
+    "source": "Main 1541, FROZEN",
+    "obligation": "Reduce deterministically without coverage loss; re-execute/rebuild affected projections; assertions, confidence, and packaging cannot change frozen semantics.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-076": {
+    "row": "IPM-AUTH-076",
+    "source": "Main 1543\u20131545, B/A audit",
+    "obligation": "Split current post-RuleCode recensus into Scenario Author pre-handoff semantic audit, Generator bijection audit, and Validator candidate audit.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V6",
+    "checks": [
+      "bidirectional_assertion_value_and_count"
+    ]
+  },
+  "S4-AUTH-077": {
+    "row": "IPM-AUTH-077",
+    "source": "Main 1547\u20131550, nested DT setup",
+    "obligation": "DTE/DTA setup is immutable before projection; Generator copies exact invocation-page setup and cannot add physical inputs.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-078": {
+    "row": "IPM-AUTH-078",
+    "source": "Main 1552\u20131577, RuleCode allocation",
+    "obligation": "Formal parameter type governs serialization; setup, P&C, cleanup, simulation, and expected-result fields have distinct uses.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-079": {
+    "row": "IPM-AUTH-079",
+    "source": "Main 1579\u20131615, When structure",
+    "obligation": "Each group has one Decision block, one Scenario per row, fixed cell order/shape, typed final Result, exact paths, and no simulated-DP input.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-080": {
+    "row": "IPM-AUTH-080",
+    "source": "Main 1617\u20131677, grouping key",
+    "obligation": "Scenario Author computes locked full-simulation groups; Generator verifies and projects without semantic regrouping.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V7",
+    "checks": [
+      "simulation_mapping_shared_identity"
+    ]
+  },
+  "S4-AUTH-081": {
+    "row": "IPM-AUTH-081",
+    "source": "Main 1679\u20131708, synchronization",
+    "obligation": "Only simulation differences split; Scenario, Decision row, traces, simulation, IDs, order, and narrative references remain locally synchronized.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V8",
+    "checks": [
+      "when_rows_cells_and_scope"
+    ]
+  },
+  "S4-AUTH-082": {
+    "row": "IPM-AUTH-082",
+    "source": "Main 1710\u20131730, DecisionResult",
+    "obligation": "When Result requires terminal dependency evidence; critical gaps cannot be replaced by guesses or confidence downgrade.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-083": {
+    "row": "IPM-AUTH-083",
+    "source": "Main 1732\u20131736, coverage/shape",
+    "obligation": "Coverage comes only from compiler; full cells execute before freeze; rows share ordered columns and one final Result.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V8",
+    "checks": [
+      "when_rows_cells_and_scope"
+    ]
+  },
+  "S4-AUTH-084": {
+    "row": "IPM-AUTH-084",
+    "source": "Main 1738\u20131751, empty input",
+    "obligation": "Empty input preserves initialized carrier/cell, omits only pyExpectedValue, uses EMPTY trace semantics, and is not Page non-existence.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V8",
+    "checks": [
+      "when_rows_cells_and_scope"
+    ]
+  },
+  "S4-AUTH-085": {
+    "row": "IPM-AUTH-085",
+    "source": "Main 1753\u20131784, input paths",
+    "obligation": "Preserve namespace, leading dot, indexes, keys, spelling, casing, and locked root for primary-relative paths.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V8",
+    "checks": [
+      "when_rows_cells_and_scope"
+    ]
+  },
+  "S4-AUTH-086": {
+    "row": "IPM-AUTH-086",
+    "source": "Main 1786\u20131817, final row checks",
+    "obligation": "Generator verifies exact group Scenario/row bijection, signature, cell order, Result, trace numbers, and paths before write.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-087": {
+    "row": "IPM-AUTH-087",
+    "source": "Main 1819\u20131828, narratives",
+    "obligation": "Narratives are at most two factual plain-language sentences matching seeded, checked, and simulated semantics.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-088": {
+    "row": "IPM-AUTH-088",
+    "source": "Main 1832\u20131865, EvidenceSummary",
+    "obligation": "Truthfully project closure, support, branches, simulation, complexity, counts, gaps, reasoning, and seed coverage from canonical evidence.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V6",
+    "checks": [
+      "bidirectional_assertion_value_and_count"
+    ]
+  },
+  "S4-AUTH-089": {
+    "row": "IPM-AUTH-089",
+    "source": "Main 1867\u20131886, MultInpComb trace",
+    "obligation": "Each row has one trace per input and Result; paths, values, and local row indices match exact cells, including empty values.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V8",
+    "checks": [
+      "when_rows_cells_and_scope"
+    ]
+  },
+  "S4-AUTH-090": {
+    "row": "IPM-AUTH-090",
+    "source": "Main 1889\u20131967, trace grammar",
+    "obligation": "Every final ASSERT/SIM/OMIT has one safely encoded grammar row; removed candidates become explicit omissions; support rules remain enforced.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V5",
+    "checks": [
+      "strict_trace_complete_grammar"
+    ]
+  },
+  "S4-AUTH-091": {
+    "row": "IPM-AUTH-091",
+    "source": "Main 1969\u20131984, structural/Param/SIM",
+    "obligation": "Structural omission, Param shape, and DP SIM signature rules are exact and block projection when required evidence is absent.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V7",
+    "checks": [
+      "simulation_mapping_shared_identity"
+    ]
+  },
+  "S4-AUTH-092": {
+    "row": "IPM-AUTH-092",
+    "source": "Main 1994\u20132010, confidence",
+    "obligation": "Gaps deterministically cap confidence/testability; critical gaps force Low and partial/not-testable semantics.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-093": {
+    "row": "IPM-AUTH-093",
+    "source": "Main 2011\u20132020, legacy loop",
+    "obligation": "Replace Author persistence/validation/repair with Generator group reads, candidate writes, UUID validation, and projection-only repair.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-094": {
+    "row": "IPM-AUTH-094",
+    "source": "Main 2022\u20132057, write exceptions",
+    "obligation": "Candidate write is single-attempt and terminal on detected failure; never validate or expose payload after failure.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-095": {
+    "row": "IPM-AUTH-095",
+    "source": "Main 2059\u20132064, timing",
+    "obligation": "Immutable ScenarioGroups finalize before Generator; every repaired projection gets a new candidate UUID without semantic mutation.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V3",
+    "checks": [
+      "memory_envelopes_payloads_no_fallback"
+    ]
+  },
+  "S4-AUTH-096": {
+    "row": "IPM-AUTH-096",
+    "source": "Main 2066\u20132093, regrouping",
+    "obligation": "Generator projects one entry per supplied physical group and rejects invalid group contracts; it cannot merge/split immutable groups.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-097": {
+    "row": "IPM-AUTH-097",
+    "source": "Main 2095\u20132103, cell-trace gate",
+    "obligation": "Preserve row/cell/trace bijection and exclude simulated DP roots; semantic cell defects become scoped rejection, not local deletion.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V8",
+    "checks": [
+      "when_rows_cells_and_scope"
+    ]
+  },
+  "S4-AUTH-098": {
+    "row": "IPM-AUTH-098",
+    "source": "Main 2105\u20132115, dependency evidence",
+    "obligation": "Every unresolved dependency claim has canonical proof; active work returns to crawl and cannot support positive assertions.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-099": {
+    "row": "IPM-AUTH-099",
+    "source": "Main 2116\u20132143, JSON checklist",
+    "obligation": "Produce one parseable schema-guided root, synchronize RuleCode/evidence, preserve grouping/Param/simulation rules, and delegate strict validation.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-100": {
+    "row": "IPM-AUTH-100",
+    "source": "Main 2144\u20132155, assertion/setup audit",
+    "obligation": "Scenario Author resolves semantic ASSERT/OMIT; Generator detects mismatches but cannot remove or change semantic decisions.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V6",
+    "checks": [
+      "bidirectional_assertion_value_and_count"
+    ]
+  },
+  "S4-AUTH-101": {
+    "row": "IPM-AUTH-101",
+    "source": "Main 2156\u20132167, seed audit",
+    "obligation": "Exclude forbidden seeds, preserve required DT before values, and rematerialize/re-execute on semantic conflict.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-102": {
+    "row": "IPM-AUTH-102",
+    "source": "Main 2168\u20132176, primary root",
+    "obligation": "Root class/page/setup/P&C/context stay consistent; named pages require runtime-use evidence.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V9",
+    "checks": [
+      "visible_doc_context_and_catalog_limits"
+    ]
+  },
+  "S4-AUTH-103": {
+    "row": "IPM-AUTH-103",
+    "source": "Main 2177\u20132183, target binding",
+    "obligation": "Property assertion fields reconstruct mechanically from immutable APB, Scenario context, and root with full-path equality.",
+    "owner": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-104": {
+    "row": "IPM-AUTH-104",
+    "source": "Main 2185\u20132200, DT integration",
+    "obligation": "Resolve DTM/DTA/DTE consistency, inactive scalar omissions, final effects, and before values atomically without recomputing outcomes in Generator.",
+    "owner": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-105": {
+    "row": "IPM-AUTH-105",
+    "source": "Main 2202\u20132203, final memory gate",
+    "obligation": "Complete audited semantic snapshots map exactly to physical groups before generation; use ordered immutable ScenarioGroup UUIDs.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "PRESERVED_OTHER_OWNER",
+    "section": null,
+    "checks": [
+      "protected_owner_artifacts"
+    ]
+  },
+  "S4-AUTH-106": {
+    "row": "IPM-AUTH-106",
+    "source": "Main 2205\u20132219, references",
+    "obligation": "Knowledge/RuleCrawler govern semantics, schema governs structure, examples are illustrative, and schema family follows immutable original RUTType.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "CONSUME_SHARED",
+    "section": "V4",
+    "checks": [
+      "knowledge_failures_and_complete_keys"
+    ]
+  },
+  "S4-VAL-001": {
+    "row": "IPM-VAL-001",
+    "source": "Validator 1\u201320, core contract",
+    "obligation": "Validate an existing candidate, return only a compact report, never return corrected UnitTestRules, and emit no extra output.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V1",
+    "checks": [
+      "real_s3_candidates_read_only"
+    ]
+  },
+  "S4-VAL-002": {
+    "row": "IPM-VAL-002",
+    "source": "Validator 5\u20137",
+    "obligation": "Replace CaseID/RUTType-only input with CaseID, immutable original RUTType, and current UnitTestCandidateUUID.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "IMPLEMENT",
+    "section": "V1",
+    "checks": [
+      "exact_uuid_order_both_families"
+    ]
+  },
+  "S4-VAL-003": {
+    "row": "IPM-VAL-003",
+    "source": "Validator 7,9\u201317",
+    "obligation": "Original RuleJSON type selects schema internally; caller-supplied schema is ignored.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V3",
+    "checks": [
+      "exact_uuid_order_both_families"
+    ]
+  },
+  "S4-VAL-004": {
+    "row": "IPM-VAL-004",
+    "source": "Validator 22",
+    "obligation": "Preserve CaseID byte-for-byte; never add workpool class or normalize it.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "IMPLEMENT",
+    "section": "V1",
+    "checks": [
+      "exact_uuid_order_both_families"
+    ]
+  },
+  "S4-VAL-005": {
+    "row": "IPM-VAL-005",
+    "source": "Validator 5, candidate persistence",
+    "obligation": "Remove CaseID-only response-record addressing.",
+    "owner": "NONE",
+    "disposition": "REMOVED_LEGACY",
+    "section": "V1",
+    "checks": [
+      "exact_uuid_order_both_families"
+    ]
+  },
+  "S4-VAL-006": {
+    "row": "IPM-VAL-006",
+    "source": "Validator 24\u201330, tools",
+    "obligation": "Replace legacy response read with exact GetMemory; retain schema validation and UTC documentation lookup; expose no write tool.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V1",
+    "checks": [
+      "exact_uuid_order_both_families"
+    ]
+  },
+  "S4-VAL-007": {
+    "row": "IPM-VAL-007",
+    "source": "Validator 31\u201351, KnowledgeTool",
+    "obligation": "Use qualified composite keys; forbid bare/blank/double-underscore keys; MultInpComb keys are When-only.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V4",
+    "checks": [
+      "knowledge_failures_and_complete_keys"
+    ]
+  },
+  "S4-VAL-008": {
+    "row": "IPM-VAL-008",
+    "source": "Validator 51\u201357, UTC_KEYS",
+    "obligation": "Retrieve KnowledgeArea, schema, and example once after schema success for both families; correct the current non-When omission.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V4",
+    "checks": [
+      "knowledge_failures_and_complete_keys"
+    ]
+  },
+  "S4-VAL-009": {
+    "row": "IPM-VAL-009",
+    "source": "Validator 60\u2013124, report definition/output discipline",
+    "obligation": "Preserve six-field compact ValidatorReport, fixed issue shape, issues-only defects/warnings, and raw JSON-only output.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V2",
+    "checks": [
+      "report_catalog_precedence_warnings_atomic"
+    ]
+  },
+  "S4-VAL-010": {
+    "row": "IPM-VAL-010",
+    "source": "Validator 80, routes",
+    "obligation": "Replace Author routes with OK, GENERATOR_REPAIR, SEMANTIC_REJECT, HUMAN and deterministic precedence.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "IMPLEMENT",
+    "section": "V2",
+    "checks": [
+      "report_catalog_precedence_warnings_atomic"
+    ]
+  },
+  "S4-VAL-011": {
+    "row": "IPM-VAL-011",
+    "source": "Validator 86\u2013109, issue fields",
+    "obligation": "Preserve code, severity, pointer, unit/scenario coordinates, decision ID, action, and message; define scenario/group/candidate scopes.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "IMPLEMENT",
+    "section": "V2",
+    "checks": [
+      "current_coordinates_reject_stale_reports"
+    ]
+  },
+  "S4-VAL-012": {
+    "row": "IPM-VAL-012",
+    "source": "Validator 111\u2013124",
+    "obligation": "Return exactly one compact raw report with no reasoning, wrappers, audit trail, success records, or prose.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V1",
+    "checks": [
+      "report_catalog_precedence_warnings_atomic"
+    ]
+  },
+  "S4-VAL-013": {
+    "row": "IPM-VAL-013",
+    "source": "Validator 126\u2013136, execution order/input gate",
+    "obligation": "Validate CaseID, immutable RUTType, and candidate UUID before all tool calls; derive schema before candidate inspection.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V1",
+    "checks": [
+      "invalid_inputs_zero_tools",
+      "blank_rut_zero_tools_opaque_addresses"
+    ]
+  },
+  "S4-VAL-014": {
+    "row": "IPM-VAL-014",
+    "source": "Validator 137\u2013140",
+    "obligation": "Replace two-argument schema call with JsonValidationTool(CaseID, UUID, JsonSchema).",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "IMPLEMENT",
+    "section": "V3",
+    "checks": [
+      "exact_uuid_order_both_families"
+    ]
+  },
+  "S4-VAL-015": {
+    "row": "IPM-VAL-015",
+    "source": "Validator 140\u2013150",
+    "obligation": "Tool failure is distinct from schema-invalid JSON, stops later reads/checks, and routes HUMAN.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V3",
+    "checks": [
+      "schema_envelope_failures_stop",
+      "mass_diagnostics_and_untraversable_views"
+    ]
+  },
+  "S4-VAL-016": {
+    "row": "IPM-VAL-016",
+    "source": "Validator 153\u2013178",
+    "obligation": "Copy schema result; short-circuit invalid candidates before Memory/documentation/semantic checks; classify failure deterministically.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V3",
+    "checks": [
+      "ordinary_mass_schema_boundaries",
+      "mass_diagnostics_and_untraversable_views",
+      "reported_error_counts_not_echoed_values"
+    ]
+  },
+  "S4-VAL-017": {
+    "row": "IPM-VAL-017",
+    "source": "Validator 158\u2013178, mass failure",
+    "obligation": "Preserve 25-error, broad-shape, and oversized-message compaction; Generator may rebuild projection from unchanged groups within the two-repair limit.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "IMPLEMENT",
+    "section": "V3",
+    "checks": [
+      "ordinary_mass_schema_boundaries",
+      "mass_diagnostics_and_untraversable_views",
+      "reported_error_counts_not_echoed_values"
+    ]
+  },
+  "S4-VAL-018": {
+    "row": "IPM-VAL-018",
+    "source": "Validator 180\u2013182",
+    "obligation": "After schema success, read only GetMemory(CaseID, UnitTestCandidate, UUID), never latest record.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V3",
+    "checks": [
+      "memory_envelopes_payloads_no_fallback",
+      "mass_diagnostics_and_untraversable_views"
+    ]
+  },
+  "S4-VAL-019": {
+    "row": "IPM-VAL-019",
+    "source": "Validator 183\u2013186, RUT metadata",
+    "obligation": "Check immutable RUTType across every unit in the combined candidate and report exact unit scope; replace Author repair ownership.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V4",
+    "checks": [
+      "all_unit_rut_mismatch_no_knowledge",
+      "explicit_scalar_constraints_before_matching"
+    ]
+  },
+  "S4-VAL-020": {
+    "row": "IPM-VAL-020",
+    "source": "Validator 187\u2013196, order",
+    "obligation": "After schema/RUT checks, call KnowledgeTool once, then run trace/RuleCode and documentation checks.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V4",
+    "checks": [
+      "knowledge_failures_and_complete_keys",
+      "mass_diagnostics_and_untraversable_views"
+    ]
+  },
+  "S4-VAL-021": {
+    "row": "IPM-VAL-021",
+    "source": "Validator 198\u2013204, source of truth",
+    "obligation": "Schema tool alone decides strict validity; UTC docs govern RuleCode behavior; immutable semantic decisions govern candidate alignment.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V4",
+    "checks": [
+      "real_s3_candidates_read_only"
+    ]
+  },
+  "S4-VAL-022": {
+    "row": "IPM-VAL-022",
+    "source": "Validator 202\u2013204, trace authority",
+    "obligation": "Candidate trace is a trusted mechanical projection for Validator alignment; Generator alone proves it matches immutable ScenarioGroups and cannot create new semantics.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "IMPLEMENT",
+    "section": "V4",
+    "checks": [
+      "list_mock_wrapper_and_provenance_limit",
+      "final_conflicts_both_families_reject",
+      "canonical_final_values_order_independent",
+      "symmetric_explicit_final_value_types",
+      "explicit_scalar_constraints_before_matching"
+    ]
+  },
+  "S4-VAL-023": {
+    "row": "IPM-VAL-023",
+    "source": "Validator 206\u2013227, trace format",
+    "obligation": "Preserve ASSERT and MultInpComb DecisionInput/DecisionResult grammar and supports; SIM and OMIT grammar differences are replaced by IPM-VAL-043/044.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "IMPLEMENT",
+    "section": "V5",
+    "checks": [
+      "strict_trace_complete_grammar",
+      "visible_context_alignment"
+    ]
+  },
+  "S4-VAL-024": {
+    "row": "IPM-VAL-024",
+    "source": "Validator 229\u2013265, alignment checks",
+    "obligation": "After schema success, compare normalized assertion/simulation/omission keys and decode trace entities plus one JSON-string layer.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V5",
+    "checks": [
+      "entity_string_numeric_normalization",
+      "literal_quotes_and_genuine_repeated_paths",
+      "visible_context_alignment",
+      "literal_omit_path_and_assertion_multiplicity",
+      "symmetric_explicit_final_value_types",
+      "explicit_scalar_constraints_before_matching"
+    ]
+  },
+  "S4-VAL-025": {
+    "row": "IPM-VAL-025",
+    "source": "Validator 267\u2013284, paths",
+    "obligation": "Never rewrite candidate; canonicalize paths/Param/duplicate segments; trace-only formatting repair may not alter semantics or correct RuleCode.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "IMPLEMENT",
+    "section": "V5",
+    "checks": [
+      "canonical_paths_trace_only",
+      "literal_quotes_and_genuine_repeated_paths",
+      "literal_omit_path_and_assertion_multiplicity"
+    ]
+  },
+  "S4-VAL-026": {
+    "row": "IPM-VAL-026",
+    "source": "Validator 286\u2013298, MultInpComb alignment",
+    "obligation": "Require exact row numbering, one trace per input/result cell, exact paths/values, and reject Result-only legacy trace.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V8",
+    "checks": [
+      "when_rows_cells_and_scope"
+    ]
+  },
+  "S4-VAL-027": {
+    "row": "IPM-VAL-027",
+    "source": "Validator 301\u2013311, bidirectional checks",
+    "obligation": "Preserve ASSERT both ways, OMIT absence, SIM mapping, support, ResultCount/Param/DP shapes, and visible count consistency.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V6",
+    "checks": [
+      "bidirectional_assertion_value_and_count",
+      "final_conflicts_both_families_reject",
+      "visible_context_alignment",
+      "canonical_final_values_order_independent",
+      "literal_omit_path_and_assertion_multiplicity",
+      "symmetric_explicit_final_value_types"
+    ]
+  },
+  "S4-VAL-028": {
+    "row": "IPM-VAL-028",
+    "source": "Validator 313\u2013316, empty input",
+    "obligation": "Missing pyExpectedValue represents initialized empty value while retaining parent/cell symmetry.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "IMPLEMENT",
+    "section": "V8",
+    "checks": [
+      "empty_cell_preserved_and_parent_contradiction"
+    ]
+  },
+  "S4-VAL-029": {
+    "row": "IPM-VAL-029",
+    "source": "Validator 319\u2013332, semantic boundary",
+    "obligation": "Check only explicit final decisions and visible contradictions; never infer assertions, values, simulations, dependencies, branches, or RUT behavior.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V6",
+    "checks": [
+      "missing_invalid_unfinalized_semantics",
+      "final_conflicts_both_families_reject",
+      "canonical_final_values_order_independent",
+      "symmetric_explicit_final_value_types"
+    ]
+  },
+  "S4-VAL-030": {
+    "row": "IPM-VAL-030",
+    "source": "Validator 333, missing trace",
+    "obligation": "Missing decision trace is SEMANTIC_REJECT, never Generator repair.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V5",
+    "checks": [
+      "missing_invalid_unfinalized_semantics",
+      "final_conflicts_both_families_reject"
+    ]
+  },
+  "S4-VAL-031": {
+    "row": "IPM-VAL-031",
+    "source": "Validator 335\u2013343, documentation validation",
+    "obligation": "Documentation validation follows schema success, exact Memory read, and UTC lookup and is not a second schema validator.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V9",
+    "checks": [
+      "knowledge_failures_and_complete_keys"
+    ]
+  },
+  "S4-VAL-032": {
+    "row": "IPM-VAL-032",
+    "source": "Validator 345\u2013374, When checks",
+    "obligation": "Preserve row count/signature/cell shape/order/Result, paths/labels, empty values, reserved-page ban, and no inferred true/false coverage; scope shared defects to group.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "IMPLEMENT",
+    "section": "V8",
+    "checks": [
+      "when_rows_cells_and_scope",
+      "visible_context_alignment",
+      "simulated_dp_roots_all_visible_carriers"
+    ]
+  },
+  "S4-VAL-033": {
+    "row": "IPM-VAL-033",
+    "source": "Validator 376\u2013386",
+    "obligation": "Never manually re-check JSON Schema keywords after the schema tool result.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V9",
+    "checks": [
+      "visible_doc_context_and_catalog_limits"
+    ]
+  },
+  "S4-VAL-034": {
+    "row": "IPM-VAL-034",
+    "source": "Validator 388\u2013390",
+    "obligation": "Missing IsInPageListWhen pxRuleReference is not blocking; visible contrary reasoning is SEMANTIC_REJECT.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V8",
+    "checks": [
+      "synthetic_dependency_contradiction"
+    ]
+  },
+  "S4-VAL-035": {
+    "row": "IPM-VAL-035",
+    "source": "Validator 392\u2013405, Pega behavior",
+    "obligation": "Preserve behavior checks for DP simulation, placement, page/list, Param/property assertions, comparators, errors, primary page, and P&C; unsafe ambiguity routes HUMAN.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V9",
+    "checks": [
+      "param_page_list_count_boolean_shapes",
+      "visible_context_alignment",
+      "simulated_dp_roots_all_visible_carriers"
+    ]
+  },
+  "S4-VAL-036": {
+    "row": "IPM-VAL-036",
+    "source": "Validator 407\u2013443, report construction",
+    "obligation": "Replace obsolete Author-route examples while preserving exact compact report examples for OK, projection repair, semantic reject, and HUMAN.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V10",
+    "checks": [
+      "report_catalog_precedence_warnings_atomic"
+    ]
+  },
+  "S4-VAL-037": {
+    "row": "IPM-VAL-037",
+    "source": "Validator 446\u2013450, issue codes",
+    "obligation": "Reconcile prose and embedded schema into one closed issue-code catalog.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V10",
+    "checks": [
+      "report_catalog_precedence_warnings_atomic"
+    ]
+  },
+  "S4-VAL-038": {
+    "row": "IPM-VAL-038",
+    "source": "Validator 452\u2013469, repair actions/routes",
+    "obligation": "Encode projection-only Generator repair, semantic rejection, HUMAN escalation, and route precedence; remove Author-owned actions.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "IMPLEMENT",
+    "section": "V2",
+    "checks": [
+      "report_catalog_precedence_warnings_atomic",
+      "final_conflicts_both_families_reject",
+      "canonical_final_values_order_independent",
+      "symmetric_explicit_final_value_types"
+    ]
+  },
+  "S4-VAL-039": {
+    "row": "IPM-VAL-039",
+    "source": "Validator 471\u2013484, output lock",
+    "obligation": "Keep one raw JSON report and name UnitTestGenerator, not Author, as the consumer.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V1",
+    "checks": [
+      "report_catalog_precedence_warnings_atomic"
+    ]
+  },
+  "S4-VAL-040": {
+    "row": "IPM-VAL-040",
+    "source": "Validator 487\u2013657, report schema",
+    "obligation": "Preserve closed Draft 2020-12 structure/coordinates while synchronizing route, code, and action enums with prose/examples.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V10",
+    "checks": [
+      "report_catalog_precedence_warnings_atomic"
+    ]
+  },
+  "S4-VAL-041": {
+    "row": "IPM-VAL-041",
+    "source": "Validator 51,128\u2013196,231,337, invocation limit",
+    "obligation": "One invocation has one schema call, at most one exact Memory read, at most one UTC lookup, deterministic order, and no retry loop.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V1",
+    "checks": [
+      "exact_uuid_order_both_families",
+      "mass_diagnostics_and_untraversable_views"
+    ]
+  },
+  "S4-VAL-042": {
+    "row": "IPM-VAL-042",
+    "source": "Validator 18,26\u201330,267,484, read-only",
+    "obligation": "Validator never rewrites/writes candidates or persists validation/partial-failure records.",
+    "owner": "VALIDATOR",
+    "disposition": "IMPLEMENT",
+    "section": "V1",
+    "checks": [
+      "real_s3_candidates_read_only"
+    ]
+  },
+  "S4-VAL-043": {
+    "row": "IPM-VAL-043",
+    "source": "Author 1921; Validator 222,237, SIM trace",
+    "obligation": "Use the Author's complete canonical SIM grammar, including sig=DP_SIG and params=normalizedParams; Validator parses both and compares them with the exact pySimulation entry.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "IMPLEMENT",
+    "section": "V7",
+    "checks": [
+      "simulation_mapping_shared_identity",
+      "simulated_dp_roots_all_visible_carriers"
+    ]
+  },
+  "S4-VAL-044": {
+    "row": "IPM-VAL-044",
+    "source": "Author 1952\u20131961,2190\u20132194; Validator 226\u2013227, OMIT reasons",
+    "obligation": "Use the Author's complete omission catalog, including inactive_evaluate_all_scalar and inactive_return_values_scalar, in ScenarioGroup grammar, Generator formatting, Validator trace parsing/alignment, and fixtures; do not add it to ValidatorReport schema.",
+    "owner": "SHARED_CONTRACT",
+    "disposition": "IMPLEMENT",
+    "section": "V5",
+    "checks": [
+      "strict_trace_complete_grammar"
+    ]
+  }
+}
