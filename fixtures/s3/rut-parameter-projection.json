@@ -1,0 +1,372 @@
+{
+  "cases": [
+    {
+      "name": "string_page_name",
+      "formalType": "String",
+      "valueType": "string",
+      "value": "RunRecordPrimaryPage",
+      "expected": "\"RunRecordPrimaryPage\""
+    },
+    {
+      "name": "page_name",
+      "formalType": "PAGE",
+      "valueType": "string",
+      "value": "RunRecordPrimaryPage",
+      "expected": "RunRecordPrimaryPage"
+    },
+    {
+      "name": "string_boolean",
+      "formalType": "String",
+      "valueType": "string",
+      "value": "false",
+      "expected": "\"false\""
+    },
+    {
+      "name": "boolean_false",
+      "formalType": "Boolean",
+      "valueType": "boolean",
+      "value": "false",
+      "expected": "false"
+    },
+    {
+      "name": "truefalse_true",
+      "formalType": "TrueFalse",
+      "valueType": "boolean",
+      "value": "true",
+      "expected": "true"
+    },
+    {
+      "name": "integer",
+      "formalType": "Integer",
+      "valueType": "number",
+      "value": "3",
+      "expected": "3"
+    },
+    {
+      "name": "decimal",
+      "formalType": "Decimal",
+      "valueType": "number",
+      "value": "1.25",
+      "expected": "1.25"
+    },
+    {
+      "name": "fraction_not_integer",
+      "formalType": "Integer",
+      "valueType": "number",
+      "value": "1.25",
+      "expected": null
+    },
+    {
+      "name": "large_integer",
+      "formalType": "Integer",
+      "valueType": "number",
+      "value": "9007199254740993",
+      "expected": "9007199254740993"
+    },
+    {
+      "name": "empty_string",
+      "formalType": "String",
+      "valueType": "empty",
+      "value": "<EMPTY>",
+      "expected": "\"\""
+    },
+    {
+      "name": "escaped_string",
+      "formalType": "String",
+      "valueType": "string",
+      "value": "A\"B\\C\nΩ|x",
+      "expected": "\"A\\\"B\\\\C\\nΩ|x\""
+    },
+    {
+      "name": "missing_type",
+      "formalType": null,
+      "valueType": "string",
+      "value": "RunRecordPrimaryPage",
+      "expected": null
+    },
+    {
+      "name": "unsupported_type",
+      "formalType": "Date",
+      "valueType": "string",
+      "value": "2026-09-07",
+      "expected": null
+    },
+    {
+      "name": "unknown_type",
+      "formalType": "Unknown",
+      "valueType": "number",
+      "value": "3",
+      "expected": null
+    },
+    {
+      "name": "wrong_case",
+      "formalType": "string",
+      "valueType": "string",
+      "value": "x",
+      "expected": null
+    },
+    {
+      "name": "empty_type",
+      "formalType": "",
+      "valueType": "string",
+      "value": "x",
+      "expected": null
+    },
+    {
+      "name": "string_is_not_boolean",
+      "formalType": "Boolean",
+      "valueType": "string",
+      "value": "false",
+      "expected": null
+    },
+    {
+      "name": "number_is_not_string",
+      "formalType": "String",
+      "valueType": "number",
+      "value": "3",
+      "expected": null
+    },
+    {
+      "name": "undeclared_page",
+      "formalType": "PAGE",
+      "valueType": "string",
+      "value": "MissingPage",
+      "expected": null
+    },
+    {
+      "name": "empty_page",
+      "formalType": "PAGE",
+      "valueType": "empty",
+      "value": "<EMPTY>",
+      "expected": null
+    },
+    {
+      "name": "numeric_string_is_not_number",
+      "formalType": "Decimal",
+      "valueType": "string",
+      "value": "1.25",
+      "expected": null
+    },
+    {
+      "name": "null_not_boolean",
+      "formalType": "TrueFalse",
+      "valueType": "null",
+      "value": "null",
+      "expected": null
+    }
+  ],
+  "sourceParameters": {
+    "standard": [
+      {
+        "pyParametersParamName": "CustomerName",
+        "pyParametersParamType": "String"
+      },
+      {
+        "pyParametersParamName": "Retries",
+        "pyParametersParamType": "Integer"
+      },
+      {
+        "pyParametersParamName": "Rate",
+        "pyParametersParamType": "Decimal"
+      },
+      {
+        "pyParametersParamName": "Enabled",
+        "pyParametersParamType": "Boolean"
+      },
+      {
+        "pyParametersParamName": "Blocked",
+        "pyParametersParamType": "TrueFalse"
+      },
+      {
+        "pyParametersParamName": "Context",
+        "pyParametersParamType": "PAGE"
+      }
+    ],
+    "when": [
+      {
+        "pyParametersParamName": "Amount",
+        "pyParametersParamType": "Decimal"
+      }
+    ]
+  },
+  "sourceCases": [
+    {
+      "name": "unique_with_extra_source_fields",
+      "declarations": [
+        {
+          "pyParametersParamName": "Amount",
+          "pyParametersParamType": "Decimal",
+          "pyParametersParamDescription": "Original extra metadata"
+        }
+      ],
+      "expectedFormalType": "Decimal",
+      "expectedSource": "RuleJSON/pyParameters/0",
+      "projectionGap": false
+    },
+    {
+      "name": "exact_name_after_case_mismatch",
+      "declarations": [
+        {
+          "pyParametersParamName": "amount",
+          "pyParametersParamType": "PAGE"
+        },
+        {
+          "pyParametersParamName": "Amount",
+          "pyParametersParamType": "Decimal"
+        }
+      ],
+      "expectedFormalType": "Decimal",
+      "expectedSource": "RuleJSON/pyParameters/1",
+      "projectionGap": false
+    },
+    {
+      "name": "missing_name",
+      "declarations": [],
+      "expectedFormalType": null,
+      "expectedSource": "RuleJSON/pyParameters",
+      "projectionGap": true
+    },
+    {
+      "name": "absent_name_field",
+      "declarations": [
+        {
+          "pyParametersParamType": "Decimal"
+        }
+      ],
+      "expectedFormalType": null,
+      "expectedSource": "RuleJSON/pyParameters",
+      "projectionGap": true
+    },
+    {
+      "name": "duplicate_identical",
+      "declarations": [
+        {
+          "pyParametersParamName": "Amount",
+          "pyParametersParamType": "Decimal"
+        },
+        {
+          "pyParametersParamName": "Amount",
+          "pyParametersParamType": "Decimal"
+        }
+      ],
+      "expectedFormalType": null,
+      "expectedSource": "RuleJSON/pyParameters",
+      "projectionGap": true
+    },
+    {
+      "name": "duplicate_conflicting",
+      "declarations": [
+        {
+          "pyParametersParamName": "Amount",
+          "pyParametersParamType": "Decimal"
+        },
+        {
+          "pyParametersParamName": "Amount",
+          "pyParametersParamType": "PAGE"
+        }
+      ],
+      "expectedFormalType": null,
+      "expectedSource": "RuleJSON/pyParameters",
+      "projectionGap": true
+    },
+    {
+      "name": "missing_type",
+      "declarations": [
+        {
+          "pyParametersParamName": "Amount"
+        }
+      ],
+      "expectedFormalType": null,
+      "expectedSource": "RuleJSON/pyParameters/0",
+      "projectionGap": true
+    },
+    {
+      "name": "non_string_type_null",
+      "declarations": [
+        {
+          "pyParametersParamName": "Amount",
+          "pyParametersParamType": null
+        }
+      ],
+      "expectedFormalType": null,
+      "expectedSource": "RuleJSON/pyParameters/0",
+      "projectionGap": true
+    },
+    {
+      "name": "non_string_type_number",
+      "declarations": [
+        {
+          "pyParametersParamName": "Amount",
+          "pyParametersParamType": 7
+        }
+      ],
+      "expectedFormalType": null,
+      "expectedSource": "RuleJSON/pyParameters/0",
+      "projectionGap": true
+    },
+    {
+      "name": "non_string_type_boolean",
+      "declarations": [
+        {
+          "pyParametersParamName": "Amount",
+          "pyParametersParamType": true
+        }
+      ],
+      "expectedFormalType": null,
+      "expectedSource": "RuleJSON/pyParameters/0",
+      "projectionGap": true
+    },
+    {
+      "name": "non_string_type_object",
+      "declarations": [
+        {
+          "pyParametersParamName": "Amount",
+          "pyParametersParamType": {
+            "type": "Decimal"
+          }
+        }
+      ],
+      "expectedFormalType": null,
+      "expectedSource": "RuleJSON/pyParameters/0",
+      "projectionGap": true
+    },
+    {
+      "name": "non_string_type_array",
+      "declarations": [
+        {
+          "pyParametersParamName": "Amount",
+          "pyParametersParamType": [
+            "Decimal"
+          ]
+        }
+      ],
+      "expectedFormalType": null,
+      "expectedSource": "RuleJSON/pyParameters/0",
+      "projectionGap": true
+    },
+    {
+      "name": "empty_string_type",
+      "declarations": [
+        {
+          "pyParametersParamName": "Amount",
+          "pyParametersParamType": ""
+        }
+      ],
+      "expectedFormalType": "",
+      "expectedSource": "RuleJSON/pyParameters/0",
+      "projectionGap": true
+    },
+    {
+      "name": "unsupported_string_type",
+      "declarations": [
+        {
+          "pyParametersParamName": "Amount",
+          "pyParametersParamType": "Date"
+        }
+      ],
+      "expectedFormalType": "Date",
+      "expectedSource": "RuleJSON/pyParameters/0",
+      "projectionGap": true
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+SG|version=1.1|caseId=CASE-FORMAL-TYPES-001|rutType=Rule-Obj-Model|rutClass=App-Work-Customer|rutName=SetCustomer|ruleset=App|groupId=G001|groupOrder=1|kind=STANDARD|scenarioCount=1|simulationGroupKey=-
+ROOT|page=RunRecordPrimaryPage|class=App-Work-Customer|primarySetup=true|pagesAndClasses={"RunRecordPrimaryPage":"App-Work-Customer"}|namedPageEvidence=[]
+TARGET|id=T1|order=1|source=ModelStep1|behavior=Set customer name|constraint=-|state=REQUIRED|proof=-
+COMPLEXITY|invocationCount=1|whenRuleReferenceCount=0|maxNesting=0|operationCount=1|loopCount=0|modifiedPropertyCount=1|conditionalBlockCount=0|pageParameterCount=1|unresolvedCriticalDependencyCount=0|invocationChainDepth=1|weightedScore=15.25|tier=STANDARD|ruleCrawlerCalls=0|dependencyReferencesRequested=1|hardTriggers=-|triggeredLimits=-|confidenceCap=High|testabilityCap=Testable
+SCENARIO|id=S1|order=1|name=Set customer details|owner=ModelStep1|covers=T1|testability=Testable|confidence=High
+PARAM|scenario=S1|id=K001|order=1|invocation=RUT-1|dependency=RUT|name=CustomerName|formalType=String|formalEvidence=E002|mode=explicit|inheritance=n_a|expression=Param.CustomerName|valueType=string|value=Ada Lovelace|evidence=E001,E002
+PARAM|scenario=S1|id=K002|order=2|invocation=DP-1|dependency=D_Customer|name=Customer|formalType=-|formalEvidence=-|mode=explicit|inheritance=n_a|expression=Param.CustomerName|valueType=string|value=Ada|evidence=E001
+PARAM|scenario=S1|id=K003|order=3|invocation=RUT-1|dependency=RUT|name=Retries|formalType=Integer|formalEvidence=E003|mode=explicit|inheritance=n_a|expression=Param.Retries|valueType=number|value=3|evidence=E003
+PARAM|scenario=S1|id=K004|order=4|invocation=RUT-1|dependency=RUT|name=Rate|formalType=Decimal|formalEvidence=E004|mode=explicit|inheritance=n_a|expression=Param.Rate|valueType=number|value=1.25|evidence=E004
+PARAM|scenario=S1|id=K005|order=5|invocation=RUT-1|dependency=RUT|name=Enabled|formalType=Boolean|formalEvidence=E005|mode=explicit|inheritance=n_a|expression=Param.Enabled|valueType=boolean|value=true|evidence=E005
+PARAM|scenario=S1|id=K006|order=6|invocation=RUT-1|dependency=RUT|name=Blocked|formalType=TrueFalse|formalEvidence=E006|mode=explicit|inheritance=n_a|expression=Param.Blocked|valueType=boolean|value=false|evidence=E006
+PARAM|scenario=S1|id=K007|order=7|invocation=RUT-1|dependency=RUT|name=Context|formalType=PAGE|formalEvidence=E007|mode=explicit|inheritance=n_a|expression=Param.Context|valueType=string|value=RunRecordPrimaryPage|evidence=E007
+INPUT|scenario=S1|id=I001|order=1|role=PARAM|path=Param.CustomerName|page=-|class=-|mode=Text|valueType=string|value=Ada Lovelace|resolution=K001|evidence=E001
+INPUT|scenario=S1|id=I002|order=2|role=PARAM|path=Param.Retries|page=-|class=-|mode=Integer|valueType=number|value=3|resolution=K003|evidence=E003
+INPUT|scenario=S1|id=I003|order=3|role=PARAM|path=Param.Rate|page=-|class=-|mode=Decimal|valueType=number|value=1.25|resolution=K004|evidence=E004
+INPUT|scenario=S1|id=I004|order=4|role=PARAM|path=Param.Enabled|page=-|class=-|mode=TrueFalse|valueType=boolean|value=true|resolution=K005|evidence=E005
+INPUT|scenario=S1|id=I005|order=5|role=PARAM|path=Param.Blocked|page=-|class=-|mode=TrueFalse|valueType=boolean|value=false|resolution=K006|evidence=E006
+INPUT|scenario=S1|id=I006|order=6|role=PARAM|path=Param.Context|page=-|class=-|mode=Page|valueType=string|value=RunRecordPrimaryPage|resolution=K007|evidence=E007
+SETUP|scenario=S1|id=U001|order=1|role=SETUP|path=.Notes|page=RunRecordPrimaryPage|class=App-Work-Customer|mode=Text|valueType=string|value=Ada\|Lovelace\nC:\\Temp\tX|evidence=E001
+RX|scenario=S1|id=R001|order=1|source=ModelStep1|operation=Property-Set|context=RunRecordPrimaryPage|guard=-|inputs=I001,I002,I003,I004,I005,I006,U001|result=.CustomerName=Ada Lovelace|writes=.CustomerName|evidence=E001
+DEP|scenario=S1|id=D001|order=1|kind=DP|identity=D_Customer|state=CLOSED|parameters={"Customer":"Ada"}|proof=Fetched RuleJSON and executed exact signature|evidence=E001
+BRANCH|scenario=S1|id=B001|order=1|source=ModelStep1|logic=NOT_APPLICABLE|inputs=-|result=NOT_APPLICABLE|writes=.CustomerName|evidence=E001
+PRODUCER|scenario=S1|id=P001|order=1|target=.CustomerName|operation=Property-Set|context=RunRecordPrimaryPage|guard=-|payload={"value":"Ada Lovelace"}|execution=R001|evidence=E001
+PROPERTY|scenario=S1|id=Y001|order=1|target=.CustomerName|support=PredictedFromRules|deterministic=true|valueType=string|value=Ada Lovelace|producers=P001|evidence=E001
+SIM|id=M001|rule=D_Customer|sig=D_Customer[Customer=Ada]|shape=page|method=DefineData|class=App-Data-Customer|itemClass=-|params={"Customer":"Ada"}|target=.CustomerData|mockingRuleType=Rule-Declare-Pages|referredFromClass=App-Work-Customer|setupPages=[]|scenario=S1|order=1|payload={"message":"Line1\\nLine2\|C:\\\\Temp\\tX"}|parameterResolutions=K002|evidence=E001
+ASSERT|id=A001|kind=Property|target=.CustomerName|page=RunRecordPrimaryPage|class=App-Work-Customer|mode=Text|comparator=Is Equals To|value=Ada Lovelace|support=PredictedFromRules|scenario=S1|order=1|producer=P001|evidence=E001
+EVIDENCE|scenario=S1|id=E001|order=1|kind=RUT|source=ModelStep1|fact=Property-Set writes the parameter value to .CustomerName|support=PredictedFromRules|confidence=High
+EVIDENCE|scenario=S1|id=E002|order=2|kind=RUT|source=RuleJSON/pyParameters/0|fact={"pyParametersParamName":"CustomerName","pyParametersParamType":"String"}|support=Verified|confidence=High
+EVIDENCE|scenario=S1|id=E003|order=3|kind=RUT|source=RuleJSON/pyParameters/1|fact={"pyParametersParamName":"Retries","pyParametersParamType":"Integer"}|support=Verified|confidence=High
+EVIDENCE|scenario=S1|id=E004|order=4|kind=RUT|source=RuleJSON/pyParameters/2|fact={"pyParametersParamName":"Rate","pyParametersParamType":"Decimal"}|support=Verified|confidence=High
+EVIDENCE|scenario=S1|id=E005|order=5|kind=RUT|source=RuleJSON/pyParameters/3|fact={"pyParametersParamName":"Enabled","pyParametersParamType":"Boolean"}|support=Verified|confidence=High
+EVIDENCE|scenario=S1|id=E006|order=6|kind=RUT|source=RuleJSON/pyParameters/4|fact={"pyParametersParamName":"Blocked","pyParametersParamType":"TrueFalse"}|support=Verified|confidence=High
+EVIDENCE|scenario=S1|id=E007|order=7|kind=RUT|source=RuleJSON/pyParameters/5|fact={"pyParametersParamName":"Context","pyParametersParamType":"PAGE"}|support=Verified|confidence=High
+SUMMARY|scenario=S1|id=H001|order=1|supportLevel=PredictedFromRules|dependencyState=AllResolved|branchState=NotApplicable|simulationState=RequiredAndAligned|complexityTier=STANDARD|assertionCount=1|omissionCount=0|simulationCount=1|gapCount=0|internalChecklist=COVERAGE,DEPENDENCY,ROOT,SEED,SIMULATION|reasoningEvidence=E001|dependencyEvidence=E001|blockingGaps=-|dependencyClosureStatus=Closed|maxDependencyWaveReached=0|queuedDependencyCount=0|unscannedFetchedRuleJsonCount=0|seedCoverageEvidence=E001
+NARRATIVE|scenario=S1|id=N001|order=1|text=Sets the customer name and verifies the final value.|evidence=E001
+END|targetCount=1|columnCount=0|paramCount=7|scenarioCount=1|inputCount=6|setupCount=1|rxCount=1|depCount=1|branchCount=1|producerCount=1|propertyCount=1|dtCount=0|simCount=1|assertCount=1|omitCount=0|evidenceCount=7|gapCount=0|summaryCount=1|narrativeCount=1|complete=PASS

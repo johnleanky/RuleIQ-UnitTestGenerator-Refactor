@@ -1,0 +1,257 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "candidate",
+    "groups",
+    "validationAttempts",
+    "repairAttempts",
+    "errorMessage"
+  ],
+  "properties": {
+    "status": {
+      "enum": [
+        "Completed",
+        "PartiallyCompleted",
+        "Failed"
+      ]
+    },
+    "candidate": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "CaseID",
+            "Type",
+            "UUID"
+          ],
+          "properties": {
+            "CaseID": {
+              "type": "string",
+              "minLength": 1
+            },
+            "Type": {
+              "const": "UnitTestCandidate"
+            },
+            "UUID": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ]
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sourceUUID",
+          "groupId",
+          "readState",
+          "scenarios"
+        ],
+        "properties": {
+          "sourceUUID": {
+            "type": "string",
+            "minLength": 1
+          },
+          "groupId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "readState": {
+            "enum": [
+              "NotRead",
+              "ReadFailed",
+              "InvalidSource",
+              "Ready"
+            ]
+          },
+          "scenarios": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "outcome",
+                "unit",
+                "scenario",
+                "code"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "outcome": {
+                  "enum": [
+                    "Successful",
+                    "Untestable",
+                    "NotValidated"
+                  ]
+                },
+                "unit": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "scenario": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "code": {
+                  "type": "string",
+                  "maxLength": 100
+                }
+              },
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "outcome": {
+                        "const": "Successful"
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "unit": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "scenario": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "code": {
+                        "const": ""
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "unit": {
+                        "type": "null"
+                      },
+                      "scenario": {
+                        "type": "null"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "outcome": {
+                        "const": "Untestable"
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "code": {
+                        "const": ""
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "validationAttempts": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3
+    },
+    "repairAttempts": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2
+    },
+    "errorMessage": {
+      "type": "string",
+      "maxLength": 180
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GeneratorRunReport v1",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "Failed"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "candidate": {
+            "type": "null"
+          },
+          "errorMessage": {
+            "minLength": 1
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "candidate": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "CaseID",
+              "Type",
+              "UUID"
+            ],
+            "properties": {
+              "CaseID": {
+                "type": "string",
+                "minLength": 1
+              },
+              "Type": {
+                "const": "UnitTestCandidate"
+              },
+              "UUID": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "errorMessage": {
+            "const": ""
+          },
+          "validationAttempts": {
+            "minimum": 1
+          }
+        }
+      }
+    }
+  ]
+}

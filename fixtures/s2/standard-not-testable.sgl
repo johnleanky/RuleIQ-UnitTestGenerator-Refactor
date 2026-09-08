@@ -1,4 +1,4 @@
-SG|version=1|caseId=CASE-NOT-TESTABLE-001|rutType=Rule-Obj-Model|rutClass=App-Work-Order|rutName=ResolveExternalStatus|ruleset=AppRules|groupId=G001|groupOrder=1|kind=STANDARD|scenarioCount=1|simulationGroupKey=-
+SG|version=1.1|caseId=CASE-NOT-TESTABLE-001|rutType=Rule-Obj-Model|rutClass=App-Work-Order|rutName=ResolveExternalStatus|ruleset=AppRules|groupId=G001|groupOrder=1|kind=STANDARD|scenarioCount=1|simulationGroupKey=-
 ROOT|page=RunRecordPrimaryPage|class=App-Work-Order|primarySetup=false|pagesAndClasses={"RunRecordPrimaryPage":"App-Work-Order"}|namedPageEvidence=[]
 TARGET|id=T_EXTERNAL|order=1|source=ModelStep1|behavior=External status branch executes|constraint=-|state=REQUIRED|proof=-
 COMPLEXITY|invocationCount=1|whenRuleReferenceCount=0|maxNesting=0|operationCount=1|loopCount=0|modifiedPropertyCount=1|conditionalBlockCount=0|pageParameterCount=0|unresolvedCriticalDependencyCount=1|invocationChainDepth=1|weightedScore=23.25|tier=HIGH|ruleCrawlerCalls=1|dependencyReferencesRequested=1|hardTriggers=UNRESOLVED_CRITICAL_DEPENDENCY_COUNT|triggeredLimits=-|confidenceCap=Low|testabilityCap=PartiallyTestable

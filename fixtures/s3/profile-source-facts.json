@@ -1,0 +1,289 @@
+{
+  "standard-escaping.sgl:S1": [
+    {
+      "kind": "RUT",
+      "source": "GetCaseData/TestedRuleKey",
+      "fact": {
+        "TestedRuleKey": "RULE-OBJ-MODEL APP-WORK-CUSTOMER SETCUSTOMER #20260907T000000.000 GMT"
+      }
+    },
+    {
+      "kind": "DEPENDENCY",
+      "source": "PROPERTY_DEFINITION/A001",
+      "fact": {
+        "path": "RunRecordPrimaryPage.CustomerName",
+        "pyPropertyMode": "Value",
+        "pyStringType": "Text"
+      }
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "ASSERTION_CONTEXT/A001",
+      "fact": {
+        "context": {
+          "pyCardApplyToClass": "App-Work-Customer"
+        },
+        "fullPath": "RunRecordPrimaryPage.CustomerName",
+        "parentMode": null,
+        "payloadProven": false,
+        "producerIndex": "NotApplicable",
+        "stepClass": "App-Work-Customer",
+        "stepPage": "RunRecordPrimaryPage"
+      }
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "EXECUTION_ACTIONS",
+      "fact": []
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "EXECUTION_AUDIT",
+      "fact": {
+        "seeds": [],
+        "waves": []
+      }
+    }
+  ],
+  "standard-not-testable.sgl:S1": [
+    {
+      "kind": "RUT",
+      "source": "GetCaseData/TestedRuleKey",
+      "fact": {
+        "TestedRuleKey": "RULE-OBJ-MODEL APP-WORK-ORDER RESOLVEEXTERNALSTATUS #20260907T000000.000 GMT"
+      }
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "EXECUTION_ACTIONS",
+      "fact": []
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "EXECUTION_AUDIT",
+      "fact": {
+        "seeds": [],
+        "waves": [
+          {
+            "delta": {
+              "closed": [],
+              "new": [],
+              "next": "TERMINAL_BLOCKED",
+              "ready": [],
+              "returned": []
+            },
+            "plan": {
+              "ACT": [
+                "Helper@App-Work-Order@ExternalStatus"
+              ],
+              "BLK": [],
+              "CHK": "PASS",
+              "OUT": [
+                "Helper@App-Work-Order@ExternalStatus"
+              ]
+            },
+            "state": {
+              "ctx": 0,
+              "gaps": 0,
+              "open": 1,
+              "ready": 1,
+              "unscanned": 0
+            },
+            "wave": 1
+          }
+        ]
+      }
+    }
+  ],
+  "when-key-a.sgl:S1": [
+    {
+      "kind": "RUT",
+      "source": "GetCaseData/TestedRuleKey",
+      "fact": {
+        "TestedRuleKey": "RULE-OBJ-WHEN APP-WORK-ORDER ISPREFERRED #20260907T000000.000 GMT"
+      }
+    },
+    {
+      "kind": "DEPENDENCY",
+      "source": "PROPERTY_DEFINITION/A003",
+      "fact": {
+        "path": "RunRecordPrimaryPage.Discount",
+        "pyPropertyMode": "Value",
+        "pyStringType": "Decimal"
+      }
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "ASSERTION_CONTEXT/A003",
+      "fact": {
+        "context": {
+          "pyCardApplyToClass": "App-Work-Order"
+        },
+        "fullPath": "RunRecordPrimaryPage.Discount",
+        "parentMode": null,
+        "payloadProven": false,
+        "producerIndex": "NotApplicable",
+        "stepClass": "App-Work-Order",
+        "stepPage": "RunRecordPrimaryPage"
+      }
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "EXECUTION_ACTIONS",
+      "fact": []
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "EXECUTION_AUDIT",
+      "fact": {
+        "seeds": [
+          {
+            "assertion": "A003",
+            "assertionPath": ".Discount",
+            "evidence": [
+              "E001"
+            ],
+            "expression": ".Discount",
+            "seedPath": "pySetupPages.RunRecordPrimaryPage.Discount",
+            "source": "U001"
+          }
+        ],
+        "waves": []
+      }
+    }
+  ],
+  "when-key-a.sgl:S2": [
+    {
+      "kind": "RUT",
+      "source": "GetCaseData/TestedRuleKey",
+      "fact": {
+        "TestedRuleKey": "RULE-OBJ-WHEN APP-WORK-ORDER ISPREFERRED #20260907T000000.000 GMT"
+      }
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "EXECUTION_ACTIONS",
+      "fact": []
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "EXECUTION_AUDIT",
+      "fact": {
+        "seeds": [],
+        "waves": []
+      }
+    }
+  ],
+  "when-key-b.sgl:S3": [
+    {
+      "kind": "RUT",
+      "source": "GetCaseData/TestedRuleKey",
+      "fact": {
+        "TestedRuleKey": "RULE-OBJ-WHEN APP-WORK-ORDER ISPREFERRED #20260907T000000.000 GMT"
+      }
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "EXECUTION_ACTIONS",
+      "fact": []
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "EXECUTION_AUDIT",
+      "fact": {
+        "seeds": [],
+        "waves": []
+      }
+    }
+  ],
+  "when-no-simulation.sgl:S1": [
+    {
+      "kind": "RUT",
+      "source": "GetCaseData/TestedRuleKey",
+      "fact": {
+        "TestedRuleKey": "RULE-OBJ-WHEN APP-WORK-ORDER HASAMOUNT #20260907T000000.000 GMT"
+      }
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "EXECUTION_ACTIONS",
+      "fact": []
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "EXECUTION_AUDIT",
+      "fact": {
+        "seeds": [],
+        "waves": []
+      }
+    }
+  ],
+  "rut-parameter-provenance.sgl:S1": [
+    {
+      "kind": "RUT",
+      "source": "GetCaseData/TestedRuleKey",
+      "fact": {
+        "TestedRuleKey": "RULE-OBJ-MODEL APP-WORK-CUSTOMER SETCUSTOMER #20260907T000000.000 GMT"
+      }
+    },
+    {
+      "kind": "DEPENDENCY",
+      "source": "PROPERTY_DEFINITION/A001",
+      "fact": {
+        "path": "RunRecordPrimaryPage.CustomerName",
+        "pyPropertyMode": "Value",
+        "pyStringType": "Text"
+      }
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "ASSERTION_CONTEXT/A001",
+      "fact": {
+        "context": {
+          "pyCardApplyToClass": "App-Work-Customer"
+        },
+        "fullPath": "RunRecordPrimaryPage.CustomerName",
+        "parentMode": null,
+        "payloadProven": false,
+        "producerIndex": "NotApplicable",
+        "stepClass": "App-Work-Customer",
+        "stepPage": "RunRecordPrimaryPage"
+      }
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "EXECUTION_ACTIONS",
+      "fact": []
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "EXECUTION_AUDIT",
+      "fact": {
+        "seeds": [],
+        "waves": []
+      }
+    }
+  ],
+  "when-formal-parameter.sgl:S1": [
+    {
+      "kind": "RUT",
+      "source": "GetCaseData/TestedRuleKey",
+      "fact": {
+        "TestedRuleKey": "RULE-OBJ-WHEN APP-WORK-ORDER HASAMOUNT #20260907T000000.000 GMT"
+      }
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "EXECUTION_ACTIONS",
+      "fact": []
+    },
+    {
+      "kind": "EXECUTION",
+      "source": "EXECUTION_AUDIT",
+      "fact": {
+        "seeds": [],
+        "waves": []
+      }
+    }
+  ]
+}

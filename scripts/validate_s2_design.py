@@ -8,6 +8,7 @@ import hashlib
 import re
 import sys
 from collections import Counter, defaultdict
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 
@@ -26,8 +27,14 @@ BATCH2_IDS = {f"IPM-AUTH-{number:03d}" for number in (*range(21, 27), *range(33,
 BATCH3_IDS = {f"IPM-AUTH-{number:03d}" for number in range(93, 107)}
 # Fixed reviewed content, canonicalized to LF only for repository regression.
 # ScenarioGroup payload encoding and opaque Memory transport are unaffected.
-FINAL_PROMPT_SHA256 = "6F059B641B9CF8B627E6879ED5B7A8FAEE78A616E71E2DD305AF8C051ACD215F"
-HISTORICAL_CRLF_PROMPT_SHA256 = "BACADFB07E90D68B9751B9D573437A21B204E0BCCE87BE6ACE8BD5DDF3CEEC95"
+S2_BASELINE_PROMPT_SHA256 = "6F059B641B9CF8B627E6879ED5B7A8FAEE78A616E71E2DD305AF8C051ACD215F"
+PROFILE_BASELINE_SHA256 = "D1D790346AB759DF3EFE0BF02377C7E7A789C7FCDEC22938775A835812BAC036"
+PROJECTION_BASELINE_SHA256 = "1D80FE31995009F062D1EA5AE5F843187EA050A366A443E5CDB70CF773F352CC"
+FINAL_PROMPT_SHA256 = "1DD54CB6ABB8BE12C6092A1DF3B5CDEC46E383EE709C752694A798DE2A2456ED"
+FINAL_CRLF_PROMPT_SHA256 = "DE6D9E6B8F07D62CD52AFA1FA73AF0F9A3980CC4BACC4CC08248A7FAA86B2C00"
+FINAL_PROMPT_LINE_COUNT = 2029
+PROFILE_IDS = {"IPM-AUTH-046", "IPM-AUTH-065", "IPM-AUTH-067", "IPM-AUTH-070", "IPM-AUTH-078", "IPM-AUTH-088", "IPM-AUTH-105"}
+FORMAL_PROVENANCE_IDS = {"IPM-AUTH-035", "IPM-AUTH-072", "IPM-AUTH-078", "IPM-AUTH-105"}
 
 FIELDS = {
     "SG": ("version", "caseId", "rutType", "rutClass", "rutName", "ruleset", "groupId", "groupOrder", "kind", "scenarioCount", "simulationGroupKey"),
@@ -36,7 +43,7 @@ FIELDS = {
     "COLUMN": ("id", "order", "path", "class", "mode", "source", "simulatedRoot"),
     "COMPLEXITY": ("invocationCount", "whenRuleReferenceCount", "maxNesting", "operationCount", "loopCount", "modifiedPropertyCount", "conditionalBlockCount", "pageParameterCount", "unresolvedCriticalDependencyCount", "invocationChainDepth", "weightedScore", "tier", "ruleCrawlerCalls", "dependencyReferencesRequested", "hardTriggers", "triggeredLimits", "confidenceCap", "testabilityCap"),
     "SCENARIO": ("id", "order", "name", "owner", "covers", "testability", "confidence"),
-    "PARAM": ("scenario", "id", "order", "invocation", "dependency", "name", "mode", "inheritance", "expression", "valueType", "value", "evidence"),
+    "PARAM": ("scenario", "id", "order", "invocation", "dependency", "name", "formalType", "formalEvidence", "mode", "inheritance", "expression", "valueType", "value", "evidence"),
     "INPUT": ("scenario", "id", "order", "role", "path", "page", "class", "mode", "valueType", "value", "resolution", "evidence"),
     "SETUP": ("scenario", "id", "order", "role", "path", "page", "class", "mode", "valueType", "value", "evidence"),
     "RX": ("scenario", "id", "order", "source", "operation", "context", "guard", "inputs", "result", "writes", "evidence"),
@@ -70,7 +77,7 @@ BODY_ORDER = {
 NULLABLE = {
     "SG": {"simulationGroupKey"},
     "TARGET": {"constraint", "proof"},
-    "PARAM": {"expression", "value"},
+    "PARAM": {"formalType", "formalEvidence", "expression", "value"},
     "INPUT": {"page", "class", "resolution"},
     "RX": {"guard", "inputs", "writes"},
     "DEP": {"parameters"},
@@ -310,6 +317,92 @@ def typed_python(value_type, value):
     return value
 
 
+def project_rut_parameter_value(formal_type, value_type, value, pages):
+    """Static projection oracle for the original formal-type decision table.
+
+    None means unavailable, never an inferred type or an emitted null value.
+    The caller validates ledger value encoding before using this oracle.
+    """
+    if formal_type == "String" and value_type in {"string", "empty"}:
+        return json.dumps("" if value_type == "empty" else value, ensure_ascii=False)
+    if formal_type in {"Integer", "Decimal"} and value_type == "number":
+        try:
+            number = Decimal(value)
+        except (InvalidOperation, TypeError):
+            return None
+        if not number.is_finite():
+            return None
+        if formal_type == "Integer":
+            return str(int(number)) if number == number.to_integral_value() else None
+        return format(number, "f")
+    if formal_type in {"Boolean", "TrueFalse"} and value_type == "boolean" and value in {"true", "false"}:
+        return value
+    if formal_type == "PAGE" and value_type == "string" and value and value in pages:
+        return value
+    return None
+
+
+def validate_formal_parameters(records, pages, context):
+    """Check original-RUT type provenance without treating input bindings as formals."""
+    kind = records[0]["values"]["kind"]
+    scoped = defaultdict(dict)
+    for record in records:
+        values = record["values"]
+        if "scenario" in values and "id" in values:
+            scoped[values["scenario"]][values["id"]] = record
+    formal_inputs = {}
+    names = set()
+    source_definitions = {}
+    name_sources = {}
+    for record in records:
+        values = record["values"]
+        if record["tag"] != "INPUT":
+            continue
+        in_param_namespace = values["path"].startswith("Param.")
+        require(values["role"] != "DECISION_INPUT" or kind == "WHEN", f"{context}: DECISION_INPUT requires WHEN")
+        require(not in_param_namespace or values["role"] in {"PARAM", "DECISION_INPUT"}, f"{context}: INPUT formal namespace/role")
+        is_formal = values["role"] == "PARAM" or in_param_namespace
+        if not is_formal:
+            continue
+        scenario = values["scenario"]
+        parameter = scoped[scenario].get(values["resolution"], {})
+        require(parameter.get("tag") == "PARAM", f"{context}: formal INPUT resolution")
+        param = parameter["values"]
+        require(param["dependency"] == "RUT" and values["path"] == "Param." + param["name"], f"{context}: formal RUT name/binding")
+        key = (scenario, param["id"])
+        require(key not in formal_inputs and (scenario, param["name"]) not in names, f"{context}: duplicate formal RUT input")
+        formal_inputs[key] = values
+        names.add((scenario, param["name"]))
+        evidence = scoped[scenario].get(param["formalEvidence"], {})
+        require(evidence.get("tag") == "EVIDENCE", f"{context}: missing formal type evidence")
+        proof = evidence["values"]
+        missing_declaration = proof["source"] == "RuleJSON/pyParameters"
+        require(proof["kind"] == "RUT" and (missing_declaration or re.fullmatch(r"RuleJSON/pyParameters/(0|[1-9][0-9]*)", proof["source"]) is not None), f"{context}: formal type source")
+        require(not missing_declaration or param["formalType"] is None, f"{context}: missing declaration has inferred type")
+        require(param["formalEvidence"] in ids(param["evidence"], context, False), f"{context}: formal evidence not linked")
+        fact = canonical_json(proof["fact"], context)
+        require(isinstance(fact, dict) and set(fact) == {"pyParametersParamName", "pyParametersParamType"}, f"{context}: formal metadata shape")
+        require(fact["pyParametersParamName"] == param["name"] and fact["pyParametersParamType"] == param["formalType"], f"{context}: formal metadata drift")
+        require(param["formalType"] is None or isinstance(param["formalType"], str), f"{context}: formal type value")
+        definition = (param["name"], param["formalType"])
+        if not missing_declaration:
+            require(source_definitions.setdefault(proof["source"], definition) == definition, f"{context}: inconsistent original formal definition")
+        require(name_sources.setdefault(param["name"], proof["source"]) == proof["source"], f"{context}: ambiguous original formal name")
+        if project_rut_parameter_value(param["formalType"], param["valueType"], param["value"], pages) is None:
+            gaps = [r["values"] for r in records if r["tag"] == "GAP" and r["values"]["scenario"] == scenario]
+            require(any(gap["code"] == "RUT_PARAMETER_PROJECTION_UNAVAILABLE" and gap["scope"] == values["path"] and gap["effect"] == "PARTIAL" and param["formalEvidence"] in ids(gap["evidence"], context, False) for gap in gaps), f"{context}: unavailable formal projection lacks GAP")
+            meta = next(r["values"] for r in records if r["tag"] == "SCENARIO" and r["values"]["id"] == scenario)
+            require(meta["testability"] in {"PartiallyTestable", "NotTestable"}, f"{context}: unavailable formal projection marked Testable")
+    for record in records:
+        if record["tag"] == "PARAM":
+            values = record["values"]
+            if (values["scenario"], values["id"]) not in formal_inputs:
+                require(values["formalType"] is None and values["formalEvidence"] is None, f"{context}: non-formal PARAM has RUT type metadata")
+        if record["tag"] == "COLUMN":
+            values = record["values"]
+            require((values["source"] == "PARAM") == values["path"].startswith("Param."), f"{context}: COLUMN formal namespace")
+
+
 SIM_KEY_FIELDS = {
     "itemClass",
     "params",
@@ -378,7 +471,7 @@ def validate_ledger(path: Path) -> dict:
     require(sum(record["tag"] == "END" for record in records) == 1, f"{path.name}: END cardinality")
 
     header, end = records[0], records[-1]
-    require(header["values"]["version"] == "1", f"{path.name}: version")
+    require(header["values"]["version"] == "1.1", f"{path.name}: version; rematerialize legacy v1 sources")
     require(end["values"]["complete"] == "PASS", f"{path.name}: incomplete payload")
     scenario_count = integer(header, "scenarioCount")
     group_order = integer(header, "groupOrder")
@@ -504,7 +597,7 @@ def validate_ledger(path: Path) -> dict:
         scoped_counts = Counter(record["tag"] for record in scoped)
         require(integer(summary, "assertionCount") == scoped_counts["ASSERT"] and integer(summary, "omissionCount") == scoped_counts["OMIT"] and integer(summary, "simulationCount") == scoped_counts["SIM"] and integer(summary, "gapCount") == scoped_counts["GAP"], f"{path.name}: {scenario} SUMMARY counts")
         deps = [record["values"]["state"] for record in scoped if record["tag"] == "DEP"]
-        if all(state == "NOT_APPLICABLE" for state in deps):
+        if all(state == "NOT_APPLICABLE" for state in deps) and scoped_counts["GAP"] == 0:
             expected_dependency = "NotApplicable"
         elif all(state in {"CLOSED", "NOT_APPLICABLE"} for state in deps) and scoped_counts["GAP"] == 0:
             expected_dependency = "AllResolved"
@@ -811,6 +904,7 @@ def validate_ledger(path: Path) -> dict:
     for field, expected in expected_counts.items():
         require(integer(end, field) == expected, f"{path.name}: END {field} mismatch")
 
+    validate_formal_parameters(records, pages, path.name)
     return {
         "path": path,
         "payload": raw,
@@ -987,7 +1081,11 @@ def validate_slice() -> None:
         require("DEC-011" in row[6], f"slice decision trace {row[0]}")
         require(row[4] and row[5] and row[6] and row[7], f"slice incomplete {row[0]}")
         require(row[8] in {"NOT_STARTED", "IMPLEMENTED_NOT_VERIFIED", "VERIFIED"}, f"slice invalid status {row[0]}")
-        if row[0] in BATCH1_IDS:
+        if row[0] in PROFILE_IDS:
+            require(row[8] in {"IMPLEMENTED_NOT_VERIFIED", "VERIFIED"} and "DEC-027" in row[6].split(","), f"slice profile review/decision {row[0]}")
+        elif row[0] in FORMAL_PROVENANCE_IDS:
+            require(row[8] in {"IMPLEMENTED_NOT_VERIFIED", "VERIFIED"} and "DEC-026" in row[6].split(","), f"slice formal-provenance review/decision {row[0]}")
+        elif row[0] in BATCH1_IDS:
             require(row[8] == "VERIFIED", f"slice batch-1 status {row[0]}")
         elif row[0] in BATCH2_IDS:
             require(row[8] == "VERIFIED", f"slice batch-2 status {row[0]}")
@@ -1188,7 +1286,7 @@ def validate_prompt_integrity(raw: bytes) -> str:
         text = canonical.decode("utf-8")
     except UnicodeDecodeError as error:
         raise ContractError("Main prompt invalid UTF-8") from error
-    require(canonical.count(b"\n") == 1973, "Main prompt final logical line count")
+    require(canonical.count(b"\n") == FINAL_PROMPT_LINE_COUNT, "Main prompt final logical line count")
     require(hashlib.sha256(canonical).hexdigest().upper() == FINAL_PROMPT_SHA256, "Main prompt full-regression canonical-LF SHA-256")
     return text
 
@@ -1197,7 +1295,7 @@ def validate_prompt_portability() -> None:
     canonical = validate_prompt_integrity(PROMPT.read_bytes()).encode("utf-8")
     crlf = canonical.replace(b"\n", b"\r\n")
     require(validate_prompt_integrity(crlf) == validate_prompt_integrity(canonical), "Main prompt LF/CRLF equivalence")
-    require(hashlib.sha256(crlf).hexdigest().upper() == HISTORICAL_CRLF_PROMPT_SHA256, "Main prompt historical CRLF equivalence")
+    require(hashlib.sha256(crlf).hexdigest().upper() == FINAL_CRLF_PROMPT_SHA256, "Main prompt reviewed CRLF equivalence")
     mutations = {
         "semantic_content": canonical.replace(b"Scenario Author", b"Scenario Editor", 1),
         "boundary_whitespace": b" " + canonical,
@@ -1217,8 +1315,66 @@ def validate_prompt_portability() -> None:
         raise ContractError(f"prompt integrity mutation accepted: {name}")
 
 
+def restore_closure_source_prompt(text):
+    # Original-clause clarification only: preserve exact independently reviewed 1.3.
+    ban = r"Reserved top-level system-page seed/input ban \(original Main 20–24\):[^\n]+\n\n"
+    formula = r"For consumer validation only,[^\n]+\n\n"
+    require(len(re.findall(ban,text)) == len(re.findall(formula,text)) == 1, "closure source definition boundaries")
+    original = re.sub(ban,"",text)
+    original = re.sub(formula,"The metric names, hard-trigger thresholds, and weighted-score formula are exactly those in the canonical Author complexity contract. ",original)
+    require(hashlib.sha256(original.encode()).hexdigest().upper() == "9A3B1D8A060C78955024618E16DB3B4C85A1FD19A4009D604299A2C17E059FDD", "unchanged reviewed 1.3 outside closure source clarification")
+    return original
+
+
+def restore_projection_prompt(text):
+    text = restore_closure_source_prompt(text)
+    start = "#### 13.1.2 Revision 1.3 projection provenance"
+    end = "### 13.2 Encoding"
+    require(text.count(start) == 1, "projection provenance delta boundary")
+    original = text[:text.index(start)] + text[text.index(end, text.index(start)):]
+    original = original.replace("`SG|version=1.3|", "`SG|version=1.2|")
+    original = original.replace("revision 1.3 below is now the required producer/consumer revision", "revision 1.2 below is now the required producer/consumer revision")
+    original = original.replace("Revision 1.2 introduced this common profile; revision 1.3 below governs current producers and consumers. Generator rejects older or unknown revisions", "Producers emit `SG.version=1.2`; Generator rejects older or unknown revisions")
+    original = original.replace("historical revision-1.2 examples are under fixtures/s3/profiled/.", "current producer/consumer examples are under fixtures/s3/profiled/.")
+    require(hashlib.sha256(original.encode()).hexdigest().upper() == PROJECTION_BASELINE_SHA256, "unchanged instructions outside DEC-029 additions")
+    return original
+
+
+def restore_profile_prompt(text):
+    text = restore_projection_prompt(text)
+    start = "#### 13.1.1 Revision 1.2 source profile"
+    end = "### 13.2 Encoding"
+    require(text.count(start) == 1, "PROFILE prompt delta boundary")
+    original = text[:text.index(start)] + text[text.index(end, text.index(start)):]
+    original = original.replace("`SG|version=1.2|", "`SG|version=1.1|")
+    original = original.replace("(`F` PROFILE, `C` COLUMN,", "(`C` COLUMN,")
+    original = original.replace("6. for each scenario, its `PROFILE`, `PARAM`,", "6. for each scenario, its `PARAM`,")
+    original = original.replace("Revision 1.1 originally added formal provenance; revision 1.2 below is now the required producer/consumer revision and rejects every older or unknown revision before projection.", "Producers emit `SG.version=1.1`; consumers reject legacy `version=1` and unknown revisions before projection.")
+    require(hashlib.sha256(original.encode()).hexdigest().upper() == PROFILE_BASELINE_SHA256, "unchanged instructions outside DEC-027 additions")
+    return original
+
+
+def validate_formal_prompt_delta(text):
+    """Remove only the declared DEC-026 additions and recover the reviewed S2 text."""
+    original = restore_profile_prompt(text)
+    for start, end in (
+        ("Formal RUT metadata capture [", "### 5.3 BranchEvaluations ledger"),
+        ("Revision 1.1 adds explicit formal RUT parameter provenance", "A ScenarioGroup payload is the complete, immutable semantic snapshot"),
+        ("Formal RUT parameter provenance (IPM-AUTH-035/IPM-AUTH-078; DEC-026):", "#### 13.4.3 Execution and evidence"),
+    ):
+        require(original.count(start) == 1, f"formal prompt delta boundary: {start}")
+        left = original.index(start)
+        right = original.index(end, left)
+        original = original[:left] + original[right:]
+    formal_fields = "|formalType=<exactPegaTypeOrAbsent>|formalEvidence=<evidenceIDOrAbsent>"
+    require(original.count(formal_fields) == 1 and original.count("SG|version=1.1|") == 1, "formal prompt grammar delta")
+    original = original.replace(formal_fields, "").replace("SG|version=1.1|", "SG|version=1|")
+    require(hashlib.sha256(original.encode()).hexdigest().upper() == S2_BASELINE_PROMPT_SHA256, "unchanged S2 instructions outside DEC-026 additions")
+
+
 def validate_prompt_batch3() -> None:
     text = validate_prompt_integrity(PROMPT.read_bytes())
+    validate_formal_prompt_delta(text)
     for row_id in BATCH3_IDS:
         require(row_id in text, f"Main prompt missing batch-3 trace {row_id}")
 
@@ -1301,7 +1457,8 @@ def main() -> int:
     print(f"prompt_batch2_relocations={len(SEMANTIC_CRITICAL_CLAUSES)}")
     print("prompt_batch3=final_gates,exact_scenariogroup_contract,ordered_storage,single_handoff,downstream_boundary")
     print(f"prompt_full_regression=canonical_lf_sha256:{FINAL_PROMPT_SHA256},ipm_rows:106")
-    print("prompt_portability=uniform_lf_or_crlf,historical_crlf_equivalence,negative_mutations:8")
+    print("prompt_portability=uniform_lf_or_crlf,reviewed_crlf_equivalence,negative_mutations:8")
+    print("dec026=revision_1.1,formal_type_provenance,projection_gaps,unchanged_s2_baseline_recovered")
     return 0
 
 

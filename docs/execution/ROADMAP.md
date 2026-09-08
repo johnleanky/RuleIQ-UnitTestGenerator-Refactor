@@ -6,7 +6,7 @@ Every stage is governed by the Instruction Preservation Matrix and the high-risk
 
 Under DEC-023, every independent repository reviewer uses `gpt-6-astra` with `xhigh` reasoning, including documentation-only reviews, high-risk batches, and final whole-stage closure audits. The root agent passes both overrides explicitly and follows the availability and evidence rules in `CONTINUITY.md`.
 
-S3 is active after independent `gpt-6-astra`/`xhigh` activation-plan and checker-prerequisite `PASS`. Follow the [S3 ExecPlan](plans/S3-unit-test-generator.md): build and independently validate the Generator design-freeze package before prompt/export implementation.
+S3 is CLOSED after independent whole-stage gpt-6-astra/xhigh PASS and root reconciliation. All 15 criteria in the [S3 ExecPlan](plans/S3-unit-test-generator.md) are VERIFIED; see the [acceptance report](design/S3-acceptance-report.md). S4 and S5 remain NOT_STARTED.
 
 ## S0 — Baseline and Contract Stabilization
 
@@ -61,7 +61,7 @@ S3 is active after independent `gpt-6-astra`/`xhigh` activation-plan and checker
 
 - **Objective:** Design and add one sequential Pega agent named `UnitTestGenerator` that reads ordered ScenarioGroup UUIDs, creates one combined candidate, performs projection-only repair, and returns a runtime report.
 - **Dependencies:** `S1`, `S2`
-- **Status:** `ACTIVE`
+- **Status:** `CLOSED`
 - **Mandatory acceptance criteria:**
   - The new rule is named `UnitTestGenerator`; its canonical readable prompt is `UnitTestGenerator_Prompt.txt` and its Pega export is `UnitTestGenerator.txt`.
   - Generator consumes `CaseID`, immutable `RUTType`, and ordered `ScenarioGroupUUIDs`.
@@ -72,7 +72,7 @@ S3 is active after independent `gpt-6-astra`/`xhigh` activation-plan and checker
   - `GeneratorRunReport` returns `Completed`, `PartiallyCompleted`, or `Failed` consistently.
   - Every Generator-owned or shared Instruction Preservation Matrix row is implemented without duplicating semantic ownership from Scenario Author.
 - **Required validation:** Matrix-row traceability, repository-only standard and When grouping fixtures, multiple simulation groups, ordering, immutable semantic input, repair-version addressing, failure pruning, static runtime-report contract checks, and high-risk-gate independent review after each prompt or interface batch.
-- **Unresolved questions:** None; non-contractual Pega metadata may be selected during implementation and must be recorded and validated in the S3 ExecPlan.
+- **Unresolved questions:** None for S3 repository completion. Target selection, external tool implementation, live import and runtime remain Pega-owned; the unchanged legacy Validator is adapted in S4.
 
 ## S4 — Validator Refactor
 
