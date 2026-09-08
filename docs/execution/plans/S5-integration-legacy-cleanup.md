@@ -1,8 +1,37 @@
 # ExecPlan: S5 Integration and Legacy Cleanup
 
 - **Roadmap stage:** S5
-- **Plan status:** CLOSED — independent whole-stage PASS and root reconciliation complete; all13criteria VERIFIED.
+- **Plan status:** CLOSED — original13criteria and annotation-cleanup criteria14–15 VERIFIED after independent PASS and root reconciliation.
 - **Last reconciled:** 2026-09-08
+
+## DEC-reference completion — 2026-09-08
+
+VERIFIED — on2026-09-08 /root/review_ipm_cleanup actual gpt-6-astra/xhigh returned PASS for the clarified DEC cleanup, with no remaining actionable findings. Root reconciled25removed DEC references/16closed editorial substitutions, all five product hashes and fixed-closure reconstruction, both decoded export pairs and unchanged outside-prompt metadata,83protected files,150matrix rows,106Author IDs/132anchors and36consumer anchors. The complete S5 gate passed locally and independently (16integration groups, three annotation/ten artifact/six matrix controls, fixed historical S4/S3 gate including35producer groups and180correction regressions); ten additional independent DEC-reinsertion/baseline-drift probes were rejected. The reviewer-reported stale DEC-032 scope text was corrected and rechecked. Criterion15 is VERIFIED; S5 is CLOSED. All19project paths remain uncommitted, .idea/ is untouched, and no commit/push or Pega operation occurred. The separate two Validator behavior findings remain unfixed.
+
+Earlier entries below retain their checkpoint state; this closure entry governs current readiness.
+
+IMPLEMENTED_NOT_VERIFIED — the user clarified that remaining DEC references such as [DEC-026] must also be removed. Root removed25references (Main10, Generator12, Validator3) using16closed editorial substitutions that preserve operative requirements. Both exports are synchronized only inside pySystemPrompt. All five pre-cleanup products remain pinned to2c2fc19, current hashes/Author anchors are updated, and83other baseline files remain fixed; the Validator pair is now an explicitly authorized annotation-only delta. Full local validation and independent gpt-6-astra/xhigh review are pending. No commit/push, Pega runtime or unrelated Validator behavior fix is included.
+
+- Authorization: the user identified [DEC-026] as another unwanted runtime annotation. Extend DEC-032 to all remaining DEC references, including prose references, and preserve the actual requirements. This supersedes the previous IPM-only instruction to retain DEC labels.
+- Scope: all three canonical prompts and both paired exports; current Author anchor quotes, S5 builder/checker, manifests and affected documentation. Preserve83baseline files and all bytes outside both pySystemPrompt bodies.
+- Acceptance criterion15: no IPM-/DEC- references in any effective prompt/export; exact bounded editorial changes only; all150matrix rows,106Author IDs/132anchors and36consumer anchors still resolve; both decoded pairs and metadata checks pass; complete current/historical gate and independent read-only gpt-6-astra/xhigh review pass.
+- Risk/gate: one indivisible prompt/checker batch; dependent work stops until independent review. The separate two Validator behavior findings remain unchanged and are outside scope.
+
+## Post-closure annotation cleanup — 2026-09-08
+
+VERIFIED — on 2026-09-08 focused /root/review_ipm_cleanup actual gpt-6-astra/xhigh returned PASS with both first-review P2 findings closed and no remaining actionable issues in the annotation cleanup. Root reconciled the complete corrected S5 gate (16connected groups,150rows,106Author IDs/132anchors,85protected files, three annotation/nine artifact/six matrix controls and fixed historical S4/S3 PASS), unchanged reviewed product hashes, exact annotation-only baseline differences and both-pair XML/metadata checks. Reviewer also rejected the original injection and six additional catalog/overlay attacks. Criterion14 is VERIFIED; S5 is CLOSED. The16project paths remain uncommitted; .idea/ is untouched. HEAD and local origin/main are2c2fc19 with0/0divergence. No commit/push or Pega operation was performed in this cleanup; the two separate Validator findings remain unfixed.
+
+Earlier cleanup entries below retain their checkpoint state; this closure entry governs current readiness.
+
+- User authorization: remove IPM tags from prompts. DEC-032 permits annotation removal and corresponding external traceability maintenance; no commit/push is requested.
+- Scope: 27 exact replacements remove 135 IPM occurrences from Main/Generator canonical prompts and synchronize the Generator export. Standalone labels and annotation-only prose are removed; adjacent instructions, DEC references, schemas and export metadata are retained. Validator pair and reference-only Main export remain fixed.
+- Traceability: retain all original matrix IDs in documentation and fixtures. Replace in-prompt-ID destinations with real section headings and 132 section/quote anchors for all106Author IDs, derived from the tagged closure text.
+- Acceptance criterion14: no IPM identifiers in effective prompts/exports; only authorized annotation deltas from2c2fc19; complete original instruction mapping remains checked; both selected pairs decode exactly; all85protected artifacts stay fixed; complete S5 gate and independent read-only gpt-6-astra/xhigh review pass.
+- Validation: run the complete current/historical S5 gate, inspect annotation-only diff and metadata preservation, and reject tag reinsertion plus corrupted section/quote anchors. This indivisible prompt/checker batch requires independent review before dependent work or closure.
+- Evidence: IMPLEMENTED_NOT_VERIFIED. Complete S5 gate passed:16connected groups,150rows,85protected files, nine artifact/six matrix mutations and fixed historical S4/S3 full gate. Root independently verified annotation-only baseline differences and decoded XML parity/metadata. Independent review remains pending. No Pega runtime claim.
+IMPLEMENTED_NOT_VERIFIED — first independent /root/review_ipm_cleanup gpt-6-astra/xhigh review returned FAIL on two P2 findings: annotation replacements could inject operational text, and current tracking documentation was stale. Root now enforces a closed annotation-only replacement allowlist, pins tagged artifacts to the fixed S5 closure, adds three insertion/deletion/drift negative controls, and records observed HEAD/origin0/0 without attribution. Corrected local checks and focused review are pending.
+
+- Separate known work: two P2 Validator oracle findings from the read-only review (quoted schema-error phrases and raw SIM params comparison) remain unfixed and are outside this annotation-only request.
 
 ## Purpose
 
@@ -73,6 +102,10 @@ Complete the repository refactor by proving the Scenario Author -> UnitTestGener
 12. VERIFIED — Historical full S4 gate (including all S2/S3 suites) passes on fixed isolated baseline. Current S5 integration, reverse matrix, complete legacy search, artifact/protected-scope, link/next-action, whitespace and meaningful negative mutations also pass.
 13. VERIFIED — Independent whole-stage actual gpt-6-astra/xhigh PASS has no remaining actionable findings; root records current hashes, correction history and honest static limits and closes S5 with one synchronized handoff action.
 
+14. VERIFIED — User-requested IPM annotation cleanup under DEC-032 preserves all operational text, external traceability, paired exports and protected artifacts; complete corrected gate and focused independent PASS are reconciled in the addendum.
+
+15. VERIFIED — User-clarified DEC reference cleanup preserves all operative requirements and current external anchors, removes remaining references from all five effective products, preserves both export metadata boundaries and83fixed artifacts, and passes complete local/independent checks recorded in the addendum.
+
 ## Validation
 
 - Use Python with the unchanged requirements-s3.txt; full Draft202012Validator, not a partial schema substitute.
@@ -83,6 +116,8 @@ Complete the repository refactor by proving the Scenario Author -> UnitTestGener
 - Independent reviewers are read-only actual gpt-6-astra/xhigh; root is sole writer. No product work before design PASS or stage closure before whole-stage PASS.
 
 ## Evidence
+
+- VERIFIED authorization — on2026-09-08 the user requested a local commit of the completed IPM/DEC cleanup. Use vkoloskov <95134563+vkoloskov@users.noreply.github.com> as both author and committer, include all19verified project paths and commit reconciliation, exclude .idea/, and perform no push. Commit creation remains pending; no product behavior changes are part of this step.
 
 - VERIFIED — on 2026-09-08 root created the user-authorized local S5 closure checkpoint in 22 project paths, with vkoloskov <95134563+vkoloskov@users.noreply.github.com> as both author and committer. Parent is d4061046650c87b9da2c4f87141f23aa2602f082; main is four commits ahead of unchanged local origin/main and only .idea/ remains untracked. The complete staged S5 gate passed, including 16 integration groups and the fixed historical S4/S3 gate (35 producer groups, seven suites/180 corrections). This same checkpoint includes its Git-state reconciliation; resolve its final self-referential hash from Git. No push was performed; all S0–S5 stages remain CLOSED.
 
@@ -118,4 +153,4 @@ Earlier entries below retain their checkpoint state; the latest closure entry an
 
 ## Exact Next Action
 
-Await user-owned Pega import/runtime results for the committed S5 artifacts.
+Await user direction on the two separately reproduced Validator review findings.

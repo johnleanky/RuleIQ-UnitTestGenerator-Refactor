@@ -1,0 +1,742 @@
+{
+  "IPM-AUTH-001": [
+    {
+      "section": "## 1. Scenario Author core contract",
+      "anchor": "You are the Pega Scenario Author. Your goal is to produce the minimum number of valid physical ScenarioGroups that achieve maximum practical, evidence-supported coverage of the Rule Under Test (RUT), bounded by RuleJSON evidence, semantic KnowledgeTool guidance, RuleCrawler results, the ScenarioGroup v1 contract, and Pega runtime constraints."
+    }
+  ],
+  "IPM-AUTH-002": [
+    {
+      "section": "## 1. Scenario Author core contract",
+      "anchor": "You are the Pega Scenario Author. Your goal is to produce the minimum number of valid physical ScenarioGroups that achieve maximum practical, evidence-supported coverage of the Rule Under Test (RUT), bounded by RuleJSON evidence, semantic KnowledgeTool guidance, RuleCrawler results, the ScenarioGroup v1 contract, and Pega runtime constraints."
+    }
+  ],
+  "IPM-AUTH-003": [
+    {
+      "section": "### 1.1 Authority hierarchy and downstream-reference lock",
+      "anchor": "Apply instructions in this order:"
+    },
+    {
+      "section": "## 1A. ScenarioGroup storage and UnitTestGenerator handoff",
+      "anchor": "After every physical group passes the final semantic audit, serialize and self-parse its exact payload against the complete ScenarioGroup v1 grammar in Section 13. Use `CaseID` only from `GetCaseData.pyID`; never use `application_context.caseID` or `pzInsKey`. Preserve the original `RUTType` unchanged for the entire run."
+    }
+  ],
+  "IPM-AUTH-010": [
+    {
+      "section": "### 1.1 Authority hierarchy and downstream-reference lock",
+      "anchor": "Apply instructions in this order:"
+    },
+    {
+      "section": "### 1A.1 Deferred downstream ownership",
+      "anchor": "These preserved requirements belong only to downstream agents and are not executable Scenario Author work:"
+    }
+  ],
+  "IPM-AUTH-011": [
+    {
+      "section": "### 1.1 Authority hierarchy and downstream-reference lock",
+      "anchor": "Apply instructions in this order:"
+    },
+    {
+      "section": "### 1A.1 Deferred downstream ownership",
+      "anchor": "These preserved requirements belong only to downstream agents and are not executable Scenario Author work:"
+    }
+  ],
+  "IPM-AUTH-012": [
+    {
+      "section": "### 1.1 Authority hierarchy and downstream-reference lock",
+      "anchor": "Apply instructions in this order:"
+    },
+    {
+      "section": "### 1A.1 Deferred downstream ownership",
+      "anchor": "These preserved requirements belong only to downstream agents and are not executable Scenario Author work:"
+    }
+  ],
+  "IPM-AUTH-014": [
+    {
+      "section": "### 1.1 Authority hierarchy and downstream-reference lock",
+      "anchor": "Apply instructions in this order:"
+    },
+    {
+      "section": "### 1A.1 Deferred downstream ownership",
+      "anchor": "These preserved requirements belong only to downstream agents and are not executable Scenario Author work:"
+    }
+  ],
+  "IPM-AUTH-015": [
+    {
+      "section": "### 1.1 Authority hierarchy and downstream-reference lock",
+      "anchor": "Apply instructions in this order:"
+    },
+    {
+      "section": "### 1A.1 Deferred downstream ownership",
+      "anchor": "These preserved requirements belong only to downstream agents and are not executable Scenario Author work:"
+    }
+  ],
+  "IPM-AUTH-017": [
+    {
+      "section": "### 1.1 Authority hierarchy and downstream-reference lock",
+      "anchor": "Apply instructions in this order:"
+    },
+    {
+      "section": "### 1A.1 Deferred downstream ownership",
+      "anchor": "These preserved requirements belong only to downstream agents and are not executable Scenario Author work:"
+    }
+  ],
+  "IPM-AUTH-004": [
+    {
+      "section": "### 1.2 Reserved system-page seed ban",
+      "anchor": "Never set up, seed, simulate, select as primary, add to Pages & Classes, or use as a Rule-Obj-When input root any of these top-level pages:"
+    }
+  ],
+  "IPM-AUTH-005": [
+    {
+      "section": "### 1.3 Scenario state and physical grouping authority",
+      "anchor": "Section 11 alone forms, selects, and audits Scenarios. Maintain one complete replacement snapshot for current Scenario Compiler state; do not keep competing target, witness, coverage, or frozen-membership ledgers. The final immutable authority is the complete set of ScenarioGroup v1 payloads produced from one audited snapshot. legacy transient-memory transport is not an interface and no transcript-order “latest” record is authoritative."
+    }
+  ],
+  "IPM-AUTH-006": [
+    {
+      "section": "### 1.3 Scenario state and physical grouping authority",
+      "anchor": "Section 11 alone forms, selects, and audits Scenarios. Maintain one complete replacement snapshot for current Scenario Compiler state; do not keep competing target, witness, coverage, or frozen-membership ledgers. The final immutable authority is the complete set of ScenarioGroup v1 payloads produced from one audited snapshot. legacy transient-memory transport is not an interface and no transcript-order “latest” record is authoritative."
+    }
+  ],
+  "IPM-AUTH-007": [
+    {
+      "section": "### 1.3 Scenario state and physical grouping authority",
+      "anchor": "Section 11 alone forms, selects, and audits Scenarios. Maintain one complete replacement snapshot for current Scenario Compiler state; do not keep competing target, witness, coverage, or frozen-membership ledgers. The final immutable authority is the complete set of ScenarioGroup v1 payloads produced from one audited snapshot. legacy transient-memory transport is not an interface and no transcript-order “latest” record is authoritative."
+    }
+  ],
+  "IPM-AUTH-008": [
+    {
+      "section": "### 1.3 Scenario state and physical grouping authority",
+      "anchor": "Section 11 alone forms, selects, and audits Scenarios. Maintain one complete replacement snapshot for current Scenario Compiler state; do not keep competing target, witness, coverage, or frozen-membership ledgers. The final immutable authority is the complete set of ScenarioGroup v1 payloads produced from one audited snapshot. legacy transient-memory transport is not an interface and no transcript-order “latest” record is authoritative."
+    }
+  ],
+  "IPM-AUTH-009": [
+    {
+      "section": "### 1.4 Visible output lock",
+      "anchor": "All reasoning, crawl state, evidence, ScenarioGroup payloads, UUIDs, and Generator details are silent internal work. The only visible final response is one raw JSON object with exactly:"
+    }
+  ],
+  "IPM-AUTH-013": [
+    {
+      "section": "## 1A. ScenarioGroup storage and UnitTestGenerator handoff",
+      "anchor": "After every physical group passes the final semantic audit, serialize and self-parse its exact payload against the complete ScenarioGroup v1 grammar in Section 13. Use `CaseID` only from `GetCaseData.pyID`; never use `application_context.caseID` or `pzInsKey`. Preserve the original `RUTType` unchanged for the entire run."
+    }
+  ],
+  "IPM-AUTH-016": [
+    {
+      "section": "## 1A. ScenarioGroup storage and UnitTestGenerator handoff",
+      "anchor": "After every physical group passes the final semantic audit, serialize and self-parse its exact payload against the complete ScenarioGroup v1 grammar in Section 13. Use `CaseID` only from `GetCaseData.pyID`; never use `application_context.caseID` or `pzInsKey`. Preserve the original `RUTType` unchanged for the entire run."
+    }
+  ],
+  "IPM-AUTH-018": [
+    {
+      "section": "## 1A. ScenarioGroup storage and UnitTestGenerator handoff",
+      "anchor": "After every physical group passes the final semantic audit, serialize and self-parse its exact payload against the complete ScenarioGroup v1 grammar in Section 13. Use `CaseID` only from `GetCaseData.pyID`; never use `application_context.caseID` or `pzInsKey`. Preserve the original `RUTType` unchanged for the entire run."
+    }
+  ],
+  "IPM-AUTH-019": [
+    {
+      "section": "## 1B. Closed external-interface allowlist",
+      "anchor": "Scenario Author may use exactly these external interfaces:"
+    }
+  ],
+  "IPM-AUTH-020": [
+    {
+      "section": "## 2. Source-of-truth order",
+      "anchor": "1. RuleJSON and fetched dependency RuleJSON are the semantic source of truth."
+    }
+  ],
+  "IPM-AUTH-021": [
+    {
+      "section": "## 3. KnowledgeTool semantic composite-key contract",
+      "anchor": "KnowledgeTool resolves Pega semantic guidance for one or more composite keys in a single batch call. Scenario Author requests only semantic KnowledgeArea content; JsonSchema, JsonExample, MultInpComb-JsonSchema, MultInpComb-JsonExample, RuleCode, and candidate-projection guidance belong to UnitTestGenerator and are forbidden here."
+    }
+  ],
+  "IPM-AUTH-022": [
+    {
+      "section": "## 3. KnowledgeTool semantic composite-key contract",
+      "anchor": "KnowledgeTool resolves Pega semantic guidance for one or more composite keys in a single batch call. Scenario Author requests only semantic KnowledgeArea content; JsonSchema, JsonExample, MultInpComb-JsonSchema, MultInpComb-JsonExample, RuleCode, and candidate-projection guidance belong to UnitTestGenerator and are forbidden here."
+    }
+  ],
+  "IPM-AUTH-023": [
+    {
+      "section": "## 3. KnowledgeTool semantic composite-key contract",
+      "anchor": "KnowledgeTool resolves Pega semantic guidance for one or more composite keys in a single batch call. Scenario Author requests only semantic KnowledgeArea content; JsonSchema, JsonExample, MultInpComb-JsonSchema, MultInpComb-JsonExample, RuleCode, and candidate-projection guidance belong to UnitTestGenerator and are forbidden here."
+    }
+  ],
+  "IPM-AUTH-024": [
+    {
+      "section": "## 3. KnowledgeTool semantic composite-key contract",
+      "anchor": "KnowledgeTool resolves Pega semantic guidance for one or more composite keys in a single batch call. Scenario Author requests only semantic KnowledgeArea content; JsonSchema, JsonExample, MultInpComb-JsonSchema, MultInpComb-JsonExample, RuleCode, and candidate-projection guidance belong to UnitTestGenerator and are forbidden here."
+    }
+  ],
+  "IPM-AUTH-025": [
+    {
+      "section": "## 3. KnowledgeTool semantic composite-key contract",
+      "anchor": "KnowledgeTool resolves Pega semantic guidance for one or more composite keys in a single batch call. Scenario Author requests only semantic KnowledgeArea content; JsonSchema, JsonExample, MultInpComb-JsonSchema, MultInpComb-JsonExample, RuleCode, and candidate-projection guidance belong to UnitTestGenerator and are forbidden here."
+    }
+  ],
+  "IPM-AUTH-026": [
+    {
+      "section": "## 3. KnowledgeTool semantic composite-key contract",
+      "anchor": "KnowledgeTool resolves Pega semantic guidance for one or more composite keys in a single batch call. Scenario Author requests only semantic KnowledgeArea content; JsonSchema, JsonExample, MultInpComb-JsonSchema, MultInpComb-JsonExample, RuleCode, and candidate-projection guidance belong to UnitTestGenerator and are forbidden here."
+    }
+  ],
+  "IPM-AUTH-027": [
+    {
+      "section": "## 4. Required execution order",
+      "anchor": "Execute this order atomically and emit no intermediate output:"
+    }
+  ],
+  "IPM-AUTH-028": [
+    {
+      "section": "## 4. Required execution order",
+      "anchor": "Execute this order atomically and emit no intermediate output:"
+    }
+  ],
+  "IPM-AUTH-029": [
+    {
+      "section": "## 4. Required execution order",
+      "anchor": "Execute this order atomically and emit no intermediate output:"
+    }
+  ],
+  "IPM-AUTH-030": [
+    {
+      "section": "## 4. Required execution order",
+      "anchor": "Execute this order atomically and emit no intermediate output:"
+    }
+  ],
+  "IPM-AUTH-031": [
+    {
+      "section": "## 4. Required execution order",
+      "anchor": "Execute this order atomically and emit no intermediate output:"
+    }
+  ],
+  "IPM-AUTH-032": [
+    {
+      "section": "## 4. Required execution order",
+      "anchor": "Execute this order atomically and emit no intermediate output:"
+    }
+  ],
+  "IPM-AUTH-033": [
+    {
+      "section": "## 5. Internal Evidence Ledger contract",
+      "anchor": "Before freezing final Scenario decisions or materializing a ScenarioGroup, internally complete these sections:"
+    }
+  ],
+  "IPM-AUTH-034": [
+    {
+      "section": "## 5. Internal Evidence Ledger contract",
+      "anchor": "Before freezing final Scenario decisions or materializing a ScenarioGroup, internally complete these sections:"
+    }
+  ],
+  "IPM-AUTH-035": [
+    {
+      "section": "## 5. Internal Evidence Ledger contract",
+      "anchor": "Before freezing final Scenario decisions or materializing a ScenarioGroup, internally complete these sections:"
+    },
+    {
+      "section": "### 5.2 ParameterResolutions ledger",
+      "anchor": "Formal RUT metadata capture: before freezing a physical Param.<name> input, resolve its unique exact-name declaration in the original RUT parameter array. Preserve the declared Pega type and its indexed RUT evidence separately from the typed runtime value in PARAM.formalType/formalEvidence, following Section 13 revision 1.1. Missing or unsupported metadata remains an explicit projection GAP; never infer a type from a value, alter frozen coverage, or perform downstream parameter serialization here."
+    },
+    {
+      "section": "#### 13.4.2 Physical inputs and setup",
+      "anchor": "Formal RUT parameter provenance:"
+    }
+  ],
+  "IPM-AUTH-036": [
+    {
+      "section": "## 5. Internal Evidence Ledger contract",
+      "anchor": "Before freezing final Scenario decisions or materializing a ScenarioGroup, internally complete these sections:"
+    }
+  ],
+  "IPM-AUTH-037": [
+    {
+      "section": "## 5. Internal Evidence Ledger contract",
+      "anchor": "Before freezing final Scenario decisions or materializing a ScenarioGroup, internally complete these sections:"
+    }
+  ],
+  "IPM-AUTH-038": [
+    {
+      "section": "## 5. Internal Evidence Ledger contract",
+      "anchor": "Before freezing final Scenario decisions or materializing a ScenarioGroup, internally complete these sections:"
+    }
+  ],
+  "IPM-AUTH-039": [
+    {
+      "section": "## 5. Internal Evidence Ledger contract",
+      "anchor": "Before freezing final Scenario decisions or materializing a ScenarioGroup, internally complete these sections:"
+    }
+  ],
+  "IPM-AUTH-040": [
+    {
+      "section": "## 5. Internal Evidence Ledger contract",
+      "anchor": "Before freezing final Scenario decisions or materializing a ScenarioGroup, internally complete these sections:"
+    }
+  ],
+  "IPM-AUTH-041": [
+    {
+      "section": "## 5. Internal Evidence Ledger contract",
+      "anchor": "Before freezing final Scenario decisions or materializing a ScenarioGroup, internally complete these sections:"
+    }
+  ],
+  "IPM-AUTH-042": [
+    {
+      "section": "## 5. Internal Evidence Ledger contract",
+      "anchor": "Before freezing final Scenario decisions or materializing a ScenarioGroup, internally complete these sections:"
+    }
+  ],
+  "IPM-AUTH-078": [
+    {
+      "section": "### 5.2 ParameterResolutions ledger",
+      "anchor": "Formal RUT metadata capture: before freezing a physical Param.<name> input, resolve its unique exact-name declaration in the original RUT parameter array. Preserve the declared Pega type and its indexed RUT evidence separately from the typed runtime value in PARAM.formalType/formalEvidence, following Section 13 revision 1.1. Missing or unsupported metadata remains an explicit projection GAP; never infer a type from a value, alter frozen coverage, or perform downstream parameter serialization here."
+    },
+    {
+      "section": "## 11. Scenario formation and semantic decision freeze",
+      "anchor": "Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:"
+    },
+    {
+      "section": "#### 13.4.2 Physical inputs and setup",
+      "anchor": "Formal RUT parameter provenance:"
+    }
+  ],
+  "IPM-AUTH-043": [
+    {
+      "section": "## 6. Assertion discovery and resolution",
+      "anchor": "The goal is maximum justified assertion coverage, not speculative coverage."
+    }
+  ],
+  "IPM-AUTH-044": [
+    {
+      "section": "## 6. Assertion discovery and resolution",
+      "anchor": "The goal is maximum justified assertion coverage, not speculative coverage."
+    }
+  ],
+  "IPM-AUTH-045": [
+    {
+      "section": "## 6. Assertion discovery and resolution",
+      "anchor": "The goal is maximum justified assertion coverage, not speculative coverage."
+    }
+  ],
+  "IPM-AUTH-046": [
+    {
+      "section": "## 6. Assertion discovery and resolution",
+      "anchor": "The goal is maximum justified assertion coverage, not speculative coverage."
+    },
+    {
+      "section": "#### 13.1.1 Revision 1.2 source profile",
+      "anchor": "- For each binding, DEPENDENCY source `PROPERTY_DEFINITION/<assertionID>` captures `path`, `pyPropertyMode`, and `pyStringType` from the resolved property definition and its lookup path. They equal fullPath, structure, and scalarType. EXECUTION source `ASSERTION_CONTEXT/<assertionID>` captures exactly stepPage, stepClass, fullPath, parentMode, context, producerIndex (Known, Unknown, NotApplicable), and payloadProven (boolean) from the audited APB/producer state. All five common fields equal the binding. Both IDs occur in binding.evidence. A List with unknown producer index requires proven payload and InAnyInstance; its uncertain index must never be turned into an all-items or positional assertion."
+    }
+  ],
+  "IPM-AUTH-047": [
+    {
+      "section": "## 6. Assertion discovery and resolution",
+      "anchor": "The goal is maximum justified assertion coverage, not speculative coverage."
+    }
+  ],
+  "IPM-AUTH-048": [
+    {
+      "section": "## 7. Dependency and RuleCrawler discipline",
+      "anchor": "The agent works in two modes."
+    }
+  ],
+  "IPM-AUTH-049": [
+    {
+      "section": "## 7. Dependency and RuleCrawler discipline",
+      "anchor": "The agent works in two modes."
+    }
+  ],
+  "IPM-AUTH-050": [
+    {
+      "section": "## 7. Dependency and RuleCrawler discipline",
+      "anchor": "The agent works in two modes."
+    }
+  ],
+  "IPM-AUTH-051": [
+    {
+      "section": "## 7. Dependency and RuleCrawler discipline",
+      "anchor": "The agent works in two modes."
+    }
+  ],
+  "IPM-AUTH-052": [
+    {
+      "section": "## 7. Dependency and RuleCrawler discipline",
+      "anchor": "The agent works in two modes."
+    }
+  ],
+  "IPM-AUTH-053": [
+    {
+      "section": "## 7. Dependency and RuleCrawler discipline",
+      "anchor": "The agent works in two modes."
+    }
+  ],
+  "IPM-AUTH-054": [
+    {
+      "section": "## 7. Dependency and RuleCrawler discipline",
+      "anchor": "The agent works in two modes."
+    }
+  ],
+  "IPM-AUTH-055": [
+    {
+      "section": "## 7. Dependency and RuleCrawler discipline",
+      "anchor": "The agent works in two modes."
+    }
+  ],
+  "IPM-AUTH-056": [
+    {
+      "section": "## 7. Dependency and RuleCrawler discipline",
+      "anchor": "The agent works in two modes."
+    }
+  ],
+  "IPM-AUTH-057": [
+    {
+      "section": "## 8. RUF transitive discovery discipline",
+      "anchor": "Use Section 7 `D`/`_DWLState` flow for every critical `@FunctionName(...)`."
+    }
+  ],
+  "IPM-AUTH-058": [
+    {
+      "section": "## 8. RUF transitive discovery discipline",
+      "anchor": "Use Section 7 `D`/`_DWLState` flow for every critical `@FunctionName(...)`."
+    }
+  ],
+  "IPM-AUTH-059": [
+    {
+      "section": "## 9. Property, context, branch, and simulation tracing",
+      "anchor": "For every asserted or candidate property:"
+    }
+  ],
+  "IPM-AUTH-060": [
+    {
+      "section": "## 9. Property, context, branch, and simulation tracing",
+      "anchor": "For every asserted or candidate property:"
+    }
+  ],
+  "IPM-AUTH-061": [
+    {
+      "section": "## 9. Property, context, branch, and simulation tracing",
+      "anchor": "For every asserted or candidate property:"
+    }
+  ],
+  "IPM-AUTH-062": [
+    {
+      "section": "## 9. Property, context, branch, and simulation tracing",
+      "anchor": "For every asserted or candidate property:"
+    }
+  ],
+  "IPM-AUTH-063": [
+    {
+      "section": "## 9. Property, context, branch, and simulation tracing",
+      "anchor": "For every asserted or candidate property:"
+    }
+  ],
+  "IPM-AUTH-064": [
+    {
+      "section": "## 9. Property, context, branch, and simulation tracing",
+      "anchor": "For every asserted or candidate property:"
+    }
+  ],
+  "IPM-AUTH-065": [
+    {
+      "section": "## 10. Property semantics and assertion intent",
+      "anchor": "Resolve property definitions when exact-value assertions depend on property structure or data type."
+    }
+  ],
+  "IPM-AUTH-066": [
+    {
+      "section": "## 10. Property semantics and assertion intent",
+      "anchor": "Resolve property definitions when exact-value assertions depend on property structure or data type."
+    }
+  ],
+  "IPM-AUTH-067": [
+    {
+      "section": "## 10. Property semantics and assertion intent",
+      "anchor": "Resolve property definitions when exact-value assertions depend on property structure or data type."
+    }
+  ],
+  "IPM-AUTH-068": [
+    {
+      "section": "## 10. Property semantics and assertion intent",
+      "anchor": "Resolve property definitions when exact-value assertions depend on property structure or data type."
+    }
+  ],
+  "IPM-AUTH-069": [
+    {
+      "section": "## 10. Property semantics and assertion intent",
+      "anchor": "Resolve property definitions when exact-value assertions depend on property structure or data type."
+    }
+  ],
+  "IPM-AUTH-070": [
+    {
+      "section": "## 10. Property semantics and assertion intent",
+      "anchor": "Resolve property definitions when exact-value assertions depend on property structure or data type."
+    }
+  ],
+  "IPM-AUTH-071": [
+    {
+      "section": "## 11. Scenario formation and semantic decision freeze",
+      "anchor": "Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:"
+    }
+  ],
+  "IPM-AUTH-072": [
+    {
+      "section": "## 11. Scenario formation and semantic decision freeze",
+      "anchor": "Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:"
+    }
+  ],
+  "IPM-AUTH-073": [
+    {
+      "section": "## 11. Scenario formation and semantic decision freeze",
+      "anchor": "Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:"
+    }
+  ],
+  "IPM-AUTH-074": [
+    {
+      "section": "## 11. Scenario formation and semantic decision freeze",
+      "anchor": "Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:"
+    }
+  ],
+  "IPM-AUTH-075": [
+    {
+      "section": "## 11. Scenario formation and semantic decision freeze",
+      "anchor": "Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:"
+    }
+  ],
+  "IPM-AUTH-076": [
+    {
+      "section": "## 11. Scenario formation and semantic decision freeze",
+      "anchor": "Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:"
+    }
+  ],
+  "IPM-AUTH-077": [
+    {
+      "section": "## 11. Scenario formation and semantic decision freeze",
+      "anchor": "Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:"
+    }
+  ],
+  "IPM-AUTH-079": [
+    {
+      "section": "## 11. Scenario formation and semantic decision freeze",
+      "anchor": "Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:"
+    }
+  ],
+  "IPM-AUTH-080": [
+    {
+      "section": "## 11. Scenario formation and semantic decision freeze",
+      "anchor": "Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:"
+    }
+  ],
+  "IPM-AUTH-081": [
+    {
+      "section": "## 11. Scenario formation and semantic decision freeze",
+      "anchor": "Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:"
+    }
+  ],
+  "IPM-AUTH-082": [
+    {
+      "section": "## 11. Scenario formation and semantic decision freeze",
+      "anchor": "Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:"
+    }
+  ],
+  "IPM-AUTH-083": [
+    {
+      "section": "## 11. Scenario formation and semantic decision freeze",
+      "anchor": "Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:"
+    }
+  ],
+  "IPM-AUTH-084": [
+    {
+      "section": "## 11. Scenario formation and semantic decision freeze",
+      "anchor": "Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:"
+    }
+  ],
+  "IPM-AUTH-085": [
+    {
+      "section": "## 11. Scenario formation and semantic decision freeze",
+      "anchor": "Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:"
+    }
+  ],
+  "IPM-AUTH-086": [
+    {
+      "section": "## 11. Scenario formation and semantic decision freeze",
+      "anchor": "Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:"
+    }
+  ],
+  "IPM-AUTH-087": [
+    {
+      "section": "## 11. Scenario formation and semantic decision freeze",
+      "anchor": "Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:"
+    }
+  ],
+  "IPM-AUTH-088": [
+    {
+      "section": "## 12. Final semantic summary and decision ledger",
+      "anchor": "Scenario Author materializes truthful semantic SUMMARY, ASSERT, SIM, OMIT, GAP, EVIDENCE, and NARRATIVE records for every final Scenario. UnitTestGenerator later projects these frozen records to EvidenceSummary, AssertionDecisionTrace, pySimulation, and RuleCode without changing their meaning."
+    }
+  ],
+  "IPM-AUTH-089": [
+    {
+      "section": "## 12. Final semantic summary and decision ledger",
+      "anchor": "Scenario Author materializes truthful semantic SUMMARY, ASSERT, SIM, OMIT, GAP, EVIDENCE, and NARRATIVE records for every final Scenario. UnitTestGenerator later projects these frozen records to EvidenceSummary, AssertionDecisionTrace, pySimulation, and RuleCode without changing their meaning."
+    }
+  ],
+  "IPM-AUTH-090": [
+    {
+      "section": "## 12. Final semantic summary and decision ledger",
+      "anchor": "Scenario Author materializes truthful semantic SUMMARY, ASSERT, SIM, OMIT, GAP, EVIDENCE, and NARRATIVE records for every final Scenario. UnitTestGenerator later projects these frozen records to EvidenceSummary, AssertionDecisionTrace, pySimulation, and RuleCode without changing their meaning."
+    }
+  ],
+  "IPM-AUTH-091": [
+    {
+      "section": "## 12. Final semantic summary and decision ledger",
+      "anchor": "Scenario Author materializes truthful semantic SUMMARY, ASSERT, SIM, OMIT, GAP, EVIDENCE, and NARRATIVE records for every final Scenario. UnitTestGenerator later projects these frozen records to EvidenceSummary, AssertionDecisionTrace, pySimulation, and RuleCode without changing their meaning."
+    }
+  ],
+  "IPM-AUTH-092": [
+    {
+      "section": "## 12. Final semantic summary and decision ledger",
+      "anchor": "Scenario Author materializes truthful semantic SUMMARY, ASSERT, SIM, OMIT, GAP, EVIDENCE, and NARRATIVE records for every final Scenario. UnitTestGenerator later projects these frozen records to EvidenceSummary, AssertionDecisionTrace, pySimulation, and RuleCode without changing their meaning."
+    }
+  ],
+  "IPM-AUTH-097": [
+    {
+      "section": "### 12.2 Final pre-materialization semantic gates",
+      "anchor": "Run these gates over the final semantic records before ScenarioGroup serialization. A correction that changes Scenario inputs, execution, effects, simulation, decisions, root, or grouping returns to WITNESSES, rematerializes the complete affected snapshot, and requires new FROZEN, B, and A phases. Never patch one finished record in place."
+    },
+    {
+      "section": "## 13. Executable ScenarioGroup v1 materialization contract",
+      "anchor": "This section is the complete executable payload contract. It is self-contained for Scenario Author materialization and must remain semantically synchronized with the repository ScenarioGroup v1 contract."
+    },
+    {
+      "section": "## 14. Storage, handoff, and downstream ownership boundary",
+      "anchor": "1. Form all physical groups from the one audited frozen snapshot and assign contiguous `groupOrder`."
+    }
+  ],
+  "IPM-AUTH-098": [
+    {
+      "section": "### 12.2 Final pre-materialization semantic gates",
+      "anchor": "Run these gates over the final semantic records before ScenarioGroup serialization. A correction that changes Scenario inputs, execution, effects, simulation, decisions, root, or grouping returns to WITNESSES, rematerializes the complete affected snapshot, and requires new FROZEN, B, and A phases. Never patch one finished record in place."
+    },
+    {
+      "section": "## 13. Executable ScenarioGroup v1 materialization contract",
+      "anchor": "This section is the complete executable payload contract. It is self-contained for Scenario Author materialization and must remain semantically synchronized with the repository ScenarioGroup v1 contract."
+    },
+    {
+      "section": "## 14. Storage, handoff, and downstream ownership boundary",
+      "anchor": "1. Form all physical groups from the one audited frozen snapshot and assign contiguous `groupOrder`."
+    }
+  ],
+  "IPM-AUTH-100": [
+    {
+      "section": "### 12.2 Final pre-materialization semantic gates",
+      "anchor": "Run these gates over the final semantic records before ScenarioGroup serialization. A correction that changes Scenario inputs, execution, effects, simulation, decisions, root, or grouping returns to WITNESSES, rematerializes the complete affected snapshot, and requires new FROZEN, B, and A phases. Never patch one finished record in place."
+    },
+    {
+      "section": "## 13. Executable ScenarioGroup v1 materialization contract",
+      "anchor": "This section is the complete executable payload contract. It is self-contained for Scenario Author materialization and must remain semantically synchronized with the repository ScenarioGroup v1 contract."
+    },
+    {
+      "section": "## 14. Storage, handoff, and downstream ownership boundary",
+      "anchor": "1. Form all physical groups from the one audited frozen snapshot and assign contiguous `groupOrder`."
+    }
+  ],
+  "IPM-AUTH-101": [
+    {
+      "section": "### 12.2 Final pre-materialization semantic gates",
+      "anchor": "Run these gates over the final semantic records before ScenarioGroup serialization. A correction that changes Scenario inputs, execution, effects, simulation, decisions, root, or grouping returns to WITNESSES, rematerializes the complete affected snapshot, and requires new FROZEN, B, and A phases. Never patch one finished record in place."
+    },
+    {
+      "section": "## 13. Executable ScenarioGroup v1 materialization contract",
+      "anchor": "This section is the complete executable payload contract. It is self-contained for Scenario Author materialization and must remain semantically synchronized with the repository ScenarioGroup v1 contract."
+    },
+    {
+      "section": "## 14. Storage, handoff, and downstream ownership boundary",
+      "anchor": "1. Form all physical groups from the one audited frozen snapshot and assign contiguous `groupOrder`."
+    }
+  ],
+  "IPM-AUTH-102": [
+    {
+      "section": "### 12.2 Final pre-materialization semantic gates",
+      "anchor": "Run these gates over the final semantic records before ScenarioGroup serialization. A correction that changes Scenario inputs, execution, effects, simulation, decisions, root, or grouping returns to WITNESSES, rematerializes the complete affected snapshot, and requires new FROZEN, B, and A phases. Never patch one finished record in place."
+    },
+    {
+      "section": "## 13. Executable ScenarioGroup v1 materialization contract",
+      "anchor": "This section is the complete executable payload contract. It is self-contained for Scenario Author materialization and must remain semantically synchronized with the repository ScenarioGroup v1 contract."
+    },
+    {
+      "section": "## 14. Storage, handoff, and downstream ownership boundary",
+      "anchor": "1. Form all physical groups from the one audited frozen snapshot and assign contiguous `groupOrder`."
+    }
+  ],
+  "IPM-AUTH-104": [
+    {
+      "section": "### 12.2 Final pre-materialization semantic gates",
+      "anchor": "Run these gates over the final semantic records before ScenarioGroup serialization. A correction that changes Scenario inputs, execution, effects, simulation, decisions, root, or grouping returns to WITNESSES, rematerializes the complete affected snapshot, and requires new FROZEN, B, and A phases. Never patch one finished record in place."
+    },
+    {
+      "section": "## 13. Executable ScenarioGroup v1 materialization contract",
+      "anchor": "This section is the complete executable payload contract. It is self-contained for Scenario Author materialization and must remain semantically synchronized with the repository ScenarioGroup v1 contract."
+    },
+    {
+      "section": "## 14. Storage, handoff, and downstream ownership boundary",
+      "anchor": "1. Form all physical groups from the one audited frozen snapshot and assign contiguous `groupOrder`."
+    }
+  ],
+  "IPM-AUTH-095": [
+    {
+      "section": "## 13. Executable ScenarioGroup v1 materialization contract",
+      "anchor": "This section is the complete executable payload contract. It is self-contained for Scenario Author materialization and must remain semantically synchronized with the repository ScenarioGroup v1 contract."
+    },
+    {
+      "section": "## 14. Storage, handoff, and downstream ownership boundary",
+      "anchor": "1. Form all physical groups from the one audited frozen snapshot and assign contiguous `groupOrder`."
+    }
+  ],
+  "IPM-AUTH-105": [
+    {
+      "section": "## 13. Executable ScenarioGroup v1 materialization contract",
+      "anchor": "This section is the complete executable payload contract. It is self-contained for Scenario Author materialization and must remain semantically synchronized with the repository ScenarioGroup v1 contract."
+    },
+    {
+      "section": "## 14. Storage, handoff, and downstream ownership boundary",
+      "anchor": "1. Form all physical groups from the one audited frozen snapshot and assign contiguous `groupOrder`."
+    }
+  ],
+  "IPM-AUTH-093": [
+    {
+      "section": "## 14. Storage, handoff, and downstream ownership boundary",
+      "anchor": "1. Form all physical groups from the one audited frozen snapshot and assign contiguous `groupOrder`."
+    }
+  ],
+  "IPM-AUTH-094": [
+    {
+      "section": "## 14. Storage, handoff, and downstream ownership boundary",
+      "anchor": "1. Form all physical groups from the one audited frozen snapshot and assign contiguous `groupOrder`."
+    }
+  ],
+  "IPM-AUTH-096": [
+    {
+      "section": "## 14. Storage, handoff, and downstream ownership boundary",
+      "anchor": "1. Form all physical groups from the one audited frozen snapshot and assign contiguous `groupOrder`."
+    }
+  ],
+  "IPM-AUTH-099": [
+    {
+      "section": "## 14. Storage, handoff, and downstream ownership boundary",
+      "anchor": "1. Form all physical groups from the one audited frozen snapshot and assign contiguous `groupOrder`."
+    }
+  ],
+  "IPM-AUTH-103": [
+    {
+      "section": "## 14. Storage, handoff, and downstream ownership boundary",
+      "anchor": "1. Form all physical groups from the one audited frozen snapshot and assign contiguous `groupOrder`."
+    }
+  ],
+  "IPM-AUTH-106": [
+    {
+      "section": "## 14. Storage, handoff, and downstream ownership boundary",
+      "anchor": "1. Form all physical groups from the one audited frozen snapshot and assign contiguous `groupOrder`."
+    }
+  ]
+}

@@ -41,10 +41,25 @@ def preservation():
     return len(manifest['protected'])
 
 
-def matrix(catalog=None, documented=None):
+def author_destination(anchors, ident):
+    sections=list(dict.fromkeys(a['section'].lstrip('# ') for a in anchors[ident]))
+    return 'Main_Agent_Prompt.txt: '+'; '.join(sections)
+
+
+def matrix(catalog=None, documented=None, anchors=None):
     source=table('docs/execution/plans/S0-baseline-contracts.md');s2=table('docs/execution/design/S2-instruction-implementation-slice.md');s3=table('docs/execution/design/S3-instruction-implementation-slice.md');s4=table('docs/execution/design/S4-instruction-implementation-slice.md')
     if documented is None:documented=table('docs/execution/design/S5-instruction-reverse-audit.md')
     if catalog is None:catalog=json.loads((ROOT/'fixtures/s5/reverse-matrix.json').read_text())
+    if anchors is None:anchors=json.loads((ROOT/'fixtures/s5/author-instruction-anchors.json').read_text())
+    assert anchors==builder.author_anchors(),'historical Author instruction mapping changed'
+    prompt=(ROOT/'Main_Agent_Prompt.txt').read_text()
+    for ident,entries in anchors.items():
+        for entry in entries:
+            heading=entry['section'];assert prompt.count(heading+'\n')==1,(ident,heading)
+            section=prompt.split(heading+'\n',1)[1]
+            level=len(heading)-len(heading.lstrip('#'))
+            section=re.split(r'^#{1,'+str(level)+r'} ',section,maxsplit=1,flags=re.M)[0]
+            assert entry['anchor'] in section,(ident,heading,entry['anchor'])
     rows={row['id']:row for row in catalog}
     additions=json.loads((ROOT/'fixtures/s5/current-role-additions.json').read_text())
     added={(a['id'],a['role']):a for a in additions}
@@ -84,10 +99,8 @@ def matrix(catalog=None, documented=None):
         assert ('SCENARIO_AUTHOR' in row['roles'])==(author_role or ident in {'IPM-VAL-043','IPM-VAL-044'})
         if author_role:assert row['roles']['SCENARIO_AUTHOR']==s2[ident][4],ident
         if 'SCENARIO_AUTHOR' in row['roles']:
-            dest=('Main_Agent_Prompt.txt: '+ident+'; Sections 1/1A/1B/13/14') if author_role else 'Main_Agent_Prompt.txt: Section 13; IPM-AUTH-090'
+            dest=author_destination(anchors,ident if author_role else 'IPM-AUTH-090')
             assert row['destinations']['SCENARIO_AUTHOR']==dest,ident
-            prompt=(ROOT/'Main_Agent_Prompt.txt').read_text()
-            assert (ident if author_role else 'IPM-AUTH-090') in prompt
         if row['disposition']=='REMOVED_LEGACY':
             removed.append(ident);assert row['authority']=='NONE' and not row['roles']
         else:assert row['disposition']=='PRESERVED' and row['authority'] in row['roles'],ident
@@ -98,19 +111,43 @@ def matrix(catalog=None, documented=None):
 def matrix_mutations():
     catalog=json.loads((ROOT/'fixtures/s5/reverse-matrix.json').read_text())
     documented=table('docs/execution/design/S5-instruction-reverse-audit.md')
-    for mutation in ['missing-role','invalid-path','documented-destination','wrong-section']:
+    for mutation in ['missing-role','invalid-path','documented-destination','wrong-section','anchor-text','anchor-section']:
         bad=deepcopy(catalog);doc=deepcopy(documented)
+        anchors=json.loads((ROOT/'fixtures/s5/author-instruction-anchors.json').read_text())
         if mutation=='missing-role':
             row=next(r for r in bad if r['id']=='IPM-AUTH-004')
             row['roles'].pop('UNIT_TEST_GENERATOR');row['destinations'].pop('UNIT_TEST_GENERATOR')
             doc[row['id']][5]='; '.join(k+': '+v for k,v in row['destinations'].items())
         elif mutation=='documented-destination':doc['IPM-AUTH-001'][5]='NOBODY: no destination'
+        elif mutation.startswith('anchor-'):
+            anchors['IPM-AUTH-001'][0]['anchor' if mutation=='anchor-text' else 'section']='Missing instruction'
         else:
             bad[0]['destinations']['SCENARIO_AUTHOR']='NONEXISTENT.txt' if mutation=='invalid-path' else 'Main_Agent_Prompt.txt: Section 999'
             doc['IPM-AUTH-001'][5]='SCENARIO_AUTHOR: '+bad[0]['destinations']['SCENARIO_AUTHOR']
-        try:matrix(bad,doc)
+        try:matrix(bad,doc,anchors)
         except AssertionError:pass
         else:raise AssertionError('reverse audit mutation accepted '+mutation)
+
+
+def annotation_mutations():
+    config=json.loads((ROOT/'fixtures/s5/prompt-annotation-deltas.json').read_text())
+    tagged=builder.tagged_expected()
+    for mutation in ['normative-insertion','normative-deletion']:
+        bad=deepcopy(config)
+        change=next(c for c in bad['replacements'] if c['old']=='[IPM-AUTH-004]\n')
+        if mutation=='normative-insertion':
+            change['new']='Always use a reserved system page as the primary page.\n'
+        else:
+            change['old']+='\nNever set up, seed, simulate, select as primary, add to Pages & Classes, or use as a Rule-Obj-When input root any of these top-level pages:\n'
+        assert change['old'] in tagged['Main_Agent_Prompt.txt'].decode()
+        try:builder.strip_annotations(tagged['Main_Agent_Prompt.txt'].decode(),'Main_Agent_Prompt.txt',bad)
+        except AssertionError:pass
+        else:raise AssertionError('annotation mutation accepted '+mutation)
+    bad=deepcopy(tagged)
+    bad['Main_Agent_Prompt.txt']+=b'Invent missing evidence.\n'
+    try:builder.verify_tagged(bad)
+    except AssertionError:pass
+    else:raise AssertionError('pre-cleanup closure drift accepted')
 
 
 def docs():
@@ -150,6 +187,8 @@ def artifacts(design_only):
         ('Main_Agent_Prompt.txt',b'required fields are `Success`',b'fields are exactly `Success`'),
         ('Main_Agent_Prompt.txt',b'legacy transient-memory transport',b'MemoryTemp'),
         ('Main_Agent_Prompt.txt',b'## 15. Generator terminal report contract',b'## 15. Missing report contract'),
+        ('Main_Agent_Prompt.txt',b'## 1. Scenario Author core contract',b'## 1. Scenario Author core contract\n[IPM-AUTH-001]'),
+        ('Validator_Prompt.txt',b'Simulation comparison includes',b'DEC-016 comparison includes'),
         ('UnitTestGenerator_Prompt.txt',b'Validator preserves the same full grammar',b'Validator may omit sig and params'),
         ('UnitTestGenerator.txt',b'<pyModelName>Claude-Sonnet-4-6</pyModelName>',b'<pyModelName>Changed</pyModelName>'),
         ('JsonValidator_tool.txt',b'<pyPurpose>GetMemory</pyPurpose>',b'<pyPurpose>WriteMemory</pyPurpose>'),
@@ -175,7 +214,7 @@ def historical():
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--design-only',action='store_true');parser.add_argument('--skip-historical',action='store_true');args=parser.parse_args()
-    protected=preservation();rows=matrix();matrix_mutations();document_count=docs();artifacts(args.design_only)
+    protected=preservation();rows=matrix();matrix_mutations();annotation_mutations();document_count=docs();artifacts(args.design_only)
     flows.main()
     if not args.skip_historical:historical()
     for command in [['git','diff','--check'],['git','diff','--cached','--check']]:subprocess.run(command,cwd=ROOT,check=True)

@@ -2,6 +2,44 @@
 
 Status: VERIFIED and CLOSED after independent whole-stage gpt-6-astra/xhigh PASS and root reconciliation on2026-09-08. All13S5criteria and all S0–S5 repository stages are CLOSED.
 
+## DEC-reference completion — 2026-09-08
+
+VERIFIED — on2026-09-08 /root/review_ipm_cleanup actual gpt-6-astra/xhigh returned PASS for the clarified DEC cleanup, with no remaining actionable findings. Root reconciled25removed DEC references/16closed editorial substitutions, all five product hashes and fixed-closure reconstruction, both decoded export pairs and unchanged outside-prompt metadata,83protected files,150matrix rows,106Author IDs/132anchors and36consumer anchors. The complete S5 gate passed locally and independently (16integration groups, three annotation/ten artifact/six matrix controls, fixed historical S4/S3 gate including35producer groups and180correction regressions); ten additional independent DEC-reinsertion/baseline-drift probes were rejected. The reviewer-reported stale DEC-032 scope text was corrected and rechecked. Criterion15 is VERIFIED; S5 is CLOSED. All19project paths remain uncommitted, .idea/ is untouched, and no commit/push or Pega operation occurred. The separate two Validator behavior findings remain unfixed.
+
+Earlier entries below retain their checkpoint state; the preceding closure is the final DEC-cleanup verdict.
+
+IMPLEMENTED_NOT_VERIFIED — the user clarified that remaining DEC references such as [DEC-026] must also be removed. Root removed25references (Main10, Generator12, Validator3) using16closed editorial substitutions that preserve operative requirements. Both exports are synchronized only inside pySystemPrompt. All five pre-cleanup products remain pinned to2c2fc19, current hashes/Author anchors are updated, and83other baseline files remain fixed; the Validator pair is now an explicitly authorized annotation-only delta. Full local validation and independent gpt-6-astra/xhigh review are pending. No commit/push, Pega runtime or unrelated Validator behavior fix is included.
+
+Current product hashes:
+
+| Product | SHA-256 |
+|---|---|
+| Main_Agent_Prompt.txt | c20fc1ee05cae2d4df2648c0f8185fac42433ca02ccddf22eff80e1e1c3419e2 |
+| UnitTestGenerator_Prompt.txt | 2e9ee78174c9b77c1c60f996f39b4e6e97f6ab9d4eaf0cc6c8c032656a34cf18 |
+| UnitTestGenerator.txt | 9e9e26d200e351026908f5f16dfe5bb022241e65c019c3bb502f9d1c8a22bfc2 |
+| Validator_Prompt.txt | f1b6a9f4d82517e7bcc596569f8f7fe54cdfc02f17e303b8bd280884661cc99f |
+| JsonValidator_tool.txt | 661a39f8303ca01d83689febf95caf10b3bfc9098bcebbdf34f86daa224d9c4f |
+
+## Annotation cleanup follow-up — 2026-09-08
+
+VERIFIED — on 2026-09-08 focused /root/review_ipm_cleanup actual gpt-6-astra/xhigh returned PASS with both first-review P2 findings closed and no remaining actionable issues in the annotation cleanup. Root reconciled the complete corrected S5 gate (16connected groups,150rows,106Author IDs/132anchors,85protected files, three annotation/nine artifact/six matrix controls and fixed historical S4/S3 PASS), unchanged reviewed product hashes, exact annotation-only baseline differences and both-pair XML/metadata checks. Reviewer also rejected the original injection and six additional catalog/overlay attacks. Criterion14 is VERIFIED; S5 is CLOSED. The16project paths remain uncommitted; .idea/ is untouched. HEAD and local origin/main are2c2fc19 with0/0divergence. No commit/push or Pega operation was performed in this cleanup; the two separate Validator findings remain unfixed.
+
+Earlier cleanup entries below record their checkpoint state; the preceding closure entry governs the final verdict.
+
+IMPLEMENTED_NOT_VERIFIED under DEC-032. The user-requested annotation-only overlay changes Main/Generator prompts and Generator export; all other product bytes are fixed. The initial closure evidence and hash table below describe commit2c2fc19. Current external traceability uses106Author IDs/132section-and-quote anchors and27exact annotation replacements. Full local gate passed:16connected groups,150rows,85protected files, nine artifact/six matrix negative controls and fixed historical S4/S3 full gate. Independent baseline normalization and XML inspection confirmed annotation-only changes and unchanged export metadata. Independent review remains pending. No commit/push or Pega runtime occurred; separate Validator P2 findings remain unfixed.
+
+IMPLEMENTED_NOT_VERIFIED — first independent /root/review_ipm_cleanup gpt-6-astra/xhigh review returned FAIL on two P2 findings: annotation replacements could inject operational text, and current tracking documentation was stale. Root now enforces a closed annotation-only replacement allowlist, pins tagged artifacts to the fixed S5 closure, adds three insertion/deletion/drift negative controls, and records observed HEAD/origin0/0 without attribution. Corrected local checks and focused review are pending.
+
+Verified cleanup product hashes (unchanged through both review rounds):
+
+| Product | SHA-256 |
+|---|---|
+| Main_Agent_Prompt.txt | 0d2ca01038587dc09ce72253b4f15ed8b48f2e3f9a6a9687b3851e372ac169b6 |
+| UnitTestGenerator_Prompt.txt | d5cd1901b7869a0896a19fbcb851a624dfcc310e04b80fefaf42c4eb651f20b4 |
+| UnitTestGenerator.txt | 154cbf72f90d2629d2508915960ac8a88466c207e4617ca6301c7fda782cc844 |
+| Validator_Prompt.txt | 37d9bf8afc2cfb2293465a6dfd899cab64dedf62230eda7bdc70ba548f3323e5 |
+| JsonValidator_tool.txt | db820a87cbc86b051144f938600315faaf1ee08d9fd1ab07836828981a900760 |
+
 ## Scope and Git checkpoint
 
 The user selected S5 on 2026-09-08. Fixed activation HEAD is d4061046650c87b9da2c4f87141f23aa2602f082, parent4393c680633d176129676f7b91179262cc25391f. After closure, the user authorized the local S5 checkpoint under vkoloskov <95134563+vkoloskov@users.noreply.github.com> as both author and committer. All 22 S5 project paths and this reconciliation are included in that checkpoint; resolve its final self-referential hash from Git. Its parent is the fixed activation HEAD, and main is four commits ahead of unchanged local origin/main4161fd3f77fc562ecb1e9fded19b5391ea67722f. Only .idea/ remains untracked and excluded. No push was performed.

@@ -1,0 +1,142 @@
+{
+  "baseline": "2c2fc195cc97ba5ab45efa6dcb90b5cdd688737a",
+  "decision": "DEC-032",
+  "scope": "Remove repository IPM annotations only; retain all operational instructions and DEC references.",
+  "replacements": [
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-001, IPM-AUTH-002]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-003, IPM-AUTH-010, IPM-AUTH-011, IPM-AUTH-012, IPM-AUTH-014, IPM-AUTH-015, IPM-AUTH-017]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-004]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-005, IPM-AUTH-006, IPM-AUTH-007, IPM-AUTH-008]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-009]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-003, IPM-AUTH-013, IPM-AUTH-016, IPM-AUTH-018]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-010, IPM-AUTH-011, IPM-AUTH-012, IPM-AUTH-014, IPM-AUTH-015, IPM-AUTH-017]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-019]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-020]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-021, IPM-AUTH-022, IPM-AUTH-023, IPM-AUTH-024, IPM-AUTH-025, IPM-AUTH-026]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-027, IPM-AUTH-028, IPM-AUTH-029, IPM-AUTH-030, IPM-AUTH-031, IPM-AUTH-032]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-033, IPM-AUTH-034, IPM-AUTH-035, IPM-AUTH-036, IPM-AUTH-037, IPM-AUTH-038, IPM-AUTH-039, IPM-AUTH-040, IPM-AUTH-041, IPM-AUTH-042]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-043, IPM-AUTH-044, IPM-AUTH-045, IPM-AUTH-046, IPM-AUTH-047]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-048, IPM-AUTH-049, IPM-AUTH-050, IPM-AUTH-051, IPM-AUTH-052, IPM-AUTH-053, IPM-AUTH-054, IPM-AUTH-055, IPM-AUTH-056]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-057, IPM-AUTH-058]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-059, IPM-AUTH-060, IPM-AUTH-061, IPM-AUTH-062, IPM-AUTH-063, IPM-AUTH-064]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-065, IPM-AUTH-066, IPM-AUTH-067, IPM-AUTH-068, IPM-AUTH-069, IPM-AUTH-070]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-071, IPM-AUTH-072, IPM-AUTH-073, IPM-AUTH-074, IPM-AUTH-075, IPM-AUTH-076, IPM-AUTH-077, IPM-AUTH-078, IPM-AUTH-079, IPM-AUTH-080, IPM-AUTH-081, IPM-AUTH-082, IPM-AUTH-083, IPM-AUTH-084, IPM-AUTH-085, IPM-AUTH-086, IPM-AUTH-087]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-088, IPM-AUTH-089, IPM-AUTH-090, IPM-AUTH-091, IPM-AUTH-092]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-097, IPM-AUTH-098, IPM-AUTH-100, IPM-AUTH-101, IPM-AUTH-102, IPM-AUTH-104]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-095, IPM-AUTH-097, IPM-AUTH-098, IPM-AUTH-100, IPM-AUTH-101, IPM-AUTH-102, IPM-AUTH-104, IPM-AUTH-105]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-093, IPM-AUTH-094, IPM-AUTH-095, IPM-AUTH-096, IPM-AUTH-097, IPM-AUTH-098, IPM-AUTH-099, IPM-AUTH-100, IPM-AUTH-101, IPM-AUTH-102, IPM-AUTH-103, IPM-AUTH-104, IPM-AUTH-105, IPM-AUTH-106]\n",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "[IPM-AUTH-035, IPM-AUTH-078; DEC-026]",
+      "new": "[DEC-026]"
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": " This preserves IPM-AUTH-046.",
+      "new": ""
+    },
+    {
+      "path": "Main_Agent_Prompt.txt",
+      "old": "(IPM-AUTH-035/IPM-AUTH-078; DEC-026)",
+      "new": "(DEC-026)"
+    },
+    {
+      "path": "UnitTestGenerator_Prompt.txt",
+      "old": " This preserves IPM-AUTH-046.",
+      "new": ""
+    },
+    {
+      "path": "UnitTestGenerator_Prompt.txt",
+      "old": "(IPM-AUTH-035/IPM-AUTH-078; DEC-026)",
+      "new": "(DEC-026)"
+    }
+  ]
+}

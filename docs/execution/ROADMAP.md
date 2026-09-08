@@ -8,6 +8,10 @@ Under DEC-023, every independent repository reviewer uses `gpt-6-astra` with `xh
 
 S3 is CLOSED after independent whole-stage gpt-6-astra/xhigh PASS and root reconciliation. All 15 criteria in the [S3 ExecPlan](plans/S3-unit-test-generator.md) are VERIFIED; see the [acceptance report](design/S3-acceptance-report.md). S4 is also CLOSED after independent whole-stage gpt-6-astra/xhigh PASS on all 14 [S4 criteria](plans/S4-validator-refactor.md) and root reconciliation; see the [S4 acceptance report](design/S4-acceptance-report.md). S5 is VERIFIED and CLOSED after independent whole-stage gpt-6-astra/xhigh PASS on all13criteria and root reconciliation; see its [ExecPlan](plans/S5-integration-legacy-cleanup.md) and [acceptance report](design/S5-acceptance-report.md). All S0–S5 repository stages are CLOSED; external Pega import/runtime are not claimed.
 
+Completed bounded follow-up: S5 annotation cleanup under DEC-032 is VERIFIED and CLOSED. Criterion14 has complete corrected local checks and focused independent gpt-6-astra/xhigh PASS with root reconciliation. Runtime IPM labels are removed, operational text and external traceability are preserved, and changes remain uncommitted. The two separate Validator review findings remain outside this cleanup.
+
+Completed clarification: S5 DEC-reference cleanup under the expanded DEC-032 is VERIFIED and CLOSED. Criterion15 covers all three prompts, both exports, preserved operational text/traceability and complete local/independent PASS. All annotation-cleanup changes remain uncommitted; earlier closure records remain historical.
+
 ## S0 — Baseline and Contract Stabilization
 
 - **Objective:** Establish a verified repository baseline, complete instruction-preservation traceability, valid schema fixtures, canonical-prompt integrity and in-scope Validator prompt/export checks, and durable target-architecture contracts before product refactoring.
@@ -94,7 +98,7 @@ S3 is CLOSED after independent whole-stage gpt-6-astra/xhigh PASS and root recon
 
 - **Objective:** Integrate the three-agent repository artifacts, remove legacy transport references, and prove the complete caller flow with static fixtures and targeted artifact checks without unintended export changes.
 - **Dependencies:** `S2`, `S3`, `S4`
-- **Status:** `CLOSED`
+- **Status:** `CLOSED` — original criteria1–13 and annotation-cleanup criteria14–15 verified.
 - **Mandatory acceptance criteria:**
   - Each agent exposes only its intended tools and responsibilities.
   - Legacy `MemoryTemp`, `CreateAIAgentResponseRecord`, and `GetAIAgentResponseRecord` references are absent from every effective S2–S4 prompt/export deliverable. Reference-only `Main_Agent.txt` is excluded, may retain baseline references, and must remain byte-identical to HEAD.

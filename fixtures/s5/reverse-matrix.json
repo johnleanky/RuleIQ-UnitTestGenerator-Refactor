@@ -10,7 +10,7 @@
       "SCENARIO_AUTHOR": "Scenario Author: purpose and semantic objective. Preserve: Maximize evidence-supported RUT coverage with the minimum valid physical unit-test groups."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-001; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 1. Scenario Author core contract"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -22,7 +22,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -37,7 +38,7 @@
       "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G2; canonical prompt same section after freeze"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-002; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 1. Scenario Author core contract",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -50,7 +51,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -65,7 +67,7 @@
       "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-003; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 1.1 Authority hierarchy and downstream-reference lock; 1A. ScenarioGroup storage and UnitTestGenerator handoff",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8"
     },
     "evidence": [
@@ -78,7 +80,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -94,7 +97,7 @@
       "VALIDATOR": "Check the observable physical reserved-page/seed or Scenario/Decision row invariant in this clause; never reconstruct Author seed proofs or original RUT execution."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-004; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 1.2 Reserved system-page seed ban",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
       "VALIDATOR": "Validator_Prompt.txt: V8"
     },
@@ -108,7 +111,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -122,7 +126,7 @@
       "SCENARIO_AUTHOR": "Scenario Author: compiler state and Memory handoff. Preserve: Scenario formation uses one complete replacement snapshot and no competing scenario ledger; replace MemoryTemp with final immutable ScenarioGroup records."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-005; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 1.3 Scenario state and physical grouping authority"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -134,7 +138,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -150,7 +155,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-006; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 1.3 Scenario state and physical grouping authority",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
       "VALIDATOR": "Validator_Prompt.txt: V8"
     },
@@ -164,7 +169,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -180,7 +186,7 @@
       "VALIDATOR": "Check complete visible SIM grammar, unique physical mock association and shared When identity; hidden source facts remain Generator-owned under DEC-030."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-007; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 1.3 Scenario state and physical grouping authority",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
       "VALIDATOR": "Validator_Prompt.txt: V7"
     },
@@ -194,7 +200,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -210,7 +217,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-008; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 1.3 Scenario state and physical grouping authority",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
       "VALIDATOR": "Validator_Prompt.txt: V8"
     },
@@ -224,7 +231,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -239,7 +247,7 @@
       "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G9; canonical prompt same section after freeze"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-009; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 1.4 Visible output lock",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G9"
     },
     "evidence": [
@@ -252,7 +260,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -346,7 +355,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V1"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-013; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 1A. ScenarioGroup storage and UnitTestGenerator handoff",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8",
       "VALIDATOR": "Validator_Prompt.txt: V1"
     },
@@ -360,7 +369,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -427,7 +437,7 @@
       "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-016; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 1A. ScenarioGroup storage and UnitTestGenerator handoff",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8"
     },
     "evidence": [
@@ -440,7 +450,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -482,7 +493,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V3"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-018; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 1A. ScenarioGroup storage and UnitTestGenerator handoff",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8",
       "VALIDATOR": "Validator_Prompt.txt: V3"
     },
@@ -496,7 +507,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -512,7 +524,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V1"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-019; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 1B. Closed external-interface allowlist",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8",
       "VALIDATOR": "Validator_Prompt.txt: V1"
     },
@@ -526,7 +538,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -542,7 +555,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V4"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-020; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 2. Source-of-truth order",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G3",
       "VALIDATOR": "Validator_Prompt.txt: V4"
     },
@@ -556,7 +569,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -572,7 +586,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V4"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-021; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 3. KnowledgeTool semantic composite-key contract",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G3",
       "VALIDATOR": "Validator_Prompt.txt: V4"
     },
@@ -586,7 +600,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -602,7 +617,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V4"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-022; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 3. KnowledgeTool semantic composite-key contract",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G3",
       "VALIDATOR": "Validator_Prompt.txt: V4"
     },
@@ -616,7 +631,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -631,7 +647,7 @@
       "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G3; canonical prompt same section after freeze"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-023; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 3. KnowledgeTool semantic composite-key contract",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G3"
     },
     "evidence": [
@@ -644,7 +660,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -660,7 +677,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V4"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-024; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 3. KnowledgeTool semantic composite-key contract",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G3",
       "VALIDATOR": "Validator_Prompt.txt: V4"
     },
@@ -674,7 +691,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -689,7 +707,7 @@
       "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G3; canonical prompt same section after freeze"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-025; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 3. KnowledgeTool semantic composite-key contract",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G3"
     },
     "evidence": [
@@ -702,7 +720,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -716,7 +735,7 @@
       "SCENARIO_AUTHOR": "Scenario Author evidence/gap ledger. Preserve: Missing required guidance remains an explicit gap affecting support and testability; it is never treated as resolved."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-026; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 3. KnowledgeTool semantic composite-key contract"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -728,7 +747,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -742,7 +762,7 @@
       "SCENARIO_AUTHOR": "Scenario Author: acquisition and crawl order. Preserve: Acquire/validate RUT identity, lock type, load guidance, scan/crawl, and prove closed or terminal dependencies before authoring."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-027; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 4. Required execution order"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -754,7 +774,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -768,7 +789,7 @@
       "SCENARIO_AUTHOR": "Scenario Author: semantic authoring order. Preserve: Semantic analysis, evidence, complexity, and Scenario Compiler freeze occur only after dependency closure."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-028; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 4. Required execution order"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -780,7 +801,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -795,7 +817,7 @@
       "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G2; canonical prompt same section after freeze"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-029; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 4. Required execution order",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -808,7 +830,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -822,7 +845,7 @@
       "SCENARIO_AUTHOR": "Scenario Author: assertion finalization. Preserve: Enumerate candidates, apply the assertion ladder, and pass runtime/producer/simulation/closure gates before final semantic decisions."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-030; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 4. Required execution order"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -834,7 +857,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -900,7 +924,7 @@
       "SCENARIO_AUTHOR": "Scenario Author evidence/DWL and ScenarioGroup snapshot. Preserve: Complete the evidence ledger before RuleCode; one canonical dependency state machine governs identity, DP signatures, grammar, transitions, closure, and authoring gates; no parallel proof ledger."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-033; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 5. Internal Evidence Ledger contract"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -912,7 +936,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -926,7 +951,7 @@
       "SCENARIO_AUTHOR": "ScenarioGroup dependency projection. Preserve: DependencyResolution is a read-only DWL projection; narrative dependencies without rows block authoring."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-034; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 5. Internal Evidence Ledger contract"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -938,7 +963,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -953,7 +979,7 @@
       "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-035; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 5. Internal Evidence Ledger contract; 5.2 ParameterResolutions ledger; 13.4.2 Physical inputs and setup",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -966,7 +992,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -980,7 +1007,7 @@
       "SCENARIO_AUTHOR": "ScenarioGroup branch/WR records. Preserve: Every relevant branch records exact logic, inputs, result, paths, and write reachability without mixing exclusive branches."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-036; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 5. Internal Evidence Ledger contract"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -992,7 +1019,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1006,7 +1034,7 @@
       "SCENARIO_AUTHOR": "Scenario Author: When semantic gate. Preserve: Copy pyLogic verbatim, tokenize every top-level clause, evaluate all clauses, discover dependencies, and block authoring on failure."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-037; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 5. Internal Evidence Ledger contract"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -1018,7 +1046,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1033,7 +1062,7 @@
       "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-038; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 5. Internal Evidence Ledger contract",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -1046,7 +1075,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1062,7 +1092,7 @@
       "VALIDATOR": "Check explicit final decisions against visible physical assertion/omission values, shapes and context; do not derive expected values, support proofs or omitted claims."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-039; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 5. Internal Evidence Ledger contract",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
       "VALIDATOR": "Validator_Prompt.txt: V6"
     },
@@ -1076,7 +1106,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1092,7 +1123,7 @@
       "VALIDATOR": "Check explicit final decisions against visible physical assertion/omission values, shapes and context; do not derive expected values, support proofs or omitted claims."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-040; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 5. Internal Evidence Ledger contract",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
       "VALIDATOR": "Validator_Prompt.txt: V6"
     },
@@ -1106,7 +1137,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1121,7 +1153,7 @@
       "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-041; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 5. Internal Evidence Ledger contract",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -1134,7 +1166,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1148,7 +1181,7 @@
       "SCENARIO_AUTHOR": "ScenarioGroup runtime execution rows. Preserve: Every execution-relevant step/expression/action has a grounded RX row; unknowns stay unknown and drive producer/DP projections."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-042; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 5. Internal Evidence Ledger contract"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -1160,7 +1193,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1174,7 +1208,7 @@
       "SCENARIO_AUTHOR": "Scenario Author: assertion inventory. Preserve: Enumerate direct, dependency, branch, error, business, and collection assertion candidates after producer discovery."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-043; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 6. Assertion discovery and resolution"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -1186,7 +1220,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1200,7 +1235,7 @@
       "SCENARIO_AUTHOR": "Scenario Author: assertion gates. Preserve: Per property/scenario, write reachability and seed conflicts select Not exists, structural/omit, or normal ladder with nested-path proof."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-044; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 6. Assertion discovery and resolution"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -1212,7 +1247,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1227,7 +1263,7 @@
       "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-045; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 6. Assertion discovery and resolution",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -1240,7 +1276,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1255,7 +1292,7 @@
       "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-046; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 6. Assertion discovery and resolution; 13.1.1 Revision 1.2 source profile",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -1268,7 +1305,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1284,7 +1322,7 @@
       "VALIDATOR": "Check explicit final decisions against visible physical assertion/omission values, shapes and context; do not derive expected values, support proofs or omitted claims."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-047; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 6. Assertion discovery and resolution",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
       "VALIDATOR": "Validator_Prompt.txt: V6"
     },
@@ -1298,7 +1336,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1313,7 +1352,7 @@
       "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-048; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 7. Dependency and RuleCrawler discipline",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -1326,7 +1365,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1340,7 +1380,7 @@
       "SCENARIO_AUTHOR": "Scenario Author: dependency extraction. Preserve: Known page-list helpers and Decision Table calls become concrete dependency rows before generic RUF handling."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-049; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 7. Dependency and RuleCrawler discipline"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -1352,7 +1392,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1366,7 +1407,7 @@
       "SCENARIO_AUTHOR": "Scenario Author: RuleJSON scan. Preserve: Every executable occurrence, property segment, RUF, DP, helper context, and Decision Table dependency is materialized and closed/terminal before use."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-050; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 7. Dependency and RuleCrawler discipline"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -1378,7 +1419,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1392,7 +1434,7 @@
       "SCENARIO_AUTHOR": "Scenario Author: crawler request plan. Preserve: RuleCrawler payloads derive mechanically from READY rows with exact reference shapes, deduplication, retries, mappings, and pre-call gates."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-051; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 7. Dependency and RuleCrawler discipline"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -1404,7 +1446,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1418,7 +1461,7 @@
       "SCENARIO_AUTHOR": "Scenario Author: crawler response transition. Preserve: Match every response, scan fetched JSON immediately, advance context occurrence-locally, retain DP obligations, and continue while work is open."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-052; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 7. Dependency and RuleCrawler discipline"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -1430,7 +1473,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1445,7 +1489,7 @@
       "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-053; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 7. Dependency and RuleCrawler discipline",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -1458,7 +1502,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1472,7 +1517,7 @@
       "SCENARIO_AUTHOR": "Scenario Author: crawl limits. Preserve: Explicit call/rule caps apply; remaining capacity plus READY work requires continued crawling; wave number is not a stop criterion."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-054; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 7. Dependency and RuleCrawler discipline"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -1484,7 +1529,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1498,7 +1544,7 @@
       "SCENARIO_AUTHOR": "Scenario Author crawler examples. Preserve: Preserve canonical continuation, context-separation, and helper-extraction examples as non-authoritative regression fixtures."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-055; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 7. Dependency and RuleCrawler discipline"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -1510,7 +1556,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1525,7 +1572,7 @@
       "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G2; canonical prompt same section after freeze"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-056; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 7. Dependency and RuleCrawler discipline",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -1538,7 +1585,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1552,7 +1600,7 @@
       "SCENARIO_AUTHOR": "Scenario Author: RUF analysis. Preserve: Critical RUFs require exact contracts, transitive closure, deterministic arguments, and explicit unknown-result gaps."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-057; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 8. RUF transitive discovery discipline"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -1564,7 +1612,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1578,7 +1627,7 @@
       "SCENARIO_AUTHOR": "ScenarioGroup Decision Table records. Preserve: Evaluate through DTM/DTA/DTE evidence; inactive scalar results create localized omissions while independent final effects remain traceable."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-058; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 8. RUF transitive discovery discipline"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -1590,7 +1639,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1605,7 +1655,7 @@
       "UNIT_TEST_GENERATOR": "Copy frozen execution/producer traces without recomputing final effects or inventing evidence."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-059; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 9. Property, context, branch, and simulation tracing",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G7"
     },
     "evidence": [
@@ -1618,7 +1668,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1634,7 +1685,7 @@
       "VALIDATOR": "Check complete visible SIM grammar, unique physical mock association and shared When identity; hidden source facts remain Generator-owned under DEC-030."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-060; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 9. Property, context, branch, and simulation tracing",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
       "VALIDATOR": "Validator_Prompt.txt: V7"
     },
@@ -1648,7 +1699,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1664,7 +1716,7 @@
       "VALIDATOR": "Check complete visible SIM grammar, unique physical mock association and shared When identity; hidden source facts remain Generator-owned under DEC-030."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-061; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 9. Property, context, branch, and simulation tracing",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G5",
       "VALIDATOR": "Validator_Prompt.txt: V7"
     },
@@ -1678,7 +1730,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1692,7 +1745,7 @@
       "SCENARIO_AUTHOR": "Scenario Author: simulation eligibility. Preserve: Only Thread-level Data Pages are simulated; excluded pages create gaps/downgrades and invalid scope returns to witness formation."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-062; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 9. Property, context, branch, and simulation tracing"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -1704,7 +1757,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1720,7 +1774,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V7"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-063; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 9. Property, context, branch, and simulation tracing",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G5",
       "VALIDATOR": "Validator_Prompt.txt: V7"
     },
@@ -1734,7 +1788,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1749,7 +1804,7 @@
       "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-064; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 9. Property, context, branch, and simulation tracing",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -1762,7 +1817,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1778,7 +1834,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V6"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-065; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 10. Property semantics and assertion intent",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
       "VALIDATOR": "Validator_Prompt.txt: V6"
     },
@@ -1792,7 +1848,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1836,7 +1893,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V6"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-067; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 10. Property semantics and assertion intent",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
       "VALIDATOR": "Validator_Prompt.txt: V6"
     },
@@ -1850,7 +1907,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1894,7 +1952,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V6"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-069; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 10. Property semantics and assertion intent",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
       "VALIDATOR": "Validator_Prompt.txt: V6"
     },
@@ -1908,7 +1966,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1952,7 +2011,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-071; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 11. Scenario formation and semantic decision freeze",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
       "VALIDATOR": "Validator_Prompt.txt: V8"
     },
@@ -1966,7 +2025,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -1981,7 +2041,7 @@
       "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-072; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 11. Scenario formation and semantic decision freeze",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -1994,7 +2054,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2008,7 +2069,7 @@
       "SCENARIO_AUTHOR": "Scenario Author INVENTORY phase. Preserve: Census original-RUT behaviors only; dependencies never own targets; rule-type adapters govern Model, When, and original Decision Table coverage."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-073; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 11. Scenario formation and semantic decision freeze"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -2020,7 +2081,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2034,7 +2096,7 @@
       "SCENARIO_AUTHOR": "Scenario Author WITNESSES phase. Preserve: Build deterministic executable coverage witnesses, resolve all physical data/simulation, execute RUT, and merge only identical physical executions."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-074; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 11. Scenario formation and semantic decision freeze"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -2046,7 +2108,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2061,7 +2124,7 @@
       "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-075; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 11. Scenario formation and semantic decision freeze",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -2074,7 +2137,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2090,7 +2154,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V6"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-076; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 11. Scenario formation and semantic decision freeze",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
       "VALIDATOR": "Validator_Prompt.txt: V6"
     },
@@ -2104,7 +2168,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2119,7 +2184,7 @@
       "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G5; canonical prompt same section after freeze"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-077; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 11. Scenario formation and semantic decision freeze",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G5"
     },
     "evidence": [
@@ -2132,7 +2197,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2202,7 +2268,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V7"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-080; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 11. Scenario formation and semantic decision freeze",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
       "VALIDATOR": "Validator_Prompt.txt: V7"
     },
@@ -2216,7 +2282,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2232,7 +2299,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-081; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 11. Scenario formation and semantic decision freeze",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
       "VALIDATOR": "Validator_Prompt.txt: V8"
     },
@@ -2246,7 +2313,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2261,7 +2329,7 @@
       "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-082; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 11. Scenario formation and semantic decision freeze",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -2274,7 +2342,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2290,7 +2359,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-083; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 11. Scenario formation and semantic decision freeze",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
       "VALIDATOR": "Validator_Prompt.txt: V8"
     },
@@ -2304,7 +2373,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2320,7 +2390,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-084; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 11. Scenario formation and semantic decision freeze",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
       "VALIDATOR": "Validator_Prompt.txt: V8"
     },
@@ -2334,7 +2404,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2350,7 +2421,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-085; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 11. Scenario formation and semantic decision freeze",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
       "VALIDATOR": "Validator_Prompt.txt: V8"
     },
@@ -2364,7 +2435,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2406,7 +2478,7 @@
       "SCENARIO_AUTHOR": "ScenarioGroup final narrative. Preserve: Narratives are at most two factual plain-language sentences matching seeded, checked, and simulated semantics."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-087; Sections 1/1A/1B/13/14"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 11. Scenario formation and semantic decision freeze"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -2418,7 +2490,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2434,7 +2507,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V6"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-088; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 12. Final semantic summary and decision ledger",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G7",
       "VALIDATOR": "Validator_Prompt.txt: V6"
     },
@@ -2448,7 +2521,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2464,7 +2538,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-089; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 12. Final semantic summary and decision ledger",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G7",
       "VALIDATOR": "Validator_Prompt.txt: V8"
     },
@@ -2478,7 +2552,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2494,7 +2569,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V5"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-090; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 12. Final semantic summary and decision ledger",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G7",
       "VALIDATOR": "Validator_Prompt.txt: V5"
     },
@@ -2508,7 +2583,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2524,7 +2600,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V7"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-091; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 12. Final semantic summary and decision ledger",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
       "VALIDATOR": "Validator_Prompt.txt: V7"
     },
@@ -2538,7 +2614,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2553,7 +2630,7 @@
       "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-092; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 12. Final semantic summary and decision ledger",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -2566,7 +2643,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2634,7 +2712,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V3"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-095; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 13. Executable ScenarioGroup v1 materialization contract; 14. Storage, handoff, and downstream ownership boundary",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
       "VALIDATOR": "Validator_Prompt.txt: V3"
     },
@@ -2648,7 +2726,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2690,7 +2769,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-097; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 12.2 Final pre-materialization semantic gates; 13. Executable ScenarioGroup v1 materialization contract; 14. Storage, handoff, and downstream ownership boundary",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
       "VALIDATOR": "Validator_Prompt.txt: V8"
     },
@@ -2704,7 +2783,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2719,7 +2799,7 @@
       "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-098; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 12.2 Final pre-materialization semantic gates; 13. Executable ScenarioGroup v1 materialization contract; 14. Storage, handoff, and downstream ownership boundary",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -2732,7 +2812,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2774,7 +2855,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V6"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-100; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 12.2 Final pre-materialization semantic gates; 13. Executable ScenarioGroup v1 materialization contract; 14. Storage, handoff, and downstream ownership boundary",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
       "VALIDATOR": "Validator_Prompt.txt: V6"
     },
@@ -2788,7 +2869,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2804,7 +2886,7 @@
       "VALIDATOR": "Check the observable physical reserved-page/seed or Scenario/Decision row invariant in this clause; never reconstruct Author seed proofs or original RUT execution."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-101; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 12.2 Final pre-materialization semantic gates; 13. Executable ScenarioGroup v1 materialization contract; 14. Storage, handoff, and downstream ownership boundary",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
       "VALIDATOR": "Validator_Prompt.txt: V8"
     },
@@ -2818,7 +2900,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2834,7 +2917,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V9"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-102; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 12.2 Final pre-materialization semantic gates; 13. Executable ScenarioGroup v1 materialization contract; 14. Storage, handoff, and downstream ownership boundary",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G4",
       "VALIDATOR": "Validator_Prompt.txt: V9"
     },
@@ -2848,7 +2931,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2889,7 +2973,7 @@
       "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-104; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 12.2 Final pre-materialization semantic gates; 13. Executable ScenarioGroup v1 materialization contract; 14. Storage, handoff, and downstream ownership boundary",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -2902,7 +2986,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2917,7 +3002,7 @@
       "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G2; canonical prompt same section after freeze"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-105; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 13. Executable ScenarioGroup v1 materialization contract; 14. Storage, handoff, and downstream ownership boundary",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
     },
     "evidence": [
@@ -2930,7 +3015,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -2946,7 +3032,7 @@
       "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V4"
     },
     "destinations": {
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-106; Sections 1/1A/1B/13/14",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 14. Storage, handoff, and downstream ownership boundary",
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G3",
       "VALIDATOR": "Validator_Prompt.txt: V4"
     },
@@ -2960,7 +3046,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -4094,7 +4181,7 @@
     "destinations": {
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G5",
       "VALIDATOR": "Validator_Prompt.txt: V7",
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: Section 13; IPM-AUTH-090"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 12. Final semantic summary and decision ledger"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -4106,7 +4193,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   },
   {
@@ -4124,7 +4212,7 @@
     "destinations": {
       "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G7",
       "VALIDATOR": "Validator_Prompt.txt: V5",
-      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: Section 13; IPM-AUTH-090"
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: 12. Final semantic summary and decision ledger"
     },
     "evidence": [
       "historical-source-and-prompt-preservation",
@@ -4136,7 +4224,8 @@
       "DEC-016",
       "DEC-019",
       "DEC-030",
-      "DEC-031"
+      "DEC-031",
+      "DEC-032"
     ]
   }
 ]

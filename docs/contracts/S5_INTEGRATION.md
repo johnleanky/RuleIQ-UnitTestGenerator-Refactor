@@ -2,6 +2,20 @@
 
 Status: VERIFIED implementation after independent whole-stage gpt-6-astra/xhigh PASS and root reconciliation on2026-09-08; S5 and all repository roadmap stages are CLOSED. See the [acceptance report](../execution/design/S5-acceptance-report.md).
 
+## DEC-reference clarification under DEC-032
+
+VERIFIED — on2026-09-08 /root/review_ipm_cleanup actual gpt-6-astra/xhigh returned PASS for the clarified DEC cleanup, with no remaining actionable findings. Root reconciled25removed DEC references/16closed editorial substitutions, all five product hashes and fixed-closure reconstruction, both decoded export pairs and unchanged outside-prompt metadata,83protected files,150matrix rows,106Author IDs/132anchors and36consumer anchors. The complete S5 gate passed locally and independently (16integration groups, three annotation/ten artifact/six matrix controls, fixed historical S4/S3 gate including35producer groups and180correction regressions); ten additional independent DEC-reinsertion/baseline-drift probes were rejected. The reviewer-reported stale DEC-032 scope text was corrected and rechecked. Criterion15 is VERIFIED; S5 is CLOSED. All19project paths remain uncommitted, .idea/ is untouched, and no commit/push or Pega operation occurred. The separate two Validator behavior findings remain unfixed.
+
+The following implementation entry records its pre-review checkpoint; the preceding PASS is the current verdict.
+
+IMPLEMENTED_NOT_VERIFIED — the user clarified that remaining DEC references such as [DEC-026] must also be removed. Root removed25references (Main10, Generator12, Validator3) using16closed editorial substitutions that preserve operative requirements. Both exports are synchronized only inside pySystemPrompt. All five pre-cleanup products remain pinned to2c2fc19, current hashes/Author anchors are updated, and83other baseline files remain fixed; the Validator pair is now an explicitly authorized annotation-only delta. Full local validation and independent gpt-6-astra/xhigh review are pending. No commit/push, Pega runtime or unrelated Validator behavior fix is included.
+
+The current closed editorial substitution list in [the builder](../../scripts/build_s5_artifacts.py) removes decision identifiers and replaces grammatical subjects with the existing contract or explicit revision. Actual types, limits, modes, signatures, schemas, routing and source-proof boundaries are retained. The current preservation census is83fixed files plus five exactly reconstructed products; previous85-file/unchanged-Validator statements below describe the preceding IPM-only checkpoint.
+
+## Annotation-only follow-up under DEC-032
+
+The initial S5 closure below describes commit2c2fc19. The user subsequently requested removing IPM identifiers from runtime prompts. The [annotation delta catalog](../../fixtures/s5/prompt-annotation-deltas.json) records27exact nonsemantic replacements; all operational text remains unchanged. The [external Author anchors](../../fixtures/s5/author-instruction-anchors.json) retain all106IDs and132section/quote locations, recovered from the tagged closure text and checked against clean current sections. Reverse-matrix destinations now use those headings. The builder applies the original S5 overlay first, then this bounded cleanup; historical S2–S4 files remain fixed. The Generator export is synchronized inside pySystemPrompt only. This follow-up is VERIFIED after the complete corrected gate, focused independent gpt-6-astra/xhigh PASS and root reconciliation. The annotation allowlist rejects operational insertions/deletions and pre-cleanup reconstruction must exactly match2c2fc19; three dedicated negative controls cover these protections. No behavioral fix, commit/push or Pega import is included.
+
 ## I1. Current authority and bounded corrections
 
 S1 caller contracts, ScenarioGroup revision1.3, the closed Generator/Validator reports and DEC-001–030 remain authoritative. DEC-031 resolves two demonstrated cross-stage inconsistencies without changing payload grammar or downstream schemas:
@@ -13,7 +27,7 @@ The [exact delta catalog](../../fixtures/s5/product-deltas.json) fixes old/new t
 
 ## I2. Effective artifacts and preservation
 
-The five effective deliverables are Main_Agent_Prompt.txt, UnitTestGenerator_Prompt.txt, UnitTestGenerator.txt, Validator_Prompt.txt and JsonValidator_tool.txt. Both Generator and Validator pairs must decode exactly. Only Main/Generator product deltas are planned. Generator export changes only its single pySystemPrompt body; Validator pair and every unrelated field remain baseline bytes. Main_Agent.txt is excluded from parity/edits and separately hash-protected.
+The five effective deliverables are Main_Agent_Prompt.txt, UnitTestGenerator_Prompt.txt, UnitTestGenerator.txt, Validator_Prompt.txt and JsonValidator_tool.txt. Both Generator and Validator pairs must decode exactly. Current product deltas include the authorized IPM and DEC reference cleanup in all three prompts. Both exports change only their single pySystemPrompt bodies; every unrelated export field remains baseline bytes. Main_Agent.txt is excluded from parity/edits and separately hash-protected.
 
 Historical S2/S3/S4 contracts, fixtures, schemas, oracles, builders and tests stay fixed. Their complete S4 gate runs in an isolated local checkout of d4061046650c87b9da2c4f87141f23aa2602f082. A historical PASS cannot establish current integration: current checks separately require exact reviewed overlay reconstruction, protected-file census, both-pair parity, absence of all three legacy names across five deliverables and connected flows through unchanged implementations.
 

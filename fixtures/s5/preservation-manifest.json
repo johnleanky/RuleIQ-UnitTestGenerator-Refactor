@@ -1,9 +1,11 @@
 {
   "baseline": "d4061046650c87b9da2c4f87141f23aa2602f082",
   "excluded": [
+    "JsonValidator_tool.txt",
     "Main_Agent_Prompt.txt",
     "UnitTestGenerator.txt",
     "UnitTestGenerator_Prompt.txt",
+    "Validator_Prompt.txt",
     "docs/decisions/DECISIONS.md",
     "docs/execution/CONTINUITY.md",
     "docs/execution/ROADMAP.md",
@@ -11,10 +13,8 @@
   ],
   "protected": {
     "AGENTS.md": "afc42ef329f47e362e18bc5621357374975bc0850b8bd3bb13b948a2795252e1",
-    "JsonValidator_tool.txt": "db820a87cbc86b051144f938600315faaf1ee08d9fd1ab07836828981a900760",
     "Main_Agent.txt": "713ad002f66ce71e927995e74c15fac19fcef2633535233b1a2a1783d3e47291",
     "Rule_Crawler_tool.txt": "b64d64d924e5ee91faaeb85465f01657c9107303876f93df2a5b04d48ef901ac",
-    "Validator_Prompt.txt": "37d9bf8afc2cfb2293465a6dfd899cab64dedf62230eda7bdc70ba548f3323e5",
     "docs/contracts/GENERATOR_RUN_REPORT_V1.schema.json": "4ea2b37bbc36c651253723fc0ac3ec449b2129f8660e2739508e27a932cdaf6f",
     "docs/contracts/PEGA_GENAI_TOOL_CALL_CONTRACTS.md": "309cff3fdaedae8b8a151030a486c7f4ce972ced0540571a9065205d307f8c62",
     "docs/contracts/SCENARIO_GROUP_V1.md": "4d38440fa358b2ee4c5528a678e9dcd7d5504343a460216a4cbac2397e2c30e2",
