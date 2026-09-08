@@ -6,7 +6,7 @@ Every stage is governed by the Instruction Preservation Matrix and the high-risk
 
 Under DEC-023, every independent repository reviewer uses `gpt-6-astra` with `xhigh` reasoning, including documentation-only reviews, high-risk batches, and final whole-stage closure audits. The root agent passes both overrides explicitly and follows the availability and evidence rules in `CONTINUITY.md`.
 
-S3 is CLOSED after independent whole-stage gpt-6-astra/xhigh PASS and root reconciliation. All 15 criteria in the [S3 ExecPlan](plans/S3-unit-test-generator.md) are VERIFIED; see the [acceptance report](design/S3-acceptance-report.md). S4 is also CLOSED after independent whole-stage gpt-6-astra/xhigh PASS on all 14 [S4 criteria](plans/S4-validator-refactor.md) and root reconciliation; see the [S4 acceptance report](design/S4-acceptance-report.md). S5 remains NOT_STARTED.
+S3 is CLOSED after independent whole-stage gpt-6-astra/xhigh PASS and root reconciliation. All 15 criteria in the [S3 ExecPlan](plans/S3-unit-test-generator.md) are VERIFIED; see the [acceptance report](design/S3-acceptance-report.md). S4 is also CLOSED after independent whole-stage gpt-6-astra/xhigh PASS on all 14 [S4 criteria](plans/S4-validator-refactor.md) and root reconciliation; see the [S4 acceptance report](design/S4-acceptance-report.md). S5 is VERIFIED and CLOSED after independent whole-stage gpt-6-astra/xhigh PASS on all13criteria and root reconciliation; see its [ExecPlan](plans/S5-integration-legacy-cleanup.md) and [acceptance report](design/S5-acceptance-report.md). All S0–S5 repository stages are CLOSED; external Pega import/runtime are not claimed.
 
 ## S0 — Baseline and Contract Stabilization
 
@@ -94,7 +94,7 @@ S3 is CLOSED after independent whole-stage gpt-6-astra/xhigh PASS and root recon
 
 - **Objective:** Integrate the three-agent repository artifacts, remove legacy transport references, and prove the complete caller flow with static fixtures and targeted artifact checks without unintended export changes.
 - **Dependencies:** `S2`, `S3`, `S4`
-- **Status:** `NOT_STARTED`
+- **Status:** `CLOSED`
 - **Mandatory acceptance criteria:**
   - Each agent exposes only its intended tools and responsibilities.
   - Legacy `MemoryTemp`, `CreateAIAgentResponseRecord`, and `GetAIAgentResponseRecord` references are absent from every effective S2–S4 prompt/export deliverable. Reference-only `Main_Agent.txt` is excluded, may retain baseline references, and must remain byte-identical to HEAD.

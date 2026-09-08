@@ -1,0 +1,134 @@
+{
+  "baseline": "d4061046650c87b9da2c4f87141f23aa2602f082",
+  "replacements": [
+    {
+      "id": "legacy-1",
+      "path": "Main_Agent_Prompt.txt",
+      "old": "MemoryTemp",
+      "new": "legacy transient-memory transport",
+      "count": 5,
+      "rows": [
+        "IPM-AUTH-003",
+        "IPM-AUTH-005",
+        "IPM-AUTH-019",
+        "IPM-VAL-005"
+      ],
+      "reason": "DEC-002/007/018/019: retain explicit prohibition or overridden historical context while removing obsolete tool name; no interface/semantic gate is added or deleted."
+    },
+    {
+      "id": "legacy-2",
+      "path": "Main_Agent_Prompt.txt",
+      "old": "CreateAIAgentResponseRecord",
+      "new": "legacy candidate-write transport",
+      "count": 3,
+      "rows": [
+        "IPM-AUTH-003",
+        "IPM-AUTH-005",
+        "IPM-AUTH-019",
+        "IPM-VAL-005"
+      ],
+      "reason": "DEC-002/007/018/019: retain explicit prohibition or overridden historical context while removing obsolete tool name; no interface/semantic gate is added or deleted."
+    },
+    {
+      "id": "legacy-3",
+      "path": "Main_Agent_Prompt.txt",
+      "old": "GetAIAgentResponseRecord",
+      "new": "legacy candidate-read transport",
+      "count": 1,
+      "rows": [
+        "IPM-AUTH-003",
+        "IPM-AUTH-005",
+        "IPM-AUTH-019",
+        "IPM-VAL-005"
+      ],
+      "reason": "DEC-002/007/018/019: retain explicit prohibition or overridden historical context while removing obsolete tool name; no interface/semantic gate is added or deleted."
+    },
+    {
+      "id": "legacy-4",
+      "path": "UnitTestGenerator_Prompt.txt",
+      "old": "MemoryTemp",
+      "new": "legacy transient-memory transport",
+      "count": 2,
+      "rows": [
+        "IPM-AUTH-003",
+        "IPM-AUTH-005",
+        "IPM-AUTH-019",
+        "IPM-VAL-005"
+      ],
+      "reason": "DEC-002/007/018/019: retain explicit prohibition or overridden historical context while removing obsolete tool name; no interface/semantic gate is added or deleted."
+    },
+    {
+      "id": "author-envelope",
+      "path": "Main_Agent_Prompt.txt",
+      "old": "Its result must be an object with exactly `Success` (boolean), `UUID` (string), `ErrorCode` (string), and `ErrorMessage` (string), with exact casing and no extra fields.",
+      "new": "Its result must be an object containing required `Success` (boolean), `UUID` (string), `ErrorCode` (string), and `ErrorMessage` (string), with exact casing. Ignore additional platform metadata; it cannot replace or repair a required field.",
+      "count": 1,
+      "rows": [
+        "IPM-AUTH-003",
+        "IPM-AUTH-013",
+        "IPM-AUTH-018"
+      ],
+      "reason": "S1 section5 permits platform metadata; DEC-031 supersedes the historical extra-field rejection without weakening required-field checks."
+    },
+    {
+      "id": "author-malformed",
+      "path": "Main_Agent_Prompt.txt",
+      "old": "- Missing, extra, wrongly typed, wrongly cased, or contradictory fields are malformed.",
+      "new": "- Missing required fields, wrongly typed or wrongly cased required fields, or contradictory required fields are malformed.",
+      "count": 1,
+      "rows": [
+        "IPM-AUTH-003",
+        "IPM-AUTH-013"
+      ],
+      "reason": "Same S1/DEC-031 bounded envelope correction; generic prose still cannot supply missing required fields."
+    },
+    {
+      "id": "sim-boundary-6",
+      "path": "Main_Agent_Prompt.txt",
+      "old": "UnitTestGenerator must project every SIM record mechanically to exactly one matching `pySimulation` entry. Validator must compare `rule`, `sig`, `shape`, `method`, `class`, `itemClass`, `params`, and `target` against that exact entry. S3 and S4 must update both consumers from this same grammar; any field drift is blocking.",
+      "new": "UnitTestGenerator must project every SIM record mechanically to exactly one matching `pySimulation` entry and prove its complete signature, typed parameters and payload binding against immutable ScenarioGroups. Validator preserves the same full grammar and compares every observable candidate field, unique mock association and shared When identity. The candidate has no separate physical sig/params/payload-binding carriers; Validator must not invent them or claim independent proof of absent source facts. This evidence boundary does not excuse any observable mismatch or weaken Generator source verification.",
+      "count": 1,
+      "rows": [
+        "IPM-AUTH-090",
+        "IPM-VAL-022",
+        "IPM-VAL-043"
+      ],
+      "reason": "DEC-016 grammar unchanged; propagate independently verified DEC-030 evidence/ownership boundary into both existing embedded source references."
+    },
+    {
+      "id": "sim-boundary-7",
+      "path": "UnitTestGenerator_Prompt.txt",
+      "old": "UnitTestGenerator must project every SIM record mechanically to exactly one matching `pySimulation` entry. Validator must compare `rule`, `sig`, `shape`, `method`, `class`, `itemClass`, `params`, and `target` against that exact entry. S3 and S4 must update both consumers from this same grammar; any field drift is blocking.",
+      "new": "UnitTestGenerator must project every SIM record mechanically to exactly one matching `pySimulation` entry and prove its complete signature, typed parameters and payload binding against immutable ScenarioGroups. Validator preserves the same full grammar and compares every observable candidate field, unique mock association and shared When identity. The candidate has no separate physical sig/params/payload-binding carriers; Validator must not invent them or claim independent proof of absent source facts. This evidence boundary does not excuse any observable mismatch or weaken Generator source verification.",
+      "count": 1,
+      "rows": [
+        "IPM-AUTH-090",
+        "IPM-VAL-022",
+        "IPM-VAL-043"
+      ],
+      "reason": "DEC-016 grammar unchanged; propagate independently verified DEC-030 evidence/ownership boundary into both existing embedded source references."
+    },
+    {
+      "id": "author-embedded-envelope",
+      "path": "Main_Agent_Prompt.txt",
+      "old": "The WriteMemory result envelope is the exact S1 contract: fields are exactly `Success` (boolean), `UUID` (string), `ErrorCode` (string), and `ErrorMessage` (string). `Success=true` requires a non-empty opaque UUID and empty error fields. `Success=false` requires an empty UUID, non-empty ErrorMessage, and ErrorCode `INVALID_INPUT`, `UNSUPPORTED_TYPE`, or `WRITE_FAILED`. Missing, additional, wrongly cased, wrongly typed, or contradictory fields are malformed and follow the same terminal no-retry/no-handoff path. UUID collection begins only after this complete envelope check.",
+      "new": "The WriteMemory result envelope is the exact S1 contract: required fields are `Success` (boolean), `UUID` (string), `ErrorCode` (string), and `ErrorMessage` (string). `Success=true` requires a non-empty opaque UUID and empty error fields. `Success=false` requires an empty UUID, non-empty ErrorMessage, and ErrorCode `INVALID_INPUT`, `UNSUPPORTED_TYPE`, or `WRITE_FAILED`. Missing required fields, wrongly cased or wrongly typed required fields, or contradictory required fields are malformed and follow the same terminal no-retry/no-handoff path. Ignore additional platform metadata; it cannot replace or repair a required field. UUID collection begins only after this complete envelope check.",
+      "count": 1,
+      "rows": [
+        "IPM-AUTH-003",
+        "IPM-AUTH-013",
+        "IPM-AUTH-018"
+      ],
+      "reason": "DEC-031: reconcile the executable Section13 embedded caller envelope with Section1A/S1 while retaining the fixed historical source file."
+    }
+  ],
+  "appendix": {
+    "path": "Main_Agent_Prompt.txt",
+    "schema": "docs/contracts/GENERATOR_RUN_REPORT_V1.schema.json",
+    "rows": [
+      "IPM-AUTH-009",
+      "IPM-AUTH-016"
+    ],
+    "reason": "Self-contained existing Generator report schema plus observable G9 outcome/count/current-coordinate and known handoff identity consistency; no candidate read or semantic inference; fixed outer status mapping."
+  }
+}

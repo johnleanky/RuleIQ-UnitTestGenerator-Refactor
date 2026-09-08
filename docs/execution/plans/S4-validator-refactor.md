@@ -123,4 +123,4 @@ Refactor UnitTestValidator to inspect exactly the candidate UUID supplied by Uni
 
 ## Exact Next Action
 
-Prepare the S5 integration activation ExecPlan for independent review; keep S5 NOT_STARTED until activation is verified.
+Follow the current ExecPlan and exact next action in continuity; S4 remains CLOSED.

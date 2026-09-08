@@ -38,7 +38,7 @@
 <p>| WriteMemory(CaseID, Type, Payload) | One attempt for each complete immutable UnitTestCandidate version. |</p>
 <p>| UnitTestValidator(CaseID, RUTType, UnitTestCandidateUUID) | Validate only the UUID returned by the current successful candidate write. |</p>
 <p></p>
-<p>GetCaseData, RuleCrawler, semantic Knowledge, direct JsonValidationTool, candidate GetMemory reads, MemoryTemp, legacy response-record tools, source rewrites and separate result/report writes are unavailable even if the environment exposes them. Never re-execute a RUT, choose a witness, infer a type/value/path, add coverage, change original RUTType, merge/split a group, or alter an ASSERT/SIM/OMIT decision. Validator messages are diagnostics, never new semantic facts.</p>
+<p>GetCaseData, RuleCrawler, semantic Knowledge, direct JsonValidationTool, candidate GetMemory reads, legacy transient-memory transport, legacy response-record tools, source rewrites and separate result/report writes are unavailable even if the environment exposes them. Never re-execute a RUT, choose a witness, infer a type/value/path, add coverage, change original RUTType, merge/split a group, or alter an ASSERT/SIM/OMIT decision. Validator messages are diagnostics, never new semantic facts.</p>
 <p></p>
 <p>## G2. Exact Reads and Immutable Source Gate</p>
 <p></p>
@@ -371,7 +371,7 @@
 <p></p>
 <p>For WHEN, each Scenario's ordered SIM records serialize to the complete `simulationGroupKey` entry set; every declared key field is compared, not only signature and parameters. A `NO_SIMULATION` group contains zero SIM records in every Scenario.</p>
 <p></p>
-<p>UnitTestGenerator must project every SIM record mechanically to exactly one matching `pySimulation` entry. Validator must compare `rule`, `sig`, `shape`, `method`, `class`, `itemClass`, `params`, and `target` against that exact entry. S3 and S4 must update both consumers from this same grammar; any field drift is blocking.</p>
+<p>UnitTestGenerator must project every SIM record mechanically to exactly one matching `pySimulation` entry and prove its complete signature, typed parameters and payload binding against immutable ScenarioGroups. Validator preserves the same full grammar and compares every observable candidate field, unique mock association and shared When identity. The candidate has no separate physical sig/params/payload-binding carriers; Validator must not invent them or claim independent proof of absent source facts. This evidence boundary does not excuse any observable mismatch or weaken Generator source verification.</p>
 <p></p>
 <p>### Assertion and Omission Decisions</p>
 <p></p>
@@ -430,7 +430,7 @@
 <p>- dependency work is closed or terminal, with no active crawl state or transient draft/planning record;</p>
 <p>- ASSERT/SIM/OMIT census is complete and all exact claims have producer/evidence support;</p>
 <p>- Decision Table records and the two inactive-scalar omission reasons are atomically consistent;</p>
-<p>- no UnitTestRules, RuleCode, schema-selection, Validator, candidate, repair, MemoryTemp, or response-record responsibility is present.</p>
+<p>- no UnitTestRules, RuleCode, schema-selection, Validator, candidate, repair, legacy transient-memory transport, or response-record responsibility is present.</p>
 <p></p>
 <p>Failure restarts the earliest invalid semantic phase or terminates the run; it never writes a partial payload.</p>
 <p></p>

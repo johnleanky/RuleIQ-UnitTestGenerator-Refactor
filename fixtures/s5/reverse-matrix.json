@@ -1,0 +1,4142 @@
+[
+  {
+    "id": "IPM-AUTH-001",
+    "source": "Main 3\u20135, Core contract",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Maximize evidence-supported RUT coverage with the minimum valid physical unit-test groups.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: purpose and semantic objective. Preserve: Maximize evidence-supported RUT coverage with the minimum valid physical unit-test groups."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-001; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-002",
+    "source": "Main 7,14\u201318",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Structured-output limits require strict evidence, dependency closure, materialized semantics, and schema-governed projection; active crawl blocks authoring.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Retain strict evidence, dependency-closure, and materialized-semantic gates before handoff.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G2; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-002; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-003",
+    "source": "Main 9\u201312",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Monolithic generation, persistence, validation, repair, and status handling must become ordered ScenarioGroup handoff, candidate generation, validation, and outer status mapping.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Replace monolithic execution with ordered ScenarioGroup writes, one Generator call, and bounded outer status mapping.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-003; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-004",
+    "source": "Main 20\u201324, reserved-page ban",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Reserved system pages are never setup, simulation, primary, P&C, or MultInpComb input roots; an invalid carrier cannot silently remove coverage.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: witness and seed safety. Preserve: Reserved system pages are never setup, simulation, primary, P&C, or MultInpComb input roots; an invalid carrier cannot silently remove coverage.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation.",
+      "VALIDATOR": "Check the observable physical reserved-page/seed or Scenario/Decision row invariant in this clause; never reconstruct Author seed proofs or original RUT execution."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-004; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
+      "VALIDATOR": "Validator_Prompt.txt: V8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-005",
+    "source": "Main 26\u201327, compiler memory authority",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Scenario formation uses one complete replacement snapshot and no competing scenario ledger; replace MemoryTemp with final immutable ScenarioGroup records.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: compiler state and Memory handoff. Preserve: Scenario formation uses one complete replacement snapshot and no competing scenario ledger; replace MemoryTemp with final immutable ScenarioGroup records."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-005; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-006",
+    "source": "Main 29\u201330, MultInpComb firewall",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "MultInpComb applies only to original Rule-Obj-When; non-When physical groups contain exactly one Scenario.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Record immutable original RUT type and enforce one Scenario per non-When physical group.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G2; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-006; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
+      "VALIDATOR": "Validator_Prompt.txt: V8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-007",
+    "source": "Main 32\u201360, simulation key",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Each When Scenario has one typed canonical key containing every runtime-relevant simulation field and concrete DP parameter; no simulation uses NO_SIMULATION.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: group formation and ScenarioGroup header. Preserve: Each When Scenario has one typed canonical key containing every runtime-relevant simulation field and concrete DP parameter; no simulation uses NO_SIMULATION.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation.",
+      "VALIDATOR": "Check complete visible SIM grammar, unique physical mock association and shared When identity; hidden source facts remain Generator-owned under DEC-030."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-007; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
+      "VALIDATOR": "Validator_Prompt.txt: V7"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-008",
+    "source": "Main 61\u201396, grouping/cardinality",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Equal simulation keys form one group, unequal keys never mix, order is stable, local rows are bijective, and unit count equals distinct keys.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Compute typed simulation keys, group equal keys only, preserve order, and freeze Scenario membership.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G2; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-008; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
+      "VALIDATOR": "Validator_Prompt.txt: V8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-009",
+    "source": "Main 99\u2013123, visible output",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Candidate and internal work stay hidden; Generator has a runtime report and Scenario Author emits only the bounded two-field external status.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Hide internal ledgers and Payloads; emit only the bounded two-field external result.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G9; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-009; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G9"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-010",
+    "source": "Main 126\u2013132, forbidden final state",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "Internal ledgers, transport state, reports, and unsupported fields never enter schema-governed candidate JSON.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G4; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G4"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-011",
+    "source": "Main 136\u2013159, stored-response validation loop",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "Validation starts a closed repair phase: no new crawl or semantic knowledge; repair uses immutable scenarios and current candidate only.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-012",
+    "source": "Main 161\u2013167, candidate storage",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "A complete formatted candidate is persisted only after semantic and projection gates, using WriteMemory and a returned UUID.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-013",
+    "source": "Main 165,171\u2013177",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "CaseID is GetCaseData.pyID and original RUTType is immutable across generation, validation, and repair.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Derive CaseID from GetCaseData.pyID and pass immutable original RUTType unchanged.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V1"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-013; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8",
+      "VALIDATOR": "Validator_Prompt.txt: V1"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-014",
+    "source": "Main 169\u2013180",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Validator selects the schema family from immutable original RUTType; caller never passes or recomputes schema mode.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V3"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V3"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-015",
+    "source": "Main 182\u2013201, validator results",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "Preserve unaffected projection material; replace Author repair/rerun with Generator projection repair and semantic rejection.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-016",
+    "source": "Main 203\u2013223",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "HUMAN or malformed reports terminate; useful issue messages precede bounded fallback failure text.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Map Generator terminal or malformed results to bounded outer failure text.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-016; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-017",
+    "source": "Main 225\u2013239",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "Mass projection failure rebuilds from unchanged ScenarioGroups; warnings do not block OK; write failure terminates; at most two repairs follow first report.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-018",
+    "source": "Main 241, data bus",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Large candidates and all validators address the same exact immutable UnitTestCandidate version.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Do not read or address candidates; pass only ordered opaque ScenarioGroup UUIDs.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V3"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-018; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8",
+      "VALIDATOR": "Validator_Prompt.txt: V3"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-019",
+    "source": "Main 245\u2013253, interfaces",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Tool access is role-bounded: Scenario Author analyzes/writes groups; Generator reads groups/writes candidates/calls Validator.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Use only the closed Scenario Author allowlist and write ScenarioGroup records.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V1"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-019; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8",
+      "VALIDATOR": "Validator_Prompt.txt: V1"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-020",
+    "source": "Main 257\u2013264, source order",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Schema governs structure; RuleJSON governs semantics; immutable ScenarioGroups govern final scenarios; examples never override authorities.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Use RuleJSON and semantic Knowledge guidance as semantic authorities; ScenarioGroups are final scenario authority.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G3; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V4"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-020; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G3",
+      "VALIDATOR": "Validator_Prompt.txt: V4"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-021",
+    "source": "Main 268\u2013305, Knowledge keys",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Knowledge uses qualified canonical composite keys; MultInpComb UTC keys depend only on original When RUT type.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Use qualified canonical semantic Knowledge keys and original RUTType for semantic adapter selection.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G3; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V4"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-021; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G3",
+      "VALIDATOR": "Validator_Prompt.txt: V4"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-022",
+    "source": "Main 307\u2013324, knowledge cache",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Parse pxResults, batch/cache each requested key once, record gaps, and prohibit new Knowledge acquisition after validation.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Batch/cache semantic keys once, parse pxResults, and retain explicit gaps.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G3; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V4"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-022; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G3",
+      "VALIDATOR": "Validator_Prompt.txt: V4"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-023",
+    "source": "Main 326\u2013339, required keys",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Scenario Author owns semantic rule/dependency/property guidance; Generator owns UTC schema/example/RuleCode guidance.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Load only semantic rule, dependency, and property guidance required by Scenario Author.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G3; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-023; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G3"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-024",
+    "source": "Main 341\u2013356, checkpoints",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Knowledge calls occur only at deterministic batch checkpoints, never repeat, and missing guidance narrows claims instead of inviting inference.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Call semantic Knowledge only at deterministic checkpoints and narrow unsupported claims.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G3; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V4"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-024; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G3",
+      "VALIDATOR": "Validator_Prompt.txt: V4"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-025",
+    "source": "Main 358\u2013374, guided extraction",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Knowledge guidance controls semantic extraction, context, parameters, properties, simulations, and RuleCode serialization according to role.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Apply guidance to semantic extraction, contexts, parameters, properties, and simulation decisions.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G3; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-025; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G3"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-026",
+    "source": "Main 375\u2013379",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Missing required guidance remains an explicit gap affecting support and testability; it is never treated as resolved.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author evidence/gap ledger. Preserve: Missing required guidance remains an explicit gap affecting support and testability; it is never treated as resolved."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-026; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-027",
+    "source": "Main 382\u2013395, execution 1\u201310",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Acquire/validate RUT identity, lock type, load guidance, scan/crawl, and prove closed or terminal dependencies before authoring.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: acquisition and crawl order. Preserve: Acquire/validate RUT identity, lock type, load guidance, scan/crawl, and prove closed or terminal dependencies before authoring."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-027; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-028",
+    "source": "Main 396\u2013400, execution 11\u201315",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Semantic analysis, evidence, complexity, and Scenario Compiler freeze occur only after dependency closure.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: semantic authoring order. Preserve: Semantic analysis, evidence, complexity, and Scenario Compiler freeze occur only after dependency closure."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-028; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-029",
+    "source": "Main 400\u2013413, packaging",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Scenario Author fixes physical groups; Generator waits for them and performs exact one-entry-per-group projection.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Freeze and order physical ScenarioGroups after semantic closure.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G2; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-029; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-030",
+    "source": "Main 414\u2013418, assertions",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Enumerate candidates, apply the assertion ladder, and pass runtime/producer/simulation/closure gates before final semantic decisions.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: assertion finalization. Preserve: Enumerate candidates, apply the assertion ladder, and pass runtime/producer/simulation/closure gates before final semantic decisions."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-030; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-031",
+    "source": "Main 419\u2013421",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "RuleCode purpose, serialization, and post-RuleCode alignment audit are mandatory projection work.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G4; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G4"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-032",
+    "source": "Main 422\u2013424",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "Replace Author storage/Validator/repair with Generator candidate UUID, Validator invocation, projection-only repair, and report.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-033",
+    "source": "Main 426\u2013523, Internal Evidence Ledger and DWL",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Complete the evidence ledger before RuleCode; one canonical dependency state machine governs identity, DP signatures, grammar, transitions, closure, and authoring gates; no parallel proof ledger.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author evidence/DWL and ScenarioGroup snapshot. Preserve: Complete the evidence ledger before RuleCode; one canonical dependency state machine governs identity, DP signatures, grammar, transitions, closure, and authoring gates; no parallel proof ledger."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-033; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-034",
+    "source": "Main 525\u2013539, DependencyResolution",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "DependencyResolution is a read-only DWL projection; narrative dependencies without rows block authoring.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "ScenarioGroup dependency projection. Preserve: DependencyResolution is a read-only DWL projection; narrative dependencies without rows block authoring."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-034; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-035",
+    "source": "Main 541\u2013553, parameters",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Every behavior-affecting parameter records invocation, mode, inheritance, expression, resolved value, and evidence; guessing is forbidden.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "ScenarioGroup parameter records. Preserve: Every behavior-affecting parameter records invocation, mode, inheritance, expression, resolved value, and evidence; guessing is forbidden.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-035; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-036",
+    "source": "Main 555\u2013580, branches",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Every relevant branch records exact logic, inputs, result, paths, and write reachability without mixing exclusive branches.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "ScenarioGroup branch/WR records. Preserve: Every relevant branch records exact logic, inputs, result, paths, and write reachability without mixing exclusive branches."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-036; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-037",
+    "source": "Main 581\u2013606, pyLogic lock",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Copy pyLogic verbatim, tokenize every top-level clause, evaluate all clauses, discover dependencies, and block authoring on failure.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: When semantic gate. Preserve: Copy pyLogic verbatim, tokenize every top-level clause, evaluate all clauses, discover dependencies, and block authoring on failure."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-037; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-038",
+    "source": "Main 608\u2013676, RUT I/O lock",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Compute root identity, reads/writes, required/forbidden seeds, conflicts, and pre-seed closure; never patch frozen scenarios.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: seed-direction gate. Preserve: Compute root identity, reads/writes, required/forbidden seeds, conflicts, and pre-seed closure; never patch frozen scenarios.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-038; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-039",
+    "source": "Main 679\u2013693, property traces",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Every emitted or omitted exact claim records support, determinism, confidence, final value, and ordered producing modifications.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "ScenarioGroup property traces. Preserve: Every emitted or omitted exact claim records support, determinism, confidence, final value, and ordered producing modifications.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation.",
+      "VALIDATOR": "Check explicit final decisions against visible physical assertion/omission values, shapes and context; do not derive expected values, support proofs or omitted claims."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-039; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
+      "VALIDATOR": "Validator_Prompt.txt: V6"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-040",
+    "source": "Main 695\u2013707, omissions",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Omission follows full candidate enumeration and assertion ladder, uses an allowed reason, and never cites complexity alone.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "ScenarioGroup OMIT decisions. Preserve: Omission follows full candidate enumeration and assertion ladder, uses an allowed reason, and never cites complexity alone.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation.",
+      "VALIDATOR": "Check explicit final decisions against visible physical assertion/omission values, shapes and context; do not derive expected values, support proofs or omitted claims."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-040; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
+      "VALIDATOR": "Validator_Prompt.txt: V6"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-041",
+    "source": "Main 709\u2013736, limits",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Complexity metrics, thresholds, caps, and tiers are deterministic; complexity increases trace depth but cannot alone reduce coverage.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: complexity and limits. Preserve: Complexity metrics, thresholds, caps, and tiers are deterministic; complexity increases trace depth but cannot alone reduce coverage.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-041; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-042",
+    "source": "Main 738\u2013770, runtime rows",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Every execution-relevant step/expression/action has a grounded RX row; unknowns stay unknown and drive producer/DP projections.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "ScenarioGroup runtime execution rows. Preserve: Every execution-relevant step/expression/action has a grounded RX row; unknowns stay unknown and drive producer/DP projections."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-042; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-043",
+    "source": "Main 774\u2013787, discovery",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Enumerate direct, dependency, branch, error, business, and collection assertion candidates after producer discovery.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: assertion inventory. Preserve: Enumerate direct, dependency, branch, error, business, and collection assertion candidates after producer discovery."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-043; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-044",
+    "source": "Main 789\u2013860, skipped-branch gate",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Per property/scenario, write reachability and seed conflicts select Not exists, structural/omit, or normal ladder with nested-path proof.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: assertion gates. Preserve: Per property/scenario, write reachability and seed conflicts select Not exists, structural/omit, or normal ladder with nested-path proof."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-044; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-045",
+    "source": "Main 861\u2013941, producer lock",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Immutable hierarchical producer and execution rows bind assertions to operation, context, guard, payload, and order.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "ScenarioGroup producer/APB records. Preserve: Immutable hierarchical producer and execution rows bind assertions to operation, context, guard, payload, and order.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-045; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-046",
+    "source": "Main 943\u2013984, list uncertainty",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Indexed/exact-count list assertions require terminal producer execution/order proof; safe fallback never removes a Scenario.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: list assertion decisions. Preserve: Indexed/exact-count list assertions require terminal producer execution/order proof; safe fallback never removes a Scenario.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-046; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-047",
+    "source": "Main 986\u2013998, assertion ladder",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Use Verified \u2192 PredictedFromRules \u2192 Structural \u2192 Omitted; all outputs have trace support and RUF/concatenation values are mechanical.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "ScenarioGroup final assertion decisions. Preserve: Use Verified \u2192 PredictedFromRules \u2192 Structural \u2192 Omitted; all outputs have trace support and RUF/concatenation values are mechanical.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation.",
+      "VALIDATOR": "Check explicit final decisions against visible physical assertion/omission values, shapes and context; do not derive expected values, support proofs or omitted claims."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-047; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
+      "VALIDATOR": "Validator_Prompt.txt: V6"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-048",
+    "source": "Main 1002\u20131013, dependency-first",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Crawl and author modes are mutually gated; active dependency work precedes authoring, downgrade, omission, or persistence.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: dependency workflow. Preserve: Crawl and author modes are mutually gated; active dependency work precedes authoring, downgrade, omission, or persistence.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-048; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-049",
+    "source": "Main 1015\u20131036, discovery",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Known page-list helpers and Decision Table calls become concrete dependency rows before generic RUF handling.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: dependency extraction. Preserve: Known page-list helpers and Decision Table calls become concrete dependency rows before generic RUF handling."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-049; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-050",
+    "source": "Main 1038\u20131086, materialization",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Every executable occurrence, property segment, RUF, DP, helper context, and Decision Table dependency is materialized and closed/terminal before use.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: RuleJSON scan. Preserve: Every executable occurrence, property segment, RUF, DP, helper context, and Decision Table dependency is materialized and closed/terminal before use."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-050; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-051",
+    "source": "Main 1088\u20131131, request planning",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "RuleCrawler payloads derive mechanically from READY rows with exact reference shapes, deduplication, retries, mappings, and pre-call gates.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: crawler request plan. Preserve: RuleCrawler payloads derive mechanically from READY rows with exact reference shapes, deduplication, retries, mappings, and pre-call gates."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-051; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-052",
+    "source": "Main 1132\u20131144, response transition",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Match every response, scan fetched JSON immediately, advance context occurrence-locally, retain DP obligations, and continue while work is open.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: crawler response transition. Preserve: Match every response, scan fetched JSON immediately, advance context occurrence-locally, retain DP obligations, and continue while work is open."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-052; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-053",
+    "source": "Main 1146\u20131156, terminal gaps",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "LIMIT/KEYONLY/MISSING/OMIT_NONCRITICAL require exhausted factual evidence and cannot replace requestable work or support positive assertions.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: terminal dependency handling. Preserve: LIMIT/KEYONLY/MISSING/OMIT_NONCRITICAL require exhausted factual evidence and cannot replace requestable work or support positive assertions.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-053; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-054",
+    "source": "Main 1158\u20131165, caps",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Explicit call/rule caps apply; remaining capacity plus READY work requires continued crawling; wave number is not a stop criterion.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: crawl limits. Preserve: Explicit call/rule caps apply; remaining capacity plus READY work requires continued crawling; wave number is not a stop criterion."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-054; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-055",
+    "source": "Main 1167\u20131219, examples",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Preserve canonical continuation, context-separation, and helper-extraction examples as non-authoritative regression fixtures.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author crawler examples. Preserve: Preserve canonical continuation, context-separation, and helper-extraction examples as non-authoritative regression fixtures."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-055; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-056",
+    "source": "Main 1221\u20131231, closure gates",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Semantic closure precedes handoff; Generator separately owns projection, RuleCode, DP alignment, and candidate-write gates.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Require dependency and semantic closure before ScenarioGroup writes and handoff.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G2; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-056; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-057",
+    "source": "Main 1233\u20131257, RUF",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Critical RUFs require exact contracts, transitive closure, deterministic arguments, and explicit unknown-result gaps.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: RUF analysis. Preserve: Critical RUFs require exact contracts, transitive closure, deterministic arguments, and explicit unknown-result gaps."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-057; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-058",
+    "source": "Main 1259\u20131269, Decision Tables",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Evaluate through DTM/DTA/DTE evidence; inactive scalar results create localized omissions while independent final effects remain traceable.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "ScenarioGroup Decision Table records. Preserve: Evaluate through DTM/DTA/DTE evidence; inactive scalar results create localized omissions while independent final effects remain traceable."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-058; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-059",
+    "source": "Main 1271\u20131285, property/context",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Trace ordered RUT/dependency modifications, loops, indexes, contexts, and Decision Table effects; assert only final observable values.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "ScenarioGroup property execution traces. Preserve: Trace ordered RUT/dependency modifications, loops, indexes, contexts, and Decision Table effects; assert only final observable values.",
+      "UNIT_TEST_GENERATOR": "Copy frozen execution/producer traces without recomputing final effects or inventing evidence."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-059; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G7"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-060",
+    "source": "Main 1287\u20131302, DP obligation",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Every reachable/unknown DP signature becomes a concrete Scenario simulation obligation with exact parameters, seed context, output shape, and DPA alignment.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "ScenarioGroup simulation decisions. Preserve: Every reachable/unknown DP signature becomes a concrete Scenario simulation obligation with exact parameters, seed context, output shape, and DPA alignment.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation.",
+      "VALIDATOR": "Check complete visible SIM grammar, unique physical mock association and shared When identity; hidden source facts remain Generator-owned under DEC-030."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-060; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
+      "VALIDATOR": "Validator_Prompt.txt: V7"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-061",
+    "source": "Main 1304\u20131333, seed depth",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Simulation paths preserve exact RUT tokens and navigation depth; wrapper conventions cannot rename or deepen paths.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: simulation payload. Preserve: Simulation paths preserve exact RUT tokens and navigation depth; wrapper conventions cannot rename or deepen paths.",
+      "UNIT_TEST_GENERATOR": "Preserve exact frozen simulation paths, wrappers, domain depth, classes and data during mechanical projection.",
+      "VALIDATOR": "Check complete visible SIM grammar, unique physical mock association and shared When identity; hidden source facts remain Generator-owned under DEC-030."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-061; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G5",
+      "VALIDATOR": "Validator_Prompt.txt: V7"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-062",
+    "source": "Main 1335\u20131368, simulation scope",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Only Thread-level Data Pages are simulated; excluded pages create gaps/downgrades and invalid scope returns to witness formation.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: simulation eligibility. Preserve: Only Thread-level Data Pages are simulated; excluded pages create gaps/downgrades and invalid scope returns to witness formation."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-062; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-063",
+    "source": "Main 1371\u20131380, simulation serialization",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Scenario Author fixes DP mock semantics; Generator maps them to pySimulation with exact page/list and runtime seed shape.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Materialize exact DP mock semantics, signature, parameters, shape, target, and evidence.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G5; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V7"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-063; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G5",
+      "VALIDATOR": "Validator_Prompt.txt: V7"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-064",
+    "source": "Main 1382\u20131383, seed coverage",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Every seed-derived exact assertion has a matching physical seed; post-freeze changes require rematerialization or downgrade.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author: seed/assertion audit. Preserve: Every seed-derived exact assertion has a matching physical seed; post-freeze changes require rematerialization or downgrade.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-064; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-065",
+    "source": "Main 1387\u20131415, property formatting",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Property definitions govern structure, class, type, boolean form, and collection addressing.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Resolve property definition, class, mode, and typed semantic value.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G6; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V6"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-065; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
+      "VALIDATOR": "Validator_Prompt.txt: V6"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-066",
+    "source": "Main 1416\u20131423, Param assertions",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "Param assertions use exact Param paths and property assertion shape without page/real-name/parent-mode fields.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G6; canonical prompt same section after freeze",
+      "VALIDATOR": "Check explicit final decisions against visible physical assertion/omission values, shapes and context; do not derive expected values, support proofs or omitted claims."
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
+      "VALIDATOR": "Validator_Prompt.txt: V6"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-067",
+    "source": "Main 1425\u20131437, regular assertions",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Regular assertion page, class, relative target, and real name derive from immutable APB/runtime context.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Freeze APB/runtime context, canonical target, page, class, mode, and real property identity.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G6; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V6"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-067; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
+      "VALIDATOR": "Validator_Prompt.txt: V6"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-068",
+    "source": "Main 1439\u20131451, Page assertions",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "Page/list-item targets use Page assertions; Property assertions address scalar descendants only.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G6; canonical prompt same section after freeze",
+      "VALIDATOR": "Check explicit final decisions against visible physical assertion/omission values, shapes and context; do not derive expected values, support proofs or omitted claims."
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
+      "VALIDATOR": "Validator_Prompt.txt: V6"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-069",
+    "source": "Main 1453\u20131472, comparators",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Semantic assertion and property type determine comparator/value; booleans remain typed and never use existence semantics.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Choose semantic assertion type, comparator intent, typed expected value, and support.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G6; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V6"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-069; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
+      "VALIDATOR": "Validator_Prompt.txt: V6"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-070",
+    "source": "Main 1475\u20131493, Pega context",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "Preserve evidenced optional Pega context fields and valid compact Page forms unless forbidden or proven wrong.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G6; canonical prompt same section after freeze",
+      "VALIDATOR": "Check explicit final decisions against visible physical assertion/omission values, shapes and context; do not derive expected values, support proofs or omitted claims."
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
+      "VALIDATOR": "Validator_Prompt.txt: V6"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-071",
+    "source": "Main 1497\u20131515, cardinality",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "One physical group per non-When Scenario or distinct When simulation key; ordinary input/result differences do not split groups.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Create one group per non-When Scenario or distinct typed When simulation key; ignore ordinary value differences.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G2; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-071; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
+      "VALIDATOR": "Validator_Prompt.txt: V8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-072",
+    "source": "Main 1517\u20131530, compiler/grammar",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "One compiler owns census, witnesses, coverage, membership, freeze, IDs, typed data, escaping, and complete snapshot validation; replace only its MemoryTemp carrier.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Versioned ScenarioGroup line-ledger. Preserve: One compiler owns census, witnesses, coverage, membership, freeze, IDs, typed data, escaping, and complete snapshot validation; replace only its MemoryTemp carrier.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-072; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-073",
+    "source": "Main 1532\u20131538, INVENTORY",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Census original-RUT behaviors only; dependencies never own targets; rule-type adapters govern Model, When, and original Decision Table coverage.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author INVENTORY phase. Preserve: Census original-RUT behaviors only; dependencies never own targets; rule-type adapters govern Model, When, and original Decision Table coverage."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-073; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-074",
+    "source": "Main 1539, WITNESSES",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Build deterministic executable coverage witnesses, resolve all physical data/simulation, execute RUT, and merge only identical physical executions.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author WITNESSES phase. Preserve: Build deterministic executable coverage witnesses, resolve all physical data/simulation, execute RUT, and merge only identical physical executions."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-074; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-075",
+    "source": "Main 1541, FROZEN",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Reduce deterministically without coverage loss; re-execute/rebuild affected projections; assertions, confidence, and packaging cannot change frozen semantics.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author final semantic gate. Preserve: Reduce deterministically without coverage loss; re-execute/rebuild affected projections; assertions, confidence, and packaging cannot change frozen semantics.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-075; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-076",
+    "source": "Main 1543\u20131545, B/A audit",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Split current post-RuleCode recensus into Scenario Author pre-handoff semantic audit, Generator bijection audit, and Validator candidate audit.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Run an independent pre-handoff recensus, re-execution, coverage, and semantic-bijection audit.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G2; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V6"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-076; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
+      "VALIDATOR": "Validator_Prompt.txt: V6"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-077",
+    "source": "Main 1547\u20131550, nested DT setup",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "DTE/DTA setup is immutable before projection; Generator copies exact invocation-page setup and cannot add physical inputs.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Freeze exact nested-DT invocation-page setup and before values before handoff.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G5; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-077; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G5"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-078",
+    "source": "Main 1552\u20131577, RuleCode allocation",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "Formal parameter type governs serialization; setup, P&C, cleanup, simulation, and expected-result fields have distinct uses.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G5; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G5"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-079",
+    "source": "Main 1579\u20131615, When structure",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "Each group has one Decision block, one Scenario per row, fixed cell order/shape, typed final Result, exact paths, and no simulated-DP input.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G6; canonical prompt same section after freeze",
+      "VALIDATOR": "Check the observable physical reserved-page/seed or Scenario/Decision row invariant in this clause; never reconstruct Author seed proofs or original RUT execution."
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
+      "VALIDATOR": "Validator_Prompt.txt: V8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-080",
+    "source": "Main 1617\u20131677, grouping key",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Scenario Author computes locked full-simulation groups; Generator verifies and projects without semantic regrouping.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Compute and lock the complete typed simulation key and group membership.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G2; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V7"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-080; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
+      "VALIDATOR": "Validator_Prompt.txt: V7"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-081",
+    "source": "Main 1679\u20131708, synchronization",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Only simulation differences split; Scenario, Decision row, traces, simulation, IDs, order, and narrative references remain locally synchronized.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Keep Scenario IDs/order, decisions, traces, simulation, cells, and narrative references locally synchronized.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G6; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-081; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
+      "VALIDATOR": "Validator_Prompt.txt: V8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-082",
+    "source": "Main 1710\u20131730, DecisionResult",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "When Result requires terminal dependency evidence; critical gaps cannot be replaced by guesses or confidence downgrade.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "ScenarioGroup DecisionResult decision. Preserve: When Result requires terminal dependency evidence; critical gaps cannot be replaced by guesses or confidence downgrade.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-082; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-083",
+    "source": "Main 1732\u20131736, coverage/shape",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Coverage comes only from compiler; full cells execute before freeze; rows share ordered columns and one final Result.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Freeze coverage-complete When cells, ordered signature, row membership, and final Result.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G6; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-083; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
+      "VALIDATOR": "Validator_Prompt.txt: V8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-084",
+    "source": "Main 1738\u20131751, empty input",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Empty input preserves initialized carrier/cell, omits only pyExpectedValue, uses EMPTY trace semantics, and is not Page non-existence.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Represent empty semantic input explicitly while preserving its initialized carrier and EMPTY trace value.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G6; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-084; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
+      "VALIDATOR": "Validator_Prompt.txt: V8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-085",
+    "source": "Main 1753\u20131784, input paths",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Preserve namespace, leading dot, indexes, keys, spelling, casing, and locked root for primary-relative paths.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Freeze exact input paths, namespace, leading dot, indexes, keys, spelling, casing, and root.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G6; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-085; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
+      "VALIDATOR": "Validator_Prompt.txt: V8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-086",
+    "source": "Main 1786\u20131817, final row checks",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "Generator verifies exact group Scenario/row bijection, signature, cell order, Result, trace numbers, and paths before write.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G6; canonical prompt same section after freeze",
+      "VALIDATOR": "Check the observable physical reserved-page/seed or Scenario/Decision row invariant in this clause; never reconstruct Author seed proofs or original RUT execution."
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
+      "VALIDATOR": "Validator_Prompt.txt: V8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-087",
+    "source": "Main 1819\u20131828, narratives",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Narratives are at most two factual plain-language sentences matching seeded, checked, and simulated semantics.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "ScenarioGroup final narrative. Preserve: Narratives are at most two factual plain-language sentences matching seeded, checked, and simulated semantics."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-087; Sections 1/1A/1B/13/14"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-088",
+    "source": "Main 1832\u20131865, EvidenceSummary",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Truthfully project closure, support, branches, simulation, complexity, counts, gaps, reasoning, and seed coverage from canonical evidence.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Materialize truthful closure, support, branch, simulation, complexity, count, gap, reasoning, and seed evidence.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G7; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V6"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-088; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G7",
+      "VALIDATOR": "Validator_Prompt.txt: V6"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-089",
+    "source": "Main 1867\u20131886, MultInpComb trace",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Each row has one trace per input and Result; paths, values, and local row indices match exact cells, including empty values.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Produce one semantic DecisionInput trace per cell and one DecisionResult trace per When row with exact values/indices.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G7; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-089; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G7",
+      "VALIDATOR": "Validator_Prompt.txt: V8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-090",
+    "source": "Main 1889\u20131967, trace grammar",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Every final ASSERT/SIM/OMIT has one safely encoded grammar row; removed candidates become explicit omissions; support rules remain enforced.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Finalize exactly one safely encoded ASSERT/SIM/OMIT decision per emitted or omitted claim.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G7; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V5"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-090; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G7",
+      "VALIDATOR": "Validator_Prompt.txt: V5"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-091",
+    "source": "Main 1969\u20131984, structural/Param/SIM",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Structural omission, Param shape, and DP SIM signature rules are exact and block projection when required evidence is absent.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Enforce structural, Param, and Data Page SIM evidence gates before handoff.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G6; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V7"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-091; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
+      "VALIDATOR": "Validator_Prompt.txt: V7"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-092",
+    "source": "Main 1994\u20132010, confidence",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Gaps deterministically cap confidence/testability; critical gaps force Low and partial/not-testable semantics.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "ScenarioGroup confidence/testability. Preserve: Gaps deterministically cap confidence/testability; critical gaps force Low and partial/not-testable semantics.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-092; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-093",
+    "source": "Main 2011\u20132020, legacy loop",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "Replace Author persistence/validation/repair with Generator group reads, candidate writes, UUID validation, and projection-only repair.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-094",
+    "source": "Main 2022\u20132057, write exceptions",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "Candidate write is single-attempt and terminal on detected failure; never validate or expose payload after failure.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-095",
+    "source": "Main 2059\u20132064, timing",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Immutable ScenarioGroups finalize before Generator; every repaired projection gets a new candidate UUID without semantic mutation.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Finalize and write all immutable ScenarioGroups, then pass their opaque UUIDs once.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G2; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V3"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-095; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
+      "VALIDATOR": "Validator_Prompt.txt: V3"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-096",
+    "source": "Main 2066\u20132093, regrouping",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "Generator projects one entry per supplied physical group and rejects invalid group contracts; it cannot merge/split immutable groups.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G2; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-097",
+    "source": "Main 2095\u20132103, cell-trace gate",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Preserve row/cell/trace bijection and exclude simulated DP roots; semantic cell defects become scoped rejection, not local deletion.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Freeze exact cell/trace bijection and exclude simulated DP roots from physical inputs.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G6; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-097; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
+      "VALIDATOR": "Validator_Prompt.txt: V8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-098",
+    "source": "Main 2105\u20132115, dependency evidence",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Every unresolved dependency claim has canonical proof; active work returns to crawl and cannot support positive assertions.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author pre-handoff closure. Preserve: Every unresolved dependency claim has canonical proof; active work returns to crawl and cannot support positive assertions.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-098; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-099",
+    "source": "Main 2116\u20132143, JSON checklist",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "Produce one parseable schema-guided root, synchronize RuleCode/evidence, preserve grouping/Param/simulation rules, and delegate strict validation.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G7; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G7"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-100",
+    "source": "Main 2144\u20132155, assertion/setup audit",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Scenario Author resolves semantic ASSERT/OMIT; Generator detects mismatches but cannot remove or change semantic decisions.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Resolve every semantic ASSERT or OMIT and all required setup before handoff.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G2; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V6"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-100; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
+      "VALIDATOR": "Validator_Prompt.txt: V6"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-101",
+    "source": "Main 2156\u20132167, seed audit",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Exclude forbidden seeds, preserve required DT before values, and rematerialize/re-execute on semantic conflict.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author final semantic audit. Preserve: Exclude forbidden seeds, preserve required DT before values, and rematerialize/re-execute on semantic conflict.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation.",
+      "VALIDATOR": "Check the observable physical reserved-page/seed or Scenario/Decision row invariant in this clause; never reconstruct Author seed proofs or original RUT execution."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-101; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2",
+      "VALIDATOR": "Validator_Prompt.txt: V8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-102",
+    "source": "Main 2168\u20132176, primary root",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Root class/page/setup/P&C/context stay consistent; named pages require runtime-use evidence.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Freeze root class/page/setup/P&C context and evidence for any named page.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G4; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V9"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-102; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G4",
+      "VALIDATOR": "Validator_Prompt.txt: V9"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-103",
+    "source": "Main 2177\u20132183, target binding",
+    "originalOwner": "UNIT_TEST_GENERATOR",
+    "obligation": "Property assertion fields reconstruct mechanically from immutable APB, Scenario context, and root with full-path equality.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G6; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-104",
+    "source": "Main 2185\u20132200, DT integration",
+    "originalOwner": "SCENARIO_AUTHOR",
+    "obligation": "Resolve DTM/DTA/DTE consistency, inactive scalar omissions, final effects, and before values atomically without recomputing outcomes in Generator.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Scenario Author final DT audit. Preserve: Resolve DTM/DTA/DTE consistency, inactive scalar omissions, final effects, and before values atomically without recomputing outcomes in Generator.",
+      "UNIT_TEST_GENERATOR": "Check the existing frozen source grammar, typed carriers, closure/final-state and PROFILE evidence for this obligation before projection; do not repeat Author acquisition, witness construction or semantic derivation."
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-104; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-105",
+    "source": "Main 2202\u20132203, final memory gate",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Complete audited semantic snapshots map exactly to physical groups before generation; use ordered immutable ScenarioGroup UUIDs.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Map each complete audited physical group to one WriteMemory call and collect UUIDs in order.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G2; canonical prompt same section after freeze"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-105; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-AUTH-106",
+    "source": "Main 2205\u20132219, references",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Knowledge/RuleCrawler govern semantics, schema governs structure, examples are illustrative, and schema family follows immutable original RUTType.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "SCENARIO_AUTHOR": "Use Knowledge/RuleCrawler only for semantics and preserve immutable original RUTType.",
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G3; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V4"
+    },
+    "destinations": {
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: IPM-AUTH-106; Sections 1/1A/1B/13/14",
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G3",
+      "VALIDATOR": "Validator_Prompt.txt: V4"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-001",
+    "source": "Validator 1\u201320, core contract",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Validate an existing candidate, return only a compact report, never return corrected UnitTestRules, and emit no extra output.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V1"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V1"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-002",
+    "source": "Validator 5\u20137",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Replace CaseID/RUTType-only input with CaseID, immutable original RUTType, and current UnitTestCandidateUUID.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G1; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V1"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G1",
+      "VALIDATOR": "Validator_Prompt.txt: V1"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-003",
+    "source": "Validator 7,9\u201317",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Original RuleJSON type selects schema internally; caller-supplied schema is ignored.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V3"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V3"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-004",
+    "source": "Validator 22",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Preserve CaseID byte-for-byte; never add workpool class or normalize it.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G1; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V1"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G1",
+      "VALIDATOR": "Validator_Prompt.txt: V1"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-005",
+    "source": "Validator 5, candidate persistence",
+    "originalOwner": "NONE",
+    "obligation": "Remove CaseID-only response-record addressing.",
+    "authority": "NONE",
+    "disposition": "REMOVED_LEGACY",
+    "roles": {},
+    "destinations": {},
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-006",
+    "source": "Validator 24\u201330, tools",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Replace legacy response read with exact GetMemory; retain schema validation and UTC documentation lookup; expose no write tool.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V1"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V1"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-007",
+    "source": "Validator 31\u201351, KnowledgeTool",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Use qualified composite keys; forbid bare/blank/double-underscore keys; MultInpComb keys are When-only.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V4"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V4"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-008",
+    "source": "Validator 51\u201357, UTC_KEYS",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Retrieve KnowledgeArea, schema, and example once after schema success for both families; correct the current non-When omission.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V4"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V4"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-009",
+    "source": "Validator 60\u2013124, report definition/output discipline",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Preserve six-field compact ValidatorReport, fixed issue shape, issues-only defects/warnings, and raw JSON-only output.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V2"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-010",
+    "source": "Validator 80, routes",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Replace Author routes with OK, GENERATOR_REPAIR, SEMANTIC_REJECT, HUMAN and deterministic precedence.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V2"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8",
+      "VALIDATOR": "Validator_Prompt.txt: V2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-011",
+    "source": "Validator 86\u2013109, issue fields",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Preserve code, severity, pointer, unit/scenario coordinates, decision ID, action, and message; define scenario/group/candidate scopes.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V2"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8",
+      "VALIDATOR": "Validator_Prompt.txt: V2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-012",
+    "source": "Validator 111\u2013124",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Return exactly one compact raw report with no reasoning, wrappers, audit trail, success records, or prose.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V1"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V1"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-013",
+    "source": "Validator 126\u2013136, execution order/input gate",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Validate CaseID, immutable RUTType, and candidate UUID before all tool calls; derive schema before candidate inspection.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V1"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V1"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-014",
+    "source": "Validator 137\u2013140",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Replace two-argument schema call with JsonValidationTool(CaseID, UUID, JsonSchema).",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V3"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8",
+      "VALIDATOR": "Validator_Prompt.txt: V3"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-015",
+    "source": "Validator 140\u2013150",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Tool failure is distinct from schema-invalid JSON, stops later reads/checks, and routes HUMAN.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V3"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V3"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-016",
+    "source": "Validator 153\u2013178",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Copy schema result; short-circuit invalid candidates before Memory/documentation/semantic checks; classify failure deterministically.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V3"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8",
+      "VALIDATOR": "Validator_Prompt.txt: V3"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-017",
+    "source": "Validator 158\u2013178, mass failure",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Preserve 25-error, broad-shape, and oversized-message compaction; Generator may rebuild projection from unchanged groups within the two-repair limit.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V3"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8",
+      "VALIDATOR": "Validator_Prompt.txt: V3"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-018",
+    "source": "Validator 180\u2013182",
+    "originalOwner": "VALIDATOR",
+    "obligation": "After schema success, read only GetMemory(CaseID, UnitTestCandidate, UUID), never latest record.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V3"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V3"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-019",
+    "source": "Validator 183\u2013186, RUT metadata",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Check immutable RUTType across every unit in the combined candidate and report exact unit scope; replace Author repair ownership.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V4"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V4"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-020",
+    "source": "Validator 187\u2013196, order",
+    "originalOwner": "VALIDATOR",
+    "obligation": "After schema/RUT checks, call KnowledgeTool once, then run trace/RuleCode and documentation checks.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V4"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V4"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-021",
+    "source": "Validator 198\u2013204, source of truth",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Schema tool alone decides strict validity; UTC docs govern RuleCode behavior; immutable semantic decisions govern candidate alignment.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V4"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V4"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-022",
+    "source": "Validator 202\u2013204, trace authority",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Candidate trace is a trusted mechanical projection for Validator alignment; Generator alone proves it matches immutable ScenarioGroups and cannot create new semantics.",
+    "authority": "UNIT_TEST_GENERATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G7; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V4"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G7",
+      "VALIDATOR": "Validator_Prompt.txt: V4"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-023",
+    "source": "Validator 206\u2013227, trace format",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Preserve ASSERT and MultInpComb DecisionInput/DecisionResult grammar and supports; SIM and OMIT grammar differences are replaced by IPM-VAL-043/044.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G7; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V5"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G7",
+      "VALIDATOR": "Validator_Prompt.txt: V5"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-024",
+    "source": "Validator 229\u2013265, alignment checks",
+    "originalOwner": "VALIDATOR",
+    "obligation": "After schema success, compare normalized assertion/simulation/omission keys and decode trace entities plus one JSON-string layer.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V5"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V5"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-025",
+    "source": "Validator 267\u2013284, paths",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Never rewrite candidate; canonicalize paths/Param/duplicate segments; trace-only formatting repair may not alter semantics or correct RuleCode.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G7; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V5"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G7",
+      "VALIDATOR": "Validator_Prompt.txt: V5"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-026",
+    "source": "Validator 286\u2013298, MultInpComb alignment",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Require exact row numbering, one trace per input/result cell, exact paths/values, and reject Result-only legacy trace.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-027",
+    "source": "Validator 301\u2013311, bidirectional checks",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Preserve ASSERT both ways, OMIT absence, SIM mapping, support, ResultCount/Param/DP shapes, and visible count consistency.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V6"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V6"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-028",
+    "source": "Validator 313\u2013316, empty input",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Missing pyExpectedValue represents initialized empty value while retaining parent/cell symmetry.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G6; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
+      "VALIDATOR": "Validator_Prompt.txt: V8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-029",
+    "source": "Validator 319\u2013332, semantic boundary",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Check only explicit final decisions and visible contradictions; never infer assertions, values, simulations, dependencies, branches, or RUT behavior.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V6"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V6"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-030",
+    "source": "Validator 333, missing trace",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Missing decision trace is SEMANTIC_REJECT, never Generator repair.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V5"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V5"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-031",
+    "source": "Validator 335\u2013343, documentation validation",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Documentation validation follows schema success, exact Memory read, and UTC lookup and is not a second schema validator.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V9"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V9"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-032",
+    "source": "Validator 345\u2013374, When checks",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Preserve row count/signature/cell shape/order/Result, paths/labels, empty values, reserved-page ban, and no inferred true/false coverage; scope shared defects to group.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G6; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G6",
+      "VALIDATOR": "Validator_Prompt.txt: V8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-033",
+    "source": "Validator 376\u2013386",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Never manually re-check JSON Schema keywords after the schema tool result.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V9"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V9"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-034",
+    "source": "Validator 388\u2013390",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Missing IsInPageListWhen pxRuleReference is not blocking; visible contrary reasoning is SEMANTIC_REJECT.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V8"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8",
+      "VALIDATOR": "Validator_Prompt.txt: V8"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-035",
+    "source": "Validator 392\u2013405, Pega behavior",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Preserve behavior checks for DP simulation, placement, page/list, Param/property assertions, comparators, errors, primary page, and P&C; unsafe ambiguity routes HUMAN.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V9"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V9"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-036",
+    "source": "Validator 407\u2013443, report construction",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Replace obsolete Author-route examples while preserving exact compact report examples for OK, projection repair, semantic reject, and HUMAN.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V10"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V10"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-037",
+    "source": "Validator 446\u2013450, issue codes",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Reconcile prose and embedded schema into one closed issue-code catalog.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V10"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V10"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-038",
+    "source": "Validator 452\u2013469, repair actions/routes",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Encode projection-only Generator repair, semantic rejection, HUMAN escalation, and route precedence; remove Author-owned actions.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G8; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V2"
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G8",
+      "VALIDATOR": "Validator_Prompt.txt: V2"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-039",
+    "source": "Validator 471\u2013484, output lock",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Keep one raw JSON report and name UnitTestGenerator, not Author, as the consumer.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V1"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V1"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-040",
+    "source": "Validator 487\u2013657, report schema",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Preserve closed Draft 2020-12 structure/coordinates while synchronizing route, code, and action enums with prose/examples.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V10"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V10"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-041",
+    "source": "Validator 51,128\u2013196,231,337, invocation limit",
+    "originalOwner": "VALIDATOR",
+    "obligation": "One invocation has one schema call, at most one exact Memory read, at most one UTC lookup, deterministic order, and no retry loop.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V1"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V1"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-042",
+    "source": "Validator 18,26\u201330,267,484, read-only",
+    "originalOwner": "VALIDATOR",
+    "obligation": "Validator never rewrites/writes candidates or persists validation/partial-failure records.",
+    "authority": "VALIDATOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V1"
+    },
+    "destinations": {
+      "VALIDATOR": "Validator_Prompt.txt: V1"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-043",
+    "source": "Author 1921; Validator 222,237, SIM trace",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Use the Author's complete canonical SIM grammar, including sig=DP_SIG and params=normalizedParams; Validator parses both and compares them with the exact pySimulation entry.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G5; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V7",
+      "SCENARIO_AUTHOR": "Own complete final semantic trace grammar and omission catalog; downstream agents consume without new decisions."
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G5",
+      "VALIDATOR": "Validator_Prompt.txt: V7",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: Section 13; IPM-AUTH-090"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  },
+  {
+    "id": "IPM-VAL-044",
+    "source": "Author 1952\u20131961,2190\u20132194; Validator 226\u2013227, OMIT reasons",
+    "originalOwner": "SHARED_CONTRACT",
+    "obligation": "Use the Author's complete omission catalog, including inactive_evaluate_all_scalar and inactive_return_values_scalar, in ScenarioGroup grammar, Generator formatting, Validator trace parsing/alignment, and fixtures; do not add it to ValidatorReport schema.",
+    "authority": "SCENARIO_AUTHOR",
+    "disposition": "PRESERVED",
+    "roles": {
+      "UNIT_TEST_GENERATOR": "Projection, immutable-source checks, transport or repair only; UnitTestGenerator contract G7; canonical prompt same section after freeze",
+      "VALIDATOR": "Candidate-observable checks or report production only; Validator contract V5",
+      "SCENARIO_AUTHOR": "Own complete final semantic trace grammar and omission catalog; downstream agents consume without new decisions."
+    },
+    "destinations": {
+      "UNIT_TEST_GENERATOR": "UnitTestGenerator_Prompt.txt: G7",
+      "VALIDATOR": "Validator_Prompt.txt: V5",
+      "SCENARIO_AUTHOR": "Main_Agent_Prompt.txt: Section 13; IPM-AUTH-090"
+    },
+    "evidence": [
+      "historical-source-and-prompt-preservation",
+      "current-exact-overlay",
+      "reverse-source-census"
+    ],
+    "decisions": [
+      "DEC-011",
+      "DEC-016",
+      "DEC-019",
+      "DEC-030",
+      "DEC-031"
+    ]
+  }
+]

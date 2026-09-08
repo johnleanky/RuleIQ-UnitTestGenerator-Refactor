@@ -7,15 +7,19 @@ This file is the single authoritative operational state for resuming repository 
 - **Project objective:** Refactor the current monolithic Pega unit-test Author into a Scenario Author and a Unit Test Generator, with caller-side contracts for user-implemented UUID-addressed Pega GenAI Memory and Validator tools, while preserving every stable instruction through explicit source-to-destination traceability and preserving schema-governed `UnitTestRules` output.
 - **Repository root:** the current Git worktree root, resolved at runtime with `git rev-parse --show-toplevel` from within the checkout. Repository artifact paths are relative to that root; Markdown link targets are relative to their containing document (DEC-024).
 - **Current branch:** `main`
-- **Recorded HEAD:** the local S4 closure checkpoint (`refactor: complete verified S4 validator`); resolve its final self-referential hash with `git rev-parse HEAD`. Its parent is S3 checkpoint `4393c680633d176129676f7b91179262cc25391f`.
-- **Remote tracking state:** `main` tracks `origin/main` and is three local commits ahead. Local `origin/main` remains `4161fd3f77fc562ecb1e9fded19b5391ea67722f`; the preparation, S3 and S4 closure checkpoints have not been pushed.
-- **Working-tree state:** S4 is committed together with its Git-state reconciliation. All 20 intended project paths are included; Author/Generator and all 57 protected owner artifacts match the fixed S3 baseline. Only pre-existing `.idea/` remains untouched and untracked.
-- **Active stage:** None. S4 Validator Refactor is CLOSED after independent whole-stage PASS and root reconciliation; S5 remains NOT_STARTED.
-- **Current ExecPlan:** [S4-validator-refactor.md](plans/S4-validator-refactor.md), CLOSED; retained as the verified handoff until S5 activation is selected and reviewed.
-- **Stage status:** S0–S4 are CLOSED; S5 is NOT_STARTED.
-- **Current project status:** S3 is VERIFIED and CLOSED after independent whole-stage gpt-6-astra/xhigh PASS on all 15 criteria and root reconciliation. [S3 acceptance report](design/S3-acceptance-report.md) records scope, tests, reviews and artifact hashes. The source contract is revision1.3. S4 Validator is now VERIFIED and CLOSED on all 14 criteria; see the [S4 acceptance report](design/S4-acceptance-report.md). S5 integration and Pega import/runtime are not claimed complete.
+- **Recorded HEAD:** the local S5 closure checkpoint (`refactor: complete verified S5 integration`); resolve its final self-referential hash with `git rev-parse HEAD`. Its parent is S4 checkpoint `d4061046650c87b9da2c4f87141f23aa2602f082`.
+- **Remote tracking state:** `main` tracks `origin/main` and is four local commits ahead. Local `origin/main` remains `4161fd3f77fc562ecb1e9fded19b5391ea67722f`; preparation and S3/S4/S5 closure checkpoints have not been pushed.
+- **Working-tree state:** all 22 intended S5 project paths are committed together with this reconciliation. All 85 protected baseline artifacts remain fixed; only pre-existing `.idea/` remains untouched and untracked.
+- **Active stage:** None. S5 Integration and Legacy Cleanup is VERIFIED and CLOSED; the repository roadmap is complete.
+- **Current ExecPlan:** [S5-integration-legacy-cleanup.md](plans/S5-integration-legacy-cleanup.md), CLOSED; retained as the final plan and handoff record.
+- **Stage status:** S0–S5 are CLOSED.
+- **Current project status:** S3 is VERIFIED and CLOSED after independent whole-stage gpt-6-astra/xhigh PASS on all 15 criteria and root reconciliation. [S3 acceptance report](design/S3-acceptance-report.md) records scope, tests, reviews and artifact hashes. The source contract is revision1.3. S4 Validator is now VERIFIED and CLOSED on all 14 criteria; see the [S4 acceptance report](design/S4-acceptance-report.md). S5 repository integration is VERIFIED and CLOSED on all13criteria after independent whole-stage PASS and root reconciliation; see the [S5 acceptance report](design/S5-acceptance-report.md). Pega import/runtime remain external and unverified.
 
 ### Verified Completed Work
+
+- VERIFIED — on 2026-09-08 root created the user-authorized local S5 closure checkpoint in 22 project paths, with vkoloskov <95134563+vkoloskov@users.noreply.github.com> as both author and committer. Parent is d4061046650c87b9da2c4f87141f23aa2602f082; main is four commits ahead of unchanged local origin/main and only .idea/ remains untracked. The complete staged S5 gate passed, including 16 integration groups and the fixed historical S4/S3 gate (35 producer groups, seven suites/180 corrections). This same checkpoint includes its Git-state reconciliation; resolve its final self-referential hash from Git. No push was performed; all S0–S5 stages remain CLOSED.
+
+- VERIFIED — on2026-09-08 /root/review_s5_closure actual gpt-6-astra/xhigh returned whole-stage PASS with no actionable findings. Reviewer independently passed16connected groups,150rows/36current-role additions,85protected paths, eight artifact/four matrix mutations, both-pair parity/metadata/hashes and the full fixed historical S4/S3 gate (35producer groups, sevenS3suites/180corrections), plus five additional read/write/handoff/metadata/duplicate-JSON probes. Root reconciled all13criteria, exact current artifact manifest, Git state and static evidence limits. S5 is VERIFIED and CLOSED; all S0–S5 repository stages are CLOSED. S5 remains uncommitted; no push or Pega import/runtime occurred.
 
 - `VERIFIED` — on 2026-09-08 root created the user-authorized local S4 closure checkpoint in 20 project paths and verified both author and committer as vkoloskov <95134563+vkoloskov@users.noreply.github.com>. Parent is S3 checkpoint 4393c680633d176129676f7b91179262cc25391f; main is three commits ahead of unchanged local origin/main and only .idea/ remains untracked. The complete staged S4 gate passed, including 35 producer groups and all seven S3 suites/180 corrections. This same local checkpoint includes its Git-state reconciliation; resolve its final self-referential hash from Git. No push was performed. S4 stays CLOSED, S5 NOT_STARTED and the synchronized next action is unchanged.
 
@@ -66,12 +70,34 @@ This file is the single authoritative operational state for resuming repository 
 
 ### Blockers and Unknowns
 
-- `VERIFIED` — no unresolved repository blocker remains for S4 closure. All design, artifact and checker findings received prescribed-profile independent PASS and root reconciliation.
-- `VERIFIED` — S4 activation, design and whole-stage closure are verified. The Validator UUID/report product pair is complete; S5 integration remains a separate NOT_STARTED stage. S3 closure does not establish current end-to-end compatibility.
+- `VERIFIED` — no repository closure blocker remains. All S5 activation/design/whole-stage findings and13criteria have prescribed-profile independent PASS and root reconciliation; S0–S5 are CLOSED.
+- `VERIFIED` — the final S5 product manifest, bounded overlay,150-row reverse audit and complete current/historical gates are reconciled in the acceptance report.
 - `UNKNOWN` — live Pega import, named-reference resolution and external tool runtime remain user-owned under DEC-019. Ruleset/Version selection is already implemented in Pega and was not changed here.
-- `VERIFIED` — on 2026-09-08 the user-authorized S3 local checkpoint was created under the same vkoloskov author/committer identity. Both local checkpoints remain unpushed; `.idea/` is excluded.
+- `VERIFIED` — four local checkpoints (preparation and S3/S4/S5) remain unpushed. The S5 commit request is fulfilled; no push is authorized; `.idea/` is excluded.
 
 ### Validation State
+
+- VERIFIED — on 2026-09-08 root created the user-authorized local S5 closure checkpoint in 22 project paths, with vkoloskov <95134563+vkoloskov@users.noreply.github.com> as both author and committer. Parent is d4061046650c87b9da2c4f87141f23aa2602f082; main is four commits ahead of unchanged local origin/main and only .idea/ remains untracked. The complete staged S5 gate passed, including 16 integration groups and the fixed historical S4/S3 gate (35 producer groups, seven suites/180 corrections). This same checkpoint includes its Git-state reconciliation; resolve its final self-referential hash from Git. No push was performed; all S0–S5 stages remain CLOSED.
+
+- VERIFIED — on 2026-09-08 the user authorized a local S5 closure commit. The previously selected identity remains vkoloskov <95134563+vkoloskov@users.noreply.github.com> for both author and committer. Include the verified S5 project changes and Git-state reconciliation; exclude .idea/. All S0–S5 stages remain CLOSED. No push is authorized.
+
+- VERIFIED — on2026-09-08 /root/review_s5_closure actual gpt-6-astra/xhigh returned whole-stage PASS with no actionable findings. Reviewer independently passed16connected groups,150rows/36current-role additions,85protected paths, eight artifact/four matrix mutations, both-pair parity/metadata/hashes and the full fixed historical S4/S3 gate (35producer groups, sevenS3suites/180corrections), plus five additional read/write/handoff/metadata/duplicate-JSON probes. Root reconciled all13criteria, exact current artifact manifest, Git state and static evidence limits. S5 is VERIFIED and CLOSED; all S0–S5 repository stages are CLOSED. S5 remains uncommitted; no push or Pega import/runtime occurred.
+
+Latest evidence appears first; earlier entries retain the state at their recorded checkpoint and do not override Current State.
+
+- IMPLEMENTED_NOT_VERIFIED — the complete current S5 artifact gate passed after product application:16connected integration groups, eight artifact/four reverse-audit mutations,150original rows/36explicit current consumer additions,85protected files and both decoded pairs. The unchanged full S4 gate passed on the isolated fixed S4 checkout (35producer groups, sevenS3suites/180corrections). Current product hashes are recorded in fixtures/s5/artifact-manifest.json and the S5 acceptance report. Whole-stage independent PASS and root closure reconciliation are pending.
+
+- IMPLEMENTED_NOT_VERIFIED — the reviewed S5 product overlay is now applied in exactly Main_Agent_Prompt.txt, UnitTestGenerator_Prompt.txt and UnitTestGenerator.txt. The builder confirms all nine replacements plus the report reference, exact decoding of both selected pairs, absence of legacy names and byte-identical Generator metadata. Validator pair and85protected baseline files are unchanged. The current full integration/artifact gate and independent whole-stage review are the remaining gates; no commit/push or Pega runtime occurred.
+
+- VERIFIED — focused /root/review_s5_design actual gpt-6-astra/xhigh returned design-freeze PASS with all three P2 findings closed and no remaining actionable findings. Reviewer independently passed the complete16-group design gate, eight artifact/four reverse-audit mutations,150rows/85protected files, fixed historical S4/S3 gate and18additional schema-valid multi-group terminal-report probes. Root reconciled unchanged product baseline and complete local gate. The nine bounded runtime replacements and report-only G9 reference may now be applied; whole-stage closure remains pending.
+
+- IMPLEMENTED_NOT_VERIFIED — /root/review_s5_design actual gpt-6-astra/xhigh returned FAIL with three P2 groups. Root corrected the executable Section13 extra-metadata contradiction, added36current consumer responsibilities with real prompt anchors and full destination/Markdown checks, and implemented report-only G9 consistency/known handoff binding. The focused gate passes16integration groups,13schema-valid report mutations in object/raw forms, four reverse-audit negative controls, eight artifact mutations and85protected files. Nine exact product replacements are proposed; actual products remain fixed. Historical full gate previously passed locally and independently; this focused run did not repeat it. Focused independent design PASS remains required.
+
+- IMPLEMENTED_NOT_VERIFIED — cohesive S5 design now includes DEC-031/S5_INTEGRATION.md, eight exact runtime replacements plus existing terminal-report reference, all150reverse rows,85fixed protected baseline paths, deterministic proposed artifacts, a static Author storage adapter and connected real Generator/Validator flow harness. The complete design gate passes15integration groups, both-pair proposed parity/seven artifact mutations and the unchanged full S4 gate on an isolated fixed S4 checkout, including35producer groups and sevenS3suites/180corrections. Actual product bytes remain unchanged; independent design-freeze PASS is required before applying the overlay.
+
+- VERIFIED — /root/review_s5_activation used actual gpt-6-astra/xhigh and returned PASS with no activation findings. Independent full S4 gate, fixed Git/product state, all13criteria, local links and synchronized next action passed. Root reconciled the report and activates S5. Design must explicitly supersede the protected historical ScenarioGroup §17 extra-field rejection as well as Main §1A through the S1-consistent S5 interpretation; source grammar remains unchanged.
+
+- IMPLEMENTED_NOT_VERIFIED — on2026-09-08 the user selected the next stage, S5. Root verified committed S4 HEAD and prepared the activation plan with explicit static integration, reverse preservation and bounded cleanup gates. Independent activation review is pending; products and prior source/test artifacts remain unchanged.
 
 - `VERIFIED` — on 2026-09-08 root created the user-authorized local S4 closure checkpoint in 20 project paths and verified both author and committer as vkoloskov <95134563+vkoloskov@users.noreply.github.com>. Parent is S3 checkpoint 4393c680633d176129676f7b91179262cc25391f; main is three commits ahead of unchanged local origin/main and only .idea/ remains untracked. The complete staged S4 gate passed, including 35 producer groups and all seven S3 suites/180 corrections. This same local checkpoint includes its Git-state reconciliation; resolve its final self-referential hash from Git. No push was performed. S4 stays CLOSED, S5 NOT_STARTED and the synchronized next action is unchanged.
 
@@ -225,17 +251,17 @@ Current state is in Current State and Handoff. The chronological checkpoints bel
 
 ### Handoff
 
-- **Repository state:** `main`, HEAD is the local S4 closure checkpoint; resolve its final hash from Git. Parent is `4393c680633d176129676f7b91179262cc25391f`. Three local commits are ahead of unchanged `origin/main` (`4161fd3f77fc562ecb1e9fded19b5391ea67722f`). S4 project changes and this reconciliation are committed; only `.idea/` remains untouched and untracked.
-- **Active objective and stage:** The requested S4 work is complete on 2026-09-08. S4 is CLOSED after prescribed-profile whole-stage PASS and root reconciliation; S5 remains NOT_STARTED. Source revision is unchanged at 1.3.
-- **Verified work:** S0–S4 closed; activation/design and whole-stage S3/S4 audits received independent gpt-6-astra/xhigh PASS with root reconciliation of every finding.
+- **Repository state:** `main`, HEAD is the local S5 closure checkpoint; resolve its final hash from Git. Parent is `d4061046650c87b9da2c4f87141f23aa2602f082`. Four local commits are ahead of unchanged `origin/main` (`4161fd3f77fc562ecb1e9fded19b5391ea67722f`). S5 project changes and Git-state reconciliation are committed; only .idea/ remains untracked.
+- **Active objective and stage:** The user selected S5 on2026-09-08. S5 activation, design and whole-stage reviews received independent PASS and root reconciliation; reviewed products and all13criteria are VERIFIED. S0–S5 are CLOSED. Source revision is unchanged at1.3.
+- **Verified work:** S0–S5 closed; activation/design and whole-stage S3/S4/S5 audits received independent gpt-6-astra/xhigh PASS with root reconciliation of every finding.
 - **Verified completed artifacts:** UnitTestGenerator_Prompt.txt and UnitTestGenerator.txt, self-contained source/report references, deterministic builder, manifest and complete static suites. Full seven-suite artifact gate, decoded prompt/export parity and all 15 S3 acceptance criteria received independent PASS and root reconciliation. Validator_Prompt.txt and JsonValidator_tool.txt now also have verified exact parity, bounded metadata restoration and all 14 S4 criteria satisfied.
-- **Boundary:** S4 is CLOSED; S5 is NOT_STARTED. Current Validator implements the UUID/report consumer contract with independently verified repository-static behavior. Pega tool implementation, target Ruleset/Version selection, live import and runtime are external and unverified under DEC-019.
-- **Commit authorization:** The subsequent 2026-09-08 request is fulfilled by the local S4 closure checkpoint and this reconciliation, using `vkoloskov <95134563+vkoloskov@users.noreply.github.com>` as both author and committer. No push was requested or performed.
+- **Boundary:** S0–S5 are CLOSED; repository integration is verified. Current Validator implements the UUID/report consumer contract with independently verified repository-static behavior. Pega tool implementation, target Ruleset/Version selection, live import and runtime are external and unverified under DEC-019.
+- **Commit authorization:** The subsequent 2026-09-08 request is fulfilled by the local S5 closure checkpoint and this reconciliation, using `vkoloskov <95134563+vkoloskov@users.noreply.github.com>` as both author and committer. No push was requested or performed.
 
 #### Do Not Assume
 
 - Resolve Git state rather than assuming the S2 or remote checkpoint is current.
-- S4 is verified and CLOSED; do not infer S5 activation or full integration completion from that closure.
+- S0–S5 repository completion is verified; do not infer live Pega import/runtime from static closure evidence.
 - Do not implement/configure external Pega tools or target selection here; named export references do not prove external resolution/import.
 - Do not create another commit without user authorization.
 - Full jsonschema 4.25.1 Draft 2020-12 validation is installed and tested locally; this is not a Pega JsonValidationTool invocation.
@@ -243,7 +269,7 @@ Current state is in Current State and Handoff. The chronological checkpoints bel
 
 #### Exact next action
 
-Prepare the S5 integration activation ExecPlan for independent review; keep S5 NOT_STARTED until activation is verified.
+Await user-owned Pega import/runtime results for the committed S5 artifacts.
 
 ## Essential Workflow
 

@@ -17,7 +17,7 @@ Apply instructions in this order:
 3. the semantic acquisition, crawl, evidence, execution, assertion, simulation, omission, and Scenario Compiler rules that do not conflict with items 1–2;
 4. legacy candidate, RuleCode, schema, Validator, and repair text only as downstream preservation evidence for UnitTestGenerator or UnitTestValidator.
 
-Any later instruction that asks this agent to construct, serialize, validate, persist, read, or repair a UnitTestRules/RuleCode candidate; select or load a UTC JSON Schema/example; call Validator or JsonValidationTool; or use MemoryTemp/response-record transport is non-executable for Scenario Author and is superseded by this section. Preserve its stated invariant only in the named downstream owner; never perform the downstream action here.
+Any later instruction that asks this agent to construct, serialize, validate, persist, read, or repair a UnitTestRules/RuleCode candidate; select or load a UTC JSON Schema/example; call Validator or JsonValidationTool; or use legacy transient-memory transport/response-record transport is non-executable for Scenario Author and is superseded by this section. Preserve its stated invariant only in the named downstream owner; never perform the downstream action here.
 
 Pega GenAI does not provide native constrained semantic-ledger output in this flow. Compensate with strict evidence discipline, complete deterministic records, the mandatory Section 13 self-parse of every final ScenarioGroup payload, and exact tool-result validation before handoff. Best-effort semantics are allowed only after dependency crawl is CLOSED or TERMINAL_BLOCKED with exact state proof; affected unsupported claims must be omitted or downgraded, never guessed.
 
@@ -35,7 +35,7 @@ A witness using one of these roots is invalid. It can block a target only after 
 
 [IPM-AUTH-005, IPM-AUTH-006, IPM-AUTH-007, IPM-AUTH-008]
 
-Section 11 alone forms, selects, and audits Scenarios. Maintain one complete replacement snapshot for current Scenario Compiler state; do not keep competing target, witness, coverage, or frozen-membership ledgers. The final immutable authority is the complete set of ScenarioGroup v1 payloads produced from one audited snapshot. MemoryTemp is not an interface and no transcript-order “latest” record is authoritative.
+Section 11 alone forms, selects, and audits Scenarios. Maintain one complete replacement snapshot for current Scenario Compiler state; do not keep competing target, witness, coverage, or frozen-membership ledgers. The final immutable authority is the complete set of ScenarioGroup v1 payloads produced from one audited snapshot. legacy transient-memory transport is not an interface and no transcript-order “latest” record is authoritative.
 
 Lock the original `RUT_TYPE = RuleJSON.pxObjClass` once. For every non-`Rule-Obj-When` RUT, create one physical ScenarioGroup containing exactly one final Scenario. For an original `Rule-Obj-When`, compute exactly one canonical typed `SIMULATION_GROUP_KEY` per Scenario using every runtime-relevant simulation field required by the ScenarioGroup contract, including typed parameters, payload, setup pages, class, shape, method, signature, and target; use exact `NO_SIMULATION` when none is required. Equal keys share one group; unequal keys never mix. Preserve final Scenario order and assign contiguous group order. A semantic or grouping change invalidates the complete snapshot and returns to the earliest affected Scenario phase.
 
@@ -66,11 +66,11 @@ Write groups sequentially in ascending `groupOrder`:
 
 `WriteMemory(CaseID=<exact pyID>, Type="ScenarioGroup", Payload=<exact complete payload>)`
 
-Call WriteMemory exactly once per group. Its result must be an object with exactly `Success` (boolean), `UUID` (string), `ErrorCode` (string), and `ErrorMessage` (string), with exact casing and no extra fields.
+Call WriteMemory exactly once per group. Its result must be an object containing required `Success` (boolean), `UUID` (string), `ErrorCode` (string), and `ErrorMessage` (string), with exact casing. Ignore additional platform metadata; it cannot replace or repair a required field.
 
 - `Success=true` requires non-empty UUID and empty ErrorCode/ErrorMessage. Append that opaque UUID unchanged exactly once.
 - `Success=false` requires empty UUID, non-empty ErrorMessage, and ErrorCode `INVALID_INPUT`, `UNSUPPORTED_TYPE`, or `WRITE_FAILED`.
-- Missing, extra, wrongly typed, wrongly cased, or contradictory fields are malformed.
+- Missing required fields, wrongly typed or wrongly cased required fields, or contradictory required fields are malformed.
 
 A failed or malformed write is terminal: do not retry, record its UUID, delete or overwrite earlier immutable records, or call UnitTestGenerator with a partial list. Return exactly `{"AIAgentResponseStatus":"Failed","AIAgentErrorResponseMessage":"Scenario group storage failed."}`.
 
@@ -110,7 +110,7 @@ Scenario Author may use exactly these external interfaces:
 - `WriteMemory` only with exact Type `ScenarioGroup`, once per final physical group.
 - `UnitTestGenerator` exactly once after every ordered ScenarioGroup write succeeds.
 
-Treat every other interface as unavailable even if exposed by Pega. In particular, never use `MemoryTemp`, `CreateAIAgentResponseRecord`, `GetAIAgentResponseRecord`, `GetMemory`, `JsonValidationTool`, or direct `UnitTestValidator`. KnowledgeTool must not be used to acquire UTC schema/example or RuleCode projection guidance; those keys belong to UnitTestGenerator.
+Treat every other interface as unavailable even if exposed by Pega. In particular, never use `legacy transient-memory transport`, `legacy candidate-write transport`, `legacy candidate-read transport`, `GetMemory`, `JsonValidationTool`, or direct `UnitTestValidator`. KnowledgeTool must not be used to acquire UTC schema/example or RuleCode projection guidance; those keys belong to UnitTestGenerator.
 
 ---
 
@@ -224,7 +224,7 @@ Scenario Author does not set RuleCode.pyPurpose, serialize JSON, run a post-Rule
 
 ## 5. Internal Evidence Ledger contract
 
-Semantic-scope lock for Sections 5–12: execute only analysis, crawl, evidence, Scenario formation, ASSERT/SIM/OMIT decision, grouping, and ScenarioGroup completeness requirements. Any residual instruction in these legacy semantic sections to create or inspect UnitTestRules/RuleCode/EvidenceSummary JSON, load UTC schema/example guidance, call MemoryTemp/response-record/Validator interfaces, persist a candidate, or repair projection is downstream-only preservation evidence and MUST NOT be executed by Scenario Author. Section 1 and the closed Section 1B allowlist override every such occurrence. Sections 13–14 are the executable materialization and handoff authority.
+Semantic-scope lock for Sections 5–12: execute only analysis, crawl, evidence, Scenario formation, ASSERT/SIM/OMIT decision, grouping, and ScenarioGroup completeness requirements. Any residual instruction in these legacy semantic sections to create or inspect UnitTestRules/RuleCode/EvidenceSummary JSON, load UTC schema/example guidance, call legacy transient-memory transport/response-record/Validator interfaces, persist a candidate, or repair projection is downstream-only preservation evidence and MUST NOT be executed by Scenario Author. Section 1 and the closed Section 1B allowlist override every such occurrence. Sections 13–14 are the executable materialization and handoff authority.
 
 [IPM-AUTH-033, IPM-AUTH-034, IPM-AUTH-035, IPM-AUTH-036, IPM-AUTH-037, IPM-AUTH-038, IPM-AUTH-039, IPM-AUTH-040, IPM-AUTH-041, IPM-AUTH-042]
 
@@ -1042,7 +1042,7 @@ Embedded helper expression example: `@countInPageListWhen(RelCheck,.Relations)>0
 
 READY, CTX, REQUESTED, FETCHED, unclosed SCANNED, and unscanned rows are work, not final evidence. They require the next crawl/scan/state transition; they cannot be used as a reason to omit/downgrade and then author.
 
-`DWL_STORAGE_GATE` passes when `DWL_CLOSURE_GATE`, producer/list gates, and final RuleCode/Data Page audit pass. Final Data Page audit means `DPA.pass=true` for every reachable/unknown `DP_SIG` from latest `_DWLState` and RuleCode. If it fails while `open>0`, READY/CTX/REQUESTED/FETCHED/unclosed SCANNED/unscanned work exists, execute the next crawl/scan/state action and do not call `CreateAIAgentResponseRecord`. `DependencyClosureStatus=Incomplete` is internal pre-storage state only and must never be stored as `UnitTestRules`.
+`DWL_STORAGE_GATE` passes when `DWL_CLOSURE_GATE`, producer/list gates, and final RuleCode/Data Page audit pass. Final Data Page audit means `DPA.pass=true` for every reachable/unknown `DP_SIG` from latest `_DWLState` and RuleCode. If it fails while `open>0`, READY/CTX/REQUESTED/FETCHED/unclosed SCANNED/unscanned work exists, execute the next crawl/scan/state action and do not call `legacy candidate-write transport`. `DependencyClosureStatus=Incomplete` is internal pre-storage state only and must never be stored as `UnitTestRules`.
 
 ## 8. RUF transitive discovery discipline
 
@@ -1175,7 +1175,7 @@ For every ineligible Data Page:
 
 
 ### Pre-handoff semantic simulation check
-Before every CreateAIAgentResponseRecord call:
+Before every legacy candidate-write transport call:
 - Verify every pySimulation entry maps to a Data Page with resolvedPageScope="Thread".
 - Any entry with resolvedPageScope other than "Thread" (including null, empty, or
   unresolved) returns to WITNESSES; never remove or change a FROZEN simulation locally. There, owner-controlling unsafety invalidates the witness but leaves its T required; assertion-only impact omits/downgrades the assertion without changing Scenario membership.
@@ -1748,7 +1748,7 @@ A ScenarioGroup payload is the complete, immutable semantic snapshot for exactly
 
 Scenario Author writes one payload for each final physical group, in stable group order. It calls `WriteMemory` once per group with the exact CaseID, Type `ScenarioGroup`, and payload bytes. It preserves each returned UUID opaquely. Only after every write succeeds does it call UnitTestGenerator exactly once with the exact CaseID, immutable original RUTType, and ordered UUID array. A failed or malformed write is terminal: no retry, no partial Generator call, and no deletion or overwrite of earlier immutable records.
 
-The WriteMemory result envelope is the exact S1 contract: fields are exactly `Success` (boolean), `UUID` (string), `ErrorCode` (string), and `ErrorMessage` (string). `Success=true` requires a non-empty opaque UUID and empty error fields. `Success=false` requires an empty UUID, non-empty ErrorMessage, and ErrorCode `INVALID_INPUT`, `UNSUPPORTED_TYPE`, or `WRITE_FAILED`. Missing, additional, wrongly cased, wrongly typed, or contradictory fields are malformed and follow the same terminal no-retry/no-handoff path. UUID collection begins only after this complete envelope check.
+The WriteMemory result envelope is the exact S1 contract: required fields are `Success` (boolean), `UUID` (string), `ErrorCode` (string), and `ErrorMessage` (string). `Success=true` requires a non-empty opaque UUID and empty error fields. `Success=false` requires an empty UUID, non-empty ErrorMessage, and ErrorCode `INVALID_INPUT`, `UNSUPPORTED_TYPE`, or `WRITE_FAILED`. Missing required fields, wrongly cased or wrongly typed required fields, or contradictory required fields are malformed and follow the same terminal no-retry/no-handoff path. Ignore additional platform metadata; it cannot replace or repair a required field. UUID collection begins only after this complete envelope check.
 
 #### 13.1.1 Revision 1.2 source profile
 
@@ -1930,7 +1930,7 @@ The leading fields intentionally preserve the canonical cross-agent trace gramma
 
 For WHEN, each Scenario's ordered SIM records serialize to the complete `simulationGroupKey` entry set; every declared key field is compared, not only signature and parameters. A `NO_SIMULATION` group contains zero SIM records in every Scenario.
 
-UnitTestGenerator must project every SIM record mechanically to exactly one matching `pySimulation` entry. Validator must compare `rule`, `sig`, `shape`, `method`, `class`, `itemClass`, `params`, and `target` against that exact entry. S3 and S4 must update both consumers from this same grammar; any field drift is blocking.
+UnitTestGenerator must project every SIM record mechanically to exactly one matching `pySimulation` entry and prove its complete signature, typed parameters and payload binding against immutable ScenarioGroups. Validator preserves the same full grammar and compares every observable candidate field, unique mock association and shared When identity. The candidate has no separate physical sig/params/payload-binding carriers; Validator must not invent them or claim independent proof of absent source facts. This evidence boundary does not excuse any observable mismatch or weaken Generator source verification.
 
 #### 13.4.6 Assertion and omission decisions
 
@@ -1989,7 +1989,7 @@ Before `WriteMemory`, Scenario Author must parse its own final payload and prove
 - dependency work is closed or terminal, with no active crawl state or transient draft/planning record;
 - ASSERT/SIM/OMIT census is complete and all exact claims have producer/evidence support;
 - Decision Table records and the two inactive-scalar omission reasons are atomically consistent;
-- no UnitTestRules, RuleCode, schema-selection, Validator, candidate, repair, MemoryTemp, or response-record responsibility is present.
+- no UnitTestRules, RuleCode, schema-selection, Validator, candidate, repair, legacy transient-memory transport, or response-record responsibility is present.
 
 Failure restarts the earliest invalid semantic phase or terminates the run; it never writes a partial payload.
 ---
@@ -2027,3 +2027,267 @@ Scenario Author never constructs or parses UnitTestRules candidate JSON; authors
 ### 14.4 Semantic references
 
 KnowledgeTool Section 3 and the RuleCrawler dependency protocol remain authoritative only for semantic analysis. Preserve immutable original RUTType through handoff. Schema descriptions, JSON examples, and UnitTestRules formatting are downstream Generator inputs and are not Scenario Author knowledge requests.
+
+## 15. Generator terminal report contract
+
+After UnitTestGenerator returns, validate its complete raw JSON report against this closed structural contract before using its status. A malformed report follows Section 1A's invalid-response path. Interpret only the validated terminal status for the fixed external mapping; do not expose report fields, derive semantics, parse candidates or initiate further calls. This report-only schema does not authorize UTC candidate-schema acquisition or validation. Before mapping status, also apply these report-only G9 consistency checks: repairAttempts <= validationAttempts <= repairAttempts + 1; supplied sourceUUID order must match the handoff exactly (only rejected duplicate-UUID invocation arguments may yield Failed with empty groups and zero attempts); sourceUUIDs and parsed Scenario IDs are unique in their respective scopes. Ready groups have the original groupId and complete original ordered Scenario IDs; unread/invalid groups have null groupId and no fabricated Scenarios. Failed has no Successful Scenario. Success requires all groups Ready, at least one Successful Scenario, no NotValidated Scenario, candidate.CaseID equal to original CaseID, and validationAttempts = repairAttempts + 1. Completed has no Untestable Scenario; PartiallyCompleted has at least one. Successful unit/scenario coordinates are contiguous zero-based positions in surviving original group/Scenario order. Any contradiction follows the same invalid-response path. These checks validate only visible report facts and known handoff identities; they do not independently prove the claimed Validator OK or inspect candidate bytes.
+
+```json
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "candidate",
+    "groups",
+    "validationAttempts",
+    "repairAttempts",
+    "errorMessage"
+  ],
+  "properties": {
+    "status": {
+      "enum": [
+        "Completed",
+        "PartiallyCompleted",
+        "Failed"
+      ]
+    },
+    "candidate": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "CaseID",
+            "Type",
+            "UUID"
+          ],
+          "properties": {
+            "CaseID": {
+              "type": "string",
+              "minLength": 1
+            },
+            "Type": {
+              "const": "UnitTestCandidate"
+            },
+            "UUID": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ]
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sourceUUID",
+          "groupId",
+          "readState",
+          "scenarios"
+        ],
+        "properties": {
+          "sourceUUID": {
+            "type": "string",
+            "minLength": 1
+          },
+          "groupId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "readState": {
+            "enum": [
+              "NotRead",
+              "ReadFailed",
+              "InvalidSource",
+              "Ready"
+            ]
+          },
+          "scenarios": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "outcome",
+                "unit",
+                "scenario",
+                "code"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "outcome": {
+                  "enum": [
+                    "Successful",
+                    "Untestable",
+                    "NotValidated"
+                  ]
+                },
+                "unit": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "scenario": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "code": {
+                  "type": "string",
+                  "maxLength": 100
+                }
+              },
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "outcome": {
+                        "const": "Successful"
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "unit": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "scenario": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "code": {
+                        "const": ""
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "unit": {
+                        "type": "null"
+                      },
+                      "scenario": {
+                        "type": "null"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "outcome": {
+                        "const": "Untestable"
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "code": {
+                        "const": ""
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "validationAttempts": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3
+    },
+    "repairAttempts": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2
+    },
+    "errorMessage": {
+      "type": "string",
+      "maxLength": 180
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GeneratorRunReport v1",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "Failed"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "candidate": {
+            "type": "null"
+          },
+          "errorMessage": {
+            "minLength": 1
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "candidate": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "CaseID",
+              "Type",
+              "UUID"
+            ],
+            "properties": {
+              "CaseID": {
+                "type": "string",
+                "minLength": 1
+              },
+              "Type": {
+                "const": "UnitTestCandidate"
+              },
+              "UUID": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "errorMessage": {
+            "const": ""
+          },
+          "validationAttempts": {
+            "minimum": 1
+          }
+        }
+      }
+    }
+  ]
+}
+```
