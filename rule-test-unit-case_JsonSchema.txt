@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Pega UnitTestRules Final Candidate with RuleCode and Restored EvidenceSummary",
   "type": "object",
@@ -19,13 +19,13 @@
           "RuleCode"
         ],
         "properties": {
-          "Name":{
-  "type": "string",
-  "pattern": "^TC_[A-Za-z0-9_]+$",
-  "minLength": 5,
-  "maxLength": 53,
-  "description": "MUST equal RuleCode.pyPurpose exactly."
-},
+          "Name": {
+            "type": "string",
+            "pattern": "^TC_[A-Za-z0-9_]+$",
+            "minLength": 5,
+            "maxLength": 53,
+            "description": "MUST equal RuleCode.pyPurpose exactly."
+          },
           "Scenarios": {
             "type": "array",
             "minItems": 1,
@@ -85,7 +85,6 @@
         "DependencyState",
         "BranchState",
         "SimulationState",
-        "ComplexityTier",
         "AssertionCount",
         "ExactValueAssertionCount",
         "StructuralAssertionCount",
@@ -174,15 +173,6 @@
           ],
           "description": "Whether simulation is needed and whether pySimulation seed depth/content is aligned with RUT access depth. RequiredButLimited must not support unsupported exact-value assertions."
         },
-        "ComplexityTier": {
-          "type": "string",
-          "enum": [
-            "STANDARD",
-            "ELEVATED",
-            "HIGH"
-          ],
-          "description": "Complexity tier computed internally from invocation count, branch count, nesting, loops, modified properties, page parameters, unresolved dependencies, and invocation-chain depth."
-        },
         "AssertionCount": {
           "type": "integer",
           "minimum": 0,
@@ -245,7 +235,6 @@
             "BranchesEvaluated",
             "PropertyTracesCompleted",
             "OmissionsResolved",
-            "ComplexityComputed",
             "SimulationNeedsResolved",
             "SimulationDepthChecked",
             "ListAssertionsChecked",
@@ -280,9 +269,6 @@
               "type": "boolean"
             },
             "OmissionsResolved": {
-              "type": "boolean"
-            },
-            "ComplexityComputed": {
               "type": "boolean"
             },
             "SimulationNeedsResolved": {
@@ -907,7 +893,7 @@
         "pyRuleUnderTestInsName": {
           "type": "string",
           "pattern": "^[A-Z0-9_-]+![A-Z0-9_-]+$",
-         "description": "Format is '<ApplyToClass>!<RuleName>' and should match values taken from the TestedRuleKey property of the case. The generated value must always be in uppercase. For example, if TestedRuleKey has value 'RULE-OBJ-MODEL RULEIQ-WORK-GENUT INITIALTESTDATATRANSFORMATION #20260216T095134.961 GMT', then take the second part 'RULEIQ-WORK-GENUT' as <ApplyToClass> and 'INITIALTESTDATATRANSFORMATION' as <RuleName>, and construct the value as 'RULEIQ-WORK-GENUT!INITIALTESTDATATRANSFORMATION'."
+          "description": "Format is '<ApplyToClass>!<RuleName>' and should match values taken from the TestedRuleKey property of the case. The generated value must always be in uppercase. For example, if TestedRuleKey has value 'RULE-OBJ-MODEL RULEIQ-WORK-GENUT INITIALTESTDATATRANSFORMATION #20260216T095134.961 GMT', then take the second part 'RULEIQ-WORK-GENUT' as <ApplyToClass> and 'INITIALTESTDATATRANSFORMATION' as <RuleName>, and construct the value as 'RULEIQ-WORK-GENUT!INITIALTESTDATATRANSFORMATION'."
         },
         "pyIsSinglePageImplementation": {
           "type": "string",
@@ -1206,12 +1192,12 @@
           ]
         },
         "Name": {
-  "type": "string",
-  "pattern": "^(?!TC_)[A-Za-z0-9 _]+$",
-  "minLength": 1,
-  "maxLength": 50,
-  "description": "Short PascalCase semantic purpose label for this scenario. MUST NOT start with 'TC_'. MUST NOT contain any fragment of the RUT base name. MUST NOT equal pyPurpose. Derived from scenario semantic purpose only — never from branch names, step IDs, condition expressions, pyUsage, pyDescription, or any RuleJSON field. Examples: HappyPath, EmptyInput, BoundaryMax, ErrorPath."
-},
+          "type": "string",
+          "pattern": "^(?!TC_)[A-Za-z0-9 _]+$",
+          "minLength": 1,
+          "maxLength": 50,
+          "description": "Short PascalCase semantic purpose label for this scenario. MUST NOT start with 'TC_'. MUST NOT contain any fragment of the RUT base name. MUST NOT equal pyPurpose. Derived from scenario semantic purpose only — never from branch names, step IDs, condition expressions, pyUsage, pyDescription, or any RuleJSON field. Examples: HappyPath, EmptyInput, BoundaryMax, ErrorPath."
+        },
         "Description": {
           "type": "string"
         },
@@ -1244,12 +1230,12 @@
       "additionalProperties": false,
       "properties": {
         "pyLabel": {
-  "type": "string",
-  "pattern": "^TC_[A-Za-z0-9_]+$",
-  "minLength": 5,
-  "maxLength": 53,
-  "description": "Label of the unit test rule. MUST equal pyPurpose exactly. Do not use dash-separated or space-separated labels."
-},
+          "type": "string",
+          "pattern": "^TC_[A-Za-z0-9_]+$",
+          "minLength": 5,
+          "maxLength": 53,
+          "description": "Label of the unit test rule. MUST equal pyPurpose exactly. Do not use dash-separated or space-separated labels."
+        },
         "pyDescription": {
           "type": "string",
           "description": "Purpose and scope of the unit test, including acceptance criteria in plain language."
@@ -1276,12 +1262,12 @@
           "description": "Class of the Primary page context to execute the RUT. Typically equals pyRuleUnderTestObjClass. If Apply-To is abstract but execution needs concrete properties, set to a concrete subclass used during test."
         },
         "pyPurpose": {
-  "type": "string",
-  "pattern": "^TC_[A-Za-z0-9_]+$",
-  "minLength": 5,
-  "maxLength": 53,
-  "description": "Unique identifier of the unit test rule. MUST follow the convention: TC_<RUTBase>_<ScenarioLabel>. Construction: (1) RUT_BASE = RuleJSON.pyRuleName with ALL whitespace removed. (2) SCENARIO_LABEL = short PascalCase semantic purpose word, chars outside [A-Za-z0-9_] replaced with _, leading/trailing _ stripped. (3) BASE_ALLOC = 49 - len(SCENARIO_LABEL). (4) RUT_BASE_FINAL = RUT_BASE truncated to BASE_ALLOC characters. (5) pyPurpose = 'TC_' + RUT_BASE_FINAL + '_' + SCENARIO_LABEL. MUST equal pyLabel exactly. MUST equal UnitTestRules[i].Name exactly. Example: TC_ReviewScenariosPost_HappyPath. Pega appends up to 11 chars at runtime; max 53 ensures total stays within 64."
-},
+          "type": "string",
+          "pattern": "^TC_[A-Za-z0-9_]+$",
+          "minLength": 5,
+          "maxLength": 53,
+          "description": "Unique identifier of the unit test rule. MUST follow the convention: TC_<RUTBase>_<ScenarioLabel>. Construction: (1) RUT_BASE = RuleJSON.pyRuleName with ALL whitespace removed. (2) SCENARIO_LABEL = short PascalCase semantic purpose word, chars outside [A-Za-z0-9_] replaced with _, leading/trailing _ stripped. (3) BASE_ALLOC = 49 - len(SCENARIO_LABEL). (4) RUT_BASE_FINAL = RUT_BASE truncated to BASE_ALLOC characters. (5) pyPurpose = 'TC_' + RUT_BASE_FINAL + '_' + SCENARIO_LABEL. MUST equal pyLabel exactly. MUST equal UnitTestRules[i].Name exactly. Example: TC_ReviewScenariosPost_HappyPath. Pega appends up to 11 chars at runtime; max 53 ensures total stays within 64."
+        },
         "pyRuleSetVersion": {
           "type": "string",
           "pattern": "^[0-9]{2}-[0-9]{2}-[0-9]{2}$",

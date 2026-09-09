@@ -5,8 +5,8 @@ Kinds: F=Field, V=Value, L=List, M=Mapping, A=Algorithm, S=Semantic, P=Protocol,
 Labels: P=Purpose; M=Mapping; I=Invariant; A=Algorithm/Protocol; S=Semantic;
         X=Example/semantic witness; R=Related markers.
 Canonical source = marker heading + P/M/I/A/S. X clarifies only.
-Ownership: core identity=KDP.1; scope eligibility gate=KDP.2; examples=KDP.3.
-Coverage: core KDP.1; scope and eligibility KDP.2; examples KDP.3.
+Ownership: core identity=KDP.1; scope eligibility gate=KDP.2; examples=KDP.3; caller bindings=KDP.4.
+Coverage: core KDP.1; scope and eligibility KDP.2; examples KDP.3; bindings KDP.4.
 
 KDP.1|F|CoreFields
 P: Rule type, key, and identity fields for Rule-Declare-Pages.
@@ -78,3 +78,32 @@ X D Absent-scope Data Page (ineligible):
      -> KDP.2: pyScope absent -> INELIGIBLE; resolvedScope=unresolved.
 
 R: KDP.2.
+KDP.4|A|CallerInputBinding
+P: Resolve caller-to-Data-Page parameters in the confirmed RuleIQ environment.
+I: Parameter declarations require exact RuleJSON field-mapping evidence. A confirmed
+   empty declaration is parameterless; absent metadata or an unknown export shape
+   is unresolved, never an empty declaration. No universal declaration field is assumed.
+A: During dependency discovery capture declaration, access path, explicit expressions,
+   matching current-Param names and symbolic producers. Do not wait for concrete values
+   that scenario execution will produce. Resolve metadata independently.
+A: At each executed access use the state immediately before that access: explicit
+   argument first; otherwise a present same-name current Param value; otherwise an
+   evidenced applicable runtime default. An unresolved explicit expression wins as
+   unresolved and cannot fall back. Unknown current state cannot fall back either.
+I: This implicit current-Param binding is a confirmed RuleIQ convention, not a claim
+   about every Pega environment. Null and initialized empty are present values;
+   absence is distinct. Optional omission needs declaration evidence. Do not coerce
+   strings, numbers, Boolean values or null into one another.
+A: Apply earlier executed assignments/overwrites/removals in order. Skipped producers
+   supply no new value; uncertain execution makes the affected value unknown until
+   replaced by an executed producer. Retain separate evidence for repeated accesses.
+   Freeze each concrete map/signature during scenario execution. Equal maps may share
+   a simulation decision; all associated accesses retain their own evidence.
+I: Seed external RUT inputs only. Param values produced by RUT steps remain execution
+   results, never invented formal RUT arguments or setup values. Caller binding is
+   separate from Data-Page-to-loader pass-current-parameter-page settings.
+I: Parameter refinement changes existing scenarios and their testability. It cannot
+   create dependency-only scenarios or remove identified scenarios. KDP.2 remains mandatory.
+X: An executed Param.pyID assignment before D_GenUT supplies a declared pyID implicitly.
+   A parameterless page has an evidenced empty map; an unknown declaration does not.
+R: KDP.1,KDP.2; ScenarioGroup revision 1.4 DP_DECLARATION/DP_ACCESS/DP_EXECUTION evidence.

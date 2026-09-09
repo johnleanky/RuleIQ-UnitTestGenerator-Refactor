@@ -1,4 +1,4 @@
-﻿{
+{
   "UnitTestRules": [
     {
       "Name": "TC_EntityMap_PageDP",
@@ -19,7 +19,6 @@
             "DependencyState": "AllResolved",
             "BranchState": "NotApplicable",
             "SimulationState": "RequiredAndAligned",
-            "ComplexityTier": "STANDARD",
             "AssertionCount": 22,
             "ExactValueAssertionCount": 13,
             "StructuralAssertionCount": 9,
@@ -44,7 +43,6 @@
               "BranchesEvaluated": true,
               "PropertyTracesCompleted": true,
               "OmissionsResolved": true,
-              "ComplexityComputed": true,
               "SimulationNeedsResolved": true,
               "SimulationDepthChecked": true,
               "ListAssertionsChecked": true,
@@ -256,8 +254,8 @@
                 "pyPropertyMode": "TrueFalse",
                 "pyPropertyName": "IsBlocked",
                 "pyPropertyRealName": "IsBlocked"
-               },
-               {
+              },
+              {
                 "pyComparator": "Is Equals To",
                 "pyExpectedValue": "true",
                 "pyPageName": "RunRecordPrimaryPage",
@@ -266,7 +264,7 @@
                 "pyPropertyMode": "Text",
                 "pyPropertyName": "StatusText",
                 "pyPropertyRealName": "StatusText"
-               }
+              }
             ]
           },
           {
@@ -428,7 +426,6 @@
             "DependencyState": "AllResolved",
             "BranchState": "NotApplicable",
             "SimulationState": "RequiredAndAligned",
-            "ComplexityTier": "STANDARD",
             "AssertionCount": 1,
             "ExactValueAssertionCount": 1,
             "StructuralAssertionCount": 0,
@@ -453,7 +450,6 @@
               "BranchesEvaluated": true,
               "PropertyTracesCompleted": true,
               "OmissionsResolved": true,
-              "ComplexityComputed": true,
               "SimulationNeedsResolved": true,
               "SimulationDepthChecked": true,
               "ListAssertionsChecked": true,

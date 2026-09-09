@@ -1,0 +1,39 @@
+{
+  "evidenceCategory": "Author policy examples; not Pega runtime or model execution",
+  "cases": [
+    {"name":"proven initial absence, no effects","initial":"ABSENT","events":[],"expectedPresence":"ABSENT","expectedDecision":"Not exists"},
+    {"name":"skipped write preserves absence","initial":"ABSENT","events":[["SKIPPED","MATERIALIZE"]],"expectedPresence":"ABSENT","expectedDecision":"Not exists"},
+    {"name":"preexisting value does not become absent","initial":"PRESENT","events":[["SKIPPED","MATERIALIZE"]],"expectedPresence":"PRESENT","expectedDecision":"LADDER"},
+    {"name":"input-only unchanged value excluded","initial":"PRESENT","inputOnly":true,"events":[],"expectedPresence":"PRESENT","expectedDecision":"OMIT_INPUT_ONLY"},
+    {"name":"known present null is not absence","initial":"PRESENT","value":null,"events":[],"expectedPresence":"PRESENT","expectedDecision":"LADDER"},
+    {"name":"known present empty is not absence","initial":"PRESENT","value":"","events":[],"expectedPresence":"PRESENT","expectedDecision":"LADDER"},
+    {"name":"null alone proves no presence","initial":"UNKNOWN","value":null,"events":[],"expectedPresence":"UNKNOWN","expectedDecision":"OMIT_UNRESOLVED"},
+    {"name":"empty alone proves no presence","initial":"UNKNOWN","value":"","events":[],"expectedPresence":"UNKNOWN","expectedDecision":"OMIT_UNRESOLVED"},
+    {"name":"unknown initial state and skipped write","initial":"UNKNOWN","events":[["SKIPPED","MATERIALIZE"]],"expectedPresence":"UNKNOWN","expectedDecision":"OMIT_UNRESOLVED"},
+    {"name":"excluded seed does not prove absence","initial":"UNKNOWN","excludedSeed":true,"events":[],"expectedPresence":"UNKNOWN","expectedDecision":"OMIT_UNRESOLVED"},
+    {"name":"excluded seed does not erase preexisting state","initial":"PRESENT","excludedSeed":true,"events":[],"expectedPresence":"PRESENT","expectedDecision":"LADDER"},
+    {"name":"executed materializing write","initial":"UNKNOWN","events":[["EXECUTED","MATERIALIZE"]],"expectedPresence":"PRESENT","expectedDecision":"LADDER"},
+    {"name":"executed removal","initial":"PRESENT","inputOnly":true,"events":[["EXECUTED","REMOVE"]],"expectedPresence":"ABSENT","expectedDecision":"Not exists"},
+    {"name":"removal followed by recreation","initial":"PRESENT","events":[["EXECUTED","REMOVE"],["EXECUTED","MATERIALIZE"]],"expectedPresence":"PRESENT","expectedDecision":"LADDER"},
+    {"name":"write followed by removal","initial":"ABSENT","events":[["EXECUTED","MATERIALIZE"],["EXECUTED","REMOVE"]],"expectedPresence":"ABSENT","expectedDecision":"Not exists"},
+    {"name":"uncertain operation invalidates absence","initial":"ABSENT","events":[["UNKNOWN","MATERIALIZE"]],"expectedPresence":"UNKNOWN","expectedDecision":"OMIT_UNRESOLVED"},
+    {"name":"later removal resolves uncertainty","initial":"UNKNOWN","events":[["UNKNOWN","MATERIALIZE"],["EXECUTED","REMOVE"]],"expectedPresence":"ABSENT","expectedDecision":"Not exists"},
+    {"name":"ambiguous clear is not proven removal","initial":"PRESENT","events":[["EXECUTED","UNRESOLVED"]],"expectedPresence":"UNKNOWN","expectedDecision":"OMIT_UNRESOLVED"},
+    {"name":"unrepresentable absence target omitted","initial":"ABSENT","representable":false,"events":[],"expectedPresence":"ABSENT","expectedDecision":"OMIT_UNREPRESENTABLE"},
+    {"name":"unknown possible write is not input-only","initial":"PRESENT","inputOnly":true,"events":[["UNKNOWN","REMOVE"]],"expectedPresence":"UNKNOWN","expectedDecision":"OMIT_UNRESOLVED"},
+    {"name":"present ancestor proves no child state","initial":"UNKNOWN","initialAncestorPresence":"PRESENT","events":[],"expectedPresence":"UNKNOWN","expectedDecision":"OMIT_UNRESOLVED"},
+    {"name":"absent ancestor proves descendant absence","initial":"UNKNOWN","initialAncestorPresence":"ABSENT","events":[],"expectedPresence":"ABSENT","expectedDecision":"Not exists"},
+    {"name":"leaf write recreates absent path","initial":"UNKNOWN","initialAncestorPresence":"ABSENT","events":[["EXECUTED","MATERIALIZE"]],"expectedPresence":"PRESENT","expectedDecision":"LADDER"}
+  ],
+  "getCaseDataS2": {
+    "scenario":"S2",
+    "target":"Step 1 FALSE",
+    "caseKey":"OTHER-WORK CASE-20001",
+    "paths":["Param.pyID",".pyID",".TestedRuleKey",".RuleJSON"],
+    "simulations":[],
+    "variants":[
+      {"initialEvidence":"Explicit mock fresh-harness guarantee covering all four paths","initialPresence":"ABSENT","decision":"Not exists","support":"Structural"},
+      {"initialEvidence":null,"initialPresence":"UNKNOWN","decision":"OMIT_UNRESOLVED","testabilityWhenNoOtherAssertions":"NotTestable"}
+    ]
+  }
+}

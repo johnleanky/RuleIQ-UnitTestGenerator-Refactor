@@ -33,7 +33,7 @@ A witness using one of these roots is invalid. It can block a target only after 
 
 Section 11 alone forms, selects, and audits Scenarios. Maintain one complete replacement snapshot for current Scenario Compiler state; do not keep competing target, witness, coverage, or frozen-membership ledgers. The final immutable authority is the complete set of ScenarioGroup v1 payloads produced from one audited snapshot. legacy transient-memory transport is not an interface and no transcript-order “latest” record is authoritative.
 
-Lock the original `RUT_TYPE = RuleJSON.pxObjClass` once. For every non-`Rule-Obj-When` RUT, create one physical ScenarioGroup containing exactly one final Scenario. For an original `Rule-Obj-When`, compute exactly one canonical typed `SIMULATION_GROUP_KEY` per Scenario using every runtime-relevant simulation field required by the ScenarioGroup contract, including typed parameters, payload, setup pages, class, shape, method, signature, and target; use exact `NO_SIMULATION` when none is required. Equal keys share one group; unequal keys never mix. Preserve final Scenario order and assign contiguous group order. A semantic or grouping change invalidates the complete snapshot and returns to the earliest affected Scenario phase.
+Lock the original `RUT_TYPE = RuleJSON.pxObjClass` once. For every frozen scenario of a non-`Rule-Obj-When` RUT, create one physical ScenarioGroup containing only that scenario, following Section 11. For an original `Rule-Obj-When`, compute exactly one canonical typed `SIMULATION_GROUP_KEY` per Scenario using every runtime-relevant simulation field required by the ScenarioGroup contract, including typed parameters, payload, setup pages, class, shape, method, signature, and target; use exact `NO_SIMULATION` when none is required. Equal keys share one group; unequal keys never mix. Preserve final Scenario order and assign contiguous group order. A semantic or grouping change invalidates the complete snapshot and returns to the earliest affected Scenario phase.
 
 Group formation stops at immutable semantic facts. Scenario Author never creates a UnitTestRules entry, Decision row serialization, RuleCode, pySimulation, EvidenceSummary JSON, or AssertionDecisionTrace string. UnitTestGenerator projects exactly one schema-governed unit per supplied group without regrouping or changing semantics.
 
@@ -180,7 +180,7 @@ Use available guidance, when applicable, for:
 - property type/structure and embedded page/list class;
 - nested RUF evaluation.
 
-KnowledgeTool output is evidence, not final payload text. It must affect the canonical dependency, parameter, branch, producer, property, omission, complexity, summary, confidence/testability, and simulation facts. Missing required guidance remains an explicit gap; narrow or omit unsupported claims rather than pretending resolution.
+KnowledgeTool output is evidence, not final payload text. It must affect the canonical dependency, parameter, branch, producer, property, omission, crawl-accounting, summary, confidence/testability, and simulation facts. Missing required guidance remains an explicit gap; narrow or omit unsupported claims rather than pretending resolution.
 
 ---
 ## 4. Required execution order
@@ -197,7 +197,7 @@ Execute this order atomically and emit no intermediate output:
 7. Leave crawl mode only with `CRAWL_STATUS=CLOSED` or `CRAWL_STATUS=TERMINAL_BLOCKED`, exact proof, and `STATECHECK.preAuthor=PASS`.
 8. Analyze RUT and fetched dependency semantics, parameters, contexts, When/Decision Table behavior, Data Page signatures, runtime execution, producers, property effects, and terminal gaps.
 9. Build the assertion/dependency evidence ledger without creating a competing Scenario target/witness/coverage ledger.
-10. Compute deterministic complexity metrics, tier, limits, and caps.
+10. Record actual RuleCrawler calls, requested references, and triggered crawler limits.
 11. Run the Section 11 Scenario Compiler through INVENTORY, WITNESSES, and FROZEN using the complete replacement snapshot. Do not run AUDIT BASE or AUDITED yet.
 12. Enumerate every candidate claim, apply the assertion ladder, and finalize exact ASSERT/SIM/OMIT decisions only after runtime, producer, simulation, Decision Table, dependency, and coverage gates pass.
 13. Re-run semantic closure, seed, root, grouping, Decision Table, assertion, and evidence-summary audits. Any semantic change invalidates the frozen snapshot and restarts the earliest affected phase.
@@ -335,13 +335,13 @@ For every RUT parameter or dependency/Data Page parameter that affects behavior,
 - invocation sequence id;
 - dependency rule name;
 - parameter name;
-- resolution mode: `explicit`, `inherited`, `empty`, or `not_applicable`;
+- resolution mode: `explicit`, `inherited`, `default` (Data Pages), `empty`, or `not_applicable`;
 - inheritance flag: `enabled`, `disabled`, or `n_a`;
 - raw expression;
 - resolved runtime value;
 - evidence source.
 
-Resolve dependency parameters in this order: explicit invocation expression → inheritance flag → empty/null when inheritance is disabled and no explicit value exists. Do not guess runtime values.
+For non-Data-Page invocations follow evidenced explicit/inheritance semantics. For Data Pages use KDP.4 and Section 13 revision 1.4: explicit, present current Param, evidenced applicable default; missing is never invented empty/null.
 
 Formal RUT metadata capture: before freezing a physical Param.<name> input, resolve its unique exact-name declaration in the original RUT parameter array. Preserve the declared Pega type and its indexed RUT evidence separately from the typed runtime value in PARAM.formalType/formalEvidence, following Section 13 revision 1.1. Missing or unsupported metadata remains an explicit projection GAP; never infer a type from a value, alter frozen coverage, or perform downstream parameter serialization here.
 
@@ -367,7 +367,8 @@ for all properties exclusively written by child operations of that branch:
     |affectedProperties=<list of property paths exclusively written by skippedChildren>
     |writeReachable=false|gate=SKIPPED_BRANCH_EXISTENCE_GATE
 
-This WR row is the input to SKIPPED_BRANCH_EXISTENCE_GATE for those properties.
+This WR row supplies execution information to SKIPPED_BRANCH_EXISTENCE_GATE;
+it does not establish initial or final presence for those properties.
 If a property is written by BOTH a skipped branch AND a non-skipped operation,
 writeReachable=true (the non-skipped write is sufficient).
 
@@ -453,11 +454,12 @@ STEP 3 — SEED_DIRECTION_LOCK:
       Re-run STEP 3 until the intersection is empty.
   Record: SDL|scenario=<id>|forbidden=<paths>|conflicts=<paths>|pass=<true|false>
 
-STEP 4 — Write-Reachable skipped-branch exclusion (overrides Section 6.0-PRE condition b):
-  For any property P ∈ FORBIDDEN_SEEDS(S):
-    Write-Reachable(P,S) = false  UNCONDITIONALLY
-    Seeding P in pySetupPages/pySimulation does NOT make Write-Reachable=true
-    This exclusion is irrevocable for Scenario S
+STEP 4 — Separate seed eligibility from final presence:
+  FORBIDDEN_SEEDS governs planned setup only. Excluding or removing a planned seed
+  does not prove runtime absence and cannot override initial-state evidence or an
+  actual executing producer. Rebuild and re-execute any changed witness before
+  deriving its final presence under Section 6.0-PRE. Keep initial state UNKNOWN
+  unless supported by RUT/harness evidence; do not invent a fresh-page assumption.
 
 STEP 5 — STATECHECK.preSeed gate:
   Passes when:
@@ -500,38 +502,11 @@ Omission is allowed only after candidate enumeration and the full assertion ladd
 
 Complexity alone is never a valid omission reason.
 
-### 5.6 LimitsAndComplexity ledger
+### 5.6 Crawler controls ledger
 
-Internally compute:
-- invocation count;
-- When rule reference count;
-- max nesting;
-- operation count;
-- loop count;
-- modified property count;
-- conditional block count;
-- page parameter count;
-- unresolved critical dependency count;
-- invocation chain depth;
-- weighted complexity score;
-- complexity tier: `STANDARD`, `ELEVATED`, or `HIGH`;
-- RuleCrawler calls used;
-- dependency references requested total;
-- hard triggers;
-- triggered limits;
-- confidence/testability caps.
+`CRAWL|ruleCrawlerCalls=<N>|dependencyReferencesRequested=<N>|triggeredLimits=<sortedCodesOrAbsent>`
 
-Hard triggers use these exact codes and thresholds: `INVOCATION_COUNT` at invocation count ≥ 10, `WHEN_RULE_REFERENCE_COUNT` at When rule references ≥ 15, `MAX_NESTING` at max nesting ≥ 6, `LOOP_COUNT` at loop count ≥ 5, `MODIFIED_PROPERTY_COUNT` at modified properties ≥ 20, `UNRESOLVED_CRITICAL_DEPENDENCY_COUNT` at unresolved critical dependencies ≥ 1, `PAGE_PARAMETER_COUNT` at page parameters ≥ 5, and `INVOCATION_CHAIN_DEPTH` at invocation-chain depth ≥ 6.
-
-Weighted score formula: `INVOCATION_COUNT*8 + WHEN_RULE_REFERENCE_COUNT*6 + MAX_NESTING*5 + OPERATION_COUNT*0.25 + LOOP_COUNT*10 + MODIFIED_PROPERTY_COUNT*3 + PAGE_PARAMETER_COUNT*4 + CONDITIONAL_BLOCK_COUNT*4 + UNRESOLVED_CRITICAL_DEPENDENCY_COUNT*12`.
-
-The independent loop/invocation HIGH condition is exact: `loopCount >= 1 AND invocationCount >= 1`; add hard-trigger code `LOOP_INVOCATION_COMBINATION` when it applies.
-
-Set tier to HIGH when score ≥ 50, any hard-trigger code exists, invocation-chain depth ≥ 2, or When reference count ≥ 3 with modified property count ≥ 8. Otherwise set ELEVATED when 25 <= score < 50 and STANDARD when score < 25.
-
-Derive caps without discretion: STANDARD → `confidenceCap=High`, `testabilityCap=Testable`; ELEVATED → `confidenceCap=Medium`, `testabilityCap=Testable`; HIGH → `confidenceCap=Medium`, `testabilityCap=PartiallyTestable`. If unresolved critical dependency count ≥ 1, lower the HIGH confidence cap to `Low`; never raise either cap later.
-
-Set `triggeredLimits` to `RULECRAWLER_CALL_CAP` at 120 RuleCrawler calls and `RULES_TOTAL_REQUESTED_CAP` at 260 requested dependency references. Complexity increases internal trace depth. It must not reduce assertion coverage by itself.
+Counters are nonnegative integers bounded by 120 calls and 260 requested references. triggeredLimits contains RULECRAWLER_CALL_CAP exactly at 120 calls and RULES_TOTAL_REQUESTED_CAP exactly at 260 references; otherwise absent. Require exact wave census and total plan.OUT request count, counting repeated requests across calls. Preserve dependency-wave closure and terminal-gap handling. Reject inconsistent counters or exceeded budgets. Confidence and testability follow evidence, executable inputs, unresolved dependencies, assertion support and explicit omissions. Removal of a prior cap does not automatically promote a Scenario.
 
 ### 5.7 Scenario runtime execution rows
 
@@ -585,77 +560,75 @@ Before resolving assertion status, enumerate candidate assertions. Candidate ass
 Producer-owned intermediate values:
 If an asserted value is derived from a page/list/property that prior RUT operations or invoked dependencies may write, append, map, remove, or overwrite, `DWL_UPSTREAM_PRODUCER_GATE` must pass before any exact, Contains, ResultCount, structural, or DecisionResult assertion may be emitted from that value.
 
-### 6.0-PRE SKIPPED_BRANCH_EXISTENCE_GATE (mandatory, fires before every assertion candidate)
+### 6.0-PRE SKIPPED_BRANCH_EXISTENCE_GATE (final-presence gate)
 
-This gate is atomic and must run for every candidate assertion on every property path in every Scenario before the assertion ladder (Verified → PredictedFromRules → Structural → Omitted) is applied.
+Run this gate for every property assertion candidate before the assertion ladder.
+The existing marker name is retained for traceability. Write-Reachable and WR rows
+describe executed writes, not property presence. A skipped write preserves the
+initial state; it does not establish absence.
 
-DEFINITION — Write-Reachable:
-A property path P is Write-Reachable in Scenario S if and only if at least one of the following is true:
-  (a) A SET, APPEND, PREPEND, INSERT, APPEND_AND_MAP_TO, or REMOVE operation targeting P
-      has RX.actionState=executes in Scenario S (proven from closed _DWLState + seeded inputs).
-  (b) P is seeded directly in pySetupPages or pySimulation for Scenario S.
-  (c) P is written by a dependency invoked with RX.actionState=executes in Scenario S,
-      and that dependency's write to P is proven from fetched/scanned RuleJSON.
-GATE RULE:
-  IF Write-Reachable(P, S) = false AND Write-Reachable(P, S) ≠ unknown
-    → The only allowed assertion for P is: comparator="Not exists", support=Structural.
-    → Forbidden: Is Equals To, IS Not Equals TO, Is Empty, Is Not Empty, has errors,
-                 has error with message, has error message that contains, ResultCount Is Equals To 0,
-                 Exists, Is True, Is False, Starts With, Ends With, Contains, Is In, Is Not In.
-    → Emit ASSERT|kind=Property|comparator=Not exists|support=Structural in AssertionDecisionTrace.
-    → Do NOT apply the assertion ladder. Gate result is final.
+INITIAL AND FINAL STATE:
+- Track presence as PRESENT, ABSENT or UNKNOWN separately from the property's value.
+  Initial presence requires explicit RUT/harness/initial-state evidence. A declared
+  page, omitted setup leaf, excluded seed, empty value or null value alone proves
+  neither initial nor final absence. An explicit fresh-harness guarantee may prove
+  absence only for the paths it actually covers.
+- Apply the ordered effects of executed RUT and selected dependency operations.
+  Proven materializing writes establish presence; proven removal establishes absence.
+  A later write can recreate a removed path. Do not treat CLEAR, assigning null/empty,
+  or an ambiguous operation as removal without its applicable operation semantics.
+- Skipped operations preserve state. Unknown execution/effects make affected presence
+  UNKNOWN unless evidence proves presence is unchanged; a later conclusive effect
+  can resolve it. No executed write plus unknown initial state remains UNKNOWN.
+- Preserve the initial-state basis and ordered effects in the existing internal
+  PropertyTrace and descriptive EVIDENCE. These are Author reasoning requirements,
+  not new mandatory source fields or a new consumer presence-proof contract.
 
-  IF Write-Reachable(P, S) = unknown
-    → Do NOT emit any exact-value assertion for P.
-    → Downgrade to Structural (Not exists or Exists only) or OMIT with reason=unresolvable_runtime_input.
-    → Record in BlockingGaps.
+ASSERTION ELIGIBILITY:
+1. Apply the existing upstream-producer, input-only, assertion-support and target-
+   representability gates. A setup/input value with no later executing RUT/dependency
+   write or removal is input-only and does not gain an output assertion merely by
+   remaining present. An ineligible enumerated claim receives an existing appropriate
+   OMIT, including incorrect_candidate_assertion for an input-only claim. Unknown
+   later execution does not prove that no later write occurred; resolve it or use
+   the unresolved-presence rule rather than labeling the claim input-only.
+2. Emit Not exists with Structural support only when final absence is proven and the
+   target is a meaningful, representable assertion candidate. Known initial absence
+   with all writes skipped can support this decision. Preserve the proper target kind
+   and property mode; do not force every target to Property/Text.
+3. For proven presence, continue the assertion ladder using supported value/structure
+   evidence. Presence alone proves neither an exact value nor a list count.
+4. For UNKNOWN presence, emit neither Exists nor Not exists and do not guess a value,
+   empty state or zero count. OMIT the unsupported presence/value claim with
+   unresolvable_runtime_input and record the existing gap/testability decision.
+   Preserve the scenario even if no meaningful assertion remains; mark it NotTestable
+   in that case. This does not change downstream schema representability rules.
 
-  IF Write-Reachable(P, S) = true
-    → Proceed to the assertion ladder normally.
+NESTED PATHS AND KNOWLEDGE GUIDANCE:
+Proven absence of an ancestor establishes descendant absence at that point; a later
+effect may recreate the relevant path. An unwritten or present ancestor alone does
+not establish a child's presence or absence. A leaf write must be interpreted using
+its evidenced path/context semantics, not a requirement that every ancestor have its
+own explicit write operation.
 
-SKIPPED-BRANCH TRIGGER (most common cause):
-  A property P is Write-Reachable=false when:
-  - The only write(s) to P are child operations of a WHEN block, AND
-  - That WHEN block's condition evaluates to false in Scenario S (RX.result=false, actionState=skipped).
-  This applies regardless of property type: scalar Value, Page, PageList, ValueList, PageGroup, ValueGroup.
-  It applies to every segment of a nested path: if .Review is never written, then
-  .Review.pyErrorPage and .Review.pyErrorPage.pyErrorCode are also Write-Reachable=false.
+Apply KP.10 ClipboardInitializationSemantics and KT.36 ListPropertyExistenceGate only
+with their initialization premise established. For this gate, their never-modified/
+never-written absence shortcuts require proven initial absence and no subsequent
+materializing effect. They do not infer absence from skipped operations, an incomplete
+trace or seed exclusion. This final-presence gate takes precedence over those shortcuts.
+Retain the existing list-count/index safety and input-only assertion rules; a proven
+present list still needs supported size/index evidence for eligible count/item claims.
 
-PATH TRANSITIVITY RULE:
-  For a nested path A.B.C:
-  - If A is Write-Reachable=false → A.B and A.B.C are Write-Reachable=false.
-  - If A is Write-Reachable=true but B is Write-Reachable=false → A.B and A.B.C are Write-Reachable=false.
-  - All segments must be Write-Reachable=true for the leaf to be Write-Reachable=true.
+SEED CONFLICTS AND SERIALIZATION:
+A forbidden planned seed is a setup conflict, not an assertion outcome. Preserve any
+required before seed, return to WITNESSES as required by Section 5.3b, and rebuild and
+re-execute the affected witness. Never patch a frozen witness or delete a seed while
+retaining its stale derived state. Reapply this gate after the conflict is resolved.
 
-INTERACTION WITH KT.36 (ListPropertyExistenceGate):
-  SKIPPED_BRANCH_EXISTENCE_GATE supersedes KT.36 for list properties when the list was never
-  written due to a skipped branch. KT.36 applies after this gate passes (Write-Reachable=true)
-  to govern ResultCount and index safety.
-
-INTERACTION WITH KP.10 (ClipboardInitializationSemantics):
-  This gate is the mandatory enforcement mechanism for KP.10. KP.10 defines the semantic;
-  this gate defines the per-property, per-scenario enforcement protocol.
-
-AssertionDecisionTrace requirement:
-  For every property where this gate fires (Write-Reachable=false or unknown), emit:
-  ASSERT|id=<ID>|kind=Property|target=<path>|page=<page>|class=<class>|mode=Text|
-         comparator=Not exists|support=Structural|gate=SKIPPED_BRANCH_EXISTENCE_GATE
-  The |gate=SKIPPED_BRANCH_EXISTENCE_GATE| annotation is required to allow Validator
-  to verify gate application.
-
-SEED_CONFLICT_OVERRIDE (mandatory, fires before Write-Reachable evaluation):
-  Before evaluating Write-Reachable(P,S) via conditions (a)(b)(c):
-    IF P ∈ FORBIDDEN_SEEDS(S) as computed by Section 5.3b STEP 3:
-      IF P supplies the before value of an executing DTA:
-        Do not remove P, compute DTA.after, or emit a skipped-branch assertion. Mark
-        STATECHECK.preSeed=FIX and return to WITNESSES to rebuild and re-execute the
-        physical Scenario; never repair a FROZEN Scenario locally.
-      ELSE:
-        Write-Reachable(P,S) = false  — skip conditions (a)(b)(c) entirely
-        Proceed directly to gate rule: emit Not exists / Structural
-        AssertionDecisionTrace must include gate=SKIPPED_BRANCH_EXISTENCE_GATE
-  This override fires even when P is present in pySetupPages (seed error
-  caught by SEED_DIRECTION_LOCK; gate still enforces correct assertion).
+Author records semantic ASSERT/OMIT decisions and their existing evidence references.
+Generator alone formats AssertionDecisionTrace using its existing whitelist. Do not
+append a gate field to that trace or ask Validator to reconstruct Author presence
+reasoning. The internal WR gate marker is not a candidate trace field.
 
 ### 6.0 RUT Producer Catalog Lock and assertion producer binding check
 
@@ -868,7 +841,7 @@ RUF scan row rule:
 Data Page scan row rule:
 - Use `D|id|DP@<applyToClass>@<DataPage>|src=<holder expression>|ctx=access=<verbatim access>;params=<normalized bindings or concrete params>;reachable=<true|false|unknown>;sig=<DP_SIG>|state=<CTX|CLOSED|READY>|proof=<param/metadata/simRequired>|next=<RESOLVE_CTX|REQUEST|AUTHOR_OK>`.
 - In `MODE=CRAWL`, use `reachable=unknown` unless scenario-independent pre-access proof shows the expression containing the Data Page is never evaluated. `reachable=unknown` is a simulation obligation. In `MODE=AUTHOR`, Scenario runtime rows may refine reachability per Scenario, but they cannot delete the `DP` row; they only prove scenario-local `OMIT_NONCRITICAL` or require `SIM`. A false result of the same expression does not waive the Data Page obligation.
-- If visible/required parameters are unresolved, keep the `DP` row in `CTX` with `next=RESOLVE_CTX`. If exact `Rule-Declare-Pages` metadata is known and must be fetched, use `READY` with `next=REQUEST`. If params are resolved and metadata is not required, use `CLOSED`, `proof=simRequired`, `next=AUTHOR_OK`; simulation is still audited by `DPA` before storage.
+- During discovery record symbolic bindings and preceding producers; do not hold a DP in CTX solely because scenario execution will produce its concrete values. Unknown declaration metadata or unresolved symbolic binding evidence remains CTX with next=RESOLVE_CTX. If exact `Rule-Declare-Pages` metadata is known and must be fetched, use `READY` with `next=REQUEST`. If symbolic bindings and required declaration/scope metadata are evidenced, use `CLOSED`, `proof=simRequired`, `next=AUTHOR_OK`; simulation is still audited by `DPA` before storage.
 
 Page/list helper class rule:
 - In `@IsInPageListWhen(WhenName, PageListPath)` and `@countInPageListWhen(WhenName, PageListPath)`, `WhenName` is an executable `When`; `PageListPath` supplies target class.
@@ -1302,7 +1275,7 @@ When using examples, preserve unique Pega assertion patterns and optional contex
 
 Determine physical ScenarioGroup cardinality from immutable original RuleJSON.pxObjClass:
 
-- For non-Rule-Obj-When RUTs, create one physical group containing exactly one final Scenario.
+- For each frozen non-Rule-Obj-When scenario, create exactly one ScenarioGroup containing only that scenario. Preserve frozen scenario IDs and relative order; local scenario order is 1. Standard group count equals frozen scenario count. Assign consecutive group IDs/orders in that preserved order. Grouping must not merge, remove, or reidentify frozen scenarios.
 - For Rule-Obj-When RUTs, compute one canonical typed SIMULATION_GROUP_KEY per Scenario, partition by exact equality, keep all equal-key Scenarios together, never combine unequal keys, preserve order, and create one physical group per distinct key.
 - Freeze semantic Scenario membership, ordered COLUMN/cell facts, Result decisions, simulation obligations, and ASSERT/SIM/OMIT records. Do not create UnitTestRules, Decision JSON rows, RuleCode, or pySimulation here.
 
@@ -1644,7 +1617,6 @@ SUMMARY records are computed from the final semantic ledger and latest dependenc
 - dependency state is AllResolved, SomeUnresolved, or NotApplicable from closed rows and terminal gaps;
 - branch state is AllEvaluated, SomeUnknown, or NotApplicable;
 - simulation state is NotRequired, RequiredAndAligned, RequiredButLimited, or NotApplicable;
-- complexity tier equals the deterministic group COMPLEXITY tier;
 - assertion, omission, simulation, and gap counts equal final records;
 - checklist codes reflect applicable CELLS, COVERAGE, DECISION_TABLE, DEPENDENCY, ROOT, SEED, and SIMULATION gates;
 - reasoning/dependency evidence IDs resolve to exact EVIDENCE records;
@@ -1691,9 +1663,9 @@ Complexity alone is never an omission reason. No claim may remain undecided.
 
 UnitTestGenerator, not Scenario Author, formats AssertionDecisionTrace using the exact tag-specific whitelist and HTML-safe value encoding defined by the ScenarioGroup contract. Scenario Author stores raw losslessly escaped semantic values and never pre-encodes or constructs the trace string.
 
-### 12.4 Confidence and testability caps
+### 12.4 Evidence-based confidence and testability
 
-Apply COMPLEXITY caps first, then lower them as required by semantic gaps and closure:
+Determine confidence and testability from actual evidence, executable inputs, supported assertions, explicit omissions and semantic gaps. Removing prior caps never promotes a Scenario automatically:
 
 - any blocking gap forbids High confidence and full testability;
 - a blocking gap affecting exact value, branch result, dependency-controlled value, required simulation, or execution feasibility forces Low confidence and PartiallyTestable or NotTestable according to whether meaningful assertions remain;
@@ -1721,7 +1693,7 @@ Run these gates over the final semantic records before ScenarioGroup serializati
 This section is the complete executable payload contract. It is self-contained for Scenario Author materialization and must remain semantically synchronized with the repository ScenarioGroup v1 contract.
 ### 13.1 Purpose and boundary
 
-Revision 1.1 adds explicit formal RUT parameter provenance. Revision 1.1 originally added formal provenance; revision 1.3 below is now the required producer/consumer revision and rejects every older or unknown revision before projection. This is a required-field grammar change, not an in-place Memory upgrade: Scenario Author must rematerialize from the original RuleJSON and write new immutable ScenarioGroup records. Never relabel an old payload or infer missing metadata. The v1 family filename and Memory Type `ScenarioGroup` remain unchanged.
+Revision 1.1 adds explicit formal RUT parameter provenance. Revision 1.1 originally added formal provenance; revision 1.4 is now the required producer/consumer revision and rejects every older or unknown revision before projection. This is a required-field grammar change, not an in-place Memory upgrade: Scenario Author must rematerialize from the original RuleJSON and write new immutable ScenarioGroup records. Never relabel an old payload or infer missing metadata. The v1 family filename and Memory Type `ScenarioGroup` remain unchanged.
 
 A ScenarioGroup payload is the complete, immutable semantic snapshot for exactly one physical unit-test group. It is not candidate JSON, does not contain `UnitTestRules` or `RuleCode`, and cannot ask UnitTestGenerator to crawl, infer expected values, alter grouping, or make new ASSERT/SIM/OMIT decisions. UnitTestGenerator may only validate this contract and project its frozen facts.
 
@@ -1731,7 +1703,7 @@ The WriteMemory result envelope is the exact S1 contract: required fields are `S
 
 #### 13.1.1 Revision 1.2 source profile
 
-Revision 1.2 extends revision 1.1 with exactly one PROFILE per Scenario. Revision 1.2 introduced this common profile; revision 1.3 below governs current producers and consumers. Generator rejects older or unknown revisions and requires new immutable rematerialization from the original source. The unchanged legacy record definitions below retain their arity, including END: PROFILE count is derived from scenarioCount and its exact one-per-Scenario census. In the per-Scenario record sequence PROFILE is first, immediately before PARAM (or the first present legacy body tag); its ID is F001 and order is 1. Every other legacy count excludes PROFILE. The five S2 fixtures remain historical revision-1.1 regressions; historical revision-1.2 examples are under fixtures/s3/profiled/.
+Revision 1.2 extends revision 1.1 with exactly one PROFILE per Scenario. Revision 1.2 introduced this common profile; revision 1.4 governs current producers and consumers. Generator rejects older or unknown revisions and requires new immutable rematerialization from the original source. The unchanged legacy record definitions below retain their arity, including END: PROFILE count is derived from scenarioCount and its exact one-per-Scenario census. In the per-Scenario record sequence PROFILE is first, immediately before PARAM (or the first present legacy body tag); its ID is F001 and order is 1. Every other legacy count excludes PROFILE. The five S2 fixtures remain historical revision-1.1 regressions; historical revision-1.2 examples are under fixtures/s3/profiled/.
 
 `PROFILE|scenario=<ID>|id=F001|order=1|data=<canonicalTypedJSON>|evidence=<sortedEvidenceIDs>`
 
@@ -1743,7 +1715,7 @@ PROFILE.data has exactly `caseKey`, `singlePage`, `scenarioType`, `actions`, `bi
 - `actions` is the complete ordered array of required setup actions followed by required cleanup actions. An empty array is an audited absence, not permission for Generator to invent actions. Each object has exactly `phase` (SETUP or CLEANUP), `type` (ApplyDataTransform, RunActivity, LoadDataPage, LoadObject, CreateDataObject, CreateWorkObject), exact nonempty `name`, `page` (a ROOT page or JSON null), `parameters`, and nonempty same-Scenario `evidence` ID array. Parameters preserve order and unique exact names. Each has exactly `name`, `formalType`, `valueType`, `value`, and nonempty `evidence` ID array. Its formal type comes from the referenced action's declaration, its value from frozen execution, and the formal-parameter value table must support its projection. Unknown actions/parameters must be resolved during witness formation or cause explicit terminal failure; they cannot be silently dropped. A mocked Data Page never becomes a LoadDataPage action. Distinct shared When actions are not grounds for downstream regrouping.
 - `bindings` is one ordered object for each non-cell ASSERT, in ASSERT order; DecisionInput/DecisionResult assertions have no binding. A non-cell ASSERT in a WHEN source is retained with its binding for explicit projection-scope handling, never silently discarded. Each object has exactly `assertion`, `structure`, `scalarType`, `stepPage`, `stepClass`, `fullPath`, `parentMode`, `context`, and a nonempty same-Scenario `evidence` ID array. Capture property definitions and final APB/runtime context before freezing. `structure` is Value, Page, ValueList, PageList, ValueGroup, PageGroup, or NotApplicable. `scalarType` is Text, String, Identifier, Password, TextEncrypted, Integer, Double, Decimal, Date, DateTime, TimeOfDay, TrueFalse, or NotApplicable. `stepPage` is an evidenced ROOT pagesAndClasses root and `stepClass` is its class. `fullPath` equals the immutable Param/full ASSERT target, or ASSERT.page plus a leading-dot target. Non-Param fullPath begins with stepPage plus a dot; never guess a second root from serialized JSON. A scalar Property cannot target a Page/PageList/PageGroup itself. For a scalar Property, parentMode is ValueList/ValueGroup only for that declared indexed/keyed value structure and otherwise JSON null; Param assertions keep Text mode and no parentMode. Other parentMode values, when applicable to a non-Property binding, are PageList or PageGroup. Scalar property modes agree with the resolved scalarType.
 - `context` preserves evidenced optional assertion-block fields by their exact Pega names: pyCardApplyToClass, pyPropertyApplyToClass, pyStepPageNameActual, pyStepPageMethodName, pyListFilter, pyNumberOfAppearances, and pyComparator. Values are nonempty strings. Filters apply only to List/ResultCount; List pyNumberOfAppearances is InAllInstances for all-items checks or InAnyInstance for the preserved proven-payload/unknown-index fallback; retain the Author's evidenced choice. A Page block comparator, if present, equals its ASSERT comparator. Core target/page/class/expected-value fields cannot be overridden through this object. Absence means no applicable optional source field survived the semantic audit, not that Generator may discard an evidenced field.
-- `checklist` contains exactly the 17 Author-owned boolean facts: CandidateAssertionsEnumerated, DependencyResolutionCompleted, RuleCrawlerLimitsApplied, RUFTransitiveDiscoveryCompleted, ParametersResolved, BranchesEvaluated, PropertyTracesCompleted, OmissionsResolved, ComplexityComputed, SimulationNeedsResolved, SimulationDepthChecked, ListAssertionsChecked, SymbolicIndexesResolved, ContextSwitchesResolved, UnsupportedAssertionsExcluded, NoSpeculation, NoInternalLedgerLeak. Record actual gate results; never fill them from a blanket success template. RuleCodeConsistentWithLedger and SchemaSelfCheckPassed remain Generator-owned and are excluded. A false semantic gate must be represented by a GAP and appropriate confidence/testability limits.
+- `checklist` contains exactly the 16 Author-owned boolean facts: CandidateAssertionsEnumerated, DependencyResolutionCompleted, RuleCrawlerLimitsApplied, RUFTransitiveDiscoveryCompleted, ParametersResolved, BranchesEvaluated, PropertyTracesCompleted, OmissionsResolved, SimulationNeedsResolved, SimulationDepthChecked, ListAssertionsChecked, SymbolicIndexesResolved, ContextSwitchesResolved, UnsupportedAssertionsExcluded, NoSpeculation, NoInternalLedgerLeak. Record actual gate results; never fill them from a blanket success template. RuleCodeConsistentWithLedger and SchemaSelfCheckPassed remain Generator-owned and are excluded. A false semantic gate must be represented by a GAP and appropriate confidence/testability limits.
 - `reasoningTrace` and `dependencyClosureTrace` are final nonempty compact factual strings. Author freezes the actual wave STATE/PLAN/DELTA proof, relevant DTM/DTE/DTA projections, assertion permission/omission reasons, and seed-to-assertion evidence required by original Main 1832–1865. No invented RuleCrawler wave or fetched rule is allowed; no-crawl runs say so. Generator preserves these strings and appends only its own bounded projection facts if needed; it never synthesizes missing crawl history.
 
 PROFILE.evidence resolves in the same Scenario and includes the case-key proof and one GATE EVIDENCE at source SCENARIO_SNAPSHOT/PROFILE whose canonical fact equals PROFILE.data exactly. This records the final audited source-profile census. All nested evidence references resolve to actual acquisition/execution evidence; the census is not a substitute for that source evidence. Freeze the profile together with INPUT/SETUP/ASSERT/SIM/OMIT and re-audit it after any semantic change. No existing coverage, expected value, simulation, or stable Scenario ID may change merely to make the profile serializable.
@@ -1761,13 +1733,44 @@ Target Ruleset/Version selection is already implemented in Pega and remains outs
 
 #### 13.1.2 Revision 1.3 projection provenance
 
-The source contract requires producers to emit `SG.version=1.3` and Generator to reject every older/unknown revision. Never infer or retrofit missing facts in old Memory records; Author rematerializes new immutable sources. Revision-1.2 fixtures under fixtures/s3/profiled/ remain historical; current synthetic Author fixtures are under fixtures/s3/current/. The common PROFILE and legacy record arities remain unchanged.
+The source contract requires producers to emit `SG.version=1.4` and Generator to reject every older/unknown revision. Never infer or retrofit missing facts in old Memory records; Author rematerializes new immutable sources. Revision-1.2 fixtures under fixtures/s3/profiled/ remain historical; historical revision-1.3 fixtures remain under fixtures/s3/current/; fresh revision-1.4 fixtures are under fixtures/s6/. The common PROFILE and legacy record arities remain unchanged.
 
 For each non-cell ASSERT, binding.evidence additionally links exactly one same-Scenario EXECUTION snapshot with source `ASSERTION_VALUE/<assertionID>`. Its canonical fact has exactly `valueType` (string, boolean, number, null, empty, json, absent) and `value` equal to the decoded ASSERT.value carrier. Capture this expected-value type from the final semantic decision before freezing; property mode is not expected-value type. Non-absent carriers are strings; absent uses JSON null. Empty uses `<EMPTY>`; typed null uses `null`; strings such as `null`, `<EMPTY>` or `["Ada","Grace"]` remain literal text when explicitly typed string. Boolean and finite JSON number carriers retain exact values and decimal precision. A json carrier preserves its actual JSON type, array members and order. An array-valued Is In/Is Not In decision must remain an array, never guessed from text or stringified. Comparators without an expected value require absent; ResultCount requires a nonnegative integer number carrier and projects count text only at the downstream block. When DecisionInput/DecisionResult cells retain their existing string/empty contract and need no non-cell binding.
 
 SIM.setupPages is the complete ordered census of actual simulation pages, including the payload carrier; it is never a supplemental list. Every SIM links exactly one same-Scenario EXECUTION snapshot `SIMULATION_BINDING/<simulationID>` with canonical fact `{"itemPath":<exactCollectionPathOrNull>,"payloadPage":<exactPageName>}`. For shape=list, itemPath is the exact evidenced dot-prefixed path from the frozen payload root to its item array; select only that array when validating itemClass. Preserve unrelated arrays and nested fields, which cannot prove the selected collection's class. For shape=page, itemPath is JSON null. This name must identify exactly one page in that nonempty census. Generator places the frozen payload only on this page, merges the explicitly typed page-detail seeds without conflicting overwrites, and emits exactly the full census. Do not prepend a DP-named page or choose PrimaryPage by convention. Preserve the evidenced list wrapper class, domain collection names (including Items or pxResults), item classes and original navigation depth; never invent or replace a wrapper. Missing binding is malformed source; conflicting payload/seed or unsupported wrapper is an explicit unprojectable source scope.
 
 For a simulated WHEN group, each canonical simulationGroupKey.simulations entry has the previous complete fields plus `payloadPage` and `itemPath`, equal to its SIMULATION_BINDING snapshot. All Scenarios in the physical group must match this binding and the full setup-page census as well as every previous simulation-key fact. This explicit revision changes the grouping key; it never authorizes Generator to regroup old records. NO_SIMULATION and STANDARD absent-key rules remain unchanged.
+
+#### Revision 1.4 Data Page access evidence
+
+##### Resolution and ownership
+
+For each access, Author resolves declared Data Page inputs against the caller state immediately before the access: explicit expression first; otherwise a present same-name current Param value under the user-confirmed RuleIQ convention; otherwise an evidenced applicable runtime default. Presence includes null and initialized empty. Unresolved explicit/current values do not fall through. Unknown declarations are not empty declarations. Optional omitted inputs require declaration evidence that omission is permitted; otherwise missing values are unresolved.
+
+During crawl, record symbolic expressions and their producers without requiring future concrete scenario values. During execution, evaluate reachable accesses in order, retain skipped-access evidence, and freeze typed values and signatures. Only external inputs are seeded. Parameter resolution refines testability without adding dependency-only scenarios or removing existing scenarios. The broader scenario lifecycle remains a separate correction.
+
+KnowledgeTool supplies Data Page semantics to Author; Generator audits frozen records, never infers bindings. Validator continues candidate-visible checks only. Data-Page-to-loader pass-current-page settings do not establish caller-to-Data-Page bindings. Existing Thread-only eligibility remains in force.
+
+##### Evidence format
+
+Use existing scenario-scoped EVIDENCE records; `fact` contains canonical minified typed JSON, with ordinary outer ledger escaping. These are normalized evidence formats, NOT invented Pega RuleJSON fields. Original metadata/expression excerpts remain separately referenced EVIDENCE. Unknown export mappings yield unknown declarations.
+
+- `kind=DEPENDENCY`, `source=DP_DECLARATION/<rule>`: exact fact keys `rule`, `scope`, `parameters`, `optional`, `defaults`, `evidence`. `parameters` is a sorted unique input-name array, or null when unknown; `optional` is a sorted unique subset; `defaults` maps declared input names to typed carriers; `evidence` is a nonempty unique list of other metadata EVIDENCE IDs. Each default is included only with evidence of runtime applicability. Unknown declarations have empty optional/default sets. Scope comes from evidenced metadata.
+- Typed carrier: exact keys `valueType`, `value`. Types and string value carriers follow PARAM: null is `{"valueType":"null","value":"null"}`, initialized empty is `{"valueType":"empty","value":"<EMPTY>"}`, and absent is `{"valueType":"absent","value":null}`. Only absent uses JSON null for its carrier.
+- `kind=EXECUTION`, `source=DP_ACCESS/<invocation>`: exact fact keys `rule`, `invocation`, `execution`, `declaration`, `status`, `explicit`, `current`, `parameters`, `simulation`. `execution` references the access RX; its source equals invocation. `status` is EXECUTED, NOT_EXECUTED or UNKNOWN. `declaration` references matching DP_DECLARATION evidence. `explicit` maps supplied declared names to typed carriers plus `expression` and nonempty `evidence` IDs. For executed accesses with known declarations, `current` has exactly every declared input name; each entry has a typed carrier, nonempty `evidence` IDs and `state=ABSENT|VALUE|UNKNOWN`. ABSENT and UNKNOWN use the absent carrier; VALUE uses a non-absent carrier. `parameters` is the sorted unique list of this access's PARAM IDs; `simulation` is its SIM ID or null. Skipped/unknown accesses have empty explicit/current/parameters and null simulation. Unknown accesses require GAP DP_ACCESS_UNRESOLVED, scope=invocation, citing access evidence; they downgrade testability. Executed accesses with unknown declarations have empty current/parameters and null simulation and require DP_PARAMETER_UNRESOLVED.
+- `kind=EXECUTION`, `source=DP_EXECUTION/<RXid>` has exact fact keys `execution`, `status`, referring to that RX and the same three execution states. Require exactly one for every access RX and every relevant Param producer RX. Access status must match. A false RX guard requires NOT_EXECUTED, an unknown guard requires UNKNOWN; an executed producer requires a true or absent guard. Relevant PRODUCER guards equal their RX guards, and their payloads use the typed carrier shape above. Every RX whose comma-separated writes includes a relevant Param.<name> has exactly one matching PRODUCER for that target. Every relevant PRODUCER references an RX listing its target. Duplicate producers for one RX/target are invalid.
+- Require one initial EVIDENCE per declared name used by an executed access: `kind=SEED`, `source=DP_INITIAL/Param.<name>`, fact equal to its typed carrier. Absent means evidenced initial nonexistence, not unknown state. For each access, derive current state from this initial fact and all relevant producers with lower RX.order. NOT_EXECUTED preserves state; UNKNOWN makes it UNKNOWN; EXECUTED replaces it with the producer carrier (absent means removal). Compare the complete current snapshot against this derived state. Its evidence must include the initial fact when it remains the origin, otherwise the final relevant producer's evidence and DP_EXECUTION fact. Missing names, unproven absence and stale values fail validation. Current UNKNOWN never permits fallback; current ABSENT permits an evidenced default or optional omission. These snapshots validate Author-acquired facts, not re-execution of Pega.
+
+##### PARAM and SIM rules
+
+Execution-state proof is bidirectional: NOT_EXECUTED requires a terminal false effective RX guard (including the parent/short-circuit guard where applicable); a true or absent guard cannot justify skipping a producer. Without sufficient execution proof retain UNKNOWN. A false guard requires NOT_EXECUTED and an unknown guard requires UNKNOWN. The final relevant producer used as current-state origin means the last state-affecting producer, excluding NOT_EXECUTED producers.
+
+Add PARAM `mode=default`, with absent expression and inheritance=n_a. DP explicit uses inheritance=n_a; inherited uses inheritance=enabled and expression=Param.<name>. Every resolved parameter is bound to its access invocation and Data Page rule, and cites the access plus declaration evidence. Non-formal DP PARAM records retain absent formalType/formalEvidence.
+
+Every resolved executed eligible access references one SIM with matching rule and typed effective map. Every SIM is associated with at least one access and links those access/declaration evidence IDs. Accesses with the same rule/signature/map may share a SIM; distinct maps cannot share a signature. SIM.parameterResolutions selects one complete access's parameter list (not duplicate names accumulated from repeated accesses). All accesses retain their own PARAM rows. Comparison preserves JSON types, including Boolean versus number.
+
+`params={}` and `parameterResolutions=-` are valid only for an evidenced empty effective map. Nonempty maps have one PARAM per name, with no missing, extra, duplicate or unrelated references. All actual SIMs require Thread scope. Unresolved or excluded-scope executed accesses have no SIM and retain a matching GAP with code DP_PARAMETER_UNRESOLVED or DP_SCOPE_INELIGIBLE, scope equal to invocation, and access evidence; scenario testability reflects the gap. No guessed bindings or dummy PARAM rows.
+
 
 ### 13.2 Encoding
 
@@ -1798,7 +1801,7 @@ Records are sorted by this sequence:
 1. one `SG` and one `ROOT`;
 2. all `TARGET` records in original-RUT inventory order;
 3. zero `COLUMN` records for STANDARD, or one or more ordered `COLUMN` records for WHEN;
-4. one `COMPLEXITY` record;
+4. one `CRAWL` record;
 5. all `SCENARIO` records by scenario order;
 6. for each scenario, its `PROFILE`, `PARAM`, `INPUT`, `SETUP`, `RX`, `DEP`, `BRANCH`, `PRODUCER`, `PROPERTY`, `DTM`, `DTE`, `DTA`, `DTC`, `DTRA`, `SIM`, `ASSERT`, `OMIT`, `EVIDENCE`, `GAP`, `SUMMARY`, and `NARRATIVE` records in that tag order and then record order;
 7. one `END`.
@@ -1811,7 +1814,7 @@ The following forms are exact. A field containing `-` is nullable only when its 
 
 #### 13.4.1 Group and Scenario
 
-`SG|version=1.3|caseId=<CaseID>|rutType=<originalRUTType>|rutClass=<class>|rutName=<name>|ruleset=<ruleset>|groupId=<ID>|groupOrder=<N>|kind=<STANDARD|WHEN>|scenarioCount=<N>|simulationGroupKey=<canonicalKeyOrAbsent>`
+`SG|version=1.4|caseId=<CaseID>|rutType=<originalRUTType>|rutClass=<class>|rutName=<name>|ruleset=<ruleset>|groupId=<ID>|groupOrder=<N>|kind=<STANDARD|WHEN>|scenarioCount=<N>|simulationGroupKey=<canonicalKeyOrAbsent>`
 
 - `caseId` is exactly `GetCaseData.pyID`; it is not synthesized.
 - `rutType` is the immutable original RUT type.
@@ -1833,11 +1836,10 @@ TARGET records are the self-contained projection of original-RUT coverage target
 
 WHEN uses one ordered COLUMN signature shared by every Scenario in the same physical group. STANDARD has none. Each WHEN Scenario has exactly one DECISION_INPUT INPUT and one DecisionInput ASSERT per COLUMN in identical order, with exact path/class/mode/value equality; it also has exactly one DecisionResult ASSERT. DecisionInput and DecisionResult `row` equals the Scenario's local order. No COLUMN or physical input path may be rooted in a simulated Data Page target. Different physical groups with unequal simulation keys may have different COLUMN signatures; cross-group signature equality is neither required nor inferred.
 
-`COMPLEXITY|invocationCount=<N>|whenRuleReferenceCount=<N>|maxNesting=<N>|operationCount=<N>|loopCount=<N>|modifiedPropertyCount=<N>|conditionalBlockCount=<N>|pageParameterCount=<N>|unresolvedCriticalDependencyCount=<N>|invocationChainDepth=<N>|weightedScore=<number>|tier=<STANDARD|ELEVATED|HIGH>|ruleCrawlerCalls=<N>|dependencyReferencesRequested=<N>|hardTriggers=<sortedCodesOrAbsent>|triggeredLimits=<sortedCodesOrAbsent>|confidenceCap=<High|Medium|Low>|testabilityCap=<Testable|PartiallyTestable>`
+`CRAWL|ruleCrawlerCalls=<N>|dependencyReferencesRequested=<N>|triggeredLimits=<sortedCodesOrAbsent>`
 
-For consumer validation only, use these exact arithmetic definitions on the recorded nonnegative integer metrics; do not reacquire semantic facts or change a recorded count. weightedScore = invocationCount*8 + whenRuleReferenceCount*6 + maxNesting*5 + operationCount*0.25 + loopCount*10 + modifiedPropertyCount*3 + pageParameterCount*4 + conditionalBlockCount*4 + unresolvedCriticalDependencyCount*12. The exact hard-trigger code/threshold pairs are INVOCATION_COUNT: invocationCount>=10; WHEN_RULE_REFERENCE_COUNT: whenRuleReferenceCount>=15; MAX_NESTING: maxNesting>=6; LOOP_COUNT: loopCount>=5; MODIFIED_PROPERTY_COUNT: modifiedPropertyCount>=20; UNRESOLVED_CRITICAL_DEPENDENCY_COUNT: unresolvedCriticalDependencyCount>=1; PAGE_PARAMETER_COUNT: pageParameterCount>=5; INVOCATION_CHAIN_DEPTH: invocationChainDepth>=6. Include LOOP_INVOCATION_COMBINATION exactly when loopCount>=1 and invocationCount>=1. hardTriggers is the sorted complete set, with no extra/missing trigger. Reject a mismatch in recorded score/triggers/tier/caps/limits; never repair those immutable semantic facts.
+Counters are nonnegative integers bounded by 120 calls and 260 requested references. triggeredLimits contains RULECRAWLER_CALL_CAP exactly at 120 calls and RULES_TOTAL_REQUESTED_CAP exactly at 260 references; otherwise absent. Require exact wave census and total plan.OUT request count, counting repeated requests across calls. Preserve dependency-wave closure and terminal-gap handling. Reject inconsistent counters or exceeded budgets. Confidence and testability follow evidence, executable inputs, unresolved dependencies, assertion support and explicit omissions. Removal of a prior cap does not automatically promote a Scenario.
 
-The phrase `loop+invocation combination requires it` means `loopCount >= 1 AND invocationCount >= 1`; this is the conservative HIGH trigger `LOOP_INVOCATION_COMBINATION`. Tier is HIGH when score is at least 50, any hard trigger exists, the loop/invocation trigger applies, `invocationChainDepth >= 2`, or `whenRuleReferenceCount >= 3 AND modifiedPropertyCount >= 8`; otherwise it is ELEVATED when `25 <= score < 50` and STANDARD below 25. Caps are derived, never selected: STANDARD maps to `High/Testable`, ELEVATED to `Medium/Testable`, HIGH to `Medium/PartiallyTestable`, and any unresolved critical dependency further lowers the HIGH confidence cap to `Low`. The checker recomputes score, trigger codes, tier, and both caps. `triggeredLimits` uses only `RULECRAWLER_CALL_CAP` at 120 calls and `RULES_TOTAL_REQUESTED_CAP` at 260 requested references. Complexity may increase trace depth and cap confidence/testability, but cannot remove coverage or final claims by itself.
 
 `SCENARIO|id=<ID>|order=<N>|name=<name>|owner=<owner>|covers=<sortedTargetIDs>|testability=<Testable|PartiallyTestable|NotTestable>|confidence=<High|Medium|Low>`
 
@@ -1845,9 +1847,9 @@ Every final physical Scenario appears once. Scenario order is contiguous and sta
 
 #### 13.4.2 Physical inputs and setup
 
-`PARAM|scenario=<ID>|id=<ID>|order=<N>|invocation=<sequenceID>|dependency=<RUTOrRuleName>|name=<parameterName>|formalType=<exactPegaTypeOrAbsent>|formalEvidence=<evidenceIDOrAbsent>|mode=<explicit|inherited|empty|not_applicable>|inheritance=<enabled|disabled|n_a>|expression=<rawExpressionOrAbsent>|valueType=<string|boolean|number|null|empty|json|absent>|value=<typedValueOrAbsent>|evidence=<evidenceIDs>`
+`PARAM|scenario=<ID>|id=<ID>|order=<N>|invocation=<sequenceID>|dependency=<RUTOrRuleName>|name=<parameterName>|formalType=<exactPegaTypeOrAbsent>|formalEvidence=<evidenceIDOrAbsent>|mode=<explicit|inherited|default|empty|not_applicable>|inheritance=<enabled|disabled|n_a>|expression=<rawExpressionOrAbsent>|valueType=<string|boolean|number|null|empty|json|absent>|value=<typedValueOrAbsent>|evidence=<evidenceIDs>`
 
-Every behavior-affecting RUT, dependency, and Data Page parameter has one PARAM. Resolution follows explicit expression, then inheritance, then typed empty/null when inheritance is disabled; unresolved values are not guessed and must drive a gap/testability decision.
+Each resolved Data Page input has one PARAM per access, under revision 1.4 below. Other behavior-affecting RUT/dependency parameters retain their evidenced invocation semantics. Unresolved values are not guessed and require a gap/testability decision.
 
 `INPUT|scenario=<ID>|id=<ID>|order=<N>|role=<PARAM|PRIMARY|PAGE|DECISION_INPUT>|path=<exactPath>|page=<pageOrAbsent>|class=<classOrAbsent>|mode=<mode>|valueType=<string|boolean|number|null|empty|json>|value=<typedValue>|resolution=<paramIDOrAbsent>|evidence=<evidenceIDs>`
 
@@ -1903,9 +1905,9 @@ Every DTA is listed in exactly one DTE and exactly one passing DTRA `checkedActi
 
 #### 13.4.5 Simulation decisions
 
-`SIM|id=<ID>|rule=<dataPageOrRule>|sig=<DP_SIG>|shape=<page|list>|method=DefineData|class=<class>|itemClass=<itemClassOrAbsent>|params=<normalizedParams>|target=<targetPath>|mockingRuleType=<ruleType>|referredFromClass=<classOrAbsent>|setupPages=<canonicalTypedJSON>|scenario=<ID>|order=<N>|payload=<canonicalTypedJSON>|parameterResolutions=<paramIDs>|evidence=<evidenceIDs>`
+`SIM|id=<ID>|rule=<dataPageOrRule>|sig=<DP_SIG>|shape=<page|list>|method=DefineData|class=<class>|itemClass=<itemClassOrAbsent>|params=<normalizedParams>|target=<targetPath>|mockingRuleType=<ruleType>|referredFromClass=<classOrAbsent>|setupPages=<canonicalTypedJSON>|scenario=<ID>|order=<N>|payload=<canonicalTypedJSON>|parameterResolutions=<paramIDsOrAbsent>|evidence=<evidenceIDs>`
 
-The leading fields intentionally preserve the canonical cross-agent trace grammar. `sig=<DP_SIG>` and `params=<normalizedParams>` are mandatory, non-empty, exact frozen values. `params`, `setupPages`, and `payload` are canonical minified typed JSON. `setupPages` has the same exact array shape used in the group key. `shape=list` requires non-absent `itemClass`; `shape=page` permits absent `itemClass`. Every reachable or unknown Thread-level DP signature has exactly one SIM decision in its Scenario. Excluded-scope Data Pages instead produce an explicit gap/downgrade or a new witness; `NO_SIMULATION` is never a SIM signature.
+The leading fields intentionally preserve the canonical cross-agent trace grammar. `sig=<DP_SIG>` and `params=<normalizedParams>` are mandatory, non-empty, exact frozen values. `params`, `setupPages`, and `payload` are canonical minified typed JSON. `setupPages` has the same exact array shape used in the group key. `shape=list` requires non-absent `itemClass`; `shape=page` permits absent `itemClass`. Every resolved executed eligible DP access has a SIM decision; repeated equal signatures may share it with separate access evidence. Unknown accesses or parameters have explicit gaps and no guessed SIM. Excluded-scope Data Pages instead produce an explicit gap/downgrade or a new witness; `NO_SIMULATION` is never a SIM signature.
 
 For WHEN, each Scenario's ordered SIM records serialize to the complete `simulationGroupKey` entry set; every declared key field is compared, not only signature and parameters. A `NO_SIMULATION` group contains zero SIM records in every Scenario.
 
@@ -1944,9 +1946,9 @@ When UnitTestGenerator creates `AssertionDecisionTrace`, it uses exact tag-speci
 
 #### 13.4.7 Narrative and completion
 
-`SUMMARY|scenario=<ID>|id=<ID>|order=1|supportLevel=<Verified|PredictedFromRules|StructuralOnly|OmittedClaimsPresent|NotTestable>|dependencyState=<AllResolved|SomeUnresolved|NotApplicable>|branchState=<AllEvaluated|SomeUnknown|NotApplicable>|simulationState=<NotRequired|RequiredAndAligned|RequiredButLimited|NotApplicable>|complexityTier=<STANDARD|ELEVATED|HIGH>|assertionCount=<N>|omissionCount=<N>|simulationCount=<N>|gapCount=<N>|internalChecklist=<sortedGateCodes>|reasoningEvidence=<evidenceIDs>|dependencyEvidence=<evidenceIDsOrAbsent>|blockingGaps=<gapIDsOrAbsent>|dependencyClosureStatus=<Closed|Blocked>|maxDependencyWaveReached=<N>|queuedDependencyCount=0|unscannedFetchedRuleJsonCount=0|seedCoverageEvidence=<evidenceIDsOrAbsent>`
+`SUMMARY|scenario=<ID>|id=<ID>|order=1|supportLevel=<Verified|PredictedFromRules|StructuralOnly|OmittedClaimsPresent|NotTestable>|dependencyState=<AllResolved|SomeUnresolved|NotApplicable>|branchState=<AllEvaluated|SomeUnknown|NotApplicable>|simulationState=<NotRequired|RequiredAndAligned|RequiredButLimited|NotApplicable>|assertionCount=<N>|omissionCount=<N>|simulationCount=<N>|gapCount=<N>|internalChecklist=<sortedGateCodes>|reasoningEvidence=<evidenceIDs>|dependencyEvidence=<evidenceIDsOrAbsent>|blockingGaps=<gapIDsOrAbsent>|dependencyClosureStatus=<Closed|Blocked>|maxDependencyWaveReached=<N>|queuedDependencyCount=0|unscannedFetchedRuleJsonCount=0|seedCoverageEvidence=<evidenceIDsOrAbsent>`
 
-SUMMARY is the structured source for mechanically projected EvidenceSummary facts. Counts equal the Scenario's final records. `Closed` requires only CLOSED/NOT_APPLICABLE dependencies and no gaps; `Blocked` requires terminal dependency states and matching gaps. Active ready/queued/unscanned work is unrepresentable. `complexityTier` equals the group COMPLEXITY tier; Scenario confidence/testability honor its caps, including `NotTestable` when no meaningful assertion remains. Evidence and gap references resolve without free-text inference.
+SUMMARY is the structured source for mechanically projected EvidenceSummary facts. Counts equal the Scenario's final records. `Closed` requires only CLOSED/NOT_APPLICABLE dependencies and no gaps; `Blocked` requires terminal dependency states and matching gaps. Active ready/queued/unscanned work is unrepresentable. Scenario confidence/testability follows actual evidence, including `NotTestable` when no meaningful assertion remains. Evidence and gap references resolve without free-text inference.
 
 `internalChecklist` uses only the sorted codes `CELLS`, `COVERAGE`, `DECISION_TABLE`, `DEPENDENCY`, `ROOT`, `SEED`, and `SIMULATION`, including every code applicable to the Scenario. `supportLevel` is `NotTestable` when Scenario testability is NotTestable, otherwise `OmittedClaimsPresent` when any final claim is omitted, otherwise the highest ASSERT support with `Structural` mapped to `StructuralOnly`. `blockingGaps` is the exact GAP census for a Blocked summary and absent for Closed. Branch, simulation, dependency-wave, and record counts are recomputed rather than accepted as narrative claims.
 

@@ -89,12 +89,12 @@ def trace_projection(rows, audit):
     return reasoning, " ".join(closure)
 
 
-def validate_audit(rows, data, evidence, linked, complexity):
+def validate_audit(rows, data, evidence, linked, crawl, revision="1.3"):
     audit = proof(evidence, linked, "EXECUTION", "EXECUTION_AUDIT")
     base.require(isinstance(audit, dict) and set(audit) == {"waves", "seeds"} and isinstance(audit["waves"], list) and isinstance(audit["seeds"], list), "PROFILE execution audit")
     summary = next(r["values"] for r in rows if r["tag"] == "SUMMARY")
     deps = {r["values"]["identity"]: r["values"] for r in rows if r["tag"] == "DEP" and r["values"]["identity"] is not None}
-    base.require(len(audit["waves"]) == int(summary["maxDependencyWaveReached"]) <= int(complexity["ruleCrawlerCalls"]), "PROFILE actual wave census")
+    base.require(len(audit["waves"]) == int(summary["maxDependencyWaveReached"]) <= int(crawl["ruleCrawlerCalls"]), "PROFILE actual wave census")
     for index, wave in enumerate(audit["waves"], 1):
         base.require(isinstance(wave, dict) and set(wave) == {"wave", "state", "plan", "delta"} and type(wave["wave"]) is int and wave["wave"] == index, "PROFILE wave identity")
         state, plan, delta = wave["state"], wave["plan"], wave["delta"]
@@ -108,6 +108,8 @@ def validate_audit(rows, data, evidence, linked, complexity):
         base.require(all(deps[d]["state"] == "CLOSED" for d in delta["closed"]), "PROFILE closed dependency outcome")
         if index == len(audit["waves"]):
             base.require(len(delta["ready"]) == int(summary["queuedDependencyCount"]) and delta["next"] == ("AUTHOR" if summary["dependencyClosureStatus"] == "Closed" else "TERMINAL_BLOCKED"), "PROFILE final wave outcome")
+    if revision == "1.4":
+        base.require(sum(len(w["plan"]["OUT"]) for w in audit["waves"]) == int(crawl["dependencyReferencesRequested"]), "CRAWL requested-reference census")
     assertions = {r["values"]["id"]: r["values"] for r in rows if r["tag"] == "ASSERT"}
     seeds = {r["values"]["id"]: r for r in rows if r["tag"] in {"SETUP", "SIM"}}
     for seed in audit["seeds"]:
@@ -198,18 +200,18 @@ def read_ledger(path, revision='1.2'):
     except UnicodeDecodeError as error:
         raise base.ContractError("profiled ledger invalid UTF-8") from error
     base.require(all(lines), "profiled ledger blank record")
-    base.require(revision in {'1.2', '1.3'} and lines[0].startswith('SG|version=' + revision + '|'), 'requires revision ' + revision + '; rematerialize source')
+    base.require(revision in {'1.2', '1.3', '1.4'} and lines[0].startswith('SG|version=' + revision + '|'), 'requires revision ' + revision + '; rematerialize source')
     records = []
     for number, line in enumerate(lines, 1):
         if line.startswith("PROFILE|"):
             records.append(parse_profile(line, number))
         else:
-            records.append(base.parse_line(line, number))
+            records.append(base.parse_line(line, number, revision))
     # Reuse the reviewed common grammar/semantic core. This is a local validator
     # implementation detail, never a Memory rewrite or acceptance of legacy input.
     common = deepcopy([r for r in records if r["tag"] != "PROFILE"])
     common[0]["values"]["version"] = "1.1"
-    if revision == '1.3' and common[0]['values']['kind'] == 'WHEN' and common[0]['values']['simulationGroupKey'] != 'NO_SIMULATION':
+    if revision in {'1.3', '1.4'} and common[0]['values']['kind'] == 'WHEN' and common[0]['values']['simulationGroupKey'] != 'NO_SIMULATION':
         key = base.canonical_json(common[0]['values']['simulationGroupKey'], 'revision 1.3 key')
         base.require(isinstance(key, dict) and set(key) == {'simulations'} and isinstance(key['simulations'], list) and key['simulations'], 'revision 1.3 key root')
         for entry in key['simulations']:
@@ -217,7 +219,7 @@ def read_ledger(path, revision='1.2'):
             del entry['payloadPage']
             del entry['itemPath']
         common[0]['values']['simulationGroupKey'] = canonical(key)
-    validated = base.validate_ledger(base.MemoryFixture(path.name, serialize(common)))
+    validated = base.validate_ledger(base.MemoryFixture(path.name, serialize(common)), revision=revision)
     profiles = [r for r in records if r["tag"] == "PROFILE"]
     scenarios = [r["values"] for r in records if r["tag"] == "SCENARIO"]
     base.require([r["values"]["scenario"] for r in profiles] == [s["id"] for s in scenarios], "PROFILE scenario census/order")
@@ -257,7 +259,7 @@ def read_ledger(path, revision='1.2'):
             meta = next(s for s in scenarios if s["id"] == scenario)
             base.require(any(g["code"] == "RUT_EXECUTION_MODE_UNAVAILABLE" for g in gaps) and meta["testability"] != "Testable", "PROFILE unavailable execution mode lacks GAP")
         base.require(data["scenarioType"] in {"Baseline", "Edge"}, "PROFILE scenario type")
-        base.require(isinstance(data["checklist"], dict) and set(data["checklist"]) == CHECKLIST and all(type(v) is bool for v in data["checklist"].values()), "PROFILE checklist")
+        base.require(isinstance(data["checklist"], dict) and set(data["checklist"]) == (CHECKLIST - {"ComplexityComputed"} if revision == "1.4" else CHECKLIST) and all(type(v) is bool for v in data["checklist"].values()), "PROFILE checklist")
         if not all(data["checklist"].values()):
             meta = next(s for s in scenarios if s["id"] == scenario)
             base.require(any(r["tag"] == "GAP" for r in rows) and meta["testability"] != "Testable" and meta["confidence"] != "High", "PROFILE false gate without downgrade")
@@ -318,11 +320,11 @@ def read_ledger(path, revision='1.2'):
             base.require(len(names) == len(set(names)), "PROFILE duplicate action parameter")
         base.require(phase_order == sorted(phase_order), "PROFILE action phase order")
         action_sources(data, evidence, linked)
-        validate_audit(rows, data, evidence, linked, next(r["values"] for r in records if r["tag"] == "COMPLEXITY"))
+        validate_audit(rows, data, evidence, linked, next(r["values"] for r in records if r["tag"] == ("CRAWL" if revision == "1.4" else "COMPLEXITY")), revision)
         profile_map[scenario] = data
     base.require(len({(p["caseKey"], p["singlePage"]) for p in profile_map.values()}) == 1, "PROFILE shared RUT metadata")
     validated.update(records=records, profiles=profile_map, raw=raw)
-    if revision == '1.3':
+    if revision in {'1.3', '1.4'}:
         validate_carrier_roots(records)
         projected = projection_provenance(records)
         if header['kind'] == 'WHEN' and header['simulationGroupKey'] != 'NO_SIMULATION':
@@ -332,4 +334,7 @@ def read_ledger(path, revision='1.2'):
                 base.require([e['payloadPage'] for e in key] == [facts['simulationBindings'][s['id']] for s in sims], 'SIM binding group key mismatch')
                 base.require([e['itemPath'] for e in key] == [facts['simulationItemPaths'][s['id']] for s in sims], 'SIM item-path group key mismatch')
         for sid, facts in projected.items(): profile_map[sid].update(facts)
+    if revision == "1.4":
+        from dp_parameters import validate
+        validate(records)
     return validated

@@ -41,6 +41,7 @@ FIELDS = {
     "ROOT": ("page", "class", "primarySetup", "pagesAndClasses", "namedPageEvidence"),
     "TARGET": ("id", "order", "source", "behavior", "constraint", "state", "proof"),
     "COLUMN": ("id", "order", "path", "class", "mode", "source", "simulatedRoot"),
+    "CRAWL": ("ruleCrawlerCalls", "dependencyReferencesRequested", "triggeredLimits"),
     "COMPLEXITY": ("invocationCount", "whenRuleReferenceCount", "maxNesting", "operationCount", "loopCount", "modifiedPropertyCount", "conditionalBlockCount", "pageParameterCount", "unresolvedCriticalDependencyCount", "invocationChainDepth", "weightedScore", "tier", "ruleCrawlerCalls", "dependencyReferencesRequested", "hardTriggers", "triggeredLimits", "confidenceCap", "testabilityCap"),
     "SCENARIO": ("id", "order", "name", "owner", "covers", "testability", "confidence"),
     "PARAM": ("scenario", "id", "order", "invocation", "dependency", "name", "formalType", "formalEvidence", "mode", "inheritance", "expression", "valueType", "value", "evidence"),
@@ -92,6 +93,7 @@ NULLABLE = {
     "ASSERT_DEC": {"producer"},
     "GAP": {"dependency"},
     "SUMMARY": {"dependencyEvidence", "blockingGaps", "seedCoverageEvidence"},
+    "CRAWL": {"triggeredLimits"},
     "COMPLEXITY": {"hardTriggers", "triggeredLimits"},
 }
 
@@ -185,7 +187,7 @@ def encode_value(value) -> str:
     return "".join(escapes.get(char, char) for char in value)
 
 
-def parse_line(line: str, line_number: int) -> dict:
+def parse_line(line: str, line_number: int, revision="1.1") -> dict:
     require(not any(ord(char) < 32 for char in line), f"line {line_number}: raw control character")
     parts = split_record(line)
     tag = parts[0]
@@ -203,8 +205,13 @@ def parse_line(line: str, line_number: int) -> dict:
     schema_key = tag
     if tag == "ASSERT":
         schema_key = "ASSERT_DEC" if values.get("kind") in {"DecisionInput", "DecisionResult"} else "ASSERT_STD"
-    require(tuple(key for key, _, _ in pairs) == FIELDS[schema_key], f"line {line_number}: field order/arity mismatch for {tag}")
+    require(tag != "COMPLEXITY" or revision != "1.4", "obsolete COMPLEXITY record")
+    fields = FIELDS[schema_key]
+    if revision == "1.4" and tag == "SUMMARY": fields = tuple(k for k in fields if k != "complexityTier")
+    require(tag != "CRAWL" or revision == "1.4", "CRAWL requires revision 1.4")
+    require(tuple(key for key, _, _ in pairs) == fields, f"line {line_number}: field order/arity mismatch for {tag}")
     nullable = NULLABLE.get(schema_key, set())
+    if revision == "1.4" and tag == "SIM": nullable = nullable | {"parameterResolutions"}
     require(all(value is not None or key in nullable for key, value in values.items()), f"line {line_number}: non-null field uses absent token")
     return {"tag": tag, "line": line_number, "values": values, "raw": {key: raw for key, raw, _ in pairs}}
 
@@ -454,7 +461,7 @@ def path_root(value: str) -> str:
     return re.split(r"[.(]", stripped, maxsplit=1)[0]
 
 
-def validate_ledger(path: Path) -> dict:
+def validate_ledger(path: Path, revision="1.1") -> dict:
     raw = path.read_bytes()
     require(not raw.startswith(b"\xef\xbb\xbf"), f"{path.name}: BOM is forbidden")
     require(raw.endswith(b"\n"), f"{path.name}: final LF missing")
@@ -465,7 +472,7 @@ def validate_ledger(path: Path) -> dict:
         raise ContractError(f"{path.name}: invalid UTF-8") from error
     lines = text[:-1].split("\n")
     require(lines and all(lines), f"{path.name}: blank record")
-    records = [parse_line(line, index + 1) for index, line in enumerate(lines)]
+    records = [parse_line(line, index + 1, revision) for index, line in enumerate(lines)]
     require(records[0]["tag"] == "SG" and records[-1]["tag"] == "END", f"{path.name}: SG/END framing")
     require(sum(record["tag"] == "SG" for record in records) == 1, f"{path.name}: SG cardinality")
     require(sum(record["tag"] == "END" for record in records) == 1, f"{path.name}: END cardinality")
@@ -512,20 +519,23 @@ def validate_ledger(path: Path) -> dict:
     require(all(row["values"]["id"] == f"C{integer(row, 'order'):03d}" for row in column_rows), f"{path.name}: COLUMN IDs")
     require(all(row["values"]["source"] in {"PRIMARY", "PARAM", "PAGE"} and row["values"]["simulatedRoot"] == "false" for row in column_rows), f"{path.name}: COLUMN fields")
 
-    require(records[body_start]["tag"] == "COMPLEXITY", f"{path.name}: COMPLEXITY position/cardinality")
+    control_tag = "CRAWL" if revision == "1.4" else "COMPLEXITY"
+    require(records[body_start]["tag"] == control_tag, f"{path.name}: COMPLEXITY position/cardinality")
     complexity = records[body_start]
     body_start += 1
     metric_names = ("invocationCount", "whenRuleReferenceCount", "maxNesting", "operationCount", "loopCount", "modifiedPropertyCount", "conditionalBlockCount", "pageParameterCount", "unresolvedCriticalDependencyCount", "invocationChainDepth", "ruleCrawlerCalls", "dependencyReferencesRequested")
+    if revision == "1.4": metric_names = ("ruleCrawlerCalls", "dependencyReferencesRequested")
     metrics = {name: integer(complexity, name) for name in metric_names}
-    derived = derive_complexity(metrics)
-    require(float(complexity["values"]["weightedScore"]) == derived["score"], f"{path.name}: weighted complexity score")
-    require(ids(complexity["values"]["hardTriggers"], f"{path.name}:hardTriggers") == derived["triggers"], f"{path.name}: hard triggers")
+    derived = derive_complexity(metrics) if revision != "1.4" else None
+    if revision != "1.4": require(float(complexity["values"]["weightedScore"]) == derived["score"], f"{path.name}: weighted complexity score")
+    if revision != "1.4": require(ids(complexity["values"]["hardTriggers"], f"{path.name}:hardTriggers") == derived["triggers"], f"{path.name}: hard triggers")
+    if revision == "1.4": require(metrics["ruleCrawlerCalls"] <= 120 and metrics["dependencyReferencesRequested"] <= 260, "crawler budget exceeded")
     limits = []
     if metrics["ruleCrawlerCalls"] >= 120: limits.append("RULECRAWLER_CALL_CAP")
     if metrics["dependencyReferencesRequested"] >= 260: limits.append("RULES_TOTAL_REQUESTED_CAP")
     require(ids(complexity["values"]["triggeredLimits"], f"{path.name}:triggeredLimits") == sorted(limits), f"{path.name}: triggered limits")
-    require(complexity["values"]["tier"] == derived["tier"], f"{path.name}: complexity tier")
-    require(complexity["values"]["confidenceCap"] == derived["confidenceCap"] and complexity["values"]["testabilityCap"] == derived["testabilityCap"], f"{path.name}: complexity caps")
+    if revision != "1.4": require(complexity["values"]["tier"] == derived["tier"], f"{path.name}: complexity tier")
+    if revision != "1.4": require(complexity["values"]["confidenceCap"] == derived["confidenceCap"] and complexity["values"]["testabilityCap"] == derived["testabilityCap"], f"{path.name}: complexity caps")
 
     scenario_rows = []
     while body_start < len(records) - 1 and records[body_start]["tag"] == "SCENARIO":
@@ -632,9 +642,9 @@ def validate_ledger(path: Path) -> dict:
         require(summary_values["supportLevel"] == expected_support, f"{path.name}: {scenario} SUMMARY support level")
         gap_ids = sorted(record["values"]["id"] for record in scoped if record["tag"] == "GAP")
         require(ids(summary_values["blockingGaps"], f"{path.name}: {scenario} blocking gaps") == gap_ids, f"{path.name}: {scenario} SUMMARY gap census")
-        require(confidence_rank[scenario_meta[scenario]["confidence"]] <= confidence_rank[complexity["values"]["confidenceCap"]], f"{path.name}: {scenario} confidence cap")
+        if revision != "1.4": require(confidence_rank[scenario_meta[scenario]["confidence"]] <= confidence_rank[complexity["values"]["confidenceCap"]], f"{path.name}: {scenario} confidence cap")
         testability_rank = {"NotTestable": 0, "PartiallyTestable": 1, "Testable": 2}
-        require(testability_rank[scenario_meta[scenario]["testability"]] <= testability_rank[complexity["values"]["testabilityCap"]], f"{path.name}: {scenario} testability cap")
+        if revision != "1.4": require(testability_rank[scenario_meta[scenario]["testability"]] <= testability_rank[complexity["values"]["testabilityCap"]], f"{path.name}: {scenario} testability cap")
         checklist = set(sorted_tokens(summary_values["internalChecklist"], f"{path.name}: {scenario} checklist"))
         allowed_checklist = {"CELLS", "COVERAGE", "DECISION_TABLE", "DEPENDENCY", "ROOT", "SEED", "SIMULATION"}
         required_checklist = {"COVERAGE", "ROOT"}
@@ -714,7 +724,7 @@ def validate_ledger(path: Path) -> dict:
             for reference in ids(record["values"]["omitted"], f"{path.name}:omitted"):
                 require(record_ids[scenario].get(reference, {}).get("tag") == "OMIT", f"{path.name}: unresolved OMIT")
         if record["tag"] == "SIM":
-            for reference in ids(record["values"]["parameterResolutions"], f"{path.name}:parameterResolutions", False):
+            for reference in ids(record["values"]["parameterResolutions"], f"{path.name}:parameterResolutions", revision == "1.4"):
                 require(record_ids[scenario].get(reference, {}).get("tag") == "PARAM", f"{path.name}: unresolved SIM PARAM")
         if record["tag"] == "SUMMARY":
             for field in ("reasoningEvidence", "dependencyEvidence", "seedCoverageEvidence"):
@@ -726,7 +736,7 @@ def validate_ledger(path: Path) -> dict:
     for record in body:
         values = record["values"]
         if record["tag"] == "PARAM":
-            require(values["mode"] in {"explicit", "inherited", "empty", "not_applicable"}, f"{path.name}: PARAM mode")
+            require(values["mode"] in ({"explicit", "inherited", "empty", "not_applicable"} | ({"default"} if revision == "1.4" else set())), f"{path.name}: PARAM mode")
             require(values["inheritance"] in {"enabled", "disabled", "n_a"}, f"{path.name}: PARAM inheritance")
             validate_typed(values["valueType"], values["value"], f"{path.name}:PARAM")
             require((values["mode"] in {"explicit", "inherited"}) == (values["expression"] is not None), f"{path.name}: PARAM expression")
@@ -771,7 +781,7 @@ def validate_ledger(path: Path) -> dict:
             setup_pages = canonical_json(values["setupPages"], f"{path.name}:SIM setupPages")
             validate_setup_pages(setup_pages, f"{path.name}:SIM setupPages")
             param_object = canonical_json(values["params"], f"{path.name}:SIM params")
-            referenced_params = [record_ids[values["scenario"]][reference]["values"] for reference in ids(values["parameterResolutions"], f"{path.name}:SIM parameterResolutions", False)]
+            referenced_params = [record_ids[values["scenario"]][reference]["values"] for reference in ids(values["parameterResolutions"], f"{path.name}:SIM parameterResolutions", revision == "1.4")]
             require(param_object == {param["name"]: typed_python(param["valueType"], param["value"]) for param in referenced_params}, f"{path.name}: SIM/PARAM drift")
         if record["tag"] == "OMIT":
             require(values["reason"] in OMIT_REASONS, f"{path.name}: invalid omission reason")
@@ -794,7 +804,7 @@ def validate_ledger(path: Path) -> dict:
             require(values["dependencyState"] in {"AllResolved", "SomeUnresolved", "NotApplicable"}, f"{path.name}: SUMMARY dependency")
             require(values["branchState"] in {"AllEvaluated", "SomeUnknown", "NotApplicable"}, f"{path.name}: SUMMARY branch")
             require(values["simulationState"] in {"NotRequired", "RequiredAndAligned", "RequiredButLimited", "NotApplicable"}, f"{path.name}: SUMMARY simulation")
-            require(values["complexityTier"] == complexity["values"]["tier"], f"{path.name}: SUMMARY complexity")
+            if revision != "1.4": require(values["complexityTier"] == complexity["values"]["tier"], f"{path.name}: SUMMARY complexity")
             require(integer(record, "queuedDependencyCount") == 0 and integer(record, "unscannedFetchedRuleJsonCount") == 0, f"{path.name}: active dependency work in SUMMARY")
             require(values["dependencyClosureStatus"] in {"Closed", "Blocked"}, f"{path.name}: SUMMARY closure")
         if record["tag"] == "NARRATIVE":

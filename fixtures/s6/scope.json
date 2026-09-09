@@ -1,0 +1,22 @@
+{
+  "baseline": "13b44c7f59c250d3a54fb11d4dfb6ecbb5db24a8",
+  "modified": [
+    "Main_Agent_Prompt.txt",
+    "UnitTestGenerator_Prompt.txt",
+    "Validator_Prompt.txt",
+    "UnitTestGenerator.txt",
+    "JsonValidator_tool.txt",
+    "rule-declare-pages_knowledgearea.txt",
+    "rule-obj-model_knowledgearea.txt",
+    "rule-test-unit-case_JsonSchema.txt",
+    "rule-test-unit-case_JsonExample.txt",
+    "rule-test-unit-case_multInpComb-JsonSchema.txt",
+    "rule-test-unit-case_multInpComb-JsonExample.txt",
+    "scripts/validate_s2_design.py",
+    "scripts/sg_profile.py",
+    "scripts/generator_projection.py",
+    "docs/contracts/SCENARIO_GROUP_V1_4.md",
+    "docs/decisions/DEC-034.md",
+    "docs/execution/ROADMAP.md"
+  ]
+}

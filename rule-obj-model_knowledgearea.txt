@@ -9,7 +9,7 @@ Dependency param resolution: KT.6-KT.15,KT.19.
 Property tracing: KT.16,KT.20-KT.24,KT.27-KT.28.
 Branch tracing: KT.17,KT.25.
 Context tracing: KT.18,KT.23-KT.24,KT.28,KT.34.
-Complexity: KT.33 LoopOperations, KT.30 NestingDepthCalculation, KT.31 TotalOperationCounter.
+Traversal: KT.33 LoopOperations, KT.30 NestingDepthCalculation; KT.31 retired counter marker.
 Termination/list existence: KT.35,KT.36.
 
 KT.1|F|OperationCollectionField
@@ -240,15 +240,16 @@ A: 1) Read formal params via KT.19. 2) Extract name via KT.12 and type via KT.13
 I: Output normalization remains "PAGE".
 
 KT.30|A|NestingDepthCalculation
-P: Calculate max context nesting depth for complexity scoring.
-A: depth=0,maxDepth=0. Traverse operations in execution order. Increment depth on Rule-Obj-Model context-opening UPDATE_PAGE scope. Decrement on matching close/end when present. Track maxDepth. Return MAX_NESTING.
-Use: Execute against RUT RuleJSON. Higher nesting increases complexity score.
+P: Preserve nested runtime context while traversing Model operations.
+A: Track context-opening UPDATE_PAGE scopes and restore the parent context at each
+   matching close. Traverse child operations with their actual context and guards.
+Use: Runtime traversal and context resolution only; no numeric score or threshold.
 R: KT.18,KT.28.
 
 KT.31|A|TotalOperationCounter
-P: Count all operations for complexity scoring.
-M: Rule-Obj-Model -> count(RuleJSON.pyProperties).
-Use: Evaluate mapped expression against RUT RuleJSON; result is OPERATION_COUNT.
+P: Retired scoring-only operation counter; marker retained for historical traceability.
+I: No current counter is produced. Traverse executable operations under their runtime
+   guidance; do not replace recursive execution with a root-array count.
 
 KT.32|V|CommentOperationType
 P: Operation type value for non-executable documentation/comment operations.
@@ -259,7 +260,7 @@ X: {pyActionName:"COMMENT",pyPropertiesName:"=== Set method"}.
 KT.33|L|LoopOperations
 P: Operations representing loops/iterations.
 M: Rule-Obj-Model -> ["FOR_EACH_PAGE_IN"].
-Use: complexity scoring M3; each loop counts toward LOOP_COUNT; loop creates nested execution context; child operations execute once per iteration.
+Use: loop creates nested execution context; child operations execute once per iteration.
 X: {pyPropertyStepId:"30",pyActionName:"FOR_EACH_PAGE_IN",pyPropertiesName:".Results",pyPageName:"CurrentItem"}.
 R: KT.18,KT.27,KT.30,KT.34.
 

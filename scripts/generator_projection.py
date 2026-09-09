@@ -240,7 +240,7 @@ def when_row(source,sid):
 
 def evidence_summary(source,sid,row_number=None):
     summary=vals(source,sid,'SUMMARY')[0];profile=source['profiles'][sid];assertions=vals(source,sid,'ASSERT')
-    output={key[0].upper()+key[1:]:summary[key] for key in ('supportLevel','dependencyState','branchState','simulationState','complexityTier','dependencyClosureStatus')}
+    output={key[0].upper()+key[1:]:summary[key] for key in ('supportLevel','dependencyState','branchState','simulationState','dependencyClosureStatus')}
     for key in ('maxDependencyWaveReached','queuedDependencyCount','unscannedFetchedRuleJsonCount'):output[key[0].upper()+key[1:]]=int(summary[key])
     exact=sum(a['value'] is not None and a['comparator'] not in NO_VALUE and a['kind']!='ResultCount' for a in assertions)
     deps=vals(source,sid,'DEP');actual=[d for d in deps if d['state']!='NOT_APPLICABLE']
@@ -294,7 +294,7 @@ def scenario_parts(source,sid):
 
 def decode_source(raw,case_id,rut_type,index):
     b.require(isinstance(raw,str),'ScenarioGroup Payload type')
-    source=sg.read_ledger(b.MemoryFixture('ordered-source.sgl',raw.encode('utf-8')),revision='1.3')
+    source=sg.read_ledger(b.MemoryFixture('ordered-source.sgl',raw.encode('utf-8')),revision='1.4')
     source.pop('path',None)  # Local validation handle is not part of immutable semantic data.
     source['header']=source['records'][0]['values'];source['root']=source['records'][1]['values'];source['meta']=[r['values'] for r in source['records'] if r['tag']=='SCENARIO']
     header=source['header']
